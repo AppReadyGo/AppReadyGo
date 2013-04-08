@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{AD8B009A-AB15-4261-9739-E265948A9811}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Tests", "Tests\Web.Tests\Web.Tests.csproj", "{DB896DAD-455B-486C-9B5F-803FED7F5777}"
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Tests", "Tests\API.Tests\API.Tests.csproj", "{1BC47F5F-9A10-4908-91BF-52A3B34CAA2A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{8C379DD1-93A3-4B68-A3AE-E7C2CE5A8A0F}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{524F9C95-72F7-4EEA-95CD-915CC887DD1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,12 @@ Global
 		{8C379DD1-93A3-4B68-A3AE-E7C2CE5A8A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C379DD1-93A3-4B68-A3AE-E7C2CE5A8A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C379DD1-93A3-4B68-A3AE-E7C2CE5A8A0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
