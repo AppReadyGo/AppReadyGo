@@ -1,0 +1,15 @@
+﻿@using AppReadyGo.Model
+@using AppReadyGo.Model.Master
+@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, AppReadyGo.Models.Account.LogOnModel>
+@{
+    Layout = "~/Views/Shared/_BeforeLogin.cshtml";
+}
+@section title { Log On }
+@section header { }
+<section id="content">
+    <div class="content-wrapper">
+        <article class="center">
+            @Html.Partial("Forms/LogOnForm", Model.View)
+        </article>
+    </div>
+</section>

@@ -3,30 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using AppReadyGo.Core;
+using System.Web.Security;
+using AppReadyGo.Model.Pages.Home;
+using AppReadyGo.Model.Master;
+using AppReadyGo.Core.Queries;
+using AppReadyGo.Model.Pages.Home.Mails;
+using AppReadyGo.Common.Mails;
+using System.Text.RegularExpressions;
+using System.Text;
+using System.IO;
 
-namespace AppReadyGo.Web.Controllers
+namespace AppReadyGo.Controllers
 {
-    public class HomeController : Controller
+    [HandleError]
+    public class HomeController : Master.BeforeLoginController
     {
-        public ActionResult Index()
+        public ActionResult Index(long? appId, string pageUri, string clientSize)
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Application");
+            }
+            else
+            {
+                return View(new IndexModel { }, BeforeLoginMasterModel.MenuItem.Home);
+            }
         }
 
-        public ActionResult About()
+        public ActionResult Pricing()
         {
-            ViewBag.Message = "Your app description page.";
-
-            return View();
+            return View(new PricingModel { }, BeforeLoginMasterModel.MenuItem.PlanAndPricing);
         }
 
-        public ActionResult Contact()
+        public ActionResult PlayGround()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(new PricingModel { }, BeforeLoginMasterModel.MenuItem.PlanAndPricing);
         }
     }
 }

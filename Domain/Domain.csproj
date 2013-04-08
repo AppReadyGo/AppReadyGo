@@ -83,6 +83,7 @@
     <Compile Include="CommandHandlers\Users\ResetPasswordCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\UnsubscribeCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\UpdateLastAccessCommandHandler.cs" />
+    <Compile Include="CommandHandlers\ValidationContext.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
     <Compile Include="Mapping\ApplicationMaping.cs" />

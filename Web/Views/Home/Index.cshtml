@@ -1,45 +1,65 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using AppReadyGo.Model.Pages.Home
+@using AppReadyGo.Model
+@using AppReadyGo.Model.Master
+@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, IndexModel>
+@{
+    Layout = "~/Views/Shared/_BeforeLogin.cshtml";
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
-        </div>
-    </section>
-}
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
+@section title { Home }
+@section header { }
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
+<section id="slideshow">
+    <div class="content-wrapper">
+    <img src="/content/new/images/screens.png" />
+    <h1><strong>Get</strong> you user<br /> 
+        <strong>Improve</strong> your app</h1>
+    <h3>
+        FingerPrint helps you understand how users interact with your application        
+    </h3>
+    <a href="/account/register" class="button yellow btn-getstarted">Get Started Now</a>
+    </div>
+</section><!-- /#slideshow --> 
+<section id="content">
+    <div class="content-wrapper">
+    <article id="features">
+        <h2>Improve you application with the features of FingerPrint</h2>
+        <ul>
+            <li>
+                <img src="/content/new/images/touchmap_grey.png" />
+                <h3>TouchMap</h3>
+                <p>See where users touch in any area of an application.</p>
+            </li>
+            <li>
+                <img src="/content/new/images/eyetrack_grey.png" />
+                <h3>EyeTrack</h3>
+                <p>Check you how much attention users spend on each part of the content.</p>
+            </li>
+            <li>
+                <img src="/content/new/images/playback_grey.png" />
+                <h3>PlayBack</h3>
+                <p>Understand how users reach specific application features.</p>
+            </li>
+            <li>
+                <img src="/content/new/images/eyetrack_grey.png" />
+                <h3>A/B compare</h3>
+                <p>Compare two versions of a design to see which performs better.</p>
+            </li>
+        </ul>
+        <p class="clear"></p>
+    </article><!-- /#features --> 
+    <article id="action">
+        <span><strong>Improve your design today. Try FingerPrint for FREE!</strong></span>
+        <a href="/account/register" class="button green btn-getstarted">Get Started</a>
+    </article><!-- /#action --> 
+    <article id="info">
+        <iframe width="320" height="240" src="http://www.youtube.com/embed/hTausXI9aYw" frameborder="0" allowfullscreen class="video"></iframe>
+        <h2>Why Mobillify?</h2>
+        <p>
+            We help developers understand how users interact with a mobile application or a mobile web site and compare two versions of a design for a length of time to see which performs better. Using FingerPrint, you are able to test you UI and UX design completely, finding out exactly what you need to do to optimize your users experience. 
+        </p>
+        <p class="clear"></p>
+    </article><!-- /#info -->
+    </div><!-- /.content-wrapper --> 
+</section><!-- /#content --> 
 
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
+

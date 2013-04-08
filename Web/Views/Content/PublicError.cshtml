@@ -1,0 +1,17 @@
+﻿@using AppReadyGo.Model.Pages.Home
+@using AppReadyGo.Model
+@using AppReadyGo.Model.Master
+@using AppReadyGo.Helpers;
+@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, ContentModel>
+@{
+    Layout = "~/Views/Shared/_Content.cshtml";
+}
+@section title { Error }
+@section header 
+{
+    <link href="@Html.Content("~/Content/template/css/error.css")" rel="stylesheet" type="text/css" /> 
+}
+<article class="borders">
+    <h2>An error occurred while processing your request!</h2>
+    <p>Sorry, an error occurred while processing your request. Please contact to administrator.</p>
+</article>
