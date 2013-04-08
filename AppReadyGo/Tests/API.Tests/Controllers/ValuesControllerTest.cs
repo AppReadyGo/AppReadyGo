@@ -5,10 +5,10 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using API;
-using API.Controllers;
+using AppReadyGo.API;
+using AppReadyGo.API.Controllers;
 
-namespace API.Tests.Controllers
+namespace AppReadyGo.API.Tests.Controllers
 {
     [TestClass]
     public class ValuesControllerTest

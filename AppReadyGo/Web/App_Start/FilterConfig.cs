@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Web
+namespace AppReadyGo.Web
 {
     public class FilterConfig
     {

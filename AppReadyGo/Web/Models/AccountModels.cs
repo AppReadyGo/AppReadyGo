@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
 
-namespace Web.Models
+namespace AppReadyGo.Web.Models
 {
     public class UsersContext : DbContext
     {

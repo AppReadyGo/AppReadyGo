@@ -7,8 +7,8 @@
     <ProjectGuid>{84076534-5016-4915-B050-06518D050434}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Domain</RootNamespace>
-    <AssemblyName>Domain</AssemblyName>
+    <RootNamespace>AppReadyGo.Domain</RootNamespace>
+    <AssemblyName>AppReadyGo.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\NHibernate-3.2.0\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate-3.2.0\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,7 +56,142 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\Admin\ClearLogCommandHandler.cs" />
+    <Compile Include="CommandHandlers\API\AddPackageCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\AddScreenCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\CreateApplicationCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\RemoveApplicationCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\RemoveScreenCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\SetPackageCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\UpdateApplicationCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\UpdateScreenCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Content\CreateContentItemCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Content\CreatePageCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Content\UpdatePageCommandHandler.cs" />
+    <Compile Include="CommandHandlers\CreatePortfolioCommandHandler.cs" />
+    <Compile Include="CommandHandlers\ICommandHandler.cs" />
+    <Compile Include="CommandHandlers\RemovePortfolioCommandHandler.cs" />
+    <Compile Include="CommandHandlers\StoredProcedureCommandHandler.cs" />
+    <Compile Include="CommandHandlers\UpdatePortfolioCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\AcceptTermsAndConditionsCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\ActivateUserCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\CreateUserCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\DeactivateUserCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\GrantSpecialAccessCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\RemoveUserCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\ResendEmailCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\ResetPasswordCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\UnsubscribeCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\UpdateLastAccessCommandHandler.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="Mapping\AccountProfilerMaping.cs" />
+    <Compile Include="Mapping\ApplicationMaping.cs" />
+    <Compile Include="Mapping\BackOffice\SystemApplicationMapping.cs" />
+    <Compile Include="Mapping\BackOffice\SystemMembershipMapping.cs" />
+    <Compile Include="Mapping\BackOffice\SystemRoleMapping.cs" />
+    <Compile Include="Mapping\BackOffice\SystemUserMapping.cs" />
+    <Compile Include="Mapping\BrowserMapping.cs" />
+    <Compile Include="Mapping\ClickMaping.cs" />
+    <Compile Include="Mapping\Content\Email.cs" />
+    <Compile Include="Mapping\Content\ItemMapping.cs" />
+    <Compile Include="Mapping\Content\KeyMapping.cs" />
+    <Compile Include="Mapping\Content\MailMapping.cs" />
+    <Compile Include="Mapping\Content\PageMapping.cs" />
+    <Compile Include="Mapping\Content\ThemeMapping.cs" />
+    <Compile Include="Mapping\CountryMapping.cs" />
+    <Compile Include="Mapping\LanguageMapping.cs" />
+    <Compile Include="Mapping\Logs\CategoryMapping.cs" />
+    <Compile Include="Mapping\Logs\LogMapping.cs" />
+    <Compile Include="Mapping\NameableMapping.cs" />
+    <Compile Include="Mapping\OperationSystemMapping.cs" />
+    <Compile Include="Mapping\PackageMapping.cs" />
+    <Compile Include="Mapping\PageViewMaping.cs" />
+    <Compile Include="Mapping\PortfolioMapping.cs" />
+    <Compile Include="Mapping\ScreenMapping.cs" />
+    <Compile Include="Mapping\ScrollMapping.cs" />
+    <Compile Include="Mapping\Users\UserMapping.cs" />
+    <Compile Include="Mapping\ViewPartMaping.cs" />
+    <Compile Include="Model\AccountProfiler.cs" />
+    <Compile Include="Model\Application.cs" />
+    <Compile Include="Model\BackOffice\Entity.cs" />
+    <Compile Include="Model\BackOffice\MembershipInfo.cs" />
+    <Compile Include="Model\BackOffice\SystemApplication.cs" />
+    <Compile Include="Model\BackOffice\SystemMembership.cs" />
+    <Compile Include="Model\BackOffice\SystemRole.cs" />
+    <Compile Include="Model\BackOffice\SystemUser.cs" />
+    <Compile Include="Model\Browser.cs" />
+    <Compile Include="Model\Click.cs" />
+    <Compile Include="Model\Content\Item.cs" />
+    <Compile Include="Model\Content\Key.cs" />
+    <Compile Include="Model\Content\Language.cs" />
+    <Compile Include="Model\Content\Mail.cs" />
+    <Compile Include="Model\Content\Page.cs" />
+    <Compile Include="Model\Content\Theme.cs" />
+    <Compile Include="Model\Country.cs" />
+    <Compile Include="Model\Events\ClickEvent.cs" />
+    <Compile Include="Model\Events\IEvent.cs" />
+    <Compile Include="Model\Events\PackageEvent.cs" />
+    <Compile Include="Model\Events\ScrollEvent.cs" />
+    <Compile Include="Model\Events\SessionInfoEvent.cs" />
+    <Compile Include="Model\Events\ViewPartEvent.cs" />
+    <Compile Include="Model\Events\VisitEvent.cs" />
+    <Compile Include="Model\EyeTrackerData.cs" />
+    <Compile Include="Model\Language.cs" />
+    <Compile Include="Model\Logs\Category.cs" />
+    <Compile Include="Model\Logs\Log.cs" />
+    <Compile Include="Model\Nameable.cs" />
+    <Compile Include="Model\OperationSystem.cs" />
+    <Compile Include="Model\Package.cs" />
+    <Compile Include="Model\PageView.cs" />
+    <Compile Include="Model\Portfolio.cs" />
+    <Compile Include="Model\Screen.cs" />
+    <Compile Include="Model\Scroll.cs" />
+    <Compile Include="Model\Size.cs" />
+    <Compile Include="Model\Users\Users.cs" />
+    <Compile Include="Model\ViewPart.cs" />
+    <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueriesHandlers\Admin\GetAllMembersQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Admin\GetAllStaffQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Admin\LogQueryHadler.cs" />
+    <Compile Include="QueriesHandlers\Analytics\ABCompareViewDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Analytics\ClickHeatMapDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Analytics\DashboardViewDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Analytics\EyeTrackerViewDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Analytics\FilterBaseQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Analytics\FilterQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Analytics\FingerPrintViewDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Analytics\HeatMapDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Analytics\UsageViewDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetAllApplicationsQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetApplicationDetailsQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetScreenDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetScreenDetailsQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetScreenEditDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\ScreensQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllKeysQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllMailsQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllPagesQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllThemesQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetKeyQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Content\GetMailQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetPageQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetSystemMailQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetThemeQuery.cs" />
+    <Compile Include="QueriesHandlers\GetPortfolioDetailsQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\IQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\PortfoliosQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Users\GetUserDetailsByEmailQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Users\GetUserDetailsByIdQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Users\GetUserRolesQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Users\GetUserSecuredDetailsByEmailQueryHandler.cs" />
+    <Compile Include="Repository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{6696bbd1-9b7a-44f9-ab0e-be264402e5cc}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

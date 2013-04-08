@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace API
+namespace AppReadyGo.API
 {
     public class BundleConfig
     {

@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace AppReadyGo.Core.QueryResults.Users
+{
+    public class UserFullDetailsResult : UserDetailsResult
+    {
+        public int Id { get; set; }
+
+        public bool Activated { get; set; }
+
+        public bool SpecialAccess { get; set; }
+
+        public DateTime? LastAccessDate { get; set; }
+
+        public DateTime CreateDate { get; set; }
+    }
+}

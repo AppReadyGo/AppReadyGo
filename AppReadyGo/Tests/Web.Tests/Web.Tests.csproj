@@ -9,8 +9,8 @@
     <ProjectGuid>{DB896DAD-455B-486C-9B5F-803FED7F5777}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Web.Tests</RootNamespace>
-    <AssemblyName>Web.Tests</AssemblyName>
+    <RootNamespace>AppReadyGo.Web.Tests</RootNamespace>
+    <AssemblyName>AppReadyGo.Web.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

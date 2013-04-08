@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
-using Web.Models;
+using AppReadyGo.Web.Models;
 
-namespace Web
+namespace AppReadyGo.Web
 {
     public static class AuthConfig
     {
