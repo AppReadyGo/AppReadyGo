@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Web;
-using Web.Controllers;
+using AppReadyGo.Web;
+using AppReadyGo.Web.Controllers;
 
 namespace Web.Tests.Controllers
 {

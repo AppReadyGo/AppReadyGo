@@ -9,8 +9,8 @@
     <ProjectGuid>{1BC47F5F-9A10-4908-91BF-52A3B34CAA2A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>API.Tests</RootNamespace>
-    <AssemblyName>API.Tests</AssemblyName>
+    <RootNamespace>AppReadyGo.API.Tests</RootNamespace>
+    <AssemblyName>AppReadyGo.API.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
