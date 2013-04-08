@@ -39,11 +39,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Windsor\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -156,21 +160,143 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Data\CustomMembershipProvider.cs" />
+    <Compile Include="App_Data\CustomRoleProvider.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\m\Controllers\AccountController.cs" />
+    <Compile Include="Areas\m\Controllers\HomeController.cs" />
+    <Compile Include="Areas\m\mAreaRegistration.cs" />
+    <Compile Include="Common\CSSAttribute.cs" />
+    <Compile Include="Common\CSSFilter.cs" />
+    <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\Extentions.cs" />
+    <Compile Include="Common\MailGenerator.cs" />
+    <Compile Include="Common\Mails\ActivationEmail.cs" />
+    <Compile Include="Common\Mails\Email.cs" />
+    <Compile Include="Common\Mails\ForgotPasswordMail.cs" />
+    <Compile Include="Common\Mails\PromotionEmail.cs" />
+    <Compile Include="Common\Mails\SpecialAccessEmail.cs" />
+    <Compile Include="Common\MIMEAssistant.cs" />
+    <Compile Include="Common\RedirectToMobileAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountController_.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\CustomExceptions.cs" />
+    <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
+    <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomeController_.cs" />
+    <Compile Include="Controllers\Master\AdminMasterController.cs" />
+    <Compile Include="Controllers\Master\AfterLoginController.cs" />
+    <Compile Include="Controllers\Master\AnalyticsMasterController.cs" />
+    <Compile Include="Controllers\Master\BaseMasterController.cs" />
+    <Compile Include="Controllers\Master\BaseSubMasterController.cs" />
+    <Compile Include="Controllers\Master\BeforeLoginController.cs" />
+    <Compile Include="Controllers\PortfolioController.cs" />
+    <Compile Include="Controllers\SecureController.cs" />
+    <Compile Include="CustomModelBinders\ABFilterParametersModelBinder.cs" />
+    <Compile Include="CustomModelBinders\EventParser.cs" />
+    <Compile Include="CustomModelBinders\FilterParametersModelBinder.cs" />
+    <Compile Include="CustomModelBinders\JsonMobileDataModelBinder.cs" />
+    <Compile Include="CustomModelBinders\JsonObjects\JsonPackage.cs" />
+    <Compile Include="CustomModelBinders\JsonObjects\JsonScrollDetails.cs" />
+    <Compile Include="CustomModelBinders\JsonObjects\JsonSessionInfo.cs" />
+    <Compile Include="CustomModelBinders\JsonObjects\JsonTouchDetails.cs" />
+    <Compile Include="CustomModelBinders\JsonObjects\JsonViewAreaDetails.cs" />
+    <Compile Include="CustomModelBinders\JsonPackageModelBinder.cs" />
+    <Compile Include="CustomModelBinders\JsonVisitInfoModelBinder.cs" />
+    <Compile Include="CustomModelBinders\ModelInterfaces\IPackage.cs" />
+    <Compile Include="CustomModelBinders\ModelInterfaces\IParser.cs" />
+    <Compile Include="CustomModelBinders\Parsers\JsonPackageParser.cs" />
+    <Compile Include="CustomModelBinders\Parsers\JsonScrollParser.cs" />
+    <Compile Include="CustomModelBinders\Parsers\JsonTouchParser.cs" />
+    <Compile Include="CustomModelBinders\Parsers\JsonViewAreaParser.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\General.cs" />
+    <Compile Include="Helpers\HTMLHelper.cs" />
+    <Compile Include="Helpers\HTMLTable.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Model\AdminModels.cs" />
+    <Compile Include="Model\Filter\DateModel.cs" />
+    <Compile Include="Model\Filter\FilterModel.cs" />
+    <Compile Include="Model\Mails\MailMasterModel.cs" />
+    <Compile Include="Model\Mails\PromotionEmailModel.cs" />
+    <Compile Include="Model\Mails\SystemEmailModel.cs" />
+    <Compile Include="Model\MasterViewModelWrapper.cs" />
+    <Compile Include="Model\Master\AfterLoginMasterModel.cs" />
+    <Compile Include="Model\Master\AnalyticsMasterModel.cs" />
+    <Compile Include="Model\Master\BeforeLoginMasterModel.cs" />
+    <Compile Include="Model\Master\MainMasterModel.cs" />
+    <Compile Include="Model\Pages\Account\AccountModels.cs" />
+    <Compile Include="Model\Pages\Account\ForgotPasswordModel.cs" />
+    <Compile Include="Model\Pages\Account\ResetPasswordModel.cs" />
+    <Compile Include="Model\Pages\Account\UnsubscribeModel.cs" />
+    <Compile Include="Model\Pages\Admin\AdminMasterModel.cs" />
+    <Compile Include="Model\Pages\Admin\AdminModel.cs" />
+    <Compile Include="Model\Pages\Admin\LogsModel.cs" />
+    <Compile Include="Model\Pages\Analytics\ABCompareModel.cs" />
+    <Compile Include="Model\Pages\Analytics\ABFilterParametersModel.cs" />
+    <Compile Include="Model\Pages\Analytics\DashboardModel.cs" />
+    <Compile Include="Model\Pages\Analytics\EyeTrackerModel.cs" />
+    <Compile Include="Model\Pages\Analytics\FilterParametersModel.cs" />
+    <Compile Include="Model\Pages\Analytics\FingerPrintModel.cs" />
+    <Compile Include="Model\Pages\Analytics\UsageModel.cs" />
+    <Compile Include="Model\Pages\Application\ApplicationEditModel.cs" />
+    <Compile Include="Model\Pages\Application\ApplicationIndexModel.cs" />
+    <Compile Include="Model\Pages\Application\ApplicationModel.cs" />
+    <Compile Include="Model\Pages\Application\ApplicationViewModel.cs" />
+    <Compile Include="Model\Pages\Application\PublishModel.cs" />
+    <Compile Include="Model\Pages\Application\ScreenModel.cs" />
+    <Compile Include="Model\Pages\Application\ScreensListModel.cs" />
+    <Compile Include="Model\Pages\Home\ContentModel.cs" />
+    <Compile Include="Model\Pages\Home\IndexModel.cs" />
+    <Compile Include="Model\Pages\Home\Mails\BasicMailContentModel.cs" />
+    <Compile Include="Model\Pages\Home\Mails\MailContentModel.cs" />
+    <Compile Include="Model\Pages\Home\PricingModel.cs" />
+    <Compile Include="Model\Pages\Portfolio\PortfolioIndexModel.cs" />
+    <Compile Include="Model\Pages\Portfolio\PortfolioModel.cs" />
+    <Compile Include="Model\Pages\ViewModel.cs" />
+    <Compile Include="Model\PagingModel.cs" />
+    <Compile Include="Model\ScreenDetailsModel.cs" />
+    <Compile Include="Model\ViewModelWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\m\Content\JQThemes\custom.css" />
+    <Content Include="Areas\m\Content\JQThemes\default.css" />
+    <Content Include="Areas\m\Content\JQThemes\images\ajax-loader.gif" />
+    <Content Include="Areas\m\Content\JQThemes\images\icons-18-black.png" />
+    <Content Include="Areas\m\Content\JQThemes\images\icons-18-white.png" />
+    <Content Include="Areas\m\Content\JQThemes\images\icons-36-black.png" />
+    <Content Include="Areas\m\Content\JQThemes\images\icons-36-white.png" />
+    <Content Include="Areas\m\Views\Account\Register.aspx" />
+    <Content Include="Areas\m\Views\Home\Index.aspx" />
+    <Content Include="Areas\m\Views\Home\PageContent.aspx" />
+    <Content Include="Content\Images\arrow-down.png" />
+    <Content Include="Content\Images\bg.png" />
+    <Content Include="Content\Images\eyetrack_grey.png" />
+    <Content Include="Content\Images\logo-141X76.png" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\notice_no-data.png" />
+    <Content Include="Content\Images\notice_nobody_used.png" />
+    <Content Include="Content\Images\notice_no_screen_shot.png" />
+    <Content Include="Content\Images\playback_grey.png" />
+    <Content Include="Content\Images\screens.png" />
+    <Content Include="Content\Images\touchmap_grey.png" />
+    <Content Include="Content\Images\white_texture.png" />
+    <Content Include="Content\main.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -227,7 +353,28 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Areas\m\Views\Web.config" />
+    <Content Include="Areas\m\Content\JQThemes\images\Thumbs.db" />
+    <Content Include="Areas\m\Views\Shared\Site.Master" />
+    <Content Include="Restricted\Packages\fingerprint-1.0.properties" />
+    <Content Include="Restricted\Packages\fingerprint-1.8.62.properties" />
+    <Content Include="Restricted\Packages\fingerprint-1.8.81.properties" />
+    <Content Include="Restricted\Packages\fingerprint-1.8.84.properties" />
+    <Content Include="Restricted\Packages\fingerprint-1.8.86.properties" />
+    <Content Include="Restricted\Packages\fingerprint-1.9.07.properties" />
+    <Content Include="Restricted\Packages\fingerprint-1.9.23.properties" />
+    <Content Include="Restricted\Packages\fingerprint-1.9.26.properties" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Restricted\Packages\fingerprint-1.0.jar" />
+    <Content Include="Restricted\Packages\fingerprint-1.8.62.jar" />
+    <Content Include="Restricted\Packages\fingerprint-1.8.77.jar" />
+    <Content Include="Restricted\Packages\fingerprint-1.8.81.jar" />
+    <Content Include="Restricted\Packages\fingerprint-1.8.84.jar" />
+    <Content Include="Restricted\Packages\fingerprint-1.8.86.jar" />
+    <Content Include="Restricted\Packages\fingerprint-1.9.07.jar" />
+    <Content Include="Restricted\Packages\fingerprint-1.9.23.jar" />
+    <Content Include="Restricted\Packages\fingerprint-1.9.26.jar" />
+    <Content Include="Restricted\Packages\fingerprint.828.jar" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -242,6 +389,54 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="fatal-error.html" />
+    <Content Include="maintenance.htm" />
+    <Content Include="test.htm" />
+    <Content Include="Test\index.html" />
+    <Content Include="Test\products.html" />
+    <Content Include="underconstruction.htm" />
+    <Content Include="Views\Account\Details.aspx" />
+    <Content Include="Views\Account\ForgotPassword.aspx" />
+    <Content Include="Views\Account\Forms\ForgotPasswordForm.ascx" />
+    <Content Include="Views\Account\Forms\LogOnForm.ascx" />
+    <Content Include="Views\Account\Forms\RegisterForm.ascx" />
+    <Content Include="Views\Account\Forms\ResetPasswordForm.ascx" />
+    <Content Include="Views\Account\Forms\UnsubscribeForm.ascx" />
+    <Content Include="Views\Account\LogOn.aspx" />
+    <Content Include="Views\Account\Register.aspx" />
+    <Content Include="Views\Account\ResetPassword.aspx" />
+    <Content Include="Views\Account\TermsAndConditions.aspx" />
+    <Content Include="Views\Account\Unsubscribe.aspx" />
+    <Content Include="Views\Admin\Forms\LogsFilter.ascx" />
+    <Content Include="Views\Admin\Index.aspx" />
+    <Content Include="Views\Admin\Logs.aspx" />
+    <Content Include="Views\Admin\Members.aspx" />
+    <Content Include="Views\Admin\Membership.aspx" />
+    <Content Include="Views\Admin\Staff.aspx" />
+    <Content Include="Views\Admin\UserEdit.aspx" />
+    <Content Include="Views\Analytics\Usage.aspx" />
+    <Content Include="Views\Application\Edit.aspx" />
+    <Content Include="Views\Application\Fingerprint.aspx" />
+    <Content Include="Views\Application\Forms\ApplicationForm.ascx" />
+    <Content Include="Views\Application\Forms\ScreenForm.ascx" />
+    <Content Include="Views\Application\Index.aspx" />
+    <Content Include="Views\Application\New.aspx" />
+    <Content Include="Views\Application\ScreenEdit.aspx" />
+    <Content Include="Views\Application\ScreenNew.aspx" />
+    <Content Include="Views\Application\Screens.aspx" />
+    <Content Include="Views\Content\Authenticated404.aspx" />
+    <Content Include="Views\Content\AuthenticatedError.aspx" />
+    <Content Include="Views\Content\AuthenticatedPageContent.aspx" />
+    <Content Include="Views\Home\ComingSoon.aspx" />
+    <Content Include="Views\Home\Mails\Basic.aspx" />
+    <Content Include="Views\Home\PlayGround.aspx" />
+    <Content Include="Views\Mails\Promotion.aspx" />
+    <Content Include="Views\Mails\System.aspx" />
+    <Content Include="Views\Portfolio\Edit.aspx" />
+    <Content Include="Views\Portfolio\Form.ascx" />
+    <Content Include="Views\Portfolio\New.aspx" />
+    <Content Include="Views\Secure\ChangePassword.aspx" />
+    <Content Include="Views\Secure\Forms\ChangePasswordForm.ascx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -249,44 +444,71 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Images\accent.png" />
-    <Content Include="Images\bullet.png" />
-    <Content Include="Images\heroAccent.png" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account_\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account_\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account_\_RemoveExternalLoginsPartial.cshtml" />
+    <Content Include="Views\Account_\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account_\Login.cshtml" />
+    <Content Include="Views\Account_\Manage.cshtml" />
+    <Content Include="Views\Account_\Register.cshtml" />
+    <Content Include="Views\Account_\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account_\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Home_\About.cshtml" />
+    <Content Include="Views\Home_\Contact.cshtml" />
+    <Content Include="Views\Home_\Index.cshtml" />
+    <Content Include="Views\Shared_\Error.cshtml" />
+    <Content Include="Views\Shared_\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared_\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\Forms\LogOnForm.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Admin\Admin.master" />
+    <Content Include="Views\Analytics\ABCompare.cshtml" />
+    <Content Include="Views\Analytics\Dashboard.cshtml" />
+    <Content Include="Views\Analytics\EyeTracker.cshtml" />
+    <Content Include="Views\Analytics\Filter.cshtml" />
+    <Content Include="Views\Analytics\TouchMap.cshtml" />
+    <Content Include="Views\Application\Index.cshtml" />
+    <Content Include="Views\Application\Publish.cshtml" />
+    <Content Include="Views\Content\Public404.cshtml" />
+    <Content Include="Views\Content\PublicError.cshtml" />
+    <Content Include="Views\Content\PublicPageContent.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\AfterLogin.Master" />
+    <Content Include="Views\Shared\AfterLoginContent.Master" />
+    <Content Include="Views\Shared\AfterLoginLeftMenu.Master" />
+    <Content Include="Views\Shared\Mail.Master" />
+    <Content Include="Views\Shared\Main.Master" />
+    <Content Include="Views\Shared\_AfterLogin.cshtml" />
+    <Content Include="Views\Shared\_AfterLoginLeftMenu.cshtml" />
+    <Content Include="Views\Shared\_Analytics.cshtml" />
+    <Content Include="Views\Shared\_BeforeLogin.cshtml" />
+    <Content Include="Views\Shared\_Content.cshtml" />
+    <Content Include="Views\Shared\_Main.cshtml" />
+    <Content Include="Views\Shared\_MainTmp.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Areas\m\Models\" />
+    <Folder Include="Model\Pages\Secure\" />
+    <Folder Include="Restricted\Screens\" />
+    <Folder Include="Restricted\UserPackages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{8c379dd1-93a3-4b68-a3ae-e7c2ce5a8a0f}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{6696bbd1-9b7a-44f9-ab0e-be264402e5cc}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

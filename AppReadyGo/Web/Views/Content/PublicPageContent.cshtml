@@ -1,0 +1,13 @@
+﻿@using AppReadyGo.Model.Pages.Home
+@using AppReadyGo.Model
+@using AppReadyGo.Model.Master
+@using AppReadyGo.Helpers;
+@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, ContentModel>
+@{
+    Layout = "~/Views/Shared/_Content.cshtml";
+}
+@section title { @Model.View.Title }
+@section header { }
+@Html.Raw(Model.View.Content)
+
+

@@ -1,337 +1,101 @@
-﻿using System;
+﻿using AppReadyGo.Common;
+using AppReadyGo.Common.Mails;
+using AppReadyGo.Core;
+using AppReadyGo.Core.Commands;
+using AppReadyGo.Core.Commands.Users;
+using AppReadyGo.Core.Queries.Content;
+using AppReadyGo.Core.Queries.Users;
+using AppReadyGo.Model;
+using AppReadyGo.Model.Master;
+using AppReadyGo.Model.Pages.Account;
+using AppReadyGo.Models.Account;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using DotNetOpenAuth.AspNet;
-using Microsoft.Web.WebPages.OAuth;
-using WebMatrix.WebData;
-using AppReadyGo.Web.Filters;
-using AppReadyGo.Web.Models;
 
-namespace AppReadyGo.Web.Controllers
+namespace AppReadyGo.Controllers
 {
-    [Authorize]
-    [InitializeSimpleMembership]
+
+    [HandleError]
     public class AccountController : Controller
     {
-        //
-        // GET: /Account/Login
-
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult LogOn()
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return this.View(new LogOnModel(), BeforeLoginMasterModel.MenuItem.None);
         }
-
-        //
-        // POST: /Account/Login
 
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model, string returnUrl)
-        {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
-            {
-                return RedirectToLocal(returnUrl);
-            }
-
-            // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
-            return View(model);
-        }
-
-        //
-        // POST: /Account/LogOff
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
-        {
-            WebSecurity.Logout();
-
-            return RedirectToAction("Index", "Home");
-        }
-
-        //
-        // GET: /Account/Register
-
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/Register
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
-                try
+                var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.UserName));
+                if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 }
-                catch (MembershipCreateUserException e)
+                else if(!securedDetails.Activated)
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    ModelState.AddModelError("", "You account is not activated, please use the link from activation email to activate your account.");
+                }
+                // Temprorary access just for special users
+                else if (!securedDetails.SpecialAccess && securedDetails.Roles == null)
+                {
+                    return Redirect("~/p/special-access-required");
+                }
+                else if (!Membership.Provider.ValidateUser(model.UserName, model.Password))
+                {
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                }
+                //else if (!securedDetails.AcceptedTermsAndConditions)
+                //{
+                //    Session["id"] = securedDetails.Id;
+                //    Session["rememberMe"] = model.RememberMe;
+                //    Session["returnUrl"] = returnUrl;
+                //    return RedirectToAction("TermsAndCoditions");
+                //}
+                else
+                {
+                    return LogIn(securedDetails.Id, model.RememberMe, returnUrl);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model, BeforeLoginMasterModel.MenuItem.None);
         }
 
-        //
-        // POST: /Account/Disassociate
+        public ActionResult TermsAndConditions()
+        {
+            var key = ObjectContainer.Instance.RunQuery(new GetKeyQuery("account/terms-and-coditions"));
+            ViewBag.Content = key.Items.First().Value;
+            return this.View(new object{}, BeforeLoginMasterModel.MenuItem.None);
+        }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Disassociate(string provider, string providerUserId)
+        public ActionResult AcceptTermsAndCoditions()
         {
-            string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
-            ManageMessageId? message = null;
+            int id = (int)Session["id"];
+            bool rememberMe = (bool)Session["rememberMe"];
+            string returnUrl = (string)Session["returnUrl"];
 
-            // Only disassociate the account if the currently logged in user is the owner
-            if (ownerAccount == User.Identity.Name)
-            {
-                // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
-                {
-                    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-                    if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
-                    {
-                        OAuthWebSecurity.DeleteAccount(provider, providerUserId);
-                        scope.Complete();
-                        message = ManageMessageId.RemoveLoginSuccess;
-                    }
-                }
-            }
+            Session["id"] = null;
+            Session["rememberMe"] = null;
+            Session["returnUrl"] = null;
 
-            return RedirectToAction("Manage", new { Message = message });
+            ObjectContainer.Instance.Dispatch(new AcceptTermsAndConditionsCommand(id));
+
+            return this.LogIn(id, rememberMe, returnUrl);
         }
 
-        //
-        // GET: /Account/Manage
-
-        public ActionResult Manage(ManageMessageId? message)
+        private ActionResult LogIn(int id, bool rememberMe, string returnUrl)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : "";
-            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
-        }
+            FormsAuthentication.SetAuthCookie(id.ToString(), rememberMe);
 
-        //
-        // POST: /Account/Manage
+            ObjectContainer.Instance.Dispatch(new UpdateLastAccessCommand(id));
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Manage(LocalPasswordModel model)
-        {
-            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            ViewBag.HasLocalPassword = hasLocalAccount;
-            ViewBag.ReturnUrl = Url.Action("Manage");
-            if (hasLocalAccount)
-            {
-                if (ModelState.IsValid)
-                {
-                    // ChangePassword will throw an exception rather than return false in certain failure scenarios.
-                    bool changePasswordSucceeded;
-                    try
-                    {
-                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
-                    }
-                    catch (Exception)
-                    {
-                        changePasswordSucceeded = false;
-                    }
-
-                    if (changePasswordSucceeded)
-                    {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                    }
-                }
-            }
-            else
-            {
-                // User does not have a local password so remove any validation errors caused by a missing
-                // OldPassword field
-                ModelState state = ModelState["OldPassword"];
-                if (state != null)
-                {
-                    state.Errors.Clear();
-                }
-
-                if (ModelState.IsValid)
-                {
-                    try
-                    {
-                        WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e);
-                    }
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        //
-        // POST: /Account/ExternalLogin
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
-        {
-            return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
-        }
-
-        //
-        // GET: /Account/ExternalLoginCallback
-
-        [AllowAnonymous]
-        public ActionResult ExternalLoginCallback(string returnUrl)
-        {
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
-            if (!result.IsSuccessful)
-            {
-                return RedirectToAction("ExternalLoginFailure");
-            }
-
-            if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
-            {
-                return RedirectToLocal(returnUrl);
-            }
-
-            if (User.Identity.IsAuthenticated)
-            {
-                // If the current user is logged in add the new account
-                OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
-                return RedirectToLocal(returnUrl);
-            }
-            else
-            {
-                // User is new, ask for their desired membership name
-                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
-                ViewBag.ReturnUrl = returnUrl;
-                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
-            }
-        }
-
-        //
-        // POST: /Account/ExternalLoginConfirmation
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
-        {
-            string provider = null;
-            string providerUserId = null;
-
-            if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
-            {
-                return RedirectToAction("Manage");
-            }
-
-            if (ModelState.IsValid)
-            {
-                // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
-                {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
-                    // Check if user already exists
-                    if (user == null)
-                    {
-                        // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
-                        db.SaveChanges();
-
-                        OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
-                        OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
-
-                        return RedirectToLocal(returnUrl);
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
-                    }
-                }
-            }
-
-            ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
-            ViewBag.ReturnUrl = returnUrl;
-            return View(model);
-        }
-
-        //
-        // GET: /Account/ExternalLoginFailure
-
-        [AllowAnonymous]
-        public ActionResult ExternalLoginFailure()
-        {
-            return View();
-        }
-
-        [AllowAnonymous]
-        [ChildActionOnly]
-        public ActionResult ExternalLoginsList(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
-        }
-
-        [ChildActionOnly]
-        public ActionResult RemoveExternalLogins()
-        {
-            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
-            List<ExternalLogin> externalLogins = new List<ExternalLogin>();
-            foreach (OAuthAccount account in accounts)
-            {
-                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
-
-                externalLogins.Add(new ExternalLogin
-                {
-                    Provider = account.Provider,
-                    ProviderDisplayName = clientData.DisplayName,
-                    ProviderUserId = account.ProviderUserId,
-                });
-            }
-
-            ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            return PartialView("_RemoveExternalLoginsPartial", externalLogins);
-        }
-
-        #region Helpers
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
+            if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
             {
                 return Redirect(returnUrl);
             }
@@ -341,67 +105,185 @@ namespace AppReadyGo.Web.Controllers
             }
         }
 
-        public enum ManageMessageId
+        public ActionResult LogOff()
         {
-            ChangePasswordSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
+            FormsAuthentication.SignOut();
+            ObjectContainer.Instance.ClearCurrentUserDetails();
+
+            return RedirectToAction("Index", "Home");
         }
 
-        internal class ExternalLoginResult : ActionResult
+        public ActionResult Register()
         {
-            public ExternalLoginResult(string provider, string returnUrl)
-            {
-                Provider = provider;
-                ReturnUrl = returnUrl;
-            }
-
-            public string Provider { get; private set; }
-            public string ReturnUrl { get; private set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
-            }
+            return this.View(new RegisterModel(), BeforeLoginMasterModel.MenuItem.None);
         }
 
-        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
+        private ActionResult View<TViewModel>(TViewModel viewModel, BeforeLoginMasterModel.MenuItem selectedItem)
         {
-            // See http://go.microsoft.com/fwlink/?LinkID=177550 for
-            // a full list of status codes.
-            switch (createStatus)
-            {
-                case MembershipCreateStatus.DuplicateUserName:
-                    return "User name already exists. Please enter a different user name.";
+            var model = new ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, TViewModel>(new MainMasterModel(), new BeforeLoginMasterModel(selectedItem), viewModel);
 
-                case MembershipCreateStatus.DuplicateEmail:
-                    return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
-
-                case MembershipCreateStatus.InvalidPassword:
-                    return "The password provided is invalid. Please enter a valid password value.";
-
-                case MembershipCreateStatus.InvalidEmail:
-                    return "The e-mail address provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidAnswer:
-                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidQuestion:
-                    return "The password retrieval question provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidUserName:
-                    return "The user name provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.ProviderError:
-                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                case MembershipCreateStatus.UserRejected:
-                    return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-            }
+            return View(model);
         }
-        #endregion
+
+        [HttpPost]
+        public ActionResult Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = ObjectContainer.Instance.Dispatch(new CreateMemberCommand(model.Email, model.Password));
+
+                if (!result.Validation.Any())
+                {
+                    new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
+                    return Redirect("~/p/activation-email-sent");
+                }
+                else
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(result.Validation));
+                }
+            }
+
+            return this.View(model, BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        private string ErrorCodeToString(IEnumerable<ValidationResult> validations)
+        {
+            if(validations.Any(v => v.ErrorCode == ErrorCode.EmailExists))
+            {
+                return "User with the email already exists, please check your email.";
+            }
+            else if (validations.Any(v => v.ErrorCode == ErrorCode.WrongEmail))
+            {
+                return "Email has wrong format, please correct and try again.";
+            }
+            return "System error, please contact to administrator.";
+        }
+
+        public ActionResult Activate(string key)
+        {
+            var splitedKey = key.DecryptLow().Split(',');
+            if (DateTime.Now > DateTime.Parse(splitedKey[0]))
+            {
+                throw new Exception("Activation link expired.");
+            }
+            var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(splitedKey[1]));
+            if (result.Validation.Any())
+            {
+                throw new Exception("User was not found.");
+            }
+            ObjectContainer.Instance.Dispatch(new GrantSpecialAccessCommand(result.Result.Value, true));
+            return Redirect("~/p/account-activated"); ;
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View(new ForgotPasswordModel(), BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
+                if (userDetails != null)
+                {
+                    new MailGenerator(this.ControllerContext).Send(new ForgotPasswordMail(model.Email));
+                    return Redirect("~/p/forgot-password-email-sent"); // Redirect to content page
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The user does not exits in the system.");
+                }
+            }
+
+            return View(model, BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        public ActionResult ResetPassword(string key)
+        {
+            var splitedKey = key.DecryptLow().Split(',');
+            if (DateTime.Now > DateTime.Parse(splitedKey[0]))
+            {
+                throw new Exception("Reset password link expired.");
+            }
+            var userDetails = ObjectContainer.Instance.RunQuery(new GetUserDetailsByEmailQuery(splitedKey[1]));
+            if (userDetails == null)
+            {
+                throw new Exception("User not found.");
+            }
+            return View(new ResetPasswordModel(), BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPasswordModel model, string key)
+        {
+            if (ModelState.IsValid)
+            {
+                var splitedKey = key.DecryptLow().Split(',');
+                var email = splitedKey[1];
+                if (DateTime.Now > DateTime.Parse(splitedKey[0]))
+                {
+                    throw new Exception("Reset password link expired.");
+                }
+                var result = ObjectContainer.Instance.Dispatch(new ResetPasswordCommand(email, model.NewPassword));
+                if (result.Validation.Any())
+                {
+                    ModelState.AddModelError("", "Wrong password.");
+                }
+                else if (!result.Result.HasValue)
+                {
+                    throw new Exception("User not found.");
+                }
+                else
+                {
+                    var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(email));
+                    if (!securedDetails.Activated)
+                    {
+                        ObjectContainer.Instance.Dispatch(new ActivateUserCommand(email));
+                    }
+                    // Temprorary access just for special users
+                    if (!securedDetails.SpecialAccess && securedDetails.Roles == null)
+                    {
+                        return Redirect("~/p/special-access-required");
+                    }
+                    else
+                    {
+                        // TODO: add terms and conditions
+                        FormsAuthentication.SetAuthCookie(securedDetails.Id.ToString(), false);
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
+
+            return View(model, BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        public ActionResult Unsubscribe(string email)
+        {
+            return View(new UnsubscribeModel { Email = email }, BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        [HttpPost]
+        public ActionResult Unsubscribe(UnsubscribeModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = ObjectContainer.Instance.Dispatch(new UnsubscribeCommand(model.Email));
+                if (result.Validation.Any())
+                {
+                    ModelState.AddModelError("", "Wrong email.");
+                }
+                return Redirect("~/p/unsubscrubed-successful");
+            }
+            return View(model, BeforeLoginMasterModel.MenuItem.None);
+        }
+
+
+        public ActionResult Details()
+        {
+            return View();
+        }
     }
 }

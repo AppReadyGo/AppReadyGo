@@ -1,0 +1,61 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html> 
+<html> 
+<head runat="server">
+    <title><asp:ContentPlaceHolder ID="PageTitleContent" runat="server" /></title>
+    <meta charset="utf-8" />
+    
+    <!-- Full Screen Web App Stuff for iOS -->
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"> 
+    <link href="images/icon.png" rel="apple-touch-icon" />
+	<link href="images/gt-startup.png" rel="apple-touch-startup-image" /> 
+        
+	<!-- JQuery Mobile -->  
+    <link rel="stylesheet" href="/Areas/m/Content/jqthemes/default.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile.structure-1.1.0.min.css" /> 
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
+    <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script> 
+    <!-- JQuery Mobile -->
+    <link rel="stylesheet" href="/Areas/m/Content/jqthemes/custom.css" />
+</head>
+
+<body> 
+
+<div data-role="page" id="page1" data-theme="f">
+    <div data-role="header" data-position="fixed" style="text-align:center;">
+        <img alt="Fingerprint" src="/Content/images/logo_43.png" style="margin:4px;"/>
+    </div>
+    <div data-role="content">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    </div><!-- /content -->
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+		<ul>
+			<li><a href="/m" id="home" data-icon="home">Home</a></li>
+			<li><a href="/m/products" id="products" data-icon="grid">Products</a></li>
+			<li><a href="/m/planandpricing" id="planandprice" data-icon="star">Plan And Price</a></li>
+			<li><a href="/m/account/register" data-icon="gear">Register</a></li>
+		</ul>
+		</div>
+	</div><!-- /footer -->
+</div><!-- /page -->
+<!--
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-10271152-1']);
+  _gaq.push(['_setDomainName', 'mobillify.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+-->
+</body>
+</html>
