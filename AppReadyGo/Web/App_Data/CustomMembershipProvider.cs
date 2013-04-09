@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Security;
 using AppReadyGo.Core;
 using AppReadyGo.Core.Queries.Users;
-using AppReadyGo.Core;
 using System.Collections.Specialized;
 using AppReadyGo.Common;
 
