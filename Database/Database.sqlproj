@@ -57,5 +57,93 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Schemas" />
+    <Folder Include="Scripts" />
+    <Folder Include="Schemas\dbo" />
+    <Folder Include="Schemas\dbo\Keys" />
+    <Folder Include="Schemas\api" />
+    <Folder Include="Schemas\log" />
+    <Folder Include="Schemas\log\Keys" />
+    <Folder Include="Schemas\log\Stored Procedures" />
+    <Folder Include="Schemas\utls" />
+    <Folder Include="Schemas\usr" />
+    <Folder Include="Schemas\cont" />
+    <Folder Include="Schemas\usr" />
+    <Folder Include="Schemas\cont" />
+    <Folder Include="Scripts\Post-Deployment" />
+    <Folder Include="Scripts\Pre-Deployment" />
+    <Folder Include="Database Level Objects" />
+    <Folder Include="Database Level Objects\Schemas" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schemas\api\Roles.table.sql" />
+    <Build Include="Schemas\api\Users.table.sql" />
+    <Build Include="Schemas\cont\Items.table.sql" />
+    <Build Include="Schemas\cont\Keys.table.sql" />
+    <Build Include="Schemas\cont\Mails.table.sql" />
+    <Build Include="Schemas\cont\Pages.table.sql" />
+    <Build Include="Schemas\cont\Themes.table.sql" />
+    <Build Include="Schemas\dbo\Keys\PackageEvent.FK_PACKAGEEVENT_APPLICATION.fkey.sql" />
+    <Build Include="Schemas\dbo\Keys\PackageEvent.FK_PACKAGEEVENT_BROWSER.fkey.sql" />
+    <Build Include="Schemas\dbo\Keys\PackageEvent.FK_PACKAGEEVENT_COUNTRY.fkey.sql" />
+    <Build Include="Schemas\dbo\Keys\PackageEvent.FK_PACKAGEEVENT_COUNTRY_1.fkey.sql" />
+    <Build Include="Schemas\dbo\Keys\PackageEvent.FK_PACKAGEEVENT_LANGUAGE.fkey.sql" />
+    <Build Include="Schemas\dbo\Keys\PackageEvent.FK_PACKAGEEVENT_OPERATIONSYSTEM.fkey.sql" />
+    <Build Include="Schemas\dbo\AccountProfiler.table.sql" />
+    <Build Include="Schemas\dbo\Application.table.sql" />
+    <Build Include="Schemas\dbo\Browser.table.sql" />
+    <Build Include="Schemas\dbo\Cities.table.sql" />
+    <Build Include="Schemas\dbo\Click.table.sql" />
+    <Build Include="Schemas\dbo\ClickEvent.table.sql" />
+    <Build Include="Schemas\dbo\Continents.table.sql" />
+    <Build Include="Schemas\dbo\Countries.table.sql" />
+    <Build Include="Schemas\dbo\GeoKeys.table.sql" />
+    <Build Include="Schemas\dbo\Language.table.sql" />
+    <Build Include="Schemas\dbo\OperationSystem.table.sql" />
+    <Build Include="Schemas\dbo\PackageEvent.table.sql" />
+    <Build Include="Schemas\dbo\Packages.table.sql" />
+    <Build Include="Schemas\dbo\PageView.table.sql" />
+    <Build Include="Schemas\dbo\Regions.table.sql" />
+    <Build Include="Schemas\dbo\Screen.table.sql" />
+    <Build Include="Schemas\dbo\Scroll.table.sql" />
+    <Build Include="Schemas\dbo\ScrollEvent.table.sql" />
+    <Build Include="Schemas\dbo\SessionInfoEvent.table.sql" />
+    <Build Include="Schemas\dbo\SystemInfo.table.sql" />
+    <Build Include="Schemas\dbo\Targets.table.sql" />
+    <Build Include="Schemas\dbo\ViewPart.table.sql" />
+    <Build Include="Schemas\dbo\ViewPartEvent.table.sql" />
+    <Build Include="Schemas\dbo\VisitEvent.table.sql" />
+    <Build Include="Schemas\log\Keys\FK_CategoryLog_Audit.fkey.sql" />
+    <Build Include="Schemas\log\Keys\FK_CategoryLog_Category.fkey.sql" />
+    <Build Include="Schemas\log\Keys\PK_Categories.pkey.sql" />
+    <Build Include="Schemas\log\Keys\PK_CategoryLog.pkey.sql" />
+    <Build Include="Schemas\log\Keys\PK_Log.pkey.sql" />
+    <Build Include="Schemas\log\Stored Procedures\AddCategory.proc.sql" />
+    <Build Include="Schemas\log\Stored Procedures\CategoryLogInsert.proc.sql" />
+    <Build Include="Schemas\log\Stored Procedures\ClearLog.proc.sql" />
+    <Build Include="Schemas\log\Stored Procedures\LogWrite.proc.sql" />
+    <Build Include="Schemas\log\Category.table.sql" />
+    <Build Include="Schemas\log\CategoryLog.table.sql" />
+    <Build Include="Schemas\log\Log.table.sql" />
+    <Build Include="Schemas\usr\Memberships.table.sql" />
+    <Build Include="Schemas\usr\StaffRoles.table.sql" />
+    <Build Include="Schemas\usr\Users.table.sql" />
+    <Build Include="Schemas\usr\UserStaffRoles.table.sql" />
+    <Compile Include="Schemas\utls\CreateBinaryInserts.proc.sql" />
+    <Compile Include="Scripts\ClearUserData.sql" />
+    <Compile Include="Scripts\Create RunNow app.sql" />
+    <Compile Include="Scripts\DevelopmentData.sql" />
+    <Build Include="Database Level Objects\Schemas\api.schema.sql" />
+    <Build Include="Database Level Objects\Schemas\cont.schema.sql" />
+    <Build Include="Database Level Objects\Schemas\log.schema.sql" />
+    <Build Include="Database Level Objects\Schemas\usr.schema.sql" />
+    <Build Include="Database Level Objects\Schemas\utls.schema.sql" />
+    <Compile Include="Scripts\RemovePortfolios.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />
   </ItemGroup>
 </Project>
