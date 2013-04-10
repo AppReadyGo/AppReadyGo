@@ -94,7 +94,7 @@ VALUES
 (9, 1, 'content', '
 <div id="page_features">
 <article>
-    <img alt="Touch map preview" src="/Resources/Feature_TouchMap.jpg" />
+    <img alt="Touch map preview" src="/Images/Feature_TouchMap.jpg" />
     <h3>Touch map:</h3>
     <p>TouchMap shows touches (by means of hot or cold  spots)  in any area of an application. Developer can see where exactly people touch.<br/>
     - Improve designs to increase visitor interaction.<br/>
@@ -102,7 +102,7 @@ VALUES
     <p class="clear"></p>
 </article>
 <article>
-    <img alt="Touch map preview" src="/Resources/Feature_EyeTrack.jpg" />
+    <img alt="Touch map preview" src="/Images/Feature_EyeTrack.jpg" />
     <h3>Eye Track:</h3>
     <p>EyeTrack shows the amount of time application users spend on each part of the content. Scrolls on your content are meticulously tracked, giving you a precise understanding of what attracts users. 
     These allows to make adjutments that will have users reading more content.<br/>
@@ -112,7 +112,7 @@ VALUES
     <p class="clear"></p>
 </article>
 <article>
-    <img alt="Touch map preview" src="/Resources/Feature_PlayBack.jpg" />
+    <img alt="Touch map preview" src="/Images/Feature_PlayBack.jpg" />
     <h3>Play Back:</h3>
     <p>PlayBack gives you feed back on how users find specific application features. That information helps you understand what users need , allowing you to make your applications easier to use.<br/>
     - See what users do with your app.<br/>
@@ -141,7 +141,7 @@ VALUES
 </ul>
 </article><article class="col-2-2"><h2>Touch map:</h2>
 <p><strong>Touch Map</strong> gives you the marketing power to know everywhere your visitors touch on your application, whether it''s links, images, text or dead space. Know what ads, images and links aren''t getting enough click attention and what call to action buttons are being completely ignored.</p>
-<img alt="Touch map preview" style="float:right;margin-left:20px;" src="/Resources/TouchMap1.jpg" />
+<img alt="Touch map preview" style="float:right;margin-left:20px;" src="/Images/TouchMap.jpg" />
 <p><strong>Discover if visitors are clicking on</strong> parts of your web pages that aren''t links but should be. Are visitors clicking on your images and text, such as “Special Offers” banners, buttons or icons, without going anywhere? If these critical page elements are not linked to anything you are losing potential customers and sales!</p>
 <p><strong>Quickly and easily conduct A/B testing</strong> to dramatically increase your conversion rates. Learn how even the smallest design and layout changes can help improve your visitors'' interactions and ultimately increase your ROI (return on investment).</p>
 <p><strong>Conduct accurate eye-tracking on a massive scale at a fraction of the cost.</strong> Now Eye-tracking is open to everyone and at incredibly affordable pricing.
@@ -161,7 +161,7 @@ Having the cumulative statistics of your website visitor’s interaction within 
 </article><article class="col-2-2">
 <h2>Play back</h2>
 <p>Do you need to track what your users are doing with your application? PlayBack is like looking right over their shoulder and helping them every step of the way. Understand exactly how your customers use your application to know how to improve it.</p>
-<img src="/Resources/play_back1.jpg" alt="Play back preview" style="float:right;margin-left:20px;">
+<img src="/Images/PlayBack.jpg" alt="Play back preview" style="float:right;margin-left:20px;">
 <p><strong>Help</strong> your users to understand your application and make the most out of it. <br />
 <strong>Rewind and watch</strong> their browsing sessions to see what they looked at and how they used it. <br />
 <strong>Improve</strong> the user experience of your application.<br />
@@ -182,7 +182,7 @@ If your application is a great one, people will want to use it. </p>
 </ul>
 </article><article class="col-2-2"><h2>Eye track</h2>
 <p><strong>Understanding</strong> how much attention your visitors pay to a specific spot on your application and knowing what your visitors care about the most, what they read, and what content was completely skipped over is pure gold to increased monetization of your business.</p>
-<img src="/Resources/play_back1.jpg" alt="Play back preview" style="float:right;margin-left:20px;">
+<img src="/Images/PlayBack.jpg" alt="Play back preview" style="float:right;margin-left:20px;">
 <p><strong>Knowing what your potential customers are viewing</strong> and clicking on and what they are not will enable you to tweak your website in the most creative and effective way to attract more sales. Give your potential buying visitors the exact information they want in the least amount of time and watch your sales increase dramatically.</p>
 <p><strong>Pinpointing your visitor’s hotspots</strong> of product or service interest will allow you to design more hotspots within your web pages. By knowing your visitors browsing habits, you''re closer to writing the best attention grabbing copy that will keep your potential buyers on your website longer resulting in increased percentage of sales.</p>
 <p><strong>By identifying the boring areas of your web pages</strong> you will be able to revise and monitor your edits for best marketing performance indicated by increased viewing and purchase touches. Optimizing ideal ad and button locations dramatically impacts profit performance. Turn skipped over pages into more touched over pages.</p>
@@ -195,7 +195,7 @@ If your application is a great one, people will want to use it. </p>
     <h2>
         TouchMap</h2>
     <a href="/m/products/touch-map">
-        <img alt="" src="/Resources/TouchMap1.jpg" style="width: 270px;" /></a>
+        <img alt="" src="/Images/TouchMap.jpg" style="width: 270px;" /></a>
     <p>
         <strong>TouchMap</strong> is a unique technology which analyzes touches in any area
         of your application. Links, images, text or empty spaces - see what’s being clicked
@@ -212,7 +212,7 @@ If your application is a great one, people will want to use it. </p>
     <h2>
         EyeTrack</h2>
     <a href="/m/products/eye-track">
-        <img alt="" src="/Resources/EyeTrack2.jpg" style="width: 270px;" /></a>
+        <img alt="" src="/Images/EyeTrack.jpg" style="width: 270px;" /></a>
     <p>
         The<strong> EyeTrack</strong> technology will indicate for you how much time and
         attention your application or website users spend per each part of the content.
@@ -235,7 +235,7 @@ If your application is a great one, people will want to use it. </p>
     <h2>
         PlayBack</h2>
     <a href="/m/products/play-back">
-        <img alt="" src="/Resources/play_back1.jpg" style="width: 270px;" /></a>
+        <img alt="" src="/Images/PlayBack.jpg" style="width: 270px;" /></a>
     <p>
         Use <strong>PlayBack</strong> to make the most out of your applications. Improve
         them using the data you collect for your users to have the best experience possible.

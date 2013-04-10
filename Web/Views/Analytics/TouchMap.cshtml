@@ -75,15 +75,15 @@
                 }
                 @if (!Model.HasClicks)
                 {
-                    <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/Content/New/Images/notice_nobody_used.png" />
+                    <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/content/images/notice_nobody_used.png" />
                 }
                 else if (Model.ClicksAmount == 0)
                 {
-                    <img alt="Oops, ther is no data for this time period" class="notice" src="/Content/New/Images/notice_no-data.png" />
+                    <img alt="Oops, ther is no data for this time period" class="notice" src="/content/images/notice_no-data.png" />
                 }
                 else if (!Model.ScreenId.HasValue && !Model.HasScrolls)
                 {
-                    <img alt="Ahem! We have the data but no screenshot." class="notice" src="/Content/New/Images/notice_no_screen_shot.png" style="margin-bottom:40px;" />
+                    <img alt="Ahem! We have the data but no screenshot." class="notice" src="/content/images/notice_no_screen_shot.png" style="margin-bottom:40px;" />
                 }
                 else
                 {

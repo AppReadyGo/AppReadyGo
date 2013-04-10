@@ -25,7 +25,7 @@
 
 <div data-role="page" id="page1" data-theme="f">
     <div data-role="header" data-position="fixed" style="text-align:center;">
-        <img alt="Fingerprint" src="/Content/images/logo_43.png" style="margin:4px;"/>
+        <img alt="AppReadyGo" src="/Content/images/Logo173X38.png" style="margin:4px;"/>
     </div>
     <div data-role="content">
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
