@@ -288,8 +288,7 @@
     <Content Include="Content\Images\arrow-down.png" />
     <Content Include="Content\Images\bg.png" />
     <Content Include="Content\Images\eyetrack_grey.png" />
-    <Content Include="Content\Images\logo-141X76.png" />
-    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\Logo173X38.png" />
     <Content Include="Content\Images\notice_no-data.png" />
     <Content Include="Content\Images\notice_nobody_used.png" />
     <Content Include="Content\Images\notice_no_screen_shot.png" />
@@ -357,6 +356,12 @@
     <Content Include="Areas\m\Views\Web.config" />
     <Content Include="Areas\m\Content\JQThemes\images\Thumbs.db" />
     <Content Include="Areas\m\Views\Shared\Site.Master" />
+    <Content Include="Images\EyeTrack.jpg" />
+    <Content Include="Images\Feature_EyeTrack.jpg" />
+    <Content Include="Images\Feature_PlayBack.jpg" />
+    <Content Include="Images\Feature_TouchMap.jpg" />
+    <Content Include="Images\PlayBack.jpg" />
+    <Content Include="Images\TouchMap.jpg" />
     <Content Include="Restricted\Packages\fingerprint-1.0.properties" />
     <Content Include="Restricted\Packages\fingerprint-1.8.62.properties" />
     <Content Include="Restricted\Packages\fingerprint-1.8.81.properties" />

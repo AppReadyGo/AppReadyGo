@@ -30,7 +30,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, AppReadyGo.Model.Pag
 			<p>
 			 Create a design brief which is simply a <strong>clear outline of what you need designed</strong>. To begin, post this brief to 99designs and <strong>choose a design package</strong>.
 			</p>
-			<p class="arrow"><img src="/content/new/images/arrow-down.png" alt=" "></p>
+			<p class="arrow"><img src="/content/images/arrow-down.png" alt=" "></p>
 		</li>
 		<li>
 			<span>2</span>
@@ -38,7 +38,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, AppReadyGo.Model.Pag
 			<p>
 				Designers then submit concepts to <strong>compete for your prize</strong>.  Be sure to <strong>provide continual feedback</strong> to help the designers deliver a concept you love!
 			</p>
-			<p class="arrow"><img src="/content/new/images/arrow-down.png" alt=" "></p>
+			<p class="arrow"><img src="/content/images/arrow-down.png" alt=" "></p>
 		</li>
 		<li>
 			<span>3</span>

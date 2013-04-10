@@ -26,7 +26,7 @@ Inherits="System.Web.Mvc.ViewPage<AppReadyGo.Model.Pages.Home.Mails.BasicMailCon
                                     <tbody><tr>
                                         <td align="left" style="border-collapse:collapse">
                                             <div style="color:#505050;font-family:Arial;font-size:10px;line-height:100%;text-align:middle">
-                                            <a href="<%:Model.SiteRootUrl %>" style="color:#336699;font-weight:normal;text-decoration:underline" target="_blank"><img src="<%:Model.SiteRootUrl %>/Content/images/logo_60.png" width="392" height="60" align="" border="0" title="Fingerprint" alt="Fingerprint" style="border:0;min-height:auto;line-height:100%;outline:none;text-decoration:none;display:inline;margin-bottom:0px"></a>
+                                            <a href="<%:Model.SiteRootUrl %>" style="color:#336699;font-weight:normal;text-decoration:underline" target="_blank"><img src="<%:Model.SiteRootUrl %>/Content/images/Logo173X38.png"" width="392" height="60" align="" border="0" title="Fingerprint" alt="Fingerprint" style="border:0;min-height:auto;line-height:100%;outline:none;text-decoration:none;display:inline;margin-bottom:0px"></a>
                                             </div>
                                         </td>
                                     </tr>
