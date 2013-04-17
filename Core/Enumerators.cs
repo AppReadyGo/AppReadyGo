@@ -28,7 +28,8 @@ namespace AppReadyGo.Core
     public enum UserType : byte
     {
         Staff = 1,
-        Member
+        Member,
+        ApiMember
     }
 
     public enum DataGrouping

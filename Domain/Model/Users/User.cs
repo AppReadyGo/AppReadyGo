@@ -7,10 +7,8 @@ using AppReadyGo.Core.Entities;
 
 namespace AppReadyGo.Domain.Model.Users
 {
-    public class User
+    public abstract class User
     {
-        private Iesi.Collections.Generic.ISet<Application> applications = null;
-
         public virtual int Id { get; protected set; }
         public virtual string Email { get; protected set; }
         public virtual string Password { get; protected set; }
@@ -24,10 +22,6 @@ namespace AppReadyGo.Domain.Model.Users
         public virtual bool SpecialAccess { get; protected set; }
         public virtual bool AcceptedTermsAndConditions { get; protected set; }
         public virtual Membership Membership { get; protected set; }
-        public virtual IEnumerable<Application> Applications
-        {
-            get { return this.applications; }
-        }
 
         public virtual UserType Type
         {
@@ -81,54 +75,6 @@ namespace AppReadyGo.Domain.Model.Users
         public virtual void GrantSpecialAccess(bool specialAccess)
         {
             this.SpecialAccess = specialAccess;
-        }
-    }
-
-    public class Staff : User
-    {
-        private Iesi.Collections.Generic.ISet<StaffRole> roles = null;
-
-        public virtual IEnumerable<StaffRole> Roles
-        {
-            get { return this.roles; }
-        }
-
-        public override UserType Type
-        {
-            get { return UserType.Staff; }
-        }
-
-        public override Membership Membership
-        {
-            get { return Membership.Pro; }
-        }
-
-        public Staff(string email, string password)
-            : base(email, password)
-        {
-        }
-
-        protected Staff()
-            : base()
-        {
-            this.roles = new HashedSet<StaffRole>();
-        }
-
-
-        public virtual void GrantRole(StaffRole role)
-        {
-            if (!this.roles.Contains(role))
-            {
-                this.roles.Add(role);
-            }
-        }
-
-        public virtual void RevokeRole(StaffRole role)
-        {
-            if (!this.roles.Contains(role))
-            {
-                this.roles.Remove(role);
-            }
         }
     }
 }

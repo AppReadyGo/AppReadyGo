@@ -5,17 +5,12 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Users
 {
-    public class UserMapping : ClassMapping<User>
+    public class ApiMemberMapping : ClassMapping<ApiMember>
     {
-        public UserMapping()
+        public ApiMemberMapping()
         {
-            Schema("usr");
-            Table("Users");
-            DiscriminatorValue((byte)UserType.Member);
+            DiscriminatorValue((byte)UserType.ApiMember);
 
-            Discriminator(map => { map.Column("UserTypeID")                                                                                                                                 ; });
-            Id(x => x.Id, map => { map.Column("ID"); map.Generator(Generators.Identity); });
-            Property(x => x.Type, x => { x.NotNullable(true); x.Column("UserTypeID"); x.Access(Accessor.ReadOnly); x.Insert(false); x.Update(false); });
             Property(x => x.Email, map => { map.Length(50); map.NotNullable(true); });
             Property(x => x.Password, map => { map.Length(50); map.NotNullable(true); });
             Property(x => x.PasswordSalt, map => { map.Length(50); map.NotNullable(true); });
@@ -26,8 +21,27 @@ namespace AppReadyGo.Domain.Mapping.Users
             Property(x => x.FirstName, map => { map.Length(100); });
             Property(x => x.LastName, map => { map.Length(100); });
             Property(x => x.SpecialAccess, map => { map.NotNullable(true); });
-            Property(x => x.AcceptedTermsAndConditions, map => { map.NotNullable(true); });
-            Property(x => x.Membership, map => { map.NotNullable(true); map.Column("MembershipID"); });
-         }
+
+            Property(x => x.Age, map => { map.NotNullable(true); });
+            Property(x => x.Gender, map => { map.NotNullable(true); map.Column("GenderID"); });
+          
+            Set(
+              x => x.DownloadedApplications,
+              map =>
+              {
+                  map.Key(k => k.Column("UserID"));
+                  map.Access(Accessor.Field);
+              },
+              r => r.OneToMany());
+
+            Set(
+              x => x.Country,
+              map =>
+              {
+                  map.Key(k => k.Column("UserID"));
+                  map.Access(Accessor.Field);
+              },
+              r => r.OneToMany());
+        }
     }
 }

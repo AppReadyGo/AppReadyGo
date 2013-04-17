@@ -5,30 +5,19 @@ using System.Text;
 
 namespace AppReadyGo.Core.Entities
 {
-    /// <summary>
-    /// Enum represents Application platform types
-    /// </summary>
-    public enum ApplicationType
+    public class ApplicationType
     {
-        /// <summary>
-        /// web application
-        /// </summary>
-        Web = 1,
-        /// <summary>
-        /// webmobile application
-        /// </summary>
-        WebMobile,
-        /// <summary>
-        /// android os based application
-        /// </summary>
-        Android,
-        /// <summary>
-        /// iOS based applications
-        /// </summary>
-        iPhone,
-        /// <summary>
-        /// windows mobile based application
-        /// </summary>
-        WindowsMobile
+        public virtual int Id { get; protected set; }
+
+        public virtual string Name { get; set; }
+
+        public ApplicationType()
+        {
+        }
+
+        public ApplicationType(string name)
+        {
+            this.Name = name;
+        }
     }
 }

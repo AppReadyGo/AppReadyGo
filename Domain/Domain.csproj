@@ -110,6 +110,9 @@
     <Compile Include="Mapping\PortfolioMapping.cs" />
     <Compile Include="Mapping\ScreenMapping.cs" />
     <Compile Include="Mapping\ScrollMapping.cs" />
+    <Compile Include="Mapping\Users\ApiMemberMapping.cs" />
+    <Compile Include="Mapping\Users\MemberMapping.cs" />
+    <Compile Include="Mapping\Users\StaffMapping.cs" />
     <Compile Include="Mapping\Users\UserMapping.cs" />
     <Compile Include="Mapping\ViewPartMaping.cs" />
     <Compile Include="Model\AccountProfiler.cs" />
@@ -148,7 +151,10 @@
     <Compile Include="Model\Screen.cs" />
     <Compile Include="Model\Scroll.cs" />
     <Compile Include="Model\Size.cs" />
-    <Compile Include="Model\Users\Users.cs" />
+    <Compile Include="Model\Users\ApiMember.cs" />
+    <Compile Include="Model\Users\Member.cs" />
+    <Compile Include="Model\Users\Staff.cs" />
+    <Compile Include="Model\Users\User.cs" />
     <Compile Include="Model\ViewPart.cs" />
     <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -194,6 +200,7 @@
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

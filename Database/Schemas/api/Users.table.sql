@@ -12,7 +12,8 @@
 	[FirstName]		 NVARCHAR (100)	NULL,
 	[LastName]		 NVARCHAR (100)	NULL,
 	[MembershipID]	 SMALLINT		NOT NULL,
-	[AcceptedTermsAndConditions] BIT NOT NULL
+	[AcceptedTermsAndConditions] BIT NOT NULL,
+	[CountryID]		INT				NULL
 );
 GO
 
@@ -24,3 +25,6 @@ ALTER TABLE [api].[Users]
 ADD CONSTRAINT UC_Email UNIQUE ([Email])
 GO
 
+ALTER TABLE [api].[Users]
+    ADD CONSTRAINT [FK_Users_Countries] FOREIGN KEY ([CountryID]) REFERENCES [api].[Countries] ([ID]);
+GO
