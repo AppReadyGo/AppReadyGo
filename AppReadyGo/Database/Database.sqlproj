@@ -129,16 +129,17 @@
     <Build Include="Schemas\usr\StaffRoles.table.sql" />
     <Build Include="Schemas\usr\Users.table.sql" />
     <Build Include="Schemas\usr\UserStaffRoles.table.sql" />
-    <Compile Include="Schemas\utls\CreateBinaryInserts.proc.sql" />
-    <Compile Include="Scripts\ClearUserData.sql" />
-    <Compile Include="Scripts\Create RunNow app.sql" />
-    <Compile Include="Scripts\DevelopmentData.sql" />
+    <None Include="Schemas\utls\CreateBinaryInserts.proc.sql" />
+    <None Include="Scripts\ClearUserData.sql" />
+    <None Include="Scripts\Create RunNow app.sql" />
+    <None Include="Scripts\DevelopmentData.sql" />
     <Build Include="Database Level Objects\Schemas\api.schema.sql" />
     <Build Include="Database Level Objects\Schemas\cont.schema.sql" />
     <Build Include="Database Level Objects\Schemas\log.schema.sql" />
     <Build Include="Database Level Objects\Schemas\usr.schema.sql" />
     <Build Include="Database Level Objects\Schemas\utls.schema.sql" />
-    <Compile Include="Scripts\RemovePortfolios.sql" />
+    <None Include="Scripts\RemovePortfolios.sql" />
+    <Build Include="Schemas\api\Countries.table.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
