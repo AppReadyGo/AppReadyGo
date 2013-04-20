@@ -61,7 +61,6 @@
     <Folder Include="Scripts" />
     <Folder Include="Schemas\dbo" />
     <Folder Include="Schemas\dbo\Keys" />
-    <Folder Include="Schemas\api" />
     <Folder Include="Schemas\log" />
     <Folder Include="Schemas\log\Keys" />
     <Folder Include="Schemas\log\Stored Procedures" />
@@ -76,8 +75,6 @@
     <Folder Include="Database Level Objects\Schemas" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Schemas\api\Roles.table.sql" />
-    <Build Include="Schemas\api\Users.table.sql" />
     <Build Include="Schemas\cont\Items.table.sql" />
     <Build Include="Schemas\cont\Keys.table.sql" />
     <Build Include="Schemas\cont\Mails.table.sql" />
@@ -139,7 +136,6 @@
     <Build Include="Database Level Objects\Schemas\usr.schema.sql" />
     <Build Include="Database Level Objects\Schemas\utls.schema.sql" />
     <None Include="Scripts\RemovePortfolios.sql" />
-    <Build Include="Schemas\api\Countries.table.sql" />
     <Build Include="Schemas\dbo\ApplicationTypes.table.sql" />
   </ItemGroup>
   <ItemGroup>

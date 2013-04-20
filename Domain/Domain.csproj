@@ -99,6 +99,7 @@
     <Compile Include="Mapping\Content\MailMapping.cs" />
     <Compile Include="Mapping\Content\PageMapping.cs" />
     <Compile Include="Mapping\Content\ThemeMapping.cs" />
+    <Compile Include="Mapping\ApplicationTypeMapping.cs" />
     <Compile Include="Mapping\CountryMapping.cs" />
     <Compile Include="Mapping\LanguageMapping.cs" />
     <Compile Include="Mapping\Logs\CategoryMapping.cs" />
