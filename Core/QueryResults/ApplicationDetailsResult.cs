@@ -1,4 +1,5 @@
-﻿using AppReadyGo.Core.Entities;
+﻿using System;
+using AppReadyGo.Core.Entities;
 
 namespace AppReadyGo.Core.QueryResults
 {
@@ -8,6 +9,6 @@ namespace AppReadyGo.Core.QueryResults
 
         public string Description { get; set; }
 
-        public ApplicationType Type { get; set; }
+        public Tuple<int, string> Type { get; set; }
     }
 }

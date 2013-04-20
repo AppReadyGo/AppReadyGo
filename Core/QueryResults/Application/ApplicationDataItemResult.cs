@@ -1,4 +1,5 @@
-﻿using AppReadyGo.Core.Entities;
+﻿using System;
+using AppReadyGo.Core.Entities;
 
 namespace AppReadyGo.Core.QueryResults.Application
 {
@@ -6,7 +7,7 @@ namespace AppReadyGo.Core.QueryResults.Application
     {
         public int Visits { get; set; }
 
-        public ApplicationType Type { get; set; }
+        public Tuple<int, string> Type { get; set; }
 
         public bool IsActive { get; set; }
     }

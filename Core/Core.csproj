@@ -92,7 +92,6 @@
     <Compile Include="Commands\ValidationResult.cs" />
     <Compile Include="Encryption.cs" />
     <Compile Include="EncryptionSettings.cs" />
-    <Compile Include="Entities\ApplicationType.cs" />
     <Compile Include="Entities\ContentPredefinedKeys.cs" />
     <Compile Include="Entities\Gender.cs" />
     <Compile Include="Entities\Location.cs" />

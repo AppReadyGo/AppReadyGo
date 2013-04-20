@@ -6,7 +6,7 @@ namespace AppReadyGo.Model.Pages.Application
     public class ApplicationEditModel : ApplicationModel
     {
         [DisplayName("Type")]
-        public new ApplicationType Type { get; set; }
+        public new int Type { get; set; }
 
         public int? SelectedApplicationId { get; set; }
     }

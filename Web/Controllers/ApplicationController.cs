@@ -57,7 +57,7 @@ namespace AppReadyGo.Controllers
                     IsActive = a.IsActive,
                     Alternate = i % 2 != 0,
                     Visits = a.Visits,
-                    Key = a.Type.GetAppKey(a.Id),
+                    Key = a.Id.GetAppKey(),
                     Downloads = rnd.Next(100),
                     Published = DateTime.Now.AddDays(-rnd.Next(100)).ToString("dd MMM yyyy"),
                     Scrolls = rnd.Next(1000),
@@ -110,11 +110,11 @@ namespace AppReadyGo.Controllers
             object res = null;
             if (ModelState.IsValid)
             {
-                var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.Description, (ApplicationType)model.Type));
+                var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.Description, model.Type));
                 res = new
                 {
                     HasError = false,
-                    code = ((ApplicationType)model.Type).GetAppKey(appId.Result),
+                    // code = ((ApplicationType)model.Type).GetAppKey(appId.Result),
                     appId = appId.Result
                 };
             }
@@ -140,10 +140,10 @@ namespace AppReadyGo.Controllers
                 {
                     Id = app.Id,
                     Description = app.Description,
-                    Type = (int)app.Type,
+                    Type = app.Type.Item1,
                     UserId = ObjectContainer.Instance.CurrentUserDetails.Id
                 };
-                model.ViewData = GetViewData(app.Type, model.Id);
+                model.ViewData = GetViewData(app.Type.Item1, model.Id);
 
                 return View(model, AfterLoginMasterModel.MenuItem.Analytics);
             }
@@ -161,7 +161,7 @@ namespace AppReadyGo.Controllers
             {
                 ViewBag.Edit = true;
                 ViewBag.Version = ContentPredefinedKeys.AndroidPackageVersion.GetContent();
-                model.ViewData = GetViewData((ApplicationType)model.Type, model.Id);
+                model.ViewData = GetViewData(null/*(ApplicationType)model.Type*/, model.Id);
                 return View(model, AfterLoginMasterModel.MenuItem.Analytics);
             }
         }
@@ -180,13 +180,13 @@ namespace AppReadyGo.Controllers
             return Redirect("/Application");
         }
 
-        private static ApplicationViewModel GetViewData(ApplicationType? type = null, int? appId = null)
+        private static ApplicationViewModel GetViewData(int? type = null, int? appId = null)
         {
             return new ApplicationViewModel
             {
                 Screens = new List<ScreenResult>(),
-                TypesList = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() }),
-                PropertyId = type.HasValue && appId.HasValue ? type.Value.GetAppKey(appId.Value) : "**-******"
+                //TypesList = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() }),
+                //PropertyId = type.HasValue && appId.HasValue ? type.Value.GetAppKey(appId.Value) : "**-******"
             };
         }
 

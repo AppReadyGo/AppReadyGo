@@ -117,6 +117,7 @@
     <Compile Include="Mapping\ViewPartMaping.cs" />
     <Compile Include="Model\AccountProfiler.cs" />
     <Compile Include="Model\Application.cs" />
+    <Compile Include="Model\ApplicationType.cs" />
     <Compile Include="Model\BackOffice\Entity.cs" />
     <Compile Include="Model\BackOffice\MembershipInfo.cs" />
     <Compile Include="Model\BackOffice\SystemApplication.cs" />

@@ -12,7 +12,7 @@ namespace AppReadyGo.Domain.CommandHandlers.Users
     {
         public int Execute(ISession session, CreateMemberCommand cmd)
         {
-            var user = new User(cmd.Email, cmd.Password);
+            var user = new Member(cmd.Email, cmd.Password);
             session.Save(user);
             return user.Id;
         }

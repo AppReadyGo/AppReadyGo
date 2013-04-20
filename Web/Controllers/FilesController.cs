@@ -80,12 +80,12 @@ namespace AppReadyGo.Controllers
         }
 
         [Authorize]
-        public FileResult Properties(ApplicationType type, int pId, int appId, string filename)
+        public FileResult Properties(int type, int pId, int appId, string filename)
         {
             var sb = new StringBuilder();
             sb.AppendFormat("FingerPrint={0}", ConfigurationManager.AppSettings["FingerprintEnabled"]).AppendLine();
             sb.AppendFormat("AllowSend3G={0}", ConfigurationManager.AppSettings["AllowSend3G"]).AppendLine();
-            sb.AppendFormat("ApplicationName={0}", type.GetAppKey(appId)).AppendLine();
+            sb.AppendFormat("ApplicationName={0}", appId.GetAppKey()).AppendLine();
             var cacheInDatabase = ConfigurationManager.AppSettings["CacheInDatabase"];
             if (!string.IsNullOrEmpty(cacheInDatabase))
             {
