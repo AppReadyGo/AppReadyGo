@@ -140,6 +140,7 @@
     <Build Include="Database Level Objects\Schemas\utls.schema.sql" />
     <None Include="Scripts\RemovePortfolios.sql" />
     <Build Include="Schemas\api\Countries.table.sql" />
+    <Build Include="Schemas\dbo\ApplicationTypes.table.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />

@@ -46,7 +46,7 @@ namespace AppReadyGo.Domain.Queries.Application
                                             {
                                                 Id = a.Id,
                                                 Description = a.Description,
-                                                Type = a.Type
+                                                Type = new System.Tuple<int,string>(a.Type.Id, a.Type.Name)
                                             })
                                             .ToArray();
 

@@ -22,31 +22,10 @@ namespace AppReadyGo.Common
             }
         }
 
-        public static string GetAppKey(this ApplicationType type, int applicationId)
+        public static string GetAppKey(this int applicationId)
         {
-            string key = "";
-            switch (type)
-            {
-                case ApplicationType.Android:
-                    key = "MA";
-                    break;
-                case ApplicationType.Web:
-                    key = "WP";
-                    break;
-                case ApplicationType.iPhone:
-                    key = "MI";
-                    break;
-                case ApplicationType.WebMobile:
-                    key = "WM";
-                    break;
-                case ApplicationType.WindowsMobile:
-                    key = "MW";
-                    break;
-            }
-
-            return string.Format("{0}-{1:000000}", key, applicationId);
+            return string.Format("MA-{1:000000}", applicationId);
         }
-
         //public static string GetContentUrl(this Url
     }
 }

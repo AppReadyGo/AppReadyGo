@@ -6,9 +6,9 @@ namespace AppReadyGo.Core.Commands.Application
     public class CreateApplicationCommand : ICommand<int>
     {
         public string Description { get; protected set; }
-        public ApplicationType Type { get; protected set; }
+        public int Type { get; protected set; }
 
-        public CreateApplicationCommand(string description, ApplicationType type)
+        public CreateApplicationCommand(string description, int type)
         {
             this.Description = description;
             this.Type = type;
