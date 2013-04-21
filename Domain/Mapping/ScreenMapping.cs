@@ -12,6 +12,8 @@ namespace AppReadyGo.Domain.Mapping
     {
         public ScreenMapping()
         {
+            Table("Screens");
+            
             Id(p => p.Id, map => map.Generator(Generators.Identity));
             //Property(p => p.ApplicationId, map => { map.NotNullable(true); });
             ManyToOne(p => p.Application, map =>

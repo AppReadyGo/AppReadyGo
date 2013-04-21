@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AppReadyGo.Core.Entities
 {
-    public enum Gender : short
+    public enum Gender : byte
     {
         Men = 1,
         Women,

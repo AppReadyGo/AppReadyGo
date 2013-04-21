@@ -13,9 +13,15 @@
 	[SpecialAccess] BIT			   NOT NULL,
 	[MembershipID]	SMALLINT	   NOT NULL,
 	[AcceptedTermsAndConditions] BIT NOT NULL,
-    PRIMARY KEY CLUSTERED ([ID] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+	[GenderID]		TINYINT			NULL,
+	[Age]			SMALLINT		NULL,
+	[CountryID]		INT				NULL
 );
 GO
+
+ALTER TABLE [usr].[Users]
+ADD CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([ID] ASC);
+GO;
 
 ALTER TABLE [usr].[Users]
 ADD CONSTRAINT UC_Email UNIQUE ([Email])
@@ -23,4 +29,8 @@ GO
 
 ALTER TABLE [usr].[Users]
 ADD CONSTRAINT [FK_User_Membership] FOREIGN KEY ([MembershipID]) REFERENCES [usr].[Memberships] ([ID]);
+GO
+
+ALTER TABLE [usr].[Users]
+ADD CONSTRAINT [FK_User_Country] FOREIGN KEY ([CountryID]) REFERENCES [dbo].[Countries] ([GeoID]);
 GO

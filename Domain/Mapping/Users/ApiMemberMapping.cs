@@ -5,7 +5,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Users
 {
-    public class ApiMemberMapping : ClassMapping<ApiMember>
+    public class ApiMemberMapping : SubclassMapping<ApiMember>
     {
         public ApiMemberMapping()
         {
@@ -23,14 +23,14 @@ namespace AppReadyGo.Domain.Mapping.Users
               },
               r => r.OneToMany());
 
-            Set(
-              x => x.ApplicationTypes,
-              map =>
-              {
-                  map.Key(k => k.Column("UserID"));
-                  map.Access(Accessor.Field);
-              },
-              r => r.OneToMany());
+            //Set(
+            //  x => x.ApplicationTypes,
+            //  map =>
+            //  {
+            //      map.Key(k => k.Column("UserID"));
+            //      map.Access(Accessor.Field);
+            //  },
+            //  r => r.OneToMany());
 
             ManyToOne(p => p.Country, map =>
             {

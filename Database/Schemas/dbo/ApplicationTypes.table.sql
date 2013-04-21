@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[ApplicationTypes] (
-    [Id]   INT            IDENTITY (1, 1) NOT NULL,
+    [ID]   INT            IDENTITY (1, 1) NOT NULL,
     [Name] NVARCHAR (100) NOT NULL
 );
 GO
