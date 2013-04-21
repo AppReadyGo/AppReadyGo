@@ -18,7 +18,7 @@ namespace AppReadyGo.Domain.Mapping
                 map.Length(225);
                 map.NotNullable(true);
             });
-            Property(x => x.Type, map => map.NotNullable(true));
+            //Property(x => x.Type, map => map.NotNullable(true));
             Property(x => x.CreateDate, map => map.NotNullable(true));
             ManyToOne(p => p.User, map =>
             {

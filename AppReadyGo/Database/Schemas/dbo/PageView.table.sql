@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[PageView] (
-    [Id]                BIGINT IDENTITY (1, 1) NOT NULL,
+    [ID]                BIGINT IDENTITY (1, 1) NOT NULL,
     [Date]              DATETIME       NOT NULL,
     [Path]              NVARCHAR (256) NOT NULL,
     [Ip]                NVARCHAR (15)  NULL,-- TODO: Remove
@@ -12,10 +12,14 @@
     [ScreenHeight]      INT            NOT NULL,
     [ClientWidth]       INT            NOT NULL,
     [ClientHeight]      INT            NOT NULL,
-    [ApplicationId]     INT            NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+    [ApplicationId]     INT            NOT NULL
 );
 GO
+
+ALTER TABLE [dbo].[PageView]
+ADD CONSTRAINT [PK_PageView] PRIMARY KEY CLUSTERED ([ID] ASC);
+GO;
+
 
 ALTER TABLE [dbo].[PageView]
 ADD CONSTRAINT [FK_PageView_Browser] FOREIGN KEY ([BrowserId]) REFERENCES [dbo].[Browser] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;

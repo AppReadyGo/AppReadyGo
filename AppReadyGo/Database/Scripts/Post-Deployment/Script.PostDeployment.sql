@@ -20,6 +20,8 @@ DELETE [cont].[Pages]
 GO
 DELETE [cont].[Themes]  
 GO
+DELETE [usr].[StaffRoles]
+GO
 
 INSERT INTO [cont].[Themes] ([ID], [Name], [Url], [TYPE])
 VALUES (1, 'System Email', 'Mails\System.aspx', 1),

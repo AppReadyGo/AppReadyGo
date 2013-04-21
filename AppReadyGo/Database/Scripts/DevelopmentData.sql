@@ -14,14 +14,6 @@ VALUES (1/*Staff*/, 'dev@mobillify.com', 'XW0mA5DzfN4XL851H/i1xNFFbMOdtjVAL6fjBN
 
 GO
 
-INSERT INTO [Fingerprint].[usr].[StaffRoles]
-           ([ID]
-           ,[Name])
-     VALUES
-           (1,
-           'admin');
-GO
-
 INSERT INTO [usr].[UserStaffRoles](UserID, RoleID)
 VALUES((SELECT ID FROM [usr].[Users] WHERE Email = 'dev@mobillify.com'), 1)
 GO

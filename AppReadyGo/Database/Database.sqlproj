@@ -101,7 +101,7 @@
     <Build Include="Schemas\dbo\Packages.table.sql" />
     <Build Include="Schemas\dbo\PageView.table.sql" />
     <Build Include="Schemas\dbo\Regions.table.sql" />
-    <Build Include="Schemas\dbo\Screen.table.sql" />
+    <Build Include="Schemas\dbo\Screens.table.sql" />
     <Build Include="Schemas\dbo\Scroll.table.sql" />
     <Build Include="Schemas\dbo\ScrollEvent.table.sql" />
     <Build Include="Schemas\dbo\SessionInfoEvent.table.sql" />
