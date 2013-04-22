@@ -117,7 +117,7 @@
     <Compile Include="Interfaces\IStoreServices.cs" />
     <Compile Include="IObjectContainer.cs" />
     <Compile Include="IValidationContext.cs" />
-    <Compile Include="EmailSettings_.cs" />
+    <Compile Include="EmailSettings.cs" />
     <Compile Include="Messenger.cs" />
     <Compile Include="ObjectSerializator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
