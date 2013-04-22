@@ -5,13 +5,9 @@ using System.Web;
 
 namespace AppReadyGo.Model.Master
 {
-    public class BeforeLoginMasterModel
+    public class BeforeLoginMasterModel : MainMasterModel
     {
         public MenuItem SelectedItem { get; private set; }
-
-        public BeforeLoginMasterModel()
-        {
-        }
 
         public BeforeLoginMasterModel(MenuItem selectedItem)
         {
