@@ -28,7 +28,7 @@ namespace AppReadyGo.Model
         string SearchStrUrlPart { get; set; }
     }
 
-    public class PagingModel : AdminMasterModel
+    public class PagingModel
     {
         public bool IsOnePage { get; set; }
 
@@ -47,14 +47,9 @@ namespace AppReadyGo.Model
         public string SearchStr { get; set; }
 
         public string SearchStrUrlPart { get; set; }
-
-        public PagingModel(AdminMasterModel.MenuItem menuItem)
-            : base(menuItem)
-        {
-        }
     }
 
-    public class StaffPagingModel : PagingModel
+    public class StaffPagingModel : AdminMasterModel
     {
         public IEnumerable<StaffDetailsModel> Users { get; set; }
 
@@ -62,13 +57,15 @@ namespace AppReadyGo.Model
 
         public string NameOrder { get; set; }
 
+        public PagingModel Paging { get; set; }
+
         public StaffPagingModel()
             : base(AdminMasterModel.MenuItem.Staff)
         {
         }
     }
 
-    public class MembersPagingModel : PagingModel
+    public class MembersPagingModel : AdminMasterModel
     {
         public IEnumerable<MemberDetailsModel> Users { get; set; }
 
@@ -77,6 +74,8 @@ namespace AppReadyGo.Model
         public string NameOrder { get; set; }
 
         public string CreateDateOrder { get; set; }
+
+        public PagingModel Paging { get; set; }
 
         public MembersPagingModel()
             : base(AdminMasterModel.MenuItem.Members)

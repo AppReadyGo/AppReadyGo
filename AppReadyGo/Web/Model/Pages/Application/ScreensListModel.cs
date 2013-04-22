@@ -1,9 +1,10 @@
 ﻿using AppReadyGo.Core.QueryResults.Application;
 using System.Collections.Generic;
+using AppReadyGo.Model.Pages.Admin;
 
 namespace AppReadyGo.Model.Pages.Application
 {
-    public class ScreensListModel : PagingModel
+    public class ScreensListModel
     {
         public int ApplicationId { get; set; }
 
@@ -16,6 +17,8 @@ namespace AppReadyGo.Model.Pages.Application
         public string WidthOrder { get; set; }
 
         public string HeightOrder { get; set; }
+
+        public PagingModel Pagging { get; set; }
     }
 
     public class ScreenItemModel : ScreenDataItemResult

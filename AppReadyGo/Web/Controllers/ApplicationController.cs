@@ -136,7 +136,7 @@ namespace AppReadyGo.Controllers
             }
             else
             {
-                var model = new ApplicationModel(this)
+                var model = new ApplicationModel()
                 {
                     Id = app.Id,
                     Description = app.Description,
@@ -162,7 +162,7 @@ namespace AppReadyGo.Controllers
                 ViewBag.Edit = true;
                 ViewBag.Version = ContentPredefinedKeys.AndroidPackageVersion.GetContent();
                 model.ViewData = GetViewData(null/*(ApplicationType)model.Type*/, model.Id);
-                return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+                return View(model);
             }
         }
 
@@ -199,20 +199,23 @@ namespace AppReadyGo.Controllers
 
             var model = new ScreensListModel
             {
-                IsOnePage = data.TotalPages == 1,
-                Count = data.Count,
-                PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
-                NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
-                TotalPages = data.TotalPages,
-                CurPage = data.CurPage,
-                UrlPart = string.Concat(searchStrUrlPart, string.IsNullOrEmpty(orderby) ? string.Empty : string.Concat("&orderby=", orderby), string.IsNullOrEmpty(order) ? string.Empty : string.Concat("&order=", order)),
+                Pagging = new Model.PagingModel
+                {
+                    IsOnePage = data.TotalPages == 1,
+                    Count = data.Count,
+                    PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
+                    NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
+                    TotalPages = data.TotalPages,
+                    CurPage = data.CurPage,
+                    SearchStrUrlPart = searchStrUrlPart,
+                    SearchStr = srch,
+                    UrlPart = string.Concat(searchStrUrlPart, string.IsNullOrEmpty(orderby) ? string.Empty : string.Concat("&orderby=", orderby), string.IsNullOrEmpty(order) ? string.Empty : string.Concat("&order=", order)),
+                },
+
 
                 PathOrder = orderBy == ScreensQuery.OrderByColumn.Path && asc ? "desc" : "asc",
                 WidthOrder = orderBy == ScreensQuery.OrderByColumn.Width && asc ? "desc" : "asc",
                 HeightOrder = orderBy == ScreensQuery.OrderByColumn.Height && asc ? "desc" : "asc",
-
-                SearchStrUrlPart = searchStrUrlPart,
-                SearchStr = srch,
 
                 ApplicationId = data.ApplicationId,
                 ApplicationDescription = data.ApplicationDescription,
@@ -226,7 +229,7 @@ namespace AppReadyGo.Controllers
                     IsAlternative = i % 2 != 0
                 }).ToArray()
             };
-            return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+            return View(model);
         }
 
         //public ActionResult ScreenNew(int id, int width, int height, string path, ScreenReturn ret)
@@ -322,7 +325,7 @@ namespace AppReadyGo.Controllers
             sizes.Insert(0, new SelectListItem { Text = "Select from exists", Value = "X" });
             ViewData["predefinedSizes"] = sizes;
 
-            return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+            return View(model);
         }
 
         public ActionResult ScreenEdit(int id/*, ScreenReturn ret*/)

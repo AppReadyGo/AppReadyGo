@@ -1,6 +1,6 @@
 ﻿@using AppReadyGo.Model
 @using AppReadyGo.Model.Master
-@model MasterViewModelWrapper<MainMasterModel, BeforeLoginMasterModel>
+@model BeforeLoginMasterModel
 @{
     Layout = "~/Views/Shared/_Main.cshtml";
 }
@@ -19,10 +19,10 @@
     </form><!-- /#login --> 
     <nav>
         <ul>
-            <li class="@Model.SubMaster.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Home)"><a href="/">Home</a></li>
-            <li class="@Model.SubMaster.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products)"><a href="/p/Features">Features</a></li>
-            <li class="@Model.SubMaster.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing)"><a href="/p/PlanAndPricing">Plans and Pricing</a></li>
-            <li class="@Model.SubMaster.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials)"><a href="/p/GetStarted">Get Started</a></li>
+            <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Home)"><a href="/">Home</a></li>
+            <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products)"><a href="/p/Features">Features</a></li>
+            <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing)"><a href="/p/PlanAndPricing">Plans and Pricing</a></li>
+            <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials)"><a href="/p/GetStarted">Get Started</a></li>
         </ul>
     </nav>
     </div>

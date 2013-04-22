@@ -38,7 +38,7 @@ namespace AppReadyGo.Models.Account
         }
     }
 
-    public class LogOnModel
+    public class LogOnModel : BeforeLoginMasterModel
     {
         [Required]
         [DisplayName("User name")]
@@ -51,10 +51,15 @@ namespace AppReadyGo.Models.Account
 
         [DisplayName("Remember me?")]
         public bool RememberMe { get; set; }
+
+        public LogOnModel()
+            : base(BeforeLoginMasterModel.MenuItem.None)
+        {
+        }
     }
 
     [PropertiesMustMatch("Password", "ConfirmPassword", ErrorMessage = "The password and confirmation password do not match.")]
-    public class RegisterModel
+    public class RegisterModel : BeforeLoginMasterModel
     {
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -71,6 +76,11 @@ namespace AppReadyGo.Models.Account
         [DataType(DataType.Password)]
         [DisplayName("Confirm password")]
         public string ConfirmPassword { get; set; }
+
+        public RegisterModel()
+            : base(BeforeLoginMasterModel.MenuItem.None)
+        {
+        }
     }
     #endregion
 

@@ -23,7 +23,7 @@ namespace AppReadyGo.Controllers
     {
         public ActionResult LogOn()
         {
-            return this.View(new LogOnModel(), BeforeLoginMasterModel.MenuItem.None);
+            return this.View(new LogOnModel());
         }
 
         [HttpPost]
@@ -62,14 +62,14 @@ namespace AppReadyGo.Controllers
                 }
             }
 
-            return this.View(model, BeforeLoginMasterModel.MenuItem.None);
+            return this.View(model);
         }
 
         public ActionResult TermsAndConditions()
         {
             var key = ObjectContainer.Instance.RunQuery(new GetKeyQuery("account/terms-and-coditions"));
             ViewBag.Content = key.Items.First().Value;
-            return this.View(new object{}, BeforeLoginMasterModel.MenuItem.None);
+            return this.View(new  BeforeLoginMasterModel(BeforeLoginMasterModel.MenuItem.None));
         }
 
         [HttpPost]
@@ -115,14 +115,7 @@ namespace AppReadyGo.Controllers
 
         public ActionResult Register()
         {
-            return this.View(new RegisterModel(), BeforeLoginMasterModel.MenuItem.None);
-        }
-
-        private ActionResult View<TViewModel>(TViewModel viewModel, BeforeLoginMasterModel.MenuItem selectedItem)
-        {
-            var model = new ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, TViewModel>(new MainMasterModel(), new BeforeLoginMasterModel(selectedItem), viewModel);
-
-            return View(model);
+            return this.View(new RegisterModel());
         }
 
         [HttpPost]
@@ -143,7 +136,7 @@ namespace AppReadyGo.Controllers
                 }
             }
 
-            return this.View(model, BeforeLoginMasterModel.MenuItem.None);
+            return this.View(model);
         }
 
         private string ErrorCodeToString(IEnumerable<ValidationResult> validations)
@@ -177,7 +170,7 @@ namespace AppReadyGo.Controllers
 
         public ActionResult ForgotPassword()
         {
-            return View(new ForgotPasswordModel(), BeforeLoginMasterModel.MenuItem.None);
+            return View(new ForgotPasswordModel());
         }
 
         [HttpPost]
@@ -197,7 +190,7 @@ namespace AppReadyGo.Controllers
                 }
             }
 
-            return View(model, BeforeLoginMasterModel.MenuItem.None);
+            return View(model);
         }
 
         public ActionResult ResetPassword(string key)
@@ -212,7 +205,7 @@ namespace AppReadyGo.Controllers
             {
                 throw new Exception("User not found.");
             }
-            return View(new ResetPasswordModel(), BeforeLoginMasterModel.MenuItem.None);
+            return View(new ResetPasswordModel());
         }
 
         [HttpPost]
@@ -257,12 +250,12 @@ namespace AppReadyGo.Controllers
                 }
             }
 
-            return View(model, BeforeLoginMasterModel.MenuItem.None);
+            return View(model);
         }
 
         public ActionResult Unsubscribe(string email)
         {
-            return View(new UnsubscribeModel { Email = email }, BeforeLoginMasterModel.MenuItem.None);
+            return View(new UnsubscribeModel { Email = email });
         }
 
         [HttpPost]
@@ -277,7 +270,7 @@ namespace AppReadyGo.Controllers
                 }
                 return Redirect("~/p/unsubscrubed-successful");
             }
-            return View(model, BeforeLoginMasterModel.MenuItem.None);
+            return View(model);
         }
 
 

@@ -86,6 +86,8 @@ header #btn_login{padding: 12px 10px 8px;font-weight:bold;font-size:12px;text-tr
 #content article.column{float:left;width:800px;margin:0 0 0 40px;}
 
 #content article.center{text-align:center;}
+
+/*
 #content article.center form{width:444px; margin:0px auto;border:1px solid #b0b0b0;background-color:#FFF;padding:10px 0px;
                              -webkit-box-shadow:  1px 5px 5px 3px rgba(0, 0, 0, 0.3);box-shadow:  1px 5px 5px 3px rgba(0, 0, 0, 0.3);
                              -moz-border-radius: 5px;border-radius: 5px;-webkit-border-radius: 5px;margin-bottom:30px;}
@@ -111,7 +113,77 @@ header #btn_login{padding: 12px 10px 8px;font-weight:bold;font-size:12px;text-tr
 #content article.center form .error{color:Red;margin-bottom:20px;font-size:14px;padding-left:113px;}
 #content article.center form .error ul{margin:0;padding:0;}
 #content article.center form .error li{margin:0;padding:0;list-style:none;}
-   
+*/
+
+.form-wrapper {width: 320px;padding: 100px 0;margin: auto;text-align:left;}
+.form-wrapper * {margin: 0;padding: 0;}
+.form-wrapper h2 { text-align:center;color: #777;margin-bottom:10px;}
+.form-wrapper form {
+	margin-left: 8px;
+	padding: 26px 24px 10px;
+	font-weight: normal;
+	background: #fff;
+	border: 1px solid #e5e5e5;
+	-webkit-box-shadow: rgba(200, 200, 200, 0.7) 0px 4px 10px -1px;
+	box-shadow: rgba(200, 200, 200, 0.7) 0px 4px 10px -1px;
+}
+.form-wrapper form{
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border-width: 1px;
+	border-style: solid;
+}
+.form-wrapper form p {
+	margin-bottom: 16px;
+}
+
+.form-wrapper form .forgetmenot {
+	font-weight: normal;
+	float: left;
+	margin-bottom: 0;
+}
+.form-wrapper form .forgetmenot label {
+	font-size: 12px;
+	line-height: 19px;
+}
+
+.form-wrapper form p.submit {
+	text-align:center;
+	padding: 0;
+	padding-top:20px;
+	clear:both;
+}
+.form-wrapper form p.submit input[type="submit"]{
+	padding: 10px 16px;
+}
+.form-wrapper form .desc{color: #777;font-size: 14px;}
+.form-wrapper label {
+	color: #777;
+	font-size: 14px;
+}
+.form-wrapper input[type="text"],
+.form-wrapper input[type="password"],
+.form-wrapper input[type=email] {
+	color: #555;
+	font-weight: 200;
+	font-size: 24px;
+	line-height: 1;
+	width: 100%;
+	padding: 3px;
+	margin-top: 2px;
+	margin-right: 6px;
+	border: 1px solid #e5e5e5;
+	background: #fbfbfb;
+	outline: none;
+	-webkit-box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2);
+	box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2);
+}
+.form-wrapper .forgot-pass{float:right; font-size: 12px;padding: 0;}
+.form-wrapper .error{color:Red;font-size:14px;}
+.form-wrapper .error ul{margin:0;padding:0;margin-bottom:10px;}
+.form-wrapper .error li{margin:0;padding:0;list-style:none;}
+
+ 
 #action{background-color:#FFF;border:1px solid #b0b0b0;text-align:center;padding:35px 0;font-size:25px;margin-top:50px;}
 #action .btn-getstarted{padding: 25px 39px 23px;font-weight:bold;font-size:18px;text-transform:uppercase;margin-left:30px;}
                     

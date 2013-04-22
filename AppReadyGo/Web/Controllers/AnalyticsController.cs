@@ -128,7 +128,7 @@ namespace AppReadyGo.Controllers
                     color = "#461D7C"
                 });
 
-                var model = new UsageModel(this, filter, AnalyticsMasterModel.MenuItem.Dashboard, usageViewData, false)
+                var model = new UsageModel(filter, AnalyticsMasterModel.MenuItem.Dashboard, usageViewData, false)
                 { 
                     UsageChartData = new JavaScriptSerializer().Serialize(usageInitData) 
                 };
@@ -228,7 +228,7 @@ namespace AppReadyGo.Controllers
                     }
                 };
 
-                var model = new FingerPrintModel(this, filter, AnalyticsMasterModel.MenuItem.TouchMap, data, false)
+                var model = new FingerPrintModel(filter, AnalyticsMasterModel.MenuItem.TouchMap, data, false)
                 {
                     // Title = "Fingerprint",
                     Screens = data.Screens,
@@ -342,7 +342,7 @@ namespace AppReadyGo.Controllers
 
                 ViewData["PieData"] = new JavaScriptSerializer().Serialize(pieData);
 
-                var model = new ABCompareModel(this, filter, AnalyticsMasterModel.MenuItem.ABCompare, filterData, false/*, placeHolderHTML*/)
+                var model = new ABCompareModel(filter, AnalyticsMasterModel.MenuItem.ABCompare, filterData, false/*, placeHolderHTML*/)
                 {
                     // Title = "Fingerprint",
                     FirstScreenPathes = firstScreenPathes,
@@ -419,8 +419,7 @@ namespace AppReadyGo.Controllers
                     color = "#461D7C"
                 });
 
-
-                var model = new EyeTrackerModel(this, filter, AnalyticsMasterModel.MenuItem.EyeTracker, data, false)
+                var model = new EyeTrackerModel(filter, AnalyticsMasterModel.MenuItem.EyeTracker, data, false)
                 {
                     // Title = "Eye Tracker",
                     Screens = data.Screens,
