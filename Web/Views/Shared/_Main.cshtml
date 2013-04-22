@@ -1,7 +1,7 @@
 ﻿@using AppReadyGo.Core.Entities;
 @using AppReadyGo.Helpers;
 @using AppReadyGo.Model.Master;
-@model AppReadyGo.Model.MasterViewModelWrapper<MainMasterModel>
+@model MainMasterModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +27,7 @@
     </head>
 <body>
 @RenderBody()
-@if (Model.Master.GoogleAnalytics)
+@if (Model.GoogleAnalytics)
 {
     <script type="text/javascript">
 
