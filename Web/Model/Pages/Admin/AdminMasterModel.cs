@@ -4,14 +4,16 @@ using System.Linq;
 using System.Web;
 
 using AppReadyGo.Model.Filter;
+using AppReadyGo.Model.Master;
 
 namespace AppReadyGo.Model.Pages.Admin
 {
-    public class AdminMasterModel
+    public class AdminMasterModel : AfterLoginMasterModel
     {
-        public MenuItem SelectedItem { get; set; }
+        public new MenuItem SelectedItem { get; set; }
 
         public AdminMasterModel(MenuItem selectedItem)
+            : base(AfterLoginMasterModel.MenuItem.Administrator)
         {
             this.SelectedItem = selectedItem;
         }
@@ -21,7 +23,7 @@ namespace AppReadyGo.Model.Pages.Admin
             return item == this.SelectedItem ? "active" : string.Empty;
         }
 
-        public enum MenuItem
+        public new enum MenuItem
         {
             Logs,
             Staff,

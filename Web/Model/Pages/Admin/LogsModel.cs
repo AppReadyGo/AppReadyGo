@@ -5,7 +5,7 @@ using System.Web;
 
 namespace AppReadyGo.Model.Pages.Admin
 {
-    public class LogsModel
+    public class LogsModel : AdminMasterModel
     {
         public string SearchStr { get; set; }
 
@@ -20,5 +20,10 @@ namespace AppReadyGo.Model.Pages.Admin
         public string ProcessId { get; set; }
 
         public string ThreadId { get; set; }
+
+        public LogsModel()
+            : base(AdminMasterModel.MenuItem.Logs)
+        {
+        }
     }
 }

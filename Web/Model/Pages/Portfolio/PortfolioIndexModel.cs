@@ -37,8 +37,8 @@ namespace AppReadyGo.Model.Pages.Portfolio
 
         #endregion
 
-        public PortfolioIndexModelTmp(Controller controller, MenuItem selectedItem)
-            : base(controller, selectedItem)
+        public PortfolioIndexModelTmp(MenuItem selectedItem)
+            : base(selectedItem)
         {
         }
     }

@@ -19,8 +19,8 @@ namespace AppReadyGo.Model.Master
         /// </summary>
         public bool IsMenuDisabled { get { return string.IsNullOrEmpty(this.FilterUrlPart); } }
 
-        public AnalyticsMasterModel(Controller controller, MenuItem selectedItem)
-            : base(controller, AfterLoginMasterModel.MenuItem.Analytics)
+        public AnalyticsMasterModel(MenuItem selectedItem)
+            : base(AfterLoginMasterModel.MenuItem.Analytics)
         {
             this.SelectedMenuItem = selectedItem;
         }

@@ -17,8 +17,8 @@ namespace AppReadyGo.Model.Pages.Application
 
         public string FileName { get; set; }
 
-        public PublishModel(Controller controller, MenuItem selectedItem)
-            : base(controller, selectedItem)
+        public PublishModel(MenuItem selectedItem)
+            : base(selectedItem)
         {
         }
     }

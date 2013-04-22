@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using AppReadyGo.Model.Filter;
+using AppReadyGo.Model.Master;
+using System.Web.Mvc;
 
 namespace AppReadyGo.Model.Pages.Application
 {
-    public class ApplicationModel
+    public class ApplicationModel : AfterLoginMasterModel
     {
         public int Id { get; set; }
 
@@ -21,5 +23,10 @@ namespace AppReadyGo.Model.Pages.Application
         public int Type { get; set; }
 
         public ApplicationViewModel ViewData { get; set; }
+
+        public ApplicationModel()
+            : base(AfterLoginMasterModel.MenuItem.Analytics)
+        {
+        }
     }
 }

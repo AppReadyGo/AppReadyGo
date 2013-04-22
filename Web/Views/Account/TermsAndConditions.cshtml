@@ -1,0 +1,15 @@
+﻿@model AppReadyGo.Model.Master.BeforeLoginMasterModel
+{
+    Layout = "~/Views/Shared/_Content.cshtml";
+}
+@section title { Terms And Coditions }
+@section header 
+{ 
+    <link href="@Url.Content("~/Content/account.termsandconditions.css")" rel="stylesheet" type="text/css" />
+}
+<form action="/Account/AcceptTermsAndCoditions" method="post">
+<div>
+@ViewBag.Content
+</div>
+<div class="actions"><a href="#" class="link2" onClick="$(this).closest('form').submit();"><span><span>Accept</span></span></a><a class="link4" href="/"><span><span>Cancel</span></span></a></div>
+</form>

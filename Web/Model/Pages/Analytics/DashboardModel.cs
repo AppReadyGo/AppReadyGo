@@ -16,8 +16,8 @@ namespace AppReadyGo.Model.Pages.Analytics
 
         public ContentOverviewModel[] ContentOverviewData { get; set; }
 
-        public DashboardModel(Controller controller, FilterParametersModel filter, MenuItem selectedItem, FilterDataResult filterDataResult, bool isSingleMode)
-            : base(controller, filter, selectedItem, filterDataResult, isSingleMode)
+        public DashboardModel(FilterParametersModel filter, MenuItem selectedItem, FilterDataResult filterDataResult, bool isSingleMode)
+            : base(filter, selectedItem, filterDataResult, isSingleMode)
         {
         }
     }

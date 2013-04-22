@@ -28,11 +28,11 @@ namespace AppReadyGo.Model.Master
 
         public string CurrentUserDisplayName { get; private set; }
 
-        public AfterLoginMasterModel(Controller controller ,MenuItem selectedItem)
+        public AfterLoginMasterModel(MenuItem selectedItem)
         {
             this.SelectedItem = selectedItem;
             this.CurrentUserDisplayName = ObjectContainer.Instance.CurrentUserDetails.DisplayName;
-            this.IsAdmin = controller.User.IsInRole(StaffRole.Administrator.ToString());
+            this.IsAdmin = HttpContext.Current.User.IsInRole(StaffRole.Administrator.ToString());
         }
 
         public enum MenuItem

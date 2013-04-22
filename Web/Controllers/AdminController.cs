@@ -20,7 +20,7 @@ using AppReadyGo.Common.Mails;
 namespace AppReadyGo.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class AdminController : AdminMasterController
+    public class AdminController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
@@ -84,7 +84,7 @@ namespace AppReadyGo.Controllers
             var data = ObjectContainer.Instance.RunQuery(new GetAllStaffQuery(srch, orderBy, asc, cp, 15));
 
             var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
-            var model = new StaffPagingModel 
+            var model = new StaffPagingModel() 
             { 
                 IsOnePage = data.TotalPages == 1,
                 Count = data.Count,
@@ -109,7 +109,7 @@ namespace AppReadyGo.Controllers
                     LastAccess = u.LastAccessDate.HasValue ? u.LastAccessDate.Value.ToString("dd MMM yyyy") : string.Empty
                 }).ToArray()
             };
-            return View(model, AdminMasterModel.MenuItem.Staff);
+            return View(model);
         }
 
         public ActionResult Members(string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")
@@ -146,7 +146,7 @@ namespace AppReadyGo.Controllers
                     Registred = u.CreateDate.ToString("dd MMM yyyy")
                 }).ToArray()
             };
-            return View(model, AdminMasterModel.MenuItem.Members);
+            return View(model);
         }
 
         public ActionResult DeleteMember(int id)
@@ -221,7 +221,7 @@ namespace AppReadyGo.Controllers
             severities.Insert(0, new SelectListItem { Text = "All", Value = string.Empty, Selected = true });
             ViewBag.Severities = severities;
 
-            return View(new LogsModel(), AdminMasterModel.MenuItem.Logs);
+            return View(new LogsModel());
         }
 
         public ActionResult ClearLogs()
@@ -245,7 +245,7 @@ namespace AppReadyGo.Controllers
             severities.Insert(0, new SelectListItem { Text = "All", Value = "0", Selected = true });
             ViewBag.Severities = severities;
 
-            return View(model, AdminMasterModel.MenuItem.Logs);
+            return View(model);
         }
 
         /*

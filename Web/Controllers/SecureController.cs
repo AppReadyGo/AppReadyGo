@@ -14,9 +14,9 @@ using System.Web.Mvc;
 namespace AppReadyGo.Controllers
 {
     [Authorize]
-    public class SecureController : AfterLoginController
+    public class SecureController : Controller
     {
-        public override AfterLoginMasterModel.MenuItem SelectedMenuItem
+        public AfterLoginMasterModel.MenuItem SelectedMenuItem
         {
             get { return AfterLoginMasterModel.MenuItem.None; }
         }
@@ -48,7 +48,7 @@ namespace AppReadyGo.Controllers
                 }
             }
 
-            return View(model, BeforeLoginMasterModel.MenuItem.None);
+            return View(model);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace AppReadyGo.Controllers
                 {
                     selectedItem = BeforeLoginMasterModel.MenuItem.None;
                 }
-                return View(new ContentModel { Title = page.Title, Content = page.Content }, selectedItem);
+                return View(new ContentModel(selectedItem) { Title = page.Title, Content = page.Content });
             }
         }
     }

@@ -17,8 +17,8 @@ namespace AppReadyGo.Model.Pages.Analytics
 
         public string UsageChartData { get; set; }
 
-        public EyeTrackerModel(Controller controller, FilterParametersModel filter, MenuItem selectedItem, FilterDataResult filterDataResult, bool isSingleMode)
-            : base(controller, filter, selectedItem, filterDataResult, isSingleMode)
+        public EyeTrackerModel(FilterParametersModel filter, MenuItem selectedItem, FilterDataResult filterDataResult, bool isSingleMode)
+            : base(filter, selectedItem, filterDataResult, isSingleMode)
         {
         }
    }
