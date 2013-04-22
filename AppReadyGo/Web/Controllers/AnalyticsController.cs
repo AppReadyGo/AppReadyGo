@@ -66,7 +66,7 @@ namespace AppReadyGo.Controllers
                     color = "#461D7C"
                 });
 
-                var dashboardModel = new DashboardModel(this, filter, AnalyticsMasterModel.MenuItem.Dashboard, dashboardViewData, false)
+                var dashboardModel = new DashboardModel(filter, AnalyticsMasterModel.MenuItem.Dashboard, dashboardViewData, false)
                 {
                     UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
                     ContentOverviewData = dashboardViewData.ContentOverview.Select((d, i) => new ContentOverviewModel 

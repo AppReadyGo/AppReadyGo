@@ -40,8 +40,8 @@ namespace AppReadyGo.Model.Pages.Analytics
         public bool SecondHasFilteredClicks { get; set; }
         public bool SecondHasClicks { get; set; }
 
-        public ABCompareModel(Controller controller, FilterParametersModel filter, MenuItem selectedItem, FilterDataResult filterDataResult, bool isSingleMode)
-            : base(controller, filter, selectedItem, filterDataResult, isSingleMode)
+        public ABCompareModel(FilterParametersModel filter, MenuItem selectedItem, FilterDataResult filterDataResult, bool isSingleMode)
+            : base(filter, selectedItem, filterDataResult, isSingleMode)
         {
         }
     }

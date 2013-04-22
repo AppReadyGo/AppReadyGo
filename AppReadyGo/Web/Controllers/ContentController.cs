@@ -70,7 +70,7 @@ namespace AppReadyGo.Controllers
             }
             catch
             {
-                return View("404", new PricingModel { }, BeforeLoginMasterModel.MenuItem.None);
+                return View("404", new BeforeLoginMasterModel(BeforeLoginMasterModel.MenuItem.None));
             }
         }
 
@@ -80,11 +80,11 @@ namespace AppReadyGo.Controllers
             {
                 if (ObjectContainer.Instance.CurrentUserDetails != null)
                 {
-                    return View("AuthenticatedError", new ContentModel { }, AfterLoginMasterModel.MenuItem.None);
+                    return View("AuthenticatedError", new AuthenticatedContentModel(AfterLoginMasterModel.MenuItem.None));
                 }
                 else
                 {
-                    return View("PublicError", new ContentModel { }, BeforeLoginMasterModel.MenuItem.None);
+                    return View("PublicError", new ContentModel(BeforeLoginMasterModel.MenuItem.None));
                 }
             }
             catch (Exception exp)
@@ -98,11 +98,11 @@ namespace AppReadyGo.Controllers
         {
             if (ObjectContainer.Instance.CurrentUserDetails != null)
             {
-                return View("Authenticated404", new ContentModel { }, AfterLoginMasterModel.MenuItem.None);
+                return View("Authenticated404", new AuthenticatedContentModel(AfterLoginMasterModel.MenuItem.None));
             }
             else
             {
-                return View("Public404", new ContentModel { }, BeforeLoginMasterModel.MenuItem.None);
+                return View("Public404", new ContentModel(BeforeLoginMasterModel.MenuItem.None));
             }
         }
 
@@ -150,7 +150,7 @@ namespace AppReadyGo.Controllers
                 page.Content = page.Content.Replace(string.Format("{{{0}}}", key), key.GetContent());
             }
 
-            return View("AuthenticatedPageContent", new ContentModel { Title = page.Title, Content = page.Content }, selectedItem);
+            return View("AuthenticatedPageContent", new AuthenticatedContentModel(selectedItem) { Title = page.Title, Content = page.Content });
         }
 
         private ActionResult PublicPageContent(string urlPart1, PageResult page)
@@ -160,23 +160,23 @@ namespace AppReadyGo.Controllers
             {
                 selectedItem = BeforeLoginMasterModel.MenuItem.None;
             }
-            return View("PublicPageContent", new ContentModel { Title = page.Title, Content = page.Content }, selectedItem);
+            return View("PublicPageContent", new ContentModel(selectedItem) { Title = page.Title, Content = page.Content });
         }
 
-        private ActionResult View<TViewModel>(string view, TViewModel viewModel, BeforeLoginMasterModel.MenuItem selectedItem)
-        {
-            var model = new ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, TViewModel>(new MainMasterModel(), new BeforeLoginMasterModel(selectedItem), viewModel);
+        //private ActionResult View<TViewModel>(string view, TViewModel viewModel, BeforeLoginMasterModel.MenuItem selectedItem)
+        //{
+        //    var model = new ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, TViewModel>(new MainMasterModel(), new BeforeLoginMasterModel(selectedItem), viewModel);
 
-            return base.View(view, model);
-        }
+        //    return base.View(view, model);
+        //}
 
-        private ActionResult View<TViewModel>(string view, TViewModel viewModel, AfterLoginMasterModel.MenuItem selectedItem)
-        {
-            var masterModel = new AfterLoginMasterModel(this, selectedItem);
-            masterModel.IsAdmin = User.IsInRole(StaffRole.Administrator.ToString());
-            var model = new ViewModelWrapper<AfterLoginMasterModel, TViewModel>(masterModel, viewModel);
-            return base.View(view, model);
-        }
+        //private ActionResult View<TViewModel>(string view, TViewModel viewModel, AfterLoginMasterModel.MenuItem selectedItem)
+        //{
+        //    var masterModel = new AfterLoginMasterModel(this, selectedItem);
+        //    masterModel.IsAdmin = User.IsInRole(StaffRole.Administrator.ToString());
+        //    var model = new ViewModelWrapper<AfterLoginMasterModel, TViewModel>(masterModel, viewModel);
+        //    return base.View(view, model);
+        //}
 
         public ActionResult css(string path1, string path2, string path3, string path4, string path5, string path6, string path7)
         {

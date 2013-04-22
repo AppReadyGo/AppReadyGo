@@ -37,8 +37,8 @@ namespace AppReadyGo.Model.Filter
         public bool IsSingleMode { get; protected set; }
         public string ApplicationName { get; protected set; }
 
-        public FilterModel(Controller controller, FilterParametersModel filter, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, FilterDataResult filterDataResult, bool isSingleMode, string placeHolderHTML = null)
-            : base(controller, leftMenuSelectedItem)
+        public FilterModel(FilterParametersModel filter, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, FilterDataResult filterDataResult, bool isSingleMode, string placeHolderHTML = null)
+            : base(leftMenuSelectedItem)
         {
             this.PlaceHolderHTML = placeHolderHTML;
 

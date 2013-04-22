@@ -1,0 +1,25 @@
+﻿@using AppReadyGo.Helpers;
+@using AppReadyGo.Model.Pages.Admin
+@model AdminMasterModel
+@{
+    Layout = "~/Views/Shared/_AfterLoginLeftMenu.cshtml";
+}
+@section title { @RenderSection("title") }
+@section header 
+{ 
+   <link href="@Html.Content("~/Content/after.login.master.css")" rel="stylesheet" type="text/css" />
+   @RenderSection("header")
+}
+
+@section leftMenu 
+{ 
+    <ul>
+        <li class="@Model.GetMenuItemClass(AdminMasterModel.MenuItem.Logs)"><span></span><a href="/Admin/Logs">Logs</a></li>
+        <li class="@Model.GetMenuItemClass(AdminMasterModel.MenuItem.Staff)"><span></span><a href="/Admin/Staff">Staff</a></li>
+        <li class="@Model.GetMenuItemClass(AdminMasterModel.MenuItem.Members)"><span></span><a href="/Admin/Members">Members</a></li>
+    </ul>
+
+}
+
+@RenderSection("topMenu")
+@RenderBody()

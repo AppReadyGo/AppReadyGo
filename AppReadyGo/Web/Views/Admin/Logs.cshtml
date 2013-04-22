@@ -1,0 +1,17 @@
+﻿@using AppReadyGo.Model.Pages.Admin
+@model LogsModel
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+@section title { Logs }
+@section header 
+{
+    <link href="@Url.Content("~/Content/admin.logs.css")" rel="stylesheet" type="text/css" />
+}
+@Html.RenderPartial("Forms/LogsFilter", Model)
+<textarea runat="server" ID="output" enableviewstate="false" wrap="off" readonly style="width:100%;height:600px;">
+@ViewBag.Logs
+</textarea>
+
+
+

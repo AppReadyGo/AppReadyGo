@@ -1,6 +1,4 @@
-﻿@using AppReadyGo.Model
-@using AppReadyGo.Model.Master
-@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, AppReadyGo.Models.Account.RegisterModel>
+﻿@model AppReadyGo.Models.Account.RegisterModel
 @{
     Layout = "~/Views/Shared/_BeforeLogin.cshtml";
 }
@@ -9,7 +7,7 @@
 <section id="content">
     <div class="content-wrapper">
         <article class="center">
-            @Html.Partial("Forms/RegisterForm", Model.View)
+            @Html.Partial("Forms/RegisterForm", Model)
         </article>
     </div>
 </section>

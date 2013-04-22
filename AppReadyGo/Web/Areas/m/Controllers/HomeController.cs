@@ -42,7 +42,7 @@ namespace AppReadyGo.Areas.m.Controllers
                 {
                     selectedItem = BeforeLoginMasterModel.MenuItem.None;
                 }
-                return View(new ContentModel { Title = page.Title, Content = page.Content });
+                return View(new ContentModel(selectedItem) { Title = page.Title, Content = page.Content });
             }
         }
     }

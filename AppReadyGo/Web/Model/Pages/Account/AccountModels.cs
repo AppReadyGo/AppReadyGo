@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppReadyGo.Model.Master;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +14,7 @@ namespace AppReadyGo.Models.Account
 
     #region Models
     [PropertiesMustMatch("NewPassword", "ConfirmPassword", ErrorMessage = "The new password and confirmation password do not match.")]
-    public class ChangePasswordModel
+    public class ChangePasswordModel : BeforeLoginMasterModel
     {
         [Required]
         [DataType(DataType.Password)]
@@ -30,6 +31,11 @@ namespace AppReadyGo.Models.Account
         [DataType(DataType.Password)]
         [DisplayName("Confirm password")]
         public string ConfirmPassword { get; set; }
+
+        public ChangePasswordModel()
+            : base(MenuItem.None)
+        {
+        }
     }
 
     public class LogOnModel

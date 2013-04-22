@@ -23,11 +23,11 @@ using AppReadyGo.Core.QueryResults.Analytics;
 namespace AppReadyGo.Controllers
 {
     [Authorize]
-    public class ApplicationController : AfterLoginController
+    public class ApplicationController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public override AfterLoginMasterModel.MenuItem SelectedMenuItem
+        public AfterLoginMasterModel.MenuItem SelectedMenuItem
         {
             get { return AfterLoginMasterModel.MenuItem.Analytics; }
         }
@@ -40,7 +40,7 @@ namespace AppReadyGo.Controllers
             var rnd = new Random();
 
             var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
-            var model = new PortfolioIndexModelTmp(this, AfterLoginMasterModel.MenuItem.Analytics)
+            var model = new PortfolioIndexModelTmp(AfterLoginMasterModel.MenuItem.Analytics)
             {
                 IsOnePage = data.TotalPages == 1,
                 Count = data.Count,
@@ -79,19 +79,19 @@ namespace AppReadyGo.Controllers
                     Path = s.Path
                 }).ToArray()
             };
-            return View("~/Views/Application/Index.cshtml", model, "Tmp");
+            return View("~/Views/Application/Index.cshtml", model);
         }
 
         public ActionResult Publish(int id)
         {
 
-            return View("~/Views/Application/Publish.cshtml", new PublishModel(this, AfterLoginMasterModel.MenuItem.Analytics), "Tmp");
+            return View("~/Views/Application/Publish.cshtml", new PublishModel(AfterLoginMasterModel.MenuItem.Analytics));
         }
 
         [HttpPost]
         public ActionResult Publish()
         {
-            return View("~/Views/Application/Publish.cshtml", new PublishModel(this, AfterLoginMasterModel.MenuItem.Analytics), "Tmp");
+            return View("~/Views/Application/Publish.cshtml", new PublishModel(AfterLoginMasterModel.MenuItem.Analytics));
         }
 
         public ActionResult New(int id)
@@ -101,7 +101,7 @@ namespace AppReadyGo.Controllers
             ViewBag.PortfolioDescritpion = portfolio.Description;
             ViewBag.Version = ContentPredefinedKeys.AndroidPackageVersion.GetContent();
             var viewData = GetViewData();
-            return View(new ApplicationModel { ViewData = viewData }, AfterLoginMasterModel.MenuItem.Analytics);
+            return View(new ApplicationModel { ViewData = viewData });
         }
 
         [HttpPost]
@@ -136,7 +136,7 @@ namespace AppReadyGo.Controllers
             }
             else
             {
-                var model = new ApplicationModel
+                var model = new ApplicationModel(this)
                 {
                     Id = app.Id,
                     Description = app.Description,
@@ -145,7 +145,7 @@ namespace AppReadyGo.Controllers
                 };
                 model.ViewData = GetViewData(app.Type.Item1, model.Id);
 
-                return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+                return View(model);
             }
         }
 
