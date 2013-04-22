@@ -195,7 +195,6 @@
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HomeController_.cs" />
     <Compile Include="Controllers\Master\AdminMasterController.cs" />
     <Compile Include="Controllers\Master\AfterLoginController.cs" />
     <Compile Include="Controllers\Master\AnalyticsMasterController.cs" />
@@ -262,10 +261,8 @@
     <Compile Include="Model\Pages\Application\ScreenModel.cs" />
     <Compile Include="Model\Pages\Application\ScreensListModel.cs" />
     <Compile Include="Model\Pages\Home\ContentModel.cs" />
-    <Compile Include="Model\Pages\Home\IndexModel.cs" />
     <Compile Include="Model\Pages\Home\Mails\BasicMailContentModel.cs" />
     <Compile Include="Model\Pages\Home\Mails\MailContentModel.cs" />
-    <Compile Include="Model\Pages\Home\PricingModel.cs" />
     <Compile Include="Model\Pages\Portfolio\PortfolioIndexModel.cs" />
     <Compile Include="Model\Pages\Portfolio\PortfolioModel.cs" />
     <Compile Include="Model\Pages\ViewModel.cs" />

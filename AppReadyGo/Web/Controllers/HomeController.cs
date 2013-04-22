@@ -18,9 +18,9 @@ using System.IO;
 namespace AppReadyGo.Controllers
 {
     [HandleError]
-    public class HomeController : Master.BeforeLoginController
+    public class HomeController : Controller
     {
-        public ActionResult Index(long? appId, string pageUri, string clientSize)
+        public ActionResult Index()
         {
             if (Request.IsAuthenticated)
             {
@@ -28,18 +28,18 @@ namespace AppReadyGo.Controllers
             }
             else
             {
-                return View(new IndexModel { }, BeforeLoginMasterModel.MenuItem.Home);
+                return View(new BeforeLoginMasterModel(BeforeLoginMasterModel.MenuItem.Home));
             }
         }
 
         public ActionResult Pricing()
         {
-            return View(new PricingModel { }, BeforeLoginMasterModel.MenuItem.PlanAndPricing);
+            return View(new BeforeLoginMasterModel(BeforeLoginMasterModel.MenuItem.PlanAndPricing));
         }
 
         public ActionResult PlayGround()
         {
-            return View(new PricingModel { }, BeforeLoginMasterModel.MenuItem.PlanAndPricing);
+            return View(new BeforeLoginMasterModel(BeforeLoginMasterModel.MenuItem.PlanAndPricing));
         }
     }
 }
