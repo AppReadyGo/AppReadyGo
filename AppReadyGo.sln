@@ -19,7 +19,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{524F9C95-72F7-4EEA-95CD-915CC887DD1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Client.Test", "API.Client.Test\API.Client.Test.csproj", "{F1B9302A-E5AF-4195-995F-D8754F8962CF}"
+EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -58,6 +64,10 @@ Global
 		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F1B9302A-E5AF-4195-995F-D8754F8962CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1B9302A-E5AF-4195-995F-D8754F8962CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1B9302A-E5AF-4195-995F-D8754F8962CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1B9302A-E5AF-4195-995F-D8754F8962CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,5 +75,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DB896DAD-455B-486C-9B5F-803FED7F5777} = {0E5043EB-3097-48F0-B339-3E188965356F}
 		{1BC47F5F-9A10-4908-91BF-52A3B34CAA2A} = {0E5043EB-3097-48F0-B339-3E188965356F}
+		{F1B9302A-E5AF-4195-995F-D8754F8962CF} = {0E5043EB-3097-48F0-B339-3E188965356F}
 	EndGlobalSection
 EndGlobal
