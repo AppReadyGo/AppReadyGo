@@ -9,8 +9,8 @@ using NHibernate.Mapping.ByCode;
 using NHibernate.Driver;
 using NHibernate.Dialect;
 using System.Configuration;
-using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
 using NHibernate.Tool.hbm2ddl;
+using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
 
 namespace AppReadyGo.Domain
 {
