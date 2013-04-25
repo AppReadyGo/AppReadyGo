@@ -3,7 +3,7 @@
     <h2>Sign Up, Free</h2>
     @using (Html.BeginForm()) 
     {
-        <p class="desc">Passwords are required to be a minimum of 6 characters in length.</p>
+        <p class="desc">Passwords are required to be a minimum of 7 characters in length.</p>
         <p>
             @Html.LabelFor(m => m.Email)<br> 
             @Html.TextBoxFor(m => m.Email, new { autocomplete="off" })
