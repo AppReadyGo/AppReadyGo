@@ -31,5 +31,10 @@ namespace AppReadyGo.Domain.Model.Users
         {
             this.applications = new HashedSet<Application>();
         }
+
+        public virtual void AddApplication(Application application)
+        {
+            this.applications.Add(application);
+        }
     }
 }

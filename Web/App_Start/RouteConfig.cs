@@ -114,7 +114,7 @@ namespace AppReadyGo.Web
             routes.MapRoute(
                 "Application",
                 "Application/{action}/{id}",
-                new { controller = "Application", action = "Index" },
+                new { controller = "Application", action = "Index", id = UrlParameter.Optional },
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 

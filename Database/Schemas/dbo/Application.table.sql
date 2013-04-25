@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[Application] (
     [ID]			INT				IDENTITY (1, 1) NOT NULL,
-    [Description]	NVARCHAR (225)	NOT NULL,
+    [Name]			NVARCHAR (50)	NOT NULL,
+    [Description]	NVARCHAR (500)	NULL,
     [CreateDate]	DATETIME		NOT NULL,
     [Type]			INT				NOT NULL,
     [UserID]		INT				NOT NULL,

@@ -13,12 +13,21 @@ namespace AppReadyGo.Domain.Mapping
         public ApplicationMaping()
         {
             Id(x => x.Id, map => map.Generator(Generators.Identity));
-            Property(x => x.Description, map =>
+            Property(x => x.Name, map =>
             {
-                map.Length(225);
+                map.Length(50);
                 map.NotNullable(true);
             });
-            //Property(x => x.Type, map => map.NotNullable(true));
+            Property(x => x.Description, map =>
+            {
+                map.Length(500);
+                map.NotNullable(true);
+            });
+            ManyToOne(p => p.Type, map =>
+            {
+                map.Column("Type");
+                map.NotNullable(true);
+            });
             Property(x => x.CreateDate, map => map.NotNullable(true));
             ManyToOne(p => p.User, map =>
             {

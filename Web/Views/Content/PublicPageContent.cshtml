@@ -2,12 +2,12 @@
 @using AppReadyGo.Model
 @using AppReadyGo.Model.Master
 @using AppReadyGo.Helpers;
-@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, ContentModel>
+@model ContentModel
 @{
     Layout = "~/Views/Shared/_Content.cshtml";
 }
-@section title { @Model.View.Title }
+@section title { @Model.Title }
 @section header { }
-@Html.Raw(Model.View.Content)
+@Html.Raw(Model.Content)
 
 

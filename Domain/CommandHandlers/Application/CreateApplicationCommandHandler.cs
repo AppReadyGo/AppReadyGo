@@ -18,9 +18,9 @@ namespace AppReadyGo.Domain.CommandHandlers.Application
 
         public int Execute(ISession session, CreateApplicationCommand cmd)
         {
-            var user = session.Get<User>(securityContext.CurrentUser.Id);
+            var user = session.Get<Member>(securityContext.CurrentUser.Id);
             var type = session.Get<ApplicationType>(cmd.Type);
-            var app = new Model.Application(user, cmd.Description, type);
+            var app = new Model.Application(user, cmd.Name, cmd.Description, type);
             session.Save(app);
             return app.Id;
         }

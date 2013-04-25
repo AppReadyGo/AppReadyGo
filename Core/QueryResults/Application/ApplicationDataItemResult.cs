@@ -7,7 +7,7 @@ namespace AppReadyGo.Core.QueryResults.Application
     {
         public int Visits { get; set; }
 
-        public Tuple<int, string> Type { get; set; }
+        public string Type { get; set; }
 
         public bool IsActive { get; set; }
     }
