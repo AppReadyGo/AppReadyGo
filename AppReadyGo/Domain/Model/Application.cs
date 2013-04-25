@@ -21,6 +21,10 @@ namespace AppReadyGo.Domain.Model
         /// </summary>
         public virtual int Id { get; protected set; }
         /// <summary>
+        /// Application name
+        /// </summary>
+        public virtual string Name { get; protected set; }
+        /// <summary>
         /// Application description
         /// </summary>
         public virtual string Description { get; protected set; }
@@ -49,9 +53,11 @@ namespace AppReadyGo.Domain.Model
             this.CreateDate = DateTime.UtcNow;
         }
 
-        public Application(User user, string description, ApplicationType type)
+        public Application(Member user, string name, string description, ApplicationType type)
             : this()
         {
+            user.AddApplication(this);
+            this.Name = name;
             this.Description = description;
             this.Type = type;
             this.User = user;

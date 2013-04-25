@@ -4,15 +4,13 @@
 @using AppReadyGo.Model.Master
 @model AfterLoginMasterModel
 @{
-    Layout = "~/Views/Shared/_MainTmp.cshtml";
+    Layout = "~/Views/Shared/_Main.cshtml";
 }
 @section title { @RenderSection("title") }
 @section header 
 { 
+   <link rel="stylesheet" href="@Html.Content("~/Content/afterlogin.css")" type="text/css" media="all">
    @RenderSection("header")
-   <link rel="stylesheet" href="@Html.Content("~/Content/template/css/afterlogin.master.css")" type="text/css" media="all">
-   <link rel="stylesheet" href="@Html.Content("~/Content/after.login.master.css")" type="text/css" media="all">
-   <link href="@Html.Content("~/Content/New/other.css")" rel="stylesheet" type="text/css" />
 }
 <div class="tail-top">
 <!-- header -->
@@ -35,7 +33,7 @@
                                 }
 							</ul>
 						</nav>
-                        <img class="logo" src="/Content/images/Logo173X38.png"" alt="Fingerprint" />
+                        <img class="logo" src="/Content/images/Logo173X38.png"" alt="AppReadyGo" />
 					</div>
 				</div>
 			</div>

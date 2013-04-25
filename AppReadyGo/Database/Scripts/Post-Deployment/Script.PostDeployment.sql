@@ -22,6 +22,8 @@ DELETE [cont].[Themes]
 GO
 DELETE [usr].[StaffRoles]
 GO
+DELETE [dbo].[ApplicationTypes]
+GO
 
 INSERT INTO [cont].[Themes] ([ID], [Name], [Url], [TYPE])
 VALUES (1, 'System Email', 'Mails\System.aspx', 1),
@@ -658,4 +660,13 @@ INSERT INTO [usr].[Memberships](ID, Name)
 VALUES  (1, 'Basic'),
 		(2, 'Plus'),
 		(3, 'Pro');
+GO
+SET IDENTITY_INSERT [dbo].[ApplicationTypes] ON
+
+INSERT INTO [dbo].[ApplicationTypes](ID, Name)
+VALUES  (1, 'Music'),
+		(2, 'Navigation'),
+		(3, 'Productivity');
+
+SET IDENTITY_INSERT [dbo].[ApplicationTypes] OFF
 GO

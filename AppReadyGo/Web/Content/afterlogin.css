@@ -1,0 +1,55 @@
+﻿
+body {background: #fff;line-height:1em;}
+html {min-width:980px}
+html, body {height:100%}
+
+.container {margin:0 auto;width:100%;font-size:.75em}
+header .container {height:100px;overflow:hidden;position:relative}
+.tail-top{background-repeat:repeat-x;background-color:#f2f2f2;background-position:left top;min-width:980px}
+.tail-top {background-image:url(images/tail-top.gif)}
+.tail-top{background-position:0 -450px;}
+.logo {margin-left:20px;margin-top:5px;}
+
+.header-box {width:100%;background:url(images/small-header-box-tail.png) repeat-x left top;position:relative;top:40px}
+.header-box .left {background:url(images/small-header-box-left.png) no-repeat left top}
+.header-box .right {background:url(images/small-header-box-right.png) no-repeat right top;height:81px}
+/* header */
+header nav {float:right;padding:4px 24px 0 0}
+header nav li {float:left;font-size:18px;line-height:2.4em;text-transform:uppercase;padding-left:21px;margin-left:19px;background:url(images/divider.gif) repeat-y left top}
+header nav li:first-child {background:none;padding-left:0;margin-left:0}
+header nav li a {color:#fff;text-decoration:none}
+header nav li.current a, header nav li a:hover {color:#82b704}
+header .top-info {position:absolute;left:45px;top:17px}
+
+h1.logo {padding:9px 0 0 44px;font-size:30px;line-height:1.2em}
+
+div.user-info{position:absolute;right:10px;top:5px;width:700px;text-align:right;}
+div.user-info h2{font-size:17px;line-height:33px;font-weight:normal;}
+div.user-info form{float:right;margin-left:20px;}
+
+.main-content{padding:20px;min-height:500px;}
+.main-content h3.title{margin-top:0;font-size:17px;}
+
+#copyright{margin-right:20px;}
+
+/* buttons */
+.link2 {display:inline-block;color:#fff;font-size:15px;line-height:1.2em;text-decoration:none;background:url(images/link2-bgd.gif) left top repeat-x;letter-spacing:-1px;text-transform:uppercase;cursor:pointer;}
+.link2:hover {color:#000}
+.link2 span {display:block;background:url(images/link2-left.gif) no-repeat left top}
+.link2 span span {background:url(images/link2-right.gif) no-repeat right top;padding:10px 22px}
+
+/* crumb */
+.crumb .inner{background:url(images/crumb-middle.png) repeat-x center center;height:55px;}
+.crumb .border-right{background:url(images/crumb-right.png) no-repeat center right;padding-right:7px;}
+.crumb .border-left{background:url(images/crumb-left.png) no-repeat center left;padding-left:7px;}
+.crumb .inner ul{height:40px;}
+.crumb .inner ul li {overflow:hidden;float:left;line-height:50px;padding-right:18px;background:url(images/crumb-separator.png) no-repeat center right;height:53px;}
+.crumb .inner ul li h4{padding-left:10px;line-height:50px;margin:0px;}
+.crumb a {color:#464646;}
+.main-content{padding:6px 0px 0px 0px !important;}
+
+.form-wrapper { width: 600px;}
+.form-wrapper textarea{
+    font-size: 18px;
+    height:300px;
+}

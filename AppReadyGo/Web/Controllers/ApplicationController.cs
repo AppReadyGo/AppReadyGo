@@ -35,6 +35,11 @@ namespace AppReadyGo.Controllers
         {
             var data = ObjectContainer.Instance.RunQuery(new GetAllApplicationsQuery(srch, cp, 15));
 
+            if (!data.Applications.Any())
+            {
+                return RedirectToAction("New");
+            }
+
             ViewData["IsAdmin"] = User.IsInRole(StaffRole.Administrator.ToString());
 
             var rnd = new Random();
@@ -94,35 +99,29 @@ namespace AppReadyGo.Controllers
             return View("~/Views/Application/Publish.cshtml", new PublishModel(AfterLoginMasterModel.MenuItem.Analytics));
         }
 
-        public ActionResult New(int id)
+        public ActionResult New()
         {
-            var portfolio = ObjectContainer.Instance.RunQuery(new GetPortfolioDetailsQuery(id));
-            ViewBag.Edit = false;
-            ViewBag.PortfolioDescritpion = portfolio.Description;
-            ViewBag.Version = ContentPredefinedKeys.AndroidPackageVersion.GetContent();
-            var viewData = GetViewData();
-            return View(new ApplicationModel { ViewData = viewData });
+            var appTypes = ObjectContainer.Instance.RunQuery(new GetApplicationTypesQuery());
+            var types = appTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() });
+            return View(new ApplicationDetailsModel { Types = types });
         }
 
         [HttpPost]
-        public JsonResult New(ApplicationModel model)
+        public ActionResult New(ApplicationDetailsModel model)
         {
-            object res = null;
             if (ModelState.IsValid)
             {
-                var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.Description, model.Type));
-                res = new
-                {
-                    HasError = false,
-                    // code = ((ApplicationType)model.Type).GetAppKey(appId.Result),
-                    appId = appId.Result
-                };
+                var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.Name, model.Description, model.Type));
+
+                return View("New", new ApplicationScreensModel());
             }
             else
             {
-                res = new { };
+                var appTypes = ObjectContainer.Instance.RunQuery(new GetApplicationTypesQuery());
+                var types = appTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() });
+                model.Types = types;
+                return View("New", model);
             }
-            return Json(res);
         }
 
         public ActionResult Edit(int id)
@@ -139,11 +138,10 @@ namespace AppReadyGo.Controllers
                 var model = new ApplicationModel()
                 {
                     Id = app.Id,
-                    Description = app.Description,
-                    Type = app.Type.Item1,
+                    //Description = app.Description,
+                    //Type = app.Type.Item1,
                     UserId = ObjectContainer.Instance.CurrentUserDetails.Id
                 };
-                model.ViewData = GetViewData(app.Type.Item1, model.Id);
 
                 return View(model);
             }
@@ -154,14 +152,13 @@ namespace AppReadyGo.Controllers
         {
             if (ModelState.IsValid)
             {
-                var appId = ObjectContainer.Instance.Dispatch(new UpdateApplicationCommand(model.Id, model.Description));
+                //var appId = ObjectContainer.Instance.Dispatch(new UpdateApplicationCommand(model.Id, model.Description));
                 return Redirect("/Application");
             }
             else
             {
                 ViewBag.Edit = true;
                 ViewBag.Version = ContentPredefinedKeys.AndroidPackageVersion.GetContent();
-                model.ViewData = GetViewData(null/*(ApplicationType)model.Type*/, model.Id);
                 return View(model);
             }
         }

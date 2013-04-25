@@ -1,60 +1,38 @@
 ﻿@using AppReadyGo.Model
 @using AppReadyGo.Model.Master
+@using AppReadyGo.Helpers;
 @model BeforeLoginMasterModel
 @{
     Layout = "~/Views/Shared/_Main.cshtml";
 }
 @section title { @RenderSection("title") }
-@section header { @RenderSection("header") }
+@section header 
+{ 
+   <link rel="stylesheet" href="@Html.Content("~/Content/beforelogin.css")" type="text/css" media="all">
+   @RenderSection("header")
+}
 <header>
     <div class="content-wrapper">
-    <a class="logo" href="/"><img src="/content/images/Logo173X38.png"" /></a>
-    <form id="login" action="/Account/LogOn" method="post">
-        <ul>
-            <li><input type="email" name="UserName" maxlength="100" /></li>
-            <li><input type="password" name="Password" maxlength="100" /></li>
-            <li><input type="submit" value="Log in" class="button yellow" id="btn_login"/></li>
-        </ul>
-        <span class="links">@Html.ActionLink("Forgot Password?", "ForgotPassword", "Account") | @Html.ActionLink("Register", "Register", "Account")</span>
-    </form><!-- /#login --> 
-    <nav>
-        <ul>
-            <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Home)"><a href="/">Home</a></li>
-            <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products)"><a href="/p/Features">Features</a></li>
-            <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing)"><a href="/p/PlanAndPricing">Plans and Pricing</a></li>
-            <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials)"><a href="/p/GetStarted">Get Started</a></li>
-        </ul>
-    </nav>
+        <a class="logo" href="/"><img src="/content/images/Logo173X38.png"" /></a>
+        <form id="login" action="/Account/LogOn" method="post">
+            <ul>
+                <li><input type="email" name="UserName" maxlength="100" /></li>
+                <li><input type="password" name="Password" maxlength="100" /></li>
+                <li><input type="submit" value="Log in" class="button yellow" id="btn_login"/></li>
+            </ul>
+            <span class="links">@Html.ActionLink("Forgot Password?", "ForgotPassword", "Account") | @Html.ActionLink("Register", "Register", "Account")</span>
+        </form><!-- /#login --> 
+        <nav>
+            <ul>
+                <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Home)"><a href="/">Home</a></li>
+                <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products)"><a href="/p/Features">Features</a></li>
+                <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing)"><a href="/p/PlanAndPricing">Plans and Pricing</a></li>
+                <li class="@Model.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials)"><a href="/p/GetStarted">Get Started</a></li>
+            </ul>
+        </nav>
     </div>
 </header>
 @RenderBody()
-<footer>
-    <div class="content-wrapper">
-    <div id="copyright">
-        <img src="/content/images/Logo173X38.png"" />
-        <p>Copyright &#169; 2011@(DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "") AppReadyGo</p>
-    </div>
-    <nav>
-        <!--ul>
-            <li>
-				<a href="http://twitter.com/appreadygo" target="_blank">Twitter</a>
-            </li>
-            <li>
-                <a href="http://www.youtube.com/user/TheMobillify" target="_blank">Youtube</a>
-            </li>
-			<li>
-                <a href="http://www.facebook.com/Mobillify" target="_blank">Facebook</a>
-            </li>
-            <li>
-                <a href="http://www.linkedin.com/company/2531757?trk=pro_other_cmpy" target="_blank">LinkedIn</a>
-            </li>
-			<li>
-                <a href="http://angel.co/mobillify" target="_blank">Angellist</a>
-            </li>
-        </ul-->
-    </nav>
-    </div>
-</footer>
 @*<!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style " style="position:absolute; top:20px;left:5px;width:300px;">
 <a class="addthis_button_preferred_1"></a>

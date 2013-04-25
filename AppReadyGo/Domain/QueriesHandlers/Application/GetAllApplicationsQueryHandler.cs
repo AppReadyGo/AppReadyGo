@@ -10,6 +10,7 @@ using NHibernate;
 using NHibernate.Linq;
 using System.Collections.Generic;
 using System.Drawing;
+using AppReadyGo.Core.QueryResults;
 
 namespace AppReadyGo.Domain.Queries.Application
 {
@@ -46,7 +47,7 @@ namespace AppReadyGo.Domain.Queries.Application
                                             {
                                                 Id = a.Id,
                                                 Description = a.Description,
-                                                Type = new System.Tuple<int,string>(a.Type.Id, a.Type.Name)
+                                                Type = a.Type.Name
                                             })
                                             .ToArray();
 

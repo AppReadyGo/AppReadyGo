@@ -1,0 +1,50 @@
+﻿@using AppReadyGo.Helpers;
+@using AppReadyGo.Model.Pages.Application;
+@model ApplicationModel
+@{
+    Layout = "~/Views/Shared/_AfterLogin.cshtml";
+}
+@section title { Create Application }
+@section header 
+{
+    <script type="text/javascript">
+        var newAppURL = '/Application/New/';
+        var addScreenURL = '/Application/AddScreen/@Model.Id';
+        var screenImgURL = '/Application/Screen/';
+    </script>
+}
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+		           <li><a href="/Application"><h4>Applications</h4></a></li>
+		           <li><h4>New Application</h4></li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<div class="content-wrapper">
+    <article class="center">
+        <div class="form-wrapper">
+            @using (Html.BeginForm()) 
+            {
+                if(Model is ApplicationDetailsModel)
+                {
+                    @Html.Partial("Forms/ApplicationDetails", Model)
+                }
+                else if (Model is ApplicationScreensModel)
+                {
+                    @Html.Partial("Forms/ApplicationScreens", Model)
+                }
+                else if (Model is ApplicationUploadModel)
+                {
+                    @Html.Partial("Forms/ApplicationUpload", Model)
+                }
+            }
+        </div>
+    </article>
+</div>
+

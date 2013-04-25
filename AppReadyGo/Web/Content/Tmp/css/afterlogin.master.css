@@ -1,0 +1,9 @@
+﻿
+/* Global Structure = */
+/* Sidebar */
+xaside {background:url(../images/aside-tail.gif) repeat-x left top #131313;min-width:980px}
+/* Footer */
+xfooter .container {text-align:center;line-height:1.667em;padding:26px 0}
+
+
+.xtail-top{background-position:0 -450px;}

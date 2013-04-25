@@ -5,13 +5,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Finger - @RenderSection("title")</title>
+    <title>AppReadyGo - @RenderSection("title")</title>
     @*<meta name="description" content="Place your description here">*@
     @*<meta name="keywords" content="put, your, keyword, here">*@
-    <meta name="author" content="mobillify.com">
+    <meta name="author" content="appreadygo.com">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="@Html.Content("~/Content/reset.css")" type="text/css" media="all">
     <link rel="stylesheet" href="@Html.Content("~/Content/main.css")" type="text/css" media="all">
-    <script type="text/javascript" src="@Html.Content("~/Scripts/ThridParty/jquery-1.8.3.min.js")"></script>
+    <script type="text/javascript" src="@Html.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
     @RenderSection("header")
     @*<script type="text/javascript">
     var _mfyaq = _mfyaq || {};
@@ -27,6 +28,33 @@
     </head>
 <body>
 @RenderBody()
+<footer>
+    <div class="content-wrapper">
+    <div id="copyright">
+        <img src="/content/images/Logo173X38.png"" />
+        <p>Copyright &#169; 2011@(DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "") AppReadyGo</p>
+    </div>
+    <nav>
+        <!--ul>
+            <li>
+				<a href="http://twitter.com/appreadygo" target="_blank">Twitter</a>
+            </li>
+            <li>
+                <a href="http://www.youtube.com/user/TheMobillify" target="_blank">Youtube</a>
+            </li>
+			<li>
+                <a href="http://www.facebook.com/Mobillify" target="_blank">Facebook</a>
+            </li>
+            <li>
+                <a href="http://www.linkedin.com/company/2531757?trk=pro_other_cmpy" target="_blank">LinkedIn</a>
+            </li>
+			<li>
+                <a href="http://angel.co/mobillify" target="_blank">Angellist</a>
+            </li>
+        </ul-->
+    </nav>
+    </div>
+</footer>
 @if (Model.GoogleAnalytics)
 {
     <script type="text/javascript">

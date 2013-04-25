@@ -5,20 +5,22 @@ namespace AppReadyGo.Core.Commands.Application
 {
     public class CreateApplicationCommand : ICommand<int>
     {
+        public string Name { get; protected set; }
         public string Description { get; protected set; }
         public int Type { get; protected set; }
 
-        public CreateApplicationCommand(string description, int type)
+        public CreateApplicationCommand(string name, string description, int type)
         {
+            this.Name = name;
             this.Description = description;
             this.Type = type;
         }
 
         public IEnumerable<ValidationResult> Validate(IValidationContext validation)
         {
-            if (string.IsNullOrEmpty(this.Description))
+            if (string.IsNullOrEmpty(this.Name))
             {
-                yield return new ValidationResult(ErrorCode.WrongParameter, "Command must have Description parameter.");
+                yield return new ValidationResult(ErrorCode.WrongParameter, "Command must have Name parameter.");
             }
         }
 
