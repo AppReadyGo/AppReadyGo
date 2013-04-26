@@ -5,7 +5,8 @@
     [CreateDate]	DATETIME		NOT NULL,
     [Type]			INT				NOT NULL,
     [UserID]		INT				NOT NULL,
-	[PackageID]		INT				NULL
+	[PackageID]		INT				NULL,
+	[IconExt]		NVARCHAR (5)	NULL
 );
 GO;
 

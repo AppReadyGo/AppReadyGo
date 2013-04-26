@@ -20,8 +20,9 @@ namespace AppReadyGo.Domain.CommandHandlers.Application
         {
             var user = session.Get<Member>(securityContext.CurrentUser.Id);
             var type = session.Get<ApplicationType>(cmd.Type);
-            var app = new Model.Application(user, cmd.Name, cmd.Description, type);
+            var app = new Model.Application(user, cmd.Name, cmd.Description, type, cmd.IconExt);
             session.Save(app);
+            session.Save(user);
             return app.Id;
         }
     }
