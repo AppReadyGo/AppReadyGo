@@ -111,15 +111,43 @@ namespace AppReadyGo.Controllers
         {
             if (ModelState.IsValid)
             {
-                var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.Name, model.Description, model.Type));
+                string iconExt = Request.Files.Count == 1 ? Path.GetExtension(Request.Files[0].FileName) : null;
+                var result = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.Name, model.Description, model.Type, iconExt));
 
-                return View("New", new ApplicationScreensModel());
+                if (result.Validation.Any())
+                {
+                    log.WriteError("Error to add application to database", string.Join("; ", result.Validation.Select(v => string.Format("Code:{0}, Message: {1}", v.ErrorCode, v.Message)).ToArray()));
+                    return RedirectToAction("Error", "Home");
+                }
+                else if (Request.Files.Count == 1)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Restricted/Icons/"), result.Result + iconExt);
+                    log.WriteInformation("Save file: {0}", path);
+                    Request.Files[0].SaveAs(path);
+                }
+
+                return View("New", new ApplicationScreensModel { Id = result.Result });
             }
             else
             {
                 var appTypes = ObjectContainer.Instance.RunQuery(new GetApplicationTypesQuery());
                 var types = appTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() });
                 model.Types = types;
+                return View("New", model);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult NewScreens(ApplicationScreensModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.Name, model.Description, model.Type));
+
+                return View("New", new ApplicationUploadModel { Id = model.Id });
+            }
+            else
+            {
                 return View("New", model);
             }
         }

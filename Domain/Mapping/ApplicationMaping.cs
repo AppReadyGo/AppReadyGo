@@ -21,12 +21,15 @@ namespace AppReadyGo.Domain.Mapping
             Property(x => x.Description, map =>
             {
                 map.Length(500);
-                map.NotNullable(true);
             });
             ManyToOne(p => p.Type, map =>
             {
                 map.Column("Type");
                 map.NotNullable(true);
+            });
+            Property(x => x.IconExt, map =>
+            {
+                map.Length(5);
             });
             Property(x => x.CreateDate, map => map.NotNullable(true));
             ManyToOne(p => p.User, map =>

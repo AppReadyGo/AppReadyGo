@@ -8,12 +8,14 @@ namespace AppReadyGo.Core.Commands.Application
         public string Name { get; protected set; }
         public string Description { get; protected set; }
         public int Type { get; protected set; }
+        public string IconExt { get; protected set; }
 
-        public CreateApplicationCommand(string name, string description, int type)
+        public CreateApplicationCommand(string name, string description, int type, string iconExt)
         {
             this.Name = name;
             this.Description = description;
             this.Type = type;
+            this.IconExt = iconExt;
         }
 
         public IEnumerable<ValidationResult> Validate(IValidationContext validation)

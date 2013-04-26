@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AppReadyGo.Core.Entities;
 using NHibernate.Collection.Generic;
 using AppReadyGo.Domain.Model.Users;
+using Iesi.Collections.Generic;
 
 namespace AppReadyGo.Domain.Model
 {
@@ -14,7 +15,7 @@ namespace AppReadyGo.Domain.Model
     /// </summary>
     public class Application
     {
-        private PersistentGenericSet<Screen> screens;
+        private Iesi.Collections.Generic.ISet<Screen> screens;
 
         /// <summary>
         /// application ID 
@@ -47,13 +48,15 @@ namespace AppReadyGo.Domain.Model
 
         public virtual Package Package { get; protected set; }
 
+        public virtual string IconExt { get; protected set; }
+
         public Application()
         {
-            this.screens = new PersistentGenericSet<Screen>();
+            this.screens = new HashedSet<Screen>();
             this.CreateDate = DateTime.UtcNow;
         }
 
-        public Application(Member user, string name, string description, ApplicationType type)
+        public Application(Member user, string name, string description, ApplicationType type, string iconExt)
             : this()
         {
             user.AddApplication(this);
@@ -61,6 +64,7 @@ namespace AppReadyGo.Domain.Model
             this.Description = description;
             this.Type = type;
             this.User = user;
+            this.IconExt = iconExt;
         }
 
         protected internal virtual void Update(string description)
