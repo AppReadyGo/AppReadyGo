@@ -10,15 +10,15 @@ namespace AppReadyGo.Core.Commands.Application
     {
         public int ApplicationId { get; private set; }
 
-        public virtual AgeRange AgeRange { get; protected set; }
+        public virtual AgeRange? AgeRange { get; protected set; }
 
-        public virtual Gender Gender { get; protected set; }
+        public virtual Gender? Gender { get; protected set; }
 
-        public virtual int CountryId { get; set; }
+        public virtual int? CountryId { get; set; }
 
         public string Zip { get; set; }
 
-        public PublishCommand(int applicationId, AgeRange ageRange, Gender gender, int countryId, string zip)
+        public PublishCommand(int applicationId, AgeRange? ageRange, Gender? gender, int? countryId, string zip)
         {
             this.ApplicationId = applicationId;
             this.AgeRange = ageRange;
