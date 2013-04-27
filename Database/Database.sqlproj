@@ -98,7 +98,7 @@
     <Build Include="Schemas\dbo\Language.table.sql" />
     <Build Include="Schemas\dbo\OperationSystem.table.sql" />
     <Build Include="Schemas\dbo\PackageEvent.table.sql" />
-    <Build Include="Schemas\dbo\Packages.table.sql" />
+    <Build Include="Schemas\dbo\Publishes.table.sql" />
     <Build Include="Schemas\dbo\PageView.table.sql" />
     <Build Include="Schemas\dbo\Regions.table.sql" />
     <Build Include="Schemas\dbo\Screens.table.sql" />

@@ -119,7 +119,7 @@
     <Compile Include="Mapping\Logs\LogMapping.cs" />
     <Compile Include="Mapping\NameableMapping.cs" />
     <Compile Include="Mapping\OperationSystemMapping.cs" />
-    <Compile Include="Mapping\PackageMapping.cs" />
+    <Compile Include="Mapping\PublishDetailsMapping.cs" />
     <Compile Include="Mapping\PageViewMaping.cs" />
     <Compile Include="Mapping\PortfolioMapping.cs" />
     <Compile Include="Mapping\ScreenMapping.cs" />
@@ -160,7 +160,7 @@
     <Compile Include="Model\Logs\Log.cs" />
     <Compile Include="Model\Nameable.cs" />
     <Compile Include="Model\OperationSystem.cs" />
-    <Compile Include="Model\Package.cs" />
+    <Compile Include="Model\PublishDetails.cs" />
     <Compile Include="Model\PageView.cs" />
     <Compile Include="Model\Portfolio.cs" />
     <Compile Include="Model\Screen.cs" />
@@ -185,6 +185,7 @@
     <Compile Include="QueriesHandlers\Analytics\FingerPrintViewDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\HeatMapDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\UsageViewDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\PublishQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetApplicationTypesQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetAllApplicationsQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetApplicationDetailsQueryHandler.cs" />

@@ -8,14 +8,14 @@ using NHibernate.Mapping.ByCode;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class PackageMapping : ClassMapping<Package>
+    public class PublishDetailsMapping : ClassMapping<PublishDetails>
     {
-        public PackageMapping()
+        public PublishDetailsMapping()
         {
-            Table("Packages");
+            Table("Publishes");
 
             Id(x => x.Id, map => map.Generator(Generators.Identity));
-            Property(x => x.FileName, map => { map.NotNullable(true); map.Length(50); });
+            Property(x => x.AgeRange, map => { });
             Property(x => x.CreatedDate, map => map.NotNullable(true));
         }
     }

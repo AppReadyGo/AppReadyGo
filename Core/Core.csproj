@@ -85,7 +85,7 @@
     <Compile Include="Commands\Application\CreateApplicationCommand.cs" />
     <Compile Include="Commands\Application\RemoveApplicationCommand.cs" />
     <Compile Include="Commands\Application\RemoveScreenCommand.cs" />
-    <Compile Include="Commands\Application\SetPackageCommand.cs" />
+    <Compile Include="Commands\Application\PublishCommand.cs" />
     <Compile Include="Commands\Application\UpdateApplicationCommand.cs" />
     <Compile Include="Commands\Application\UpdateScreenCommand.cs" />
     <Compile Include="Commands\Content\CreateContentItemCommand.cs" />
@@ -115,6 +115,7 @@
     <Compile Include="Commands\ValidationResult.cs" />
     <Compile Include="Encryption.cs" />
     <Compile Include="EncryptionSettings.cs" />
+    <Compile Include="Entities\AgeRange.cs" />
     <Compile Include="Entities\ContentPredefinedKeys.cs" />
     <Compile Include="Entities\Gender.cs" />
     <Compile Include="Entities\Location.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Queries\Analytics\HeatMapDataQuery.cs" />
     <Compile Include="Queries\Analytics\IFilterQuery.cs" />
     <Compile Include="Queries\Analytics\UsageViewDataQuery.cs" />
+    <Compile Include="Queries\Application\PublishQuery.cs" />
     <Compile Include="Queries\Application\GetApplicationTypesQuery.cs" />
     <Compile Include="Queries\Application\GetAllApplicationsQuery.cs" />
     <Compile Include="Queries\Application\GetApplicationDetailsQuery.cs" />
@@ -203,6 +205,7 @@
     <Compile Include="QueryResults\Application\ApplicationScreenResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationsDataResult.cs" />
     <Compile Include="QueryResults\Application\ExtendedApplicationResult.cs" />
+    <Compile Include="QueryResults\Application\PublishResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDataItemResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDataResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDetailsDataResult.cs" />

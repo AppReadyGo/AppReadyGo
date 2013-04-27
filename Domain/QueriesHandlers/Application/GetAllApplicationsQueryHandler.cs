@@ -47,7 +47,9 @@ namespace AppReadyGo.Domain.Queries.Application
                                             {
                                                 Id = a.Id,
                                                 Description = a.Description,
-                                                Type = a.Type.Name
+                                                Type = a.Type.Name,
+                                                Name = a.Name,
+                                                IconExt = a.IconExt
                                             })
                                             .ToArray();
 

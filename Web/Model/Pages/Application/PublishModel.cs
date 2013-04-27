@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using AppReadyGo.Model.Master;
 using System.Web.Mvc;
+using AppReadyGo.Core.Entities;
 
 namespace AppReadyGo.Model.Pages.Application
 {
@@ -11,14 +12,28 @@ namespace AppReadyGo.Model.Pages.Application
     {
         public int ApplicationId { get; set; }
 
-        public string Target { get; set; }
+        public string ApplicationName { get; set; }
 
-        public IEnumerable<SelectListItem> TargetListItems { get; set; }
+        public AgeRange AgeRange { get; set; }
 
-        public string FileName { get; set; }
+        public IEnumerable<SelectListItem> AgeRanges { get; set; }
 
-        public PublishModel(MenuItem selectedItem)
-            : base(selectedItem)
+        public Gender Gender { get; set; }
+
+        public IEnumerable<SelectListItem> Genders { get; set; }
+
+        public int Country { get; set; }
+
+        public IEnumerable<SelectListItem> Countries { get; set; }
+
+        public string Zip { get; set; }
+
+        public IEnumerable<SelectListItem> Types { get; set; }
+
+        public int Type { get; set; }
+
+        public PublishModel()
+            : base(AfterLoginMasterModel.MenuItem.Analytics)
         {
         }
     }

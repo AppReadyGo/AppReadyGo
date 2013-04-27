@@ -24,7 +24,7 @@ namespace AppReadyGo.Common
 
         public static string GetAppKey(this int applicationId)
         {
-            return string.Format("MA-{1:000000}", applicationId);
+            return string.Format("MA-{0:000000}", applicationId);
         }
         //public static string GetContentUrl(this Url
     }

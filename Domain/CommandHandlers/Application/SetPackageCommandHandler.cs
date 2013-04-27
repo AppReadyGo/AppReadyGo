@@ -5,12 +5,13 @@ using AppReadyGo.Core.Commands.Application;
 
 namespace AppReadyGo.Domain.CommandHandlers.Application
 {
-    public class SetPackageCommandHandler : ICommandHandler<SetPackageCommand, int>
+    public class PublishCommandHandler : ICommandHandler<PublishCommand, int>
     {
-        public int Execute(ISession session, SetPackageCommand cmd)
+        public int Execute(ISession session, PublishCommand cmd)
         {
             var application = session.Get<Model.Application>(cmd.ApplicationId);
-            var pkg = new Package(cmd.FileName);
+            var country = session.Get<Model.Application>(cmd.CountryId);
+            var pkg = new PublishDetails(cmd.AgeRange, cmd.Gender, country, cmd.Zip);
             application.SetPakage(pkg);
             session.Save(pkg);
             return pkg.Id;

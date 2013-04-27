@@ -330,11 +330,13 @@
     <Content Include="Content\Images\notice_no-data.png" />
     <Content Include="Content\Images\notice_nobody_used.png" />
     <Content Include="Content\Images\notice_no_screen_shot.png" />
+    <Content Include="Content\Images\no_icon.png" />
     <Content Include="Content\Images\playback_grey.png" />
     <Content Include="Content\Images\screens.png" />
     <Content Include="Content\Images\small-header-box-left.png" />
     <Content Include="Content\Images\small-header-box-right.png" />
     <Content Include="Content\Images\small-header-box-tail.png" />
+    <Content Include="Content\Images\sprite.10.png" />
     <Content Include="Content\Images\tail-top.gif" />
     <Content Include="Content\Images\touchmap_grey.png" />
     <Content Include="Content\Images\white_texture.png" />
@@ -408,7 +410,6 @@
     <Content Include="Content\Tmp\css\home.index.css" />
     <Content Include="Content\Tmp\css\layout.css" />
     <Content Include="Content\reset.css" />
-    <Content Include="Content\Tmp\css\portfolio.index.css" />
     <Content Include="Content\Tmp\css\secure.change.password.css" />
     <Content Include="Content\Tmp\css\style.css" />
     <Content Include="Content\Tmp\images\1page-img.jpg" />
@@ -481,7 +482,6 @@
     <Content Include="Content\Tmp\shared\bredcrumbs.css" />
     <Content Include="Content\Tmp\shared\filter.css" />
     <Content Include="Content\Tmp\shared\Form.css" />
-    <Content Include="Content\Tmp\shared\table.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Areas\m\Views\Web.config" />
@@ -629,6 +629,7 @@
   <ItemGroup>
     <Folder Include="Areas\m\Models\" />
     <Folder Include="Model\Pages\Secure\" />
+    <Folder Include="Restricted\Icons\" />
     <Folder Include="Restricted\Screens\" />
     <Folder Include="Restricted\UserPackages\" />
   </ItemGroup>

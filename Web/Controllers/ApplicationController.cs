@@ -64,11 +64,14 @@ namespace AppReadyGo.Controllers
                     Visits = a.Visits,
                     Key = a.Id.GetAppKey(),
                     Downloads = rnd.Next(100),
-                    Published = DateTime.Now.AddDays(-rnd.Next(100)).ToString("dd MMM yyyy"),
+                    PublishedDate = DateTime.Now.AddDays(-rnd.Next(100)).ToString("dd MMM yyyy"),
                     Scrolls = rnd.Next(1000),
                     Clicks = rnd.Next(1000),
                     Time = rnd.Next(100),
-                    TargetGroup = rnd.Next(100) > 50 ? "Men 18+" : "Women 18+"
+                    TargetGroup = rnd.Next(100) > 50 ? "Men 18+" : "Women 18+",
+                    Name = a.Name,
+                    Icon = string.IsNullOrEmpty(a.IconExt) ?  "/content/images/no_icon.png" : string.Format("/Restricted/Icons/{0}{1}", a.Id, a.IconExt),
+                    Published = a.Published,
                 }).ToArray(),
                 TopApplications = data.TopApplications.Select((a, i) => new TopApplicationsItemModel
                 {
@@ -89,14 +92,24 @@ namespace AppReadyGo.Controllers
 
         public ActionResult Publish(int id)
         {
-
-            return View("~/Views/Application/Publish.cshtml", new PublishModel(AfterLoginMasterModel.MenuItem.Analytics));
+            var res = ObjectContainer.Instance.RunQuery(new PublishQuery(id));
+            var types = res.Types.Select(x => new SelectListItem() { Text = x.Value, Value = x.Key.ToString() });
+            var model = new PublishModel
+            {
+                ApplicationId = id,
+                ApplicationName = res.ApplicationName,
+                Countries = new SelectListItem[] { },
+                Genders = new SelectListItem[] { new SelectListItem { Value = "3", Text = "All" }, new SelectListItem { Value = "1", Text = "Men" }, new SelectListItem { Value = "2", Text = "Women" } },
+                AgeRanges = GetList<AgeRange>().Select(x => new SelectListItem { Value = ((int)x).ToString(), Text = x.ToString() }),
+                Types = types
+            };
+            return View("~/Views/Application/Publish.cshtml", model);
         }
 
         [HttpPost]
         public ActionResult Publish()
         {
-            return View("~/Views/Application/Publish.cshtml", new PublishModel(AfterLoginMasterModel.MenuItem.Analytics));
+            return View("~/Views/Application/Publish.cshtml", new PublishModel());
         }
 
         public ActionResult New()
@@ -111,7 +124,7 @@ namespace AppReadyGo.Controllers
         {
             if (ModelState.IsValid)
             {
-                string iconExt = Request.Files.Count == 1 ? Path.GetExtension(Request.Files[0].FileName) : null;
+                string iconExt = Request.Files.AllKeys.Contains("icon_file") ? Path.GetExtension(Request.Files[0].FileName) : null;
                 var result = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.Name, model.Description, model.Type, iconExt));
 
                 if (result.Validation.Any())
@@ -119,14 +132,30 @@ namespace AppReadyGo.Controllers
                     log.WriteError("Error to add application to database", string.Join("; ", result.Validation.Select(v => string.Format("Code:{0}, Message: {1}", v.ErrorCode, v.Message)).ToArray()));
                     return RedirectToAction("Error", "Home");
                 }
-                else if (Request.Files.Count == 1)
+                else
                 {
-                    var path = Path.Combine(Server.MapPath("~/Restricted/Icons/"), result.Result + iconExt);
-                    log.WriteInformation("Save file: {0}", path);
-                    Request.Files[0].SaveAs(path);
+                    if (!string.IsNullOrEmpty(iconExt))
+                    {
+                        var path = Path.Combine(Server.MapPath("~/Restricted/Icons/"), result.Result + iconExt);
+                        log.WriteInformation("Save file: {0}", path);
+                        Request.Files[0].SaveAs(path);
+                    }
+
+                    var keys = Request.Files.AllKeys.Where(x => x.Contains("screen_file_"));
+                    foreach (var key in keys)
+                    {
+                        var ext = Path.GetExtension(Request.Files[key].FileName);
+                        var path = Path.Combine(Server.MapPath("~/Restricted/Screens/"), result.Result + ext);
+                        var sres = ObjectContainer.Instance.Dispatch(new AddScreenCommand(result.Result, path, 0, 0, ext));
+                        if (!sres.Validation.Any())
+                        {
+                            log.WriteInformation("Save file: {0}", path);
+                            Request.Files[key].SaveAs(path);
+                        }
+                    }
                 }
 
-                return View("New", new ApplicationScreensModel { Id = result.Result });
+                return RedirectToAction("");
             }
             else
             {
@@ -596,5 +625,10 @@ namespace AppReadyGo.Controllers
             }
         }
         */
+
+        public static IEnumerable<T> GetList<T>()
+        {
+            return Enum.GetValues(typeof(T)).Cast<T>();
+        }
     }
 }
