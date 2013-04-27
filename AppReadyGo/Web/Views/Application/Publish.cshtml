@@ -16,7 +16,9 @@
 		<div class="border-left">
 			<div class="inner">
                 <ul>
-		           <li><a href="/Portfolio"><h4>Portfolios</h4></a></li>
+		           <li><a href="/Application"><h4>Applications</h4></a></li>
+		           <li><a href="/Application/@Model.ApplicationId"><h4>@Model.ApplicationName</h4></a></li>
+                   <li>Publish</li>
 		        </ul>
 			</div>
 		</div>
@@ -24,41 +26,43 @@
 </div>
 <div style="clear:both;"></div>
 <div class="content-wrapper">
-    <h2>Publish Package</h2>
-    @using (Html.BeginForm()) 
-    {
-        <table>
-            <tbody>
-                <tr>
-                    <td class="label">@Html.LabelFor(m => m.Target)</td>
-                    <td>
-                        @*Html.DropDownList("Target", Model.TargetListItems)*@
-                        <br />
-                        @Html.ValidationMessageFor(m => m.Target)
-                     </td>
-                </tr>
-                <tr>
-                    <td class="label">Package</td>
-                    <td>
-                        @if (!string.IsNullOrEmpty(Model.FileName))
-                        {
-                            <div>Warning: The exists package will be overridden by a new one.</div>
-                            @Model.FileName
-                        }
-                        <br />
-                        <input type="file" name="file" id="file"/>
-                        <br />
-                        @Html.ValidationMessageFor(m => m.FileName)
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="actions">
-                        <a class="link2" onclick="$(this).closest('form').submit();"><span><span>Save</span></span></a>&nbsp;
-                        <a class="link4" href="/Application/Screens/@Model.ApplicationId"><span><span>Cancel</span></span></a>
-                    </td>
-                 </tr>
-              </tbody>
-        </table>
-    }
+    <article class="center">
+        <div class="form-wrapper">
+        @using (Html.BeginForm()) 
+        {
+            @Html.HiddenFor(m => m.ApplicationId)
+            <p>
+                @Html.LabelFor(m => m.AgeRange)<br> 
+                @Html.DropDownListFor(m => m.AgeRange, Model.AgeRanges)
+                @Html.ValidationMessageFor(m => m.AgeRange, null, new { @class = "error" })
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Gender)<br> 
+                @Html.DropDownListFor(m => m.Gender, Model.Genders)
+                @Html.ValidationMessageFor(m => m.Gender, null, new { @class = "error" })
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Country)<br> 
+                @Html.DropDownListFor(m => m.Country, Model.Countries)
+                @Html.ValidationMessageFor(m => m.Country, null, new { @class = "error" })
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Zip)<br> 
+                @Html.TextBoxFor(m => m.Zip)
+                @Html.ValidationMessageFor(m => m.Zip, null, new { @class = "error" })
+            </p>
+             <p>
+                @Html.LabelFor(m => m.Type)<br> 
+                @Html.DropDownListFor(m => m.Type, Model.Types)
+                @Html.ValidationMessageFor(m => m.Type, null, new { @class = "error" })
+            </p>
+            <p class="submit">
+                @Html.ValidationSummary(true, null, new { @class = "error" })
+                <input type="submit" value="Publish" class="button green medium"/>
+                <input type="submit" value="Cancel" class="button green medium"/>
+            </p>
+        }
+        </div>
+    </article>
 </div>
 

@@ -5,8 +5,8 @@
     [CreateDate]	DATETIME		NOT NULL,
     [Type]			INT				NOT NULL,
     [UserID]		INT				NOT NULL,
-	[PackageID]		INT				NULL,
-	[IconExt]		NVARCHAR (5)	NULL
+	[IconExt]		NVARCHAR (5)	NULL,
+	[Published]		BIT				NOT NULL
 );
 GO;
 
@@ -16,10 +16,6 @@ GO;
 
 ALTER TABLE [dbo].[Application]
 ADD CONSTRAINT [FK_Application_User] FOREIGN KEY ([UserID]) REFERENCES [usr].[Users] ([ID]);
-GO
-
-ALTER TABLE [dbo].[Application]
-ADD CONSTRAINT [FK_Application_Package] FOREIGN KEY ([PackageID]) REFERENCES [dbo].[Packages] ([ID]);
 GO
 
 

@@ -22,7 +22,32 @@
     <input type="file" name="icon_file" />
     @Html.ValidationMessage("Icon", null, new { @class = "error" })
 </p>
+<p>
+    <label>Screen 1</label><br> 
+    <input type="file" name="sreen_file_1" />
+</p>
+<p>
+    <label>Screen 2</label><br> 
+    <input type="file" name="sreen_file_2" />
+</p>
+<p>
+    <label>Screen 3</label><br> 
+    <input type="file" name="sreen_file_3" />
+</p>
+<p>
+    <label>Screen 4</label><br> 
+    <input type="file" name="sreen_file_4" />
+</p>
+<p>
+    <label>Screen 5</label><br> 
+    <input type="file" name="sreen_file_5" />
+</p>
+<p>
+    <label>Package</label><br> 
+    <input type="file" name="package_file" />
+</p>
 <p class="submit">
     @Html.ValidationSummary(true, null, new { @class = "error" })
-    <input type="submit" value="Next" class="button green medium"/>
+    <input type="submit" value="Save" class="button green medium"/>
+    <input type="submit" value="Publish" class="button green medium"/>
 </p>

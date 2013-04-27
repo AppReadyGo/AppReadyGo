@@ -3,19 +3,8 @@
 
 @Html.HiddenFor(m => m.Id)
 <p>
-    @Html.LabelFor(m => m.Name)<br> 
-    @Html.TextBoxFor(m => m.Name)
-    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "error" })
-</p>
-<p>
-    @Html.LabelFor(m => m.Description)<br> 
-    @Html.TextAreaFor(m => m.Description)
-    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "error" })
-</p>
-<p>
-    <label>Icon</label><br> 
-    <input type="file" name="icon_file" />
-    @Html.ValidationMessage("Icon", null, new { @class = "error" })
+    <label>Screen</label><br> 
+    <input type="file" name="sreen_file_1" />
 </p>
 <p class="submit">
     @Html.ValidationSummary(true, null, new { @class = "error" })

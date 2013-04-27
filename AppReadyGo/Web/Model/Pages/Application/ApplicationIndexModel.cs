@@ -18,7 +18,7 @@ namespace AppReadyGo.Model.Pages.Portfolio
 
         public bool Alternate { get; set; }
 
-        public string Published { get; set; }
+        public string PublishedDate { get; set; }
 
         public string TargetGroup { get; set; }
 
@@ -31,5 +31,7 @@ namespace AppReadyGo.Model.Pages.Portfolio
         public int Scrolls { get; set; }
 
         public IEnumerable<object> AnalyticsVersions { get; set; }
+
+        public string Icon { get; set; }
     }
 }

@@ -46,7 +46,7 @@ namespace AppReadyGo.Domain.Model
         /// </summary>
         public virtual IEnumerable<Screen> Screens { get { return screens; } }
 
-        public virtual Package Package { get; protected set; }
+        public virtual PublishDetails Package { get; protected set; }
 
         public virtual string IconExt { get; protected set; }
 
@@ -85,7 +85,7 @@ namespace AppReadyGo.Domain.Model
             }
         }
 
-        public virtual void SetPakage(Package package)
+        public virtual void SetPakage(PublishDetails package)
         {
             this.Package = package;
         }

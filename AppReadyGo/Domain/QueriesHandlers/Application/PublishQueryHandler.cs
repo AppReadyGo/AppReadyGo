@@ -1,0 +1,45 @@
+﻿using System.Linq;
+using AppReadyGo.Core;
+using AppReadyGo.Core.Queries.Admin;
+using AppReadyGo.Core.Queries.Analytics;
+using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Users;
+using AppReadyGo.Domain.Model.Users;
+using NHibernate;
+using NHibernate.Linq;
+using AppReadyGo.Domain.Model;
+using AppReadyGo.Core.QueryResults;
+
+namespace AppReadyGo.Domain.Queries.Application
+{
+    public class PublishQueryHandler : IQueryHandler<PublishQuery, PublishResult>
+    {
+        public PublishResult Run(ISession session, PublishQuery query)
+        {
+            var res = new PublishResult();
+
+            res.ApplicationName = session.Query<Model.Application>()
+                        .Where(a => a.Id == query.ApplicationId)
+                        .Select(a => a.Name)
+                        .Single();
+
+            res.Countries = session.Query<Model.Country>()
+                        .Select(c => new KeyValueResult
+                        {
+                            Key = c.GeoId,
+                            Value = c.Name
+                        })
+                        .ToArray();
+
+            res.Types = session.Query<Model.ApplicationType>()
+                        .Select(t => new KeyValueResult
+                        {
+                            Key = t.Id,
+                            Value = t.Name
+                        })
+                        .ToArray();
+
+            return res;
+        }
+    }
+}

@@ -10,5 +10,11 @@ namespace AppReadyGo.Core.QueryResults.Application
         public string Type { get; set; }
 
         public bool IsActive { get; set; }
+
+        public string Name { get; set; }
+
+        public string IconExt { get; set; }
+
+        public bool Published { get; set; }
     }
 }
