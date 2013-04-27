@@ -14,11 +14,11 @@ namespace AppReadyGo.Model.Pages.Application
 
         public string ApplicationName { get; set; }
 
-        public AgeRange AgeRange { get; set; }
+        public AgeRange? AgeRange { get; set; }
 
         public IEnumerable<SelectListItem> AgeRanges { get; set; }
 
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
 
         public IEnumerable<SelectListItem> Genders { get; set; }
 

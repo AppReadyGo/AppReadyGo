@@ -94,12 +94,13 @@ namespace AppReadyGo.Controllers
         {
             var res = ObjectContainer.Instance.RunQuery(new PublishQuery(id));
             var types = res.Types.Select(x => new SelectListItem() { Text = x.Value, Value = x.Key.ToString() });
+            var countries = res.Countries.Select(x => new SelectListItem() { Text = x.Value, Value = x.Key.ToString() });
             var model = new PublishModel
             {
                 ApplicationId = id,
                 ApplicationName = res.ApplicationName,
-                Countries = new SelectListItem[] { },
-                Genders = new SelectListItem[] { new SelectListItem { Value = "3", Text = "All" }, new SelectListItem { Value = "1", Text = "Men" }, new SelectListItem { Value = "2", Text = "Women" } },
+                Countries = countries,
+                Genders = new SelectListItem[] { new SelectListItem { Value = "-1", Text = "All" }, new SelectListItem { Value = "1", Text = "Men" }, new SelectListItem { Value = "2", Text = "Women" } },
                 AgeRanges = GetList<AgeRange>().Select(x => new SelectListItem { Value = ((int)x).ToString(), Text = x.ToString() }),
                 Types = types
             };
@@ -107,8 +108,9 @@ namespace AppReadyGo.Controllers
         }
 
         [HttpPost]
-        public ActionResult Publish()
+        public ActionResult Publish(PublishModel model)
         {
+            //ObjectContainer.Instance.Dispatch(new PublishCommand(model.ApplicationId, 
             return View("~/Views/Application/Publish.cshtml", new PublishModel());
         }
 

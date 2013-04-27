@@ -75,7 +75,7 @@
     <Compile Include="CommandHandlers\Application\CreateApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\RemoveApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\RemoveScreenCommandHandler.cs" />
-    <Compile Include="CommandHandlers\Application\SetPackageCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\PublishCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UpdateApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UpdateScreenCommandHandler.cs" />
     <Compile Include="CommandHandlers\Content\CreateContentItemCommandHandler.cs" />

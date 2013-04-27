@@ -10,9 +10,9 @@ namespace AppReadyGo.Domain.Model
     {
         public virtual int Id { get; protected set; }
 
-        public virtual AgeRange AgeRange { get; protected set; }
+        public virtual AgeRange? AgeRange { get; protected set; }
 
-        public virtual Gender Gender { get; protected set; }
+        public virtual Gender? Gender { get; protected set; }
 
         public virtual Country Country { get; set; }
 
@@ -24,7 +24,7 @@ namespace AppReadyGo.Domain.Model
         {
         }
 
-        public PublishDetails(AgeRange ageRange, Gender gender, Country country, string zip)
+        public PublishDetails(AgeRange? ageRange, Gender? gender, Country country, string zip)
         {
             this.AgeRange = ageRange;
             this.Gender = gender;
