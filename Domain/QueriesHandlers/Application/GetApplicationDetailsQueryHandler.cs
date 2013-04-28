@@ -18,6 +18,7 @@ namespace AppReadyGo.Domain.Queries.Application
                     .Select(a => new ApplicationDetailsResult
                     {
                         Id = a.Id,
+                        Name = a.Name,
                         Description = a.Description,
                         Type = new System.Tuple<int,string>(a.Type.Id, a.Type.Name)
                     })

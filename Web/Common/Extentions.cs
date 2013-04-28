@@ -27,5 +27,10 @@ namespace AppReadyGo.Common
             return string.Format("MA-{0:000000}", applicationId);
         }
         //public static string GetContentUrl(this Url
+
+        public static string GetName(this AgeRange ageRange)
+        {
+            return ageRange.ToString();
+        }
     }
 }

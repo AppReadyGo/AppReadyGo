@@ -11,10 +11,9 @@ namespace AppReadyGo.Domain.CommandHandlers.Application
         {
             var application = session.Get<Model.Application>(cmd.ApplicationId);
             var country = cmd.CountryId.HasValue ? session.Get<Model.Country>(cmd.CountryId) : null;
-            var pkg = new PublishDetails(cmd.AgeRange, cmd.Gender, country, cmd.Zip);
-            application.SetPakage(pkg);
-            session.Save(pkg);
-            return pkg.Id;
+            var publishDetails = new PublishDetails(application, cmd.AgeRange, cmd.Gender, country, cmd.Zip);
+            session.Save(publishDetails);
+            return publishDetails.Id;
         }
     }
 }

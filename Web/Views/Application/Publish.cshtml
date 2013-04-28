@@ -51,11 +51,6 @@
                 @Html.TextBoxFor(m => m.Zip)
                 @Html.ValidationMessageFor(m => m.Zip, null, new { @class = "error" })
             </p>
-             <p>
-                @Html.LabelFor(m => m.Type)<br> 
-                @Html.DropDownListFor(m => m.Type, Model.Types)
-                @Html.ValidationMessageFor(m => m.Type, null, new { @class = "error" })
-            </p>
             <p class="submit">
                 @Html.ValidationSummary(true, null, new { @class = "error" })
                 <input type="submit" value="Publish" class="button green medium"/>

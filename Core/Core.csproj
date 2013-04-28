@@ -159,6 +159,8 @@
     <Compile Include="Queries\Analytics\HeatMapDataQuery.cs" />
     <Compile Include="Queries\Analytics\IFilterQuery.cs" />
     <Compile Include="Queries\Analytics\UsageViewDataQuery.cs" />
+    <Compile Include="Queries\Application\GetPublishDetailsQuery.cs" />
+    <Compile Include="Queries\Application\GetApplicationEditDataQuery.cs" />
     <Compile Include="Queries\Application\PublishQuery.cs" />
     <Compile Include="Queries\Application\GetApplicationTypesQuery.cs" />
     <Compile Include="Queries\Application\GetAllApplicationsQuery.cs" />
@@ -201,10 +203,12 @@
     <Compile Include="QueryResults\Analytics\UsageViewDataResult.cs" />
     <Compile Include="QueryResults\ApplicationDetailsResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationDataItemResult.cs" />
+    <Compile Include="QueryResults\Application\ApplicationEditDataResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationScreenResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationsDataResult.cs" />
     <Compile Include="QueryResults\Application\ExtendedApplicationResult.cs" />
+    <Compile Include="QueryResults\Application\PublishDetailsResult.cs" />
     <Compile Include="QueryResults\Application\PublishResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDataItemResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDataResult.cs" />

@@ -6,22 +6,11 @@
 @{
     Layout = "~/Views/Shared/_AfterLogin.cshtml";
 }
-@section title { Portfolios }
+@section title { Application }
 @section header 
 {
     <script src="@Html.Content("~/Scripts/table.js")" type="text/javascript"></script>
 }
-@*<div class="crumb">
-    <div class="border-right">
-		<div class="border-left">
-			<div class="inner">
-                <ul>
-		        </ul>
-			</div>
-		</div>
-    </div>
-</div>
-<div style="clear:both;"></div>*@
 <div class="content-wrapper" id="app_page">
 <h2>Applications</h2>
 <div class="a-r top-panel">
@@ -132,14 +121,7 @@
 				        <div class="row-actions">
 					        <span class='edit'><a href="/Application/Edit/@app.Id">Edit</a> | </span>
 					        <span class='delete'><a class='submitdelete' href='/Application/Remove/@app.Id' onclick="javascript:return confirm('Are you realy want to remove @app.Description application? The operation is not recoverable!');">Delete</a> | </span>
-					        @if(app.Published)
-                            {
-					            <span class='upload'><a href="/Application/Unpublish/@app.Id">Unpublish</a></span>
-                            }
-                            else
-                            {
-                                <span class='upload'><a href="/Application/Publish/@app.Id">Publish</a></span>
-                            }
+                            <span class='upload'><a href="/Application/Publish/@app.Id">Publish</a></span>
 				        </div>          
                     </td>
                     <td>

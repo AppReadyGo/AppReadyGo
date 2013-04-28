@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppReadyGo.Core.Entities
 {
-    public enum AgeRange
+    public enum AgeRange : short
     {
         Under12 = 1,
         Range12_17,

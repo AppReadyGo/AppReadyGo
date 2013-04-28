@@ -289,6 +289,7 @@
     <Compile Include="Model\Pages\Application\ApplicationIndexModel.cs" />
     <Compile Include="Model\Pages\Application\ApplicationModel.cs" />
     <Compile Include="Model\Pages\Application\ApplicationViewModel.cs" />
+    <Compile Include="Model\Pages\Application\PublishDetailsModel.cs" />
     <Compile Include="Model\Pages\Application\PublishModel.cs" />
     <Compile Include="Model\Pages\Application\ScreenModel.cs" />
     <Compile Include="Model\Pages\Application\ScreensListModel.cs" />
@@ -546,13 +547,11 @@
     <Content Include="Views\Admin\Staff.aspx" />
     <Content Include="Views\Admin\UserEdit.aspx" />
     <Content Include="Views\Analytics\Usage.aspx" />
-    <Content Include="Views\Application\Edit.aspx" />
+    <Content Include="Views\Application\Publishes.cshtml" />
+    <None Include="Views\Application\Edit.cshtml" />
     <Content Include="Views\Application\Fingerprint.aspx" />
     <None Include="Views\Application\Forms\ApplicationDetails.cshtml" />
     <Content Include="Views\Application\Forms\ScreenForm.ascx" />
-    <Content Include="Views\Application\Index.aspx" />
-    <Content Include="Views\Application\Forms\ApplicationUpload.cshtml" />
-    <Content Include="Views\Application\Forms\ApplicationScreens.cshtml" />
     <None Include="Views\Application\New.cshtml" />
     <Content Include="Views\Application\ScreenEdit.aspx" />
     <Content Include="Views\Application\ScreenNew.aspx" />

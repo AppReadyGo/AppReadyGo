@@ -117,6 +117,12 @@ namespace AppReadyGo.Domain.Queries.Application
                                                 Description = g.Key.Description
                                             }).ToArray();
 
+            var appIds = res.Applications.Select(x => x.Id).ToArray();
+            var appPublished = session.Query<Model.PublishDetails>()
+                        .Where(p => appIds.Contains(p.Application.Id))
+                        .Select(p => p.Application.Id)
+                        .ToArray();
+
             // Aplicatyion is not active if was not recived data for 3 days
             DateTime dt = DateTime.Now.AddDays(-3);
 
@@ -127,6 +133,8 @@ namespace AppReadyGo.Domain.Queries.Application
                 application.Visits = count != null ? count.VisitsCount : 0;
 
                 application.IsActive = count != null && count.LastRecivedDataDate < dt ? true : false;
+
+                application.Published = appPublished.Contains(application.Id);
             }
             log.WriteInformation("Get all applications for portfolio ->");
 

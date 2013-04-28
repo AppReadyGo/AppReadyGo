@@ -49,10 +49,14 @@ namespace AppReadyGo.Domain.Mapping
                 },
                 rel => rel.OneToMany());
 
-            ManyToOne(p => p.Package, map =>
-            {
-                map.Column("PackageID");
-            });
+            Set(
+              x => x.Publishes,
+              map =>
+              {
+                  map.Key(k => k.Column("ApplicationID"));
+                  map.Access(Accessor.Field);
+              },
+              r => r.OneToMany());
         }
     }
 }

@@ -31,14 +31,6 @@ namespace AppReadyGo.Domain.Queries.Application
                         })
                         .ToArray();
 
-            res.Types = session.Query<Model.ApplicationType>()
-                        .Select(t => new KeyValueResult
-                        {
-                            Key = t.Id,
-                            Value = t.Name
-                        })
-                        .ToArray();
-
             return res;
         }
     }

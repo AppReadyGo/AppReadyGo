@@ -22,15 +22,11 @@ namespace AppReadyGo.Model.Pages.Application
 
         public IEnumerable<SelectListItem> Genders { get; set; }
 
-        public int Country { get; set; }
+        public int? Country { get; set; }
 
         public IEnumerable<SelectListItem> Countries { get; set; }
 
         public string Zip { get; set; }
-
-        public IEnumerable<SelectListItem> Types { get; set; }
-
-        public int Type { get; set; }
 
         public PublishModel()
             : base(AfterLoginMasterModel.MenuItem.Analytics)
