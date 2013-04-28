@@ -10,8 +10,6 @@ namespace AppReadyGo.Core.QueryResults.Application
     {
         public IEnumerable<KeyValueResult> Countries { get; set; }
 
-        public IEnumerable<KeyValueResult> Types { get; set; }
-
         public string ApplicationName { get; set; }
     }
 }

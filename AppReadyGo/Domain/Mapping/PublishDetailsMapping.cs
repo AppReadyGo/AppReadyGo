@@ -16,7 +16,19 @@ namespace AppReadyGo.Domain.Mapping
 
             Id(x => x.Id, map => map.Generator(Generators.Identity));
             Property(x => x.AgeRange, map => { });
+            Property(x => x.Gender, map => { });
+            Property(x => x.Zip, map => { map.Length(5); });
             Property(x => x.CreatedDate, map => map.NotNullable(true));
+            ManyToOne(p => p.Application, map =>
+            {
+                map.Column("ApplicationID");
+                map.NotNullable(true);
+            });
+            ManyToOne(p => p.Country, map =>
+            {
+                map.Column("CountryID");
+            });
+
         }
     }
 }

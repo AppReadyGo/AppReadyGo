@@ -19,6 +19,7 @@ using AppReadyGo.Model.Pages.Application;
 using AppReadyGo.Model.Pages.Portfolio;
 using AppReadyGo.Common;
 using AppReadyGo.Core.QueryResults.Analytics;
+using AppReadyGo.Web.Model.Pages.Application;
 
 namespace AppReadyGo.Controllers
 {
@@ -90,39 +91,15 @@ namespace AppReadyGo.Controllers
             return View("~/Views/Application/Index.cshtml", model);
         }
 
-        public ActionResult Publish(int id)
-        {
-            var res = ObjectContainer.Instance.RunQuery(new PublishQuery(id));
-            var types = res.Types.Select(x => new SelectListItem() { Text = x.Value, Value = x.Key.ToString() });
-            var countries = res.Countries.Select(x => new SelectListItem() { Text = x.Value, Value = x.Key.ToString() });
-            var model = new PublishModel
-            {
-                ApplicationId = id,
-                ApplicationName = res.ApplicationName,
-                Countries = countries,
-                Genders = new SelectListItem[] { new SelectListItem { Value = "-1", Text = "All" }, new SelectListItem { Value = "1", Text = "Men" }, new SelectListItem { Value = "2", Text = "Women" } },
-                AgeRanges = GetList<AgeRange>().Select(x => new SelectListItem { Value = ((int)x).ToString(), Text = x.ToString() }),
-                Types = types
-            };
-            return View("~/Views/Application/Publish.cshtml", model);
-        }
-
-        [HttpPost]
-        public ActionResult Publish(PublishModel model)
-        {
-            //ObjectContainer.Instance.Dispatch(new PublishCommand(model.ApplicationId, 
-            return View("~/Views/Application/Publish.cshtml", new PublishModel());
-        }
-
         public ActionResult New()
         {
             var appTypes = ObjectContainer.Instance.RunQuery(new GetApplicationTypesQuery());
             var types = appTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() });
-            return View(new ApplicationDetailsModel { Types = types });
+            return View(new ApplicationModel { Types = types });
         }
 
         [HttpPost]
-        public ActionResult New(ApplicationDetailsModel model)
+        public ActionResult New(ApplicationModel model)
         {
             if (ModelState.IsValid)
             {
@@ -168,42 +145,22 @@ namespace AppReadyGo.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult NewScreens(ApplicationScreensModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                //var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.Name, model.Description, model.Type));
-
-                return View("New", new ApplicationUploadModel { Id = model.Id });
-            }
-            else
-            {
-                return View("New", model);
-            }
-        }
 
         public ActionResult Edit(int id)
         {
-            ViewBag.Version = ContentPredefinedKeys.AndroidPackageVersion.GetContent();
-            ViewBag.Edit = true;
-            var app = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(id));
-            if (app == null)
+            var res = ObjectContainer.Instance.RunQuery(new GetApplicationEditDataQuery(id));
+            var model = new ApplicationEditModel()
             {
-                return View("Error");
-            }
-            else
-            {
-                var model = new ApplicationModel()
-                {
-                    Id = app.Id,
-                    //Description = app.Description,
-                    //Type = app.Type.Item1,
-                    UserId = ObjectContainer.Instance.CurrentUserDetails.Id
-                };
+                Id = res.ApplicationDetails.Id,
+                Name = res.ApplicationDetails.Name,
+                Description = res.ApplicationDetails.Description,
+                Type = res.ApplicationDetails.Type.Item1,
+                Types = res.ApplicationTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() }),
+                IconPath = string.IsNullOrEmpty(res.ApplicationDetails.IconExt) ? "/content/images/no_icon.png" : string.Format("/Restricted/Icons/{0}{1}", res.ApplicationDetails.Id, res.ApplicationDetails.IconExt),
+                ScreensPathes = res.Screens.Select(s => string.Format("/Restricted/Screens/{0}{1}", s.Item1, s.Item2))
+            };
 
-                return View(model);
-            }
+            return View(model);
         }
 
         [HttpPost]
@@ -236,14 +193,67 @@ namespace AppReadyGo.Controllers
             return Redirect("/Application");
         }
 
-        private static ApplicationViewModel GetViewData(int? type = null, int? appId = null)
+        public ActionResult Publish(int id)
         {
-            return new ApplicationViewModel
+            var res = ObjectContainer.Instance.RunQuery(new PublishQuery(id));
+            var countries = res.Countries.Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+            countries.Insert(0, new SelectListItem { Text = "All", Value = "" });
+            var genders = new SelectListItem[] { new SelectListItem { Value = "", Text = "All" }, new SelectListItem { Value = "1", Text = "Men" }, new SelectListItem { Value = "2", Text = "Women" } };
+            var ageRanges = GetList<AgeRange>().Select(x => new SelectListItem { Value = ((int)x).ToString(), Text = x.ToString() }).ToList();
+            ageRanges.Insert(0, new SelectListItem { Text = "All", Value = "" });
+            var model = new PublishModel
             {
-                Screens = new List<ScreenResult>(),
-                //TypesList = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() }),
-                //PropertyId = type.HasValue && appId.HasValue ? type.Value.GetAppKey(appId.Value) : "**-******"
+                ApplicationId = id,
+                ApplicationName = res.ApplicationName,
+                Countries = countries,
+                Genders = genders,
+                AgeRanges = ageRanges
             };
+            return View("~/Views/Application/Publish.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult Publish(PublishModel model)
+        {
+            if (!string.IsNullOrEmpty(model.Zip) && !model.Country.HasValue)
+            {
+                ModelState.AddModelError("Country", "Please select a country when zip entered.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                ObjectContainer.Instance.Dispatch(new PublishCommand(model.ApplicationId, model.AgeRange, model.Gender, model.Country, model.Zip));
+                return View("", "Application");
+            }
+            else
+            {
+                var res = ObjectContainer.Instance.RunQuery(new PublishQuery(model.ApplicationId));
+                var countries = res.Countries.Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+                countries.Insert(0, new SelectListItem { Text = "All", Value = "" });
+                var genders = new SelectListItem[] { new SelectListItem { Value = "", Text = "All" }, new SelectListItem { Value = "1", Text = "Men" }, new SelectListItem { Value = "2", Text = "Women" } };
+                var ageRanges = GetList<AgeRange>().Select(x => new SelectListItem { Value = ((int)x).ToString(), Text = x.ToString() }).ToList();
+                ageRanges.Insert(0, new SelectListItem { Text = "All", Value = "" });
+                model.ApplicationName = res.ApplicationName;
+                model.Countries = countries;
+                model.Genders = genders;
+                model.AgeRanges = ageRanges;
+                return View("~/Views/Application/Publish.cshtml", model);
+            }
+        }
+
+        public ActionResult Publishes(int id)
+        {
+            var res = ObjectContainer.Instance.RunQuery(new GetPublishDetailsQuery(id));
+            var model = res.Select(x => new PublishDetailsModel
+            {
+                Id = x.Id,
+                CreateDate = x.CreatedDate.ToString("dd-MMM-yyyy"),
+                Country = x.Country == null ? string.Empty : x.Country.Item2,
+                AgeRange = x.AgeRange.HasValue ? x.AgeRange.Value.GetName() : "All",
+                Gender = x.Gender.HasValue ? x.Gender.Value.ToString() : "All",
+                Zip = x.Zip
+            });
+            return View(model);
         }
 
         public ActionResult Screens(int id, string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")

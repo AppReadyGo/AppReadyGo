@@ -11,16 +11,6 @@ namespace AppReadyGo.Model.Pages.Application
     {
         public int Id { get; set; }
 
-        public int UserId { get; set; }
-
-        public ApplicationModel()
-            : base(AfterLoginMasterModel.MenuItem.Analytics)
-        {
-        }
-    }
-
-    public class ApplicationDetailsModel : ApplicationModel
-    {
         [Required]
         [DataType(DataType.Text)]
         [DisplayName("Name")]
@@ -35,13 +25,10 @@ namespace AppReadyGo.Model.Pages.Application
         public int Type { get; set; }
 
         public IEnumerable<SelectListItem> Types { get; set; }
-    }
 
-    public class ApplicationScreensModel : ApplicationModel
-    {
+        public ApplicationModel()
+            : base(AfterLoginMasterModel.MenuItem.Analytics)
+        {
+        }
     }
-
-    public class ApplicationUploadModel : ApplicationModel
-    {
-    }   
 }

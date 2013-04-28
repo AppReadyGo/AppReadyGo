@@ -16,6 +16,7 @@ namespace AppReadyGo.Domain.Model
     public class Application
     {
         private Iesi.Collections.Generic.ISet<Screen> screens;
+        private Iesi.Collections.Generic.ISet<PublishDetails> publishes;
 
         /// <summary>
         /// application ID 
@@ -46,13 +47,14 @@ namespace AppReadyGo.Domain.Model
         /// </summary>
         public virtual IEnumerable<Screen> Screens { get { return screens; } }
 
-        public virtual PublishDetails Package { get; protected set; }
+        public virtual IEnumerable<PublishDetails> Publishes { get { return publishes; } }
 
         public virtual string IconExt { get; protected set; }
 
         public Application()
         {
             this.screens = new HashedSet<Screen>();
+            this.publishes = new HashedSet<PublishDetails>();
             this.CreateDate = DateTime.UtcNow;
         }
 
@@ -85,9 +87,9 @@ namespace AppReadyGo.Domain.Model
             }
         }
 
-        public virtual void SetPakage(PublishDetails package)
+        public virtual void Publish(PublishDetails publishDetails)
         {
-            this.Package = package;
+            publishes.Add(publishDetails);
         }
     }
 }

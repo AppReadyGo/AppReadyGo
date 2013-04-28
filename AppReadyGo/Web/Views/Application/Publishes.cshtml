@@ -1,0 +1,84 @@
+﻿@using AppReadyGo.Helpers;
+@using AppReadyGo.Web.Model.Pages.Application;
+@model System.Collections.Generic.IEnumerable<PublishDetailsModel>
+@{
+    Layout = "~/Views/Shared/_AfterLogin.cshtml";
+}
+@section title { Edit Application }
+@section header { }
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+		           <li><a href="/Application"><h4>Applications</h4></a></li>
+		           <li><h4>@Model.Name - Publishes</h4></li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<div class="content-wrapper">
+    <article class="center">
+        <div class="form-wrapper">
+            <form action="" method="post" enctype="multipart/form-data"> 
+                <p>
+                    <label>Publishes</label><br> 
+	                <table class="tbl fixed" cellspacing="0">
+		                <thead>
+		                <tr>
+			                <th scope='col' class='manage-column column-active'>Date</th>
+			                <th scope='col' class='manage-column column-icon'>Gender</th>
+			                <th scope='col' class='manage-column column-desc'>Age Range</th>
+			                <th scope='col' class='manage-column column-desc'>Country</th>
+			                <th scope='col' class='manage-column column-visits'>Zip</th>
+			                <th scope='col' class='manage-column column-visits'></th>
+		                </tr>
+		                </thead>
+		                <tbody id="the-list" class='list:user'>
+                        @if (Model.Publishes.Any())
+                        {
+                            foreach (var pubishDetails in Model.Publishes)
+                            {	
+		                        <tr class="portf @(false ? "" : "alt")">
+			                        <td>
+					                    @pubishDetails.CreatedDate.ToString("dd-MMM-yyyy")
+			                        </td>
+                                    <td>
+                                        @pubishDetails.Gender
+                                    </td>
+			                        <td class="column-desc">
+                                        @pubishDetails.AgeRange         
+                                    </td>
+                                    <td>
+                                        @pubishDetails.Country
+                                    </td>
+			                        <td class="role column-visits">
+                                        @pubishDetails.Zip
+			                        </td>
+                                    <td class="role column-visits">
+                                        <a href="/Application/Unpublish/@pubishDetails.Id">Unpublish</a>
+			                        </td>
+		                        </tr>
+                            }
+                        }
+                        else
+                        {
+                          <tr class="no-items"><td colspan="4" class="colspanchange">The application was not published.</td></tr>
+                        }
+		                </tbody>
+	                </table>
+                </p>
+                <p class="submit">
+                    @Html.ValidationSummary(true, null, new { @class = "error" })
+                    <input type="submit" value="Publish" class="button green medium"/>
+                    <input type="submit" value="Cancel" class="button green medium"/>
+                </p>
+            </form>
+        </div>
+    </article>
+</div>
+
+
+

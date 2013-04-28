@@ -5,8 +5,7 @@
     [CreateDate]	DATETIME		NOT NULL,
     [Type]			INT				NOT NULL,
     [UserID]		INT				NOT NULL,
-	[IconExt]		NVARCHAR (5)	NULL,
-	[Published]		BIT				NOT NULL
+	[IconExt]		NVARCHAR (5)	NULL
 );
 GO;
 
