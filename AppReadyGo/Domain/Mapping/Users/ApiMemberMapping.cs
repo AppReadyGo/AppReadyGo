@@ -5,14 +5,14 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Users
 {
-    public class ApiMemberMapping : SubclassMapping<ApiMember>
+    internal class ApiMemberMapping : SubclassMapping<ApiMember>
     {
         public ApiMemberMapping()
         {
             DiscriminatorValue((byte)UserType.ApiMember);
 
-            Property(x => x.Age, map => { map.NotNullable(true); });
-            Property(x => x.Gender, map => { map.NotNullable(true); map.Column("GenderID"); });
+            Property(x => x.AgeRange, map => { });
+            Property(x => x.Gender, map => { map.Column("GenderID"); });
 
             Set(
               x => x.DownloadedApplications,

@@ -4,7 +4,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Content
 {
-    public class ThemeMapping : ClassMapping<Theme>
+    internal class ThemeMapping : ClassMapping<Theme>
     {
         public ThemeMapping()
         {

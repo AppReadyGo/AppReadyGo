@@ -14,22 +14,22 @@ namespace AppReadyGo.Domain.Model
         /// <summary>
         /// Schroll ID
         /// </summary>
-        public virtual long Id { get; set; }
+        public virtual long Id { get; protected set; }
 
         /// <summary>
         /// Start scrolling property
         /// </summary>
-        public virtual Click FirstTouch { get; set; }
+        public virtual Click FirstTouch { get; protected set; }
 
         /// <summary>
         /// Finish scrolling property
         /// </summary>
-        public virtual Click LastTouch { get; set; }
+        public virtual Click LastTouch { get; protected set; }
 
 
         /// <summary>
         /// Page View ID
         /// </summary>
-        public virtual PageView PageView { get; set; }
+        public virtual PageView PageView { get; protected set; }
     }
 }

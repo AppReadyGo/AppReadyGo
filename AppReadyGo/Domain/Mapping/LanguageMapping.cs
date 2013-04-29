@@ -6,7 +6,7 @@ using AppReadyGo.Domain.Model;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class LanguageMapping : NameableMapping<Language>
+    internal class LanguageMapping : NameableMapping<Language>
     {
     }
 }

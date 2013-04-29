@@ -17,6 +17,6 @@ namespace AppReadyGo.Web.Model.Pages.Application
 
         public string Zip { get; set; }
 
-        public string CreateDate { get; set; }
+        public string CreatedDate { get; set; }
     }
 }

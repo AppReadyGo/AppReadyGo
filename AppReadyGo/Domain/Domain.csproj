@@ -72,6 +72,9 @@
     <Compile Include="CommandHandlers\Admin\ClearLogCommandHandler.cs" />
     <Compile Include="CommandHandlers\API\AddPackageCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\AddScreenCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\AddScreenshotCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\UpdateApplicationIconCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\UnPublishCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\CreateApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\RemoveApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\RemoveScreenCommandHandler.cs" />
@@ -113,6 +116,7 @@
     <Compile Include="Mapping\Content\PageMapping.cs" />
     <Compile Include="Mapping\Content\ThemeMapping.cs" />
     <Compile Include="Mapping\ApplicationTypeMapping.cs" />
+    <Compile Include="Mapping\ScreenshotMapping.cs" />
     <Compile Include="Mapping\CountryMapping.cs" />
     <Compile Include="Mapping\LanguageMapping.cs" />
     <Compile Include="Mapping\Logs\CategoryMapping.cs" />
@@ -121,7 +125,6 @@
     <Compile Include="Mapping\OperationSystemMapping.cs" />
     <Compile Include="Mapping\PublishDetailsMapping.cs" />
     <Compile Include="Mapping\PageViewMaping.cs" />
-    <Compile Include="Mapping\PortfolioMapping.cs" />
     <Compile Include="Mapping\ScreenMapping.cs" />
     <Compile Include="Mapping\ScrollMapping.cs" />
     <Compile Include="Mapping\Users\ApiMemberMapping.cs" />
@@ -162,8 +165,8 @@
     <Compile Include="Model\OperationSystem.cs" />
     <Compile Include="Model\PublishDetails.cs" />
     <Compile Include="Model\PageView.cs" />
-    <Compile Include="Model\Portfolio.cs" />
     <Compile Include="Model\Screen.cs" />
+    <Compile Include="Model\Screenshot.cs" />
     <Compile Include="Model\Scroll.cs" />
     <Compile Include="Model\Size.cs" />
     <Compile Include="Model\Users\ApiMember.cs" />
@@ -185,8 +188,9 @@
     <Compile Include="QueriesHandlers\Analytics\FingerPrintViewDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\HeatMapDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\UsageViewDataQueryHandler.cs" />
-    <Compile Include="QueriesHandlers\Application\GetPublishDetailsQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetPublishesDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetApplicationEditDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetApplicationsForUserQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\PublishQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetApplicationTypesQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetAllApplicationsQueryHandler.cs" />

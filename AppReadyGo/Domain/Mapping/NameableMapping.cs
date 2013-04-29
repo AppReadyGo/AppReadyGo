@@ -8,7 +8,7 @@ using NHibernate.Mapping.ByCode;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class NameableMapping<T> : ClassMapping<T> where T : Nameable
+    internal class NameableMapping<T> : ClassMapping<T> where T : Nameable
     {
         public NameableMapping()
         {

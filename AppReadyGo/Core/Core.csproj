@@ -82,6 +82,9 @@
     <Compile Include="Commands\Admin\ClearLogCommand.cs" />
     <Compile Include="Commands\API\AddPackageCommand.cs" />
     <Compile Include="Commands\Application\AddScreenCommand.cs" />
+    <Compile Include="Commands\Application\AddScreenshotCommand.cs" />
+    <Compile Include="Commands\Application\UpdateApplicationIconCommand.cs" />
+    <Compile Include="Commands\Application\UnPublishCommand.cs" />
     <Compile Include="Commands\Application\CreateApplicationCommand.cs" />
     <Compile Include="Commands\Application\RemoveApplicationCommand.cs" />
     <Compile Include="Commands\Application\RemoveScreenCommand.cs" />
@@ -159,7 +162,8 @@
     <Compile Include="Queries\Analytics\HeatMapDataQuery.cs" />
     <Compile Include="Queries\Analytics\IFilterQuery.cs" />
     <Compile Include="Queries\Analytics\UsageViewDataQuery.cs" />
-    <Compile Include="Queries\Application\GetPublishDetailsQuery.cs" />
+    <Compile Include="Queries\Application\GetApplicationsForUserQuery.cs" />
+    <Compile Include="Queries\Application\GetPublishesDataQuery.cs" />
     <Compile Include="Queries\Application\GetApplicationEditDataQuery.cs" />
     <Compile Include="Queries\Application\PublishQuery.cs" />
     <Compile Include="Queries\Application\GetApplicationTypesQuery.cs" />
@@ -202,11 +206,13 @@
     <Compile Include="QueryResults\Analytics\ScreenResult.cs" />
     <Compile Include="QueryResults\Analytics\UsageViewDataResult.cs" />
     <Compile Include="QueryResults\ApplicationDetailsResult.cs" />
+    <Compile Include="QueryResults\Application\APIApplicationResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationDataItemResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationEditDataResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationScreenResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationsDataResult.cs" />
+    <Compile Include="QueryResults\Application\PublishesDataResult.cs" />
     <Compile Include="QueryResults\Application\ExtendedApplicationResult.cs" />
     <Compile Include="QueryResults\Application\PublishDetailsResult.cs" />
     <Compile Include="QueryResults\Application\PublishResult.cs" />

@@ -8,7 +8,7 @@ using NHibernate.Mapping.ByCode;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class PageViewMaping : ClassMapping<PageView>
+    internal class PageViewMaping : ClassMapping<PageView>
     {
         public PageViewMaping()
         {

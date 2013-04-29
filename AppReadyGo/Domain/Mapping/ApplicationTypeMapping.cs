@@ -4,7 +4,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class ApplicationTypeMapping : ClassMapping<ApplicationType>
+    internal class ApplicationTypeMapping : ClassMapping<ApplicationType>
     {
         public ApplicationTypeMapping()
         {

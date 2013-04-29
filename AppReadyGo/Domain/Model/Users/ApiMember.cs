@@ -12,8 +12,8 @@ namespace AppReadyGo.Domain.Model.Users
         private Iesi.Collections.Generic.ISet<Application> downloadedApplications = null;
         private Iesi.Collections.Generic.ISet<ApplicationType> applicationTypes = null;
 
-        public virtual Gender Gender { get; protected set; }
-        public virtual short Age { get; protected set; }
+        public virtual Gender? Gender { get; protected set; }
+        public virtual AgeRange? AgeRange { get; protected set; }
         public virtual Country Country { get; protected set; }
 
         public virtual IEnumerable<Application> DownloadedApplications
@@ -37,7 +37,7 @@ namespace AppReadyGo.Domain.Model.Users
             this.applicationTypes = new HashedSet<ApplicationType>();
         }
 
-        public ApiMember(string email, string password, string firstName, string lastName, Gender gender, short age, Country country, ApplicationType[] appTypes)
+        public ApiMember(string email, string password, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, ApplicationType[] appTypes)
             : base(email, password)
         {
             this.downloadedApplications = new HashedSet<Application>();
@@ -46,9 +46,12 @@ namespace AppReadyGo.Domain.Model.Users
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Gender = gender;
-            this.Age = age;
+            this.AgeRange = ageRange;
             this.Country = country;
-            this.applicationTypes.AddAll(appTypes);
+            if (appTypes != null)
+            {
+                this.applicationTypes.AddAll(appTypes);
+            }
         }
 
         public virtual void DownloadApplication(Application application)
@@ -59,12 +62,12 @@ namespace AppReadyGo.Domain.Model.Users
             }
         }
 
-        public virtual void Update(string firstName, string lastName, Gender gender, short age, Country country, ApplicationType[] appTypes)
+        public virtual void Update(string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, ApplicationType[] appTypes)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Gender = gender;
-            this.Age = age;
+            this.AgeRange = ageRange;
             this.Country = country;
             this.applicationTypes.Clear();
             this.applicationTypes.AddAll(appTypes);

@@ -46,9 +46,9 @@ namespace AppReadyGo.Domain.Queries.Application
             res.Applications = applicationsQuery.Select(a => new ApplicationDataItemResult
                                             {
                                                 Id = a.Id,
-                                                Description = a.Description,
-                                                Type = a.Type.Name,
                                                 Name = a.Name,
+                                                Type = a.Type.Name,
+                                                Description = a.Description,
                                                 IconExt = a.IconExt
                                             })
                                             .ToArray();
@@ -74,7 +74,7 @@ namespace AppReadyGo.Domain.Queries.Application
                     .GroupBy(p => new
                     {
                         ApplicationId = p.Application.Id,
-                        Description = p.Application.Description,
+                        Name = p.Application.Name,
                         Path = p.Path,
                         ScreenHeight = p.ScreenHeight,
                         ScreenWidth = p.ScreenWidth
@@ -90,7 +90,7 @@ namespace AppReadyGo.Domain.Queries.Application
             var visits = visitsByScreens.GroupBy(g => new
                                 {
                                     ApplicationId = g.Key.ApplicationId,
-                                    Description = g.Key.Description,
+                                    Name = g.Key.Name,
                                 })
                                 .Select(g => new
                                 {
@@ -114,7 +114,7 @@ namespace AppReadyGo.Domain.Queries.Application
                                             .Select(g => new ApplicationResult
                                             {
                                                 Id = g.Key.ApplicationId,
-                                                Description = g.Key.Description
+                                                Name = g.Key.Name
                                             }).ToArray();
 
             var appIds = res.Applications.Select(x => x.Id).ToArray();

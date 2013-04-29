@@ -12,6 +12,6 @@ namespace AppReadyGo.Core.QueryResults.Application
 
         public IEnumerable<Tuple<int, string>> ApplicationTypes { get; set; }
 
-        public IEnumerable<Tuple<int, string>> Screens { get; set; }
+        public IEnumerable<Tuple<int, string>> Screenshots { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using NHibernate.Mapping.ByCode;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class ClickMaping : ClassMapping<Click>
+    internal class ClickMaping : ClassMapping<Click>
     {
         public ClickMaping()
         {

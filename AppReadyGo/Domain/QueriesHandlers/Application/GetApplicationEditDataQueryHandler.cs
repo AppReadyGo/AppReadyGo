@@ -31,9 +31,9 @@ namespace AppReadyGo.Domain.Queries.Application
                         .Select(x => new System.Tuple<int, string>(x.Id, x.Name))
                         .ToArray();
 
-            result.Screens = session.Query<Model.Application>()
+            result.Screenshots = session.Query<Model.Application>()
                         .Where(a => a.Id == query.Id)
-                        .SelectMany(a => a.Screens)
+                        .SelectMany(a => a.Screenshots)
                         .Select(s => new System.Tuple<int, string>(s.Id, s.FileExtension))
                         .ToArray();
 

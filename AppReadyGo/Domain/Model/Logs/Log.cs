@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AppReadyGo.Domain.Model.Logs
 {
-    public class Log
+    internal class Log
     {
         private Iesi.Collections.Generic.ISet<Category> categories;
 

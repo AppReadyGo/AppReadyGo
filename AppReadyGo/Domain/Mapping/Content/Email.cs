@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AppReadyGo.Domain.Mapping.Content
 {
-    class Email
+    internal class Email
     {
     }
 }

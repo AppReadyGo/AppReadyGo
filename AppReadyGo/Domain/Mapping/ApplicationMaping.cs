@@ -8,7 +8,7 @@ using NHibernate.Mapping.ByCode;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class ApplicationMaping : ClassMapping<Application>
+    internal class ApplicationMaping : ClassMapping<Application>
     {
         public ApplicationMaping()
         {
@@ -51,6 +51,15 @@ namespace AppReadyGo.Domain.Mapping
 
             Set(
               x => x.Publishes,
+              map =>
+              {
+                  map.Key(k => k.Column("ApplicationID"));
+                  map.Access(Accessor.Field);
+              },
+              r => r.OneToMany());
+
+            Set(
+              x => x.Screenshots,
               map =>
               {
                   map.Key(k => k.Column("ApplicationID"));
