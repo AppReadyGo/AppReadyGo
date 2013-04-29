@@ -2,9 +2,9 @@
 @using AppReadyGo.Model
 @using AppReadyGo.Model.Master
 @using AppReadyGo.Helpers;
-@model ContentModel
+@model AuthenticatedContentModel
 @{
-    Layout = "~/Views/Shared/_BeforeLogin.cshtml";
+    Layout = "~/Views/Shared/_AfterLogin.cshtml";
 }
 @section title { @Model.Title }
 @section header { }
@@ -14,5 +14,3 @@
     </div><!-- /.content-wrapper --> 
     <p class="clear"></p>
 </section><!-- /#content --> 
-
-
