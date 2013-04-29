@@ -223,7 +223,7 @@ namespace AppReadyGo.Controllers
             if (ModelState.IsValid)
             {
                 ObjectContainer.Instance.Dispatch(new PublishCommand(model.ApplicationId, model.AgeRange, model.Gender, model.Country, model.Zip));
-                return View("", "Application");
+                return RedirectToAction("", "Application");
             }
             else
             {
@@ -254,6 +254,12 @@ namespace AppReadyGo.Controllers
                 Zip = x.Zip
             });
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Unpublish(int id)
+        {
+            return null;// RedirectToAction(
         }
 
         public ActionResult Screens(int id, string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")

@@ -1,6 +1,6 @@
 ﻿@using AppReadyGo.Helpers;
 @using AppReadyGo.Web.Model.Pages.Application;
-@model System.Collections.Generic.IEnumerable<PublishDetailsModel>
+@model PublishesModel
 @{
     Layout = "~/Views/Shared/_AfterLogin.cshtml";
 }
@@ -12,7 +12,7 @@
 			<div class="inner">
                 <ul>
 		           <li><a href="/Application"><h4>Applications</h4></a></li>
-		           <li><h4>@Model.Name - Publishes</h4></li>
+		           <li><h4>@Model.ApplicationName - Publishes</h4></li>
 		        </ul>
 			</div>
 		</div>
@@ -43,7 +43,7 @@
                             {	
 		                        <tr class="portf @(false ? "" : "alt")">
 			                        <td>
-					                    @pubishDetails.CreatedDate.ToString("dd-MMM-yyyy")
+					                    @pubishDetails.CreatedDate
 			                        </td>
                                     <td>
                                         @pubishDetails.Gender
