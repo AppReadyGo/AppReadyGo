@@ -4,7 +4,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Content
 {
-    public class SystemMailMapping : ClassMapping<SystemMail>
+    internal class SystemMailMapping : ClassMapping<SystemMail>
     {
         public SystemMailMapping()
         {
@@ -31,7 +31,8 @@ namespace AppReadyGo.Domain.Mapping.Content
                 r => r.OneToMany());
         }
     }
-    public class MailMapping : SubclassMapping<Mail>
+
+    internal class MailMapping : SubclassMapping<Mail>
     {
         public MailMapping()
         {

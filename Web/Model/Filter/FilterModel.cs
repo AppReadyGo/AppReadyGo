@@ -69,7 +69,7 @@ namespace AppReadyGo.Model.Filter
             var curApplication = filterDataResult.Applications.Single(a => a.Id == filter.ApplicationId);
 
             this.SelectedApplicationId = curApplication.Id;
-            this.ApplicationName = curApplication.Description;
+            this.ApplicationName = curApplication.Name;
                     
             this.SelectedScreenSize = filter.ScreenSize.HasValue ? filter.ScreenSize.Value.ToFormatedString() : (isSingleMode ? curApplication.ScreenSizes.First().ToFormatedString() : null);
             this.SelectedPath = string.IsNullOrEmpty(filter.Path) ? (isSingleMode ? curApplication.Pathes.First() : null) : filter.Path;

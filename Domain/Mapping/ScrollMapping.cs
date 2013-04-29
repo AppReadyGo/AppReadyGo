@@ -8,7 +8,7 @@ using NHibernate.Mapping.ByCode;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class ScrollMapping : ClassMapping<Scroll>
+    internal class ScrollMapping : ClassMapping<Scroll>
     {
 
         public ScrollMapping()

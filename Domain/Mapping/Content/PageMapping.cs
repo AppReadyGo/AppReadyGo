@@ -4,7 +4,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Content
 {
-    public class PageMapping : ClassMapping<Page>
+    internal class PageMapping : ClassMapping<Page>
     {
         public PageMapping()
         {

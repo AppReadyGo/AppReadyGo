@@ -19,7 +19,7 @@
     <link href="@Html.Content("~/Content/analytics.screen.css")" rel="stylesheet" type="text/css" />
     <script src="@Html.Content("~/Scripts/filter.js")" type="text/javascript"></script>
     <script type="text/javascript">
-        var usageChartData = <%= Model.UsageChartData %>;
+        var usageChartData = @Model.UsageChartData;
         $(document).ready(function () {
         var placeholder = $("#usage_charts_place_holder");
         var plot = $.plot(placeholder, usageChartData, {

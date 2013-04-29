@@ -4,7 +4,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Content
 {
-    public class ItemMapping : ClassMapping<Item>
+    internal class ItemMapping : ClassMapping<Item>
     {
         public ItemMapping()
         {

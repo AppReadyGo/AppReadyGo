@@ -8,7 +8,7 @@ using NHibernate.Mapping.ByCode;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class ViewPartMaping : ClassMapping<ViewPart>
+    internal class ViewPartMaping : ClassMapping<ViewPart>
     {
         public ViewPartMaping()
         {

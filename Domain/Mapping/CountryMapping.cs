@@ -4,7 +4,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class CountryMapping : ClassMapping<Country>
+    internal class CountryMapping : ClassMapping<Country>
     {
         public CountryMapping() 
         {
@@ -31,7 +31,7 @@ namespace AppReadyGo.Domain.Mapping
         }
     }
 
-    public class ContinentMapping : ClassMapping<Continent>
+    internal class ContinentMapping : ClassMapping<Continent>
     {
         public ContinentMapping()
         {
@@ -49,7 +49,7 @@ namespace AppReadyGo.Domain.Mapping
         }
     }
 
-    public class RegionMapping : ClassMapping<Region>
+    internal class RegionMapping : ClassMapping<Region>
     {
         public RegionMapping()
         {
@@ -66,7 +66,7 @@ namespace AppReadyGo.Domain.Mapping
         }
     }
 
-    public class CityMapping : ClassMapping<City>
+    internal class CityMapping : ClassMapping<City>
     {
         public CityMapping()
         {
@@ -83,7 +83,7 @@ namespace AppReadyGo.Domain.Mapping
         }
     }
 
-    public class GeoKeyMapping : ClassMapping<GeoKey>
+    internal class GeoKeyMapping : ClassMapping<GeoKey>
     {
         public GeoKeyMapping()
         {

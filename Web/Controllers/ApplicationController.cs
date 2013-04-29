@@ -59,7 +59,7 @@ namespace AppReadyGo.Controllers
                 Applications = data.Applications.Select((a, i) => new ApplicationItemModel
                 {
                     Id = a.Id,
-                    Description = a.Description,
+                    Name = a.Name,
                     IsActive = a.IsActive,
                     Alternate = i % 2 != 0,
                     Visits = a.Visits,
@@ -70,7 +70,7 @@ namespace AppReadyGo.Controllers
                     Clicks = rnd.Next(1000),
                     Time = rnd.Next(100),
                     TargetGroup = rnd.Next(100) > 50 ? "Men 18+" : "Women 18+",
-                    Name = a.Name,
+                    Description = a.Description,
                     Icon = string.IsNullOrEmpty(a.IconExt) ?  "/content/images/no_icon.png" : string.Format("/Restricted/Icons/{0}{1}", a.Id, a.IconExt),
                     Published = a.Published,
                 }).ToArray(),
@@ -78,7 +78,7 @@ namespace AppReadyGo.Controllers
                 {
                     IsAlternative = i % 2 != 0,
                     Id = a.Id,
-                    Description = a.Description
+                    Description = a.Name
                 }).ToArray(),
                 TopScreens = data.TopScreens.Select((s, i) => new TopScreensItemModel
                 {
@@ -124,8 +124,8 @@ namespace AppReadyGo.Controllers
                     foreach (var key in keys)
                     {
                         var ext = Path.GetExtension(Request.Files[key].FileName);
-                        var path = Path.Combine(Server.MapPath("~/Restricted/Screens/"), result.Result + ext);
-                        var sres = ObjectContainer.Instance.Dispatch(new AddScreenCommand(result.Result, path, 0, 0, ext));
+                        var sres = ObjectContainer.Instance.Dispatch(new AddScreenshotCommand(result.Result, ext));
+                        var path = Path.Combine(Server.MapPath("~/Restricted/Screenshots/"), sres.Result + ext);
                         if (!sres.Validation.Any())
                         {
                             log.WriteInformation("Save file: {0}", path);
@@ -157,7 +157,7 @@ namespace AppReadyGo.Controllers
                 Type = res.ApplicationDetails.Type.Item1,
                 Types = res.ApplicationTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() }),
                 IconPath = string.IsNullOrEmpty(res.ApplicationDetails.IconExt) ? "/content/images/no_icon.png" : string.Format("/Restricted/Icons/{0}{1}", res.ApplicationDetails.Id, res.ApplicationDetails.IconExt),
-                ScreensPathes = res.Screens.Select(s => string.Format("/Restricted/Screens/{0}{1}", s.Item1, s.Item2))
+                ScreensPathes = res.Screenshots.Select(s => string.Format("/Restricted/Screenshots/{0}{1}", s.Item1, s.Item2))
             };
 
             return View(model);
@@ -168,8 +168,46 @@ namespace AppReadyGo.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var appId = ObjectContainer.Instance.Dispatch(new UpdateApplicationCommand(model.Id, model.Description));
-                return Redirect("/Application");
+                var result = ObjectContainer.Instance.Dispatch(new UpdateApplicationCommand(model.Id, model.Name, model.Description, model.Type));
+
+                if (result.Validation.Any())
+                {
+                    log.WriteError("Error to add application to database", string.Join("; ", result.Validation.Select(v => string.Format("Code:{0}, Message: {1}", v.ErrorCode, v.Message)).ToArray()));
+                    return RedirectToAction("Error", "Home");
+                }
+                else
+                {
+                    string iconExt = Request.Files.AllKeys.Contains("icon_file") ? Path.GetExtension(Request.Files[0].FileName) : null;
+                    if (!string.IsNullOrEmpty(iconExt))
+                    {
+                        var updateExtRes = ObjectContainer.Instance.Dispatch(new UpdateApplicationIconCommand(model.Id, iconExt));
+                        if (!string.IsNullOrEmpty(updateExtRes.Result))
+                        {
+                            // Delete old icon
+                            var oldPath = Path.Combine(Server.MapPath("~/Restricted/Icons/"), model.Id + updateExtRes.Result);
+                            log.WriteInformation("Delete file: {0}", oldPath);
+                            System.IO.File.Delete(oldPath);
+                        }
+                        //Save new icon
+                        var path = Path.Combine(Server.MapPath("~/Restricted/Icons/"), model.Id + iconExt);
+                        log.WriteInformation("Save file: {0}", path);
+                        Request.Files[0].SaveAs(path);
+                    }
+
+                    var keys = Request.Files.AllKeys.Where(x => x.Contains("screen_file_"));
+                    foreach (var key in keys)
+                    {
+                        var ext = Path.GetExtension(Request.Files[key].FileName);
+                        var sres = ObjectContainer.Instance.Dispatch(new AddScreenshotCommand(result.Result, ext));
+                        var path = Path.Combine(Server.MapPath("~/Restricted/Screenshots/"), sres.Result + ext);
+                        if (!sres.Validation.Any())
+                        {
+                            log.WriteInformation("Save file: {0}", path);
+                            Request.Files[key].SaveAs(path);
+                        }
+                    }
+                }
+                return RedirectToAction("");
             }
             else
             {
@@ -188,6 +226,7 @@ namespace AppReadyGo.Controllers
             }
             else
             {
+                // TODO: remove all screens, screenshots and icon files
                 ObjectContainer.Instance.Dispatch(new RemoveApplicationCommand(id));
             }
             return Redirect("/Application");
@@ -243,23 +282,29 @@ namespace AppReadyGo.Controllers
 
         public ActionResult Publishes(int id)
         {
-            var res = ObjectContainer.Instance.RunQuery(new GetPublishDetailsQuery(id));
-            var model = res.Select(x => new PublishDetailsModel
+            var res = ObjectContainer.Instance.RunQuery(new GetPublishesDataQuery(id));
+            var model = new PublishesModel
             {
-                Id = x.Id,
-                CreateDate = x.CreatedDate.ToString("dd-MMM-yyyy"),
-                Country = x.Country == null ? string.Empty : x.Country.Item2,
-                AgeRange = x.AgeRange.HasValue ? x.AgeRange.Value.GetName() : "All",
-                Gender = x.Gender.HasValue ? x.Gender.Value.ToString() : "All",
-                Zip = x.Zip
-            });
+                ApplicationId = id,
+                ApplicationName = res.ApplicationName,
+                Publishes = res.PublishesDetails.Select(x => new PublishDetailsModel
+                {
+
+                    Id = x.Id,
+                    CreatedDate = x.CreatedDate.ToString("dd-MMM-yyyy"),
+                    Country = x.Country == null ? string.Empty : x.Country.Item2,
+                    AgeRange = x.AgeRange.HasValue ? x.AgeRange.Value.GetName() : "All",
+                    Gender = x.Gender.HasValue ? x.Gender.Value.ToString() : "All",
+                    Zip = x.Zip
+                })
+            };
             return View(model);
         }
 
-        [HttpPost]
         public ActionResult Unpublish(int id)
         {
-            return null;// RedirectToAction(
+            var appId = ObjectContainer.Instance.Dispatch(new UnPublishCommand(id));
+            return RedirectToAction("Publishes", new { id = appId.Result });
         }
 
         public ActionResult Screens(int id, string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")

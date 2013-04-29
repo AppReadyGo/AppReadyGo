@@ -5,7 +5,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Users
 {
-    public class UserMapping : ClassMapping<User>
+    internal class UserMapping : ClassMapping<User>
     {
         public UserMapping()
         {

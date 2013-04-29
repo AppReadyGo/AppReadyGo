@@ -38,12 +38,14 @@ namespace AppReadyGo.Domain.Model.Events
         /// <summary>
         /// language
         /// </summary>
-        public virtual Language Language { get; set; }
+        // TODO: Yura this is wrong type for the property
+        //public virtual Language Language { get; set; }
 
         /// <summary>
         /// client's Country
         /// </summary>
-        public virtual Country Country { get; set; }
+        // TODO: Yura this is wrong type for the property
+        //public virtual Country Country { get; set; }
 
         /// <summary>
         /// client's City
@@ -53,12 +55,14 @@ namespace AppReadyGo.Domain.Model.Events
         /// <summary>
         /// client's OS
         /// </summary>
-        public virtual OperationSystem OperationSystem { get; set; }
+        // TODO: Yura this is wrong type for the property
+        //public virtual OperationSystem OperationSystem { get; set; }
 
         /// <summary>
         /// client's Browser
         /// </summary>
-        public virtual Browser Browser { get; set; }
+        // TODO: Yura this is wrong type for the property
+        //public virtual Browser Browser { get; set; }
 
         /// <summary>
         /// client Screen Width
@@ -76,7 +80,8 @@ namespace AppReadyGo.Domain.Model.Events
         /// <summary>
         /// client's Application - identified by Key property
         /// </summary>
-        public virtual Application Application { get; set; }
+        // TODO: Yura this is wrong type for the property
+        //public virtual Application Application { get; set; }
 
         /// <summary>
         /// todo: client's device info

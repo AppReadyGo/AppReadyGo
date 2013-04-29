@@ -22,7 +22,7 @@ namespace AppReadyGo.Domain.Queries.Analytics
                 .Select(a => new ExtendedApplicationResult
                 {
                     Id = a.Id,
-                    Description = a.Description
+                    Name = a.Description
                 })
                 .ToArray();
 

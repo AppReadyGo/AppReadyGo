@@ -4,7 +4,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Logs
 {
-    public class LogMapping : ClassMapping<Log>
+    internal class LogMapping : ClassMapping<Log>
     {
         public LogMapping()
         {

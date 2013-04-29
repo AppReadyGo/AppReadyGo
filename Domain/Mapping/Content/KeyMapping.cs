@@ -4,7 +4,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Content
 {
-    public class KeyMapping : ClassMapping<Key>
+    internal class KeyMapping : ClassMapping<Key>
     {
         public KeyMapping()
         {

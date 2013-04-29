@@ -8,6 +8,7 @@ namespace AppReadyGo.Domain.Model
     public class Nameable
     {
         public virtual int Id { get; set; }
+
         public virtual string Name { get; set; }
     }
 }

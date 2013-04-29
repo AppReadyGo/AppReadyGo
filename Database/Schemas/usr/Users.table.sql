@@ -14,7 +14,7 @@
 	[MembershipID]	SMALLINT	   NOT NULL,
 	[AcceptedTermsAndConditions] BIT NOT NULL,
 	[GenderID]		TINYINT			NULL,
-	[Age]			SMALLINT		NULL,
+	[AgeRange]			SMALLINT		NULL,
 	[CountryID]		INT				NULL
 );
 GO

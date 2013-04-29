@@ -10,7 +10,8 @@ namespace AppReadyGo.Domain.CommandHandlers.Application
         public int Execute(ISession session, UpdateApplicationCommand cmd)
         {
             var app = session.Get<Model.Application>(cmd.Id);
-            app.Update(cmd.Description);
+            var type = session.Get<Model.ApplicationType>(cmd.TypeId);
+            app.Update(cmd.Name, cmd.Description, type);
             return app.Id;
         }
     }

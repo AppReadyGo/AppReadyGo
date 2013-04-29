@@ -6,7 +6,7 @@ using AppReadyGo.Domain.Model;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class BrowserMapping : NameableMapping<Browser>
+    internal class BrowserMapping : NameableMapping<Browser>
     {
     }
 }

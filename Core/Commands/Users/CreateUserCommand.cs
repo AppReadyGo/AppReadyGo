@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using AppReadyGo.Core.Entities;
+using System.Collections.Generic;
 
 namespace AppReadyGo.Core.Commands.Users
 {
 
     public abstract class CreateUserCommand : ICommand<int>
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Email { get; protected set; }
+
+        public string Password { get; protected set; }
 
         protected CreateUserCommand(string email, string password)
         {
@@ -61,6 +63,35 @@ namespace AppReadyGo.Core.Commands.Users
         public CreateStaffCommand(string email, string password)
             : base(email, password)
         {
+        }
+    }
+
+    public class CreateAPIMemberCommand : CreateUserCommand
+    {
+        public string FirstName { get; protected set; }
+
+        public string LastName { get; protected set; }
+
+        public Gender? Gender { get; protected set; }
+
+        public AgeRange? AgeRange { get; protected set; }
+
+        public int? CountryId { get; protected set; }
+
+        public string Zip { get; protected set; }
+
+        public int[] ApplicationTypes { get; protected set; }
+
+        public CreateAPIMemberCommand(string email, string password, string firstName, string lastName, Gender? gender, AgeRange? ageRange, int? countryId, string zip, int[] applicationTypes)
+            : base(email, password)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Gender = gender;
+            this.AgeRange = ageRange;
+            this.CountryId = countryId;
+            this.Zip = zip;
+            this.ApplicationTypes = applicationTypes;
         }
     }
 }

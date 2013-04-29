@@ -8,7 +8,7 @@ using NHibernate.Mapping.ByCode;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class PublishDetailsMapping : ClassMapping<PublishDetails>
+    internal class PublishDetailsMapping : ClassMapping<PublishDetails>
     {
         public PublishDetailsMapping()
         {

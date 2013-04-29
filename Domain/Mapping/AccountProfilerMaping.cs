@@ -8,7 +8,7 @@ using NHibernate.Mapping.ByCode;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class AccountProfilerMaping : ClassMapping<AccountProfiler>
+    internal class AccountProfilerMaping : ClassMapping<AccountProfiler>
     {
         public AccountProfilerMaping()
         {

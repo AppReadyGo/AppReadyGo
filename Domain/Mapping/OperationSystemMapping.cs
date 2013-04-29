@@ -8,7 +8,7 @@ using NHibernate.Mapping.ByCode;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class OperationSystemMapping : NameableMapping<OperationSystem>
+    internal class OperationSystemMapping : NameableMapping<OperationSystem>
     {
         static OperationSystemMapping()
         {

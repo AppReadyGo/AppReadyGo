@@ -5,6 +5,7 @@ using System.Text;
 using NHibernate;
 using AppReadyGo.Core.Commands.Users;
 using AppReadyGo.Domain.Model.Users;
+using AppReadyGo.Domain.Model;
 
 namespace AppReadyGo.Domain.CommandHandlers.Users
 {
@@ -23,6 +24,18 @@ namespace AppReadyGo.Domain.CommandHandlers.Users
         public int Execute(ISession session, CreateStaffCommand cmd)
         {
             var user = new Staff(cmd.Email, cmd.Password);
+            session.Save(user);
+            return user.Id;
+        }
+    }
+
+    public class CreateAPIMemberCommandHandler : ICommandHandler<CreateAPIMemberCommand, int>
+    {
+        public int Execute(ISession session, CreateAPIMemberCommand cmd)
+        {
+            var country = session.Get<Country>(cmd.CountryId);
+            var appTypes = cmd.ApplicationTypes != null ? cmd.ApplicationTypes.Select(x => session.Get<ApplicationType>(x)).ToArray() : null;
+            var user = new ApiMember(cmd.Email, cmd.Password, cmd.FirstName, cmd.LastName, cmd.Gender, cmd.AgeRange, country, appTypes);
             session.Save(user);
             return user.Id;
         }

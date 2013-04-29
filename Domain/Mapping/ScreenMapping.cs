@@ -8,11 +8,11 @@ using NHibernate.Mapping.ByCode;
 
 namespace AppReadyGo.Domain.Mapping
 {
-    public class ScreenMapping : ClassMapping<Screen>
+    internal class ScreenshotMapping : ClassMapping<Screenshot>
     {
-        public ScreenMapping()
+        public ScreenshotMapping()
         {
-            Table("Screens");
+            Table("Screenshots");
             
             Id(p => p.Id, map => map.Generator(Generators.Identity));
             //Property(p => p.ApplicationId, map => { map.NotNullable(true); });
@@ -22,11 +22,8 @@ namespace AppReadyGo.Domain.Mapping
                 map.Column("ApplicationId");
                
             });
-            
-            Property(p => p.Path, map => { map.NotNullable(true); map.Length(256); });
-            Property(p => p.Height, map => map.NotNullable(true));
-            Property(p => p.Width, map => map.NotNullable(true));
-            Property(p => p.FileExtension, map => { map.NotNullable(true); map.Length(5); });
+
+            Property(p => p.FileExtension, map => { map.NotNullable(true); map.Length(10); });
         }
     }
 }
