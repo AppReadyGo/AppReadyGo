@@ -632,9 +632,9 @@
     <Content Include="Views\Application\ScreenEdit.aspx" />
     <Content Include="Views\Application\ScreenNew.aspx" />
     <Content Include="Views\Application\Screens.aspx" />
-    <Content Include="Views\Content\Authenticated404.aspx" />
+    <None Include="Views\Content\Authenticated404.cshtml" />
     <Content Include="Views\Content\AuthenticatedError.aspx" />
-    <Content Include="Views\Content\AuthenticatedPageContent.aspx" />
+    <None Include="Views\Content\AuthenticatedPageContent.cshtml" />
     <Content Include="Views\Home\ComingSoon.aspx" />
     <Content Include="Views\Home\Mails\Basic.aspx" />
     <Content Include="Views\Home\PlayGround.aspx" />
@@ -697,7 +697,6 @@
     <Content Include="Views\Shared\_AfterLoginLeftMenu.cshtml" />
     <Content Include="Views\Shared\_Analytics.cshtml" />
     <Content Include="Views\Shared\_BeforeLogin.cshtml" />
-    <Content Include="Views\Shared\_Content.cshtml" />
     <Content Include="Views\Shared\_Main.cshtml" />
     <Content Include="Views\Shared\_MainTmp.cshtml" />
   </ItemGroup>
