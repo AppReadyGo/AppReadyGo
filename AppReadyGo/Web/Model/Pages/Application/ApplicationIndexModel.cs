@@ -18,11 +18,7 @@ namespace AppReadyGo.Model.Pages.Portfolio
 
         public bool Alternate { get; set; }
 
-        public string PublishedDate { get; set; }
-
         public string TargetGroup { get; set; }
-
-        public int Downloads { get; set; }
 
         public int Time { get; set; }
 

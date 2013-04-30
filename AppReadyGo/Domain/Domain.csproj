@@ -73,6 +73,7 @@
     <Compile Include="CommandHandlers\API\AddPackageCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\AddScreenCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\AddScreenshotCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\ApplicationDownloadedCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UpdateApplicationIconCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UnPublishCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\CreateApplicationCommandHandler.cs" />

@@ -64,8 +64,6 @@ namespace AppReadyGo.Controllers
                     Alternate = i % 2 != 0,
                     Visits = a.Visits,
                     Key = a.Id.GetAppKey(),
-                    Downloads = rnd.Next(100),
-                    PublishedDate = DateTime.Now.AddDays(-rnd.Next(100)).ToString("dd MMM yyyy"),
                     Scrolls = rnd.Next(1000),
                     Clicks = rnd.Next(1000),
                     Time = rnd.Next(100),
@@ -73,6 +71,7 @@ namespace AppReadyGo.Controllers
                     Description = a.Description,
                     Icon = string.IsNullOrEmpty(a.IconExt) ?  "/content/images/no_icon.png" : string.Format("/Restricted/Icons/{0}{1}", a.Id, a.IconExt),
                     Published = a.Published,
+                    Downloaded = a.Downloaded
                 }).ToArray(),
                 TopApplications = data.TopApplications.Select((a, i) => new TopApplicationsItemModel
                 {
