@@ -71,7 +71,11 @@ namespace AppReadyGo.API.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Get all apps for this account 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<Application> GetApps(string email)
         {
@@ -172,6 +176,34 @@ namespace AppReadyGo.API.Controllers
             }
         }
 
+        /// <summary>
+        /// TASK comple confirmation 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="task"></param>
+        [HttpPost]
+        public void TaskConfirm(string email, int task)
+        { 
+            
+        }
+
+        /// <summary>
+        /// Update user info
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <param name="pass"></param>
+        /// <param name="gender"></param>
+        /// <param name="ageRange"></param>
+        /// <param name="contryId"></param>
+        /// <param name="zip"></param>
+        /// <param name="interest"></param>
+        [HttpPost]
+        public void UserInfoUpdateRegister(string firstName, string lastName, string email, string pass, Gender gender, AgeRange ageRange, int contryId, string zip, int[] interest)
+        { 
+            
+        }
 
 
     }
