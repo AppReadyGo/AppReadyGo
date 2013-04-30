@@ -2,16 +2,18 @@
 @using AppReadyGo.Model
 @using AppReadyGo.Model.Master
 @using AppReadyGo.Helpers;
-@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, ContentModel>
+@model ContentModel
 @{
-    Layout = "~/Views/Shared/_Content.cshtml";
+    Layout = "~/Views/Shared/_BeforeLogin.cshtml";
 }
 @section title { Error }
-@section header 
-{
-    <link href="@Html.Content("~/Content/template/css/error.css")" rel="stylesheet" type="text/css" /> 
-}
-<article class="borders">
-    <h2>An error occurred while processing your request!</h2>
-    <p>Sorry, an error occurred while processing your request. Please contact to administrator.</p>
-</article>
+@section header { }
+<section id="content">
+    <div class="content-wrapper">
+        <article class="borders">
+            <h2>An error occurred while processing your request!</h2>
+            <p>Sorry, an error occurred while processing your request.<br /> Please contact to administrator.</p>
+        </article>
+    </div><!-- /.content-wrapper --> 
+    <p class="clear"></p>
+</section><!-- /#content --> 
