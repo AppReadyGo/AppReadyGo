@@ -8,6 +8,8 @@ namespace AppReadyGo.Model.Pages.Account
 {
     public class ResetPasswordModel : BeforeLoginMasterModel
     {
+        public string Key { get; set; }
+
         public string NewPassword { get; set; }
 
         public string ConfirmPassword { get; set; }

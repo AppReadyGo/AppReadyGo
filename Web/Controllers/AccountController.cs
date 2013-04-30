@@ -205,7 +205,7 @@ namespace AppReadyGo.Controllers
             {
                 throw new Exception("User not found.");
             }
-            return View(new ResetPasswordModel());
+            return View(new ResetPasswordModel { Key = key });
         }
 
         [HttpPost]

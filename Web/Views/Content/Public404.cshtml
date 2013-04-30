@@ -4,13 +4,10 @@
 @using AppReadyGo.Helpers;
 @model ContentModel
 @{
-    Layout = "~/Views/Shared/_Content.cshtml";
+    Layout = "~/Views/Shared/_BeforeLogin.cshtml";
 }
 @section title { 404 Error }
-@section header 
-{
-    <link href="@Html.Content("~/Content/template/css/404.css")" rel="stylesheet" type="text/css" /> 
-}
+@section header { }
 <section id="content">
     <div class="content-wrapper">
         <article class="borders">

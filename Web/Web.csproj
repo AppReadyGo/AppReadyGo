@@ -612,7 +612,6 @@
     <Content Include="ThridParty\selectBoxIt-3.4.0\jquery.selectBoxIt.min.js" />
     <Content Include="underconstruction.htm" />
     <None Include="Views\Account\Details.cshtml" />
-    <None Include="Views\Account\Forms\ForgotPasswordForm.cshtml" />
     <None Include="Views\Account\ResetPassword.cshtml" />
     <None Include="Views\Account\TermsAndConditions.cshtml" />
     <None Include="Views\Account\Unsubscribe.cshtml" />
@@ -633,7 +632,7 @@
     <Content Include="Views\Application\ScreenNew.aspx" />
     <Content Include="Views\Application\Screens.aspx" />
     <None Include="Views\Content\Authenticated404.cshtml" />
-    <Content Include="Views\Content\AuthenticatedError.aspx" />
+    <None Include="Views\Content\AuthenticatedError.cshtml" />
     <None Include="Views\Content\AuthenticatedPageContent.cshtml" />
     <Content Include="Views\Home\ComingSoon.aspx" />
     <Content Include="Views\Home\Mails\Basic.aspx" />
@@ -643,8 +642,7 @@
     <Content Include="Views\Portfolio\Edit.aspx" />
     <Content Include="Views\Portfolio\Form.ascx" />
     <Content Include="Views\Portfolio\New.aspx" />
-    <Content Include="Views\Secure\ChangePassword.aspx" />
-    <Content Include="Views\Secure\Forms\ChangePasswordForm.ascx" />
+    <None Include="Views\Secure\ChangePassword.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

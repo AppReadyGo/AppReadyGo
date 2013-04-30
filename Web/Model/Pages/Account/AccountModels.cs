@@ -14,7 +14,7 @@ namespace AppReadyGo.Models.Account
 
     #region Models
     [PropertiesMustMatch("NewPassword", "ConfirmPassword", ErrorMessage = "The new password and confirmation password do not match.")]
-    public class ChangePasswordModel : BeforeLoginMasterModel
+    public class ChangePasswordModel : AfterLoginMasterModel
     {
         [Required]
         [DataType(DataType.Password)]

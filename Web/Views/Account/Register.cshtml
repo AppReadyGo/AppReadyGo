@@ -9,7 +9,7 @@
         <article class="center">
             <div class="form-wrapper">
             <h2>Sign Up, Free</h2>
-            @using (Html.BeginForm()) 
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { autocomplete = "off" })) 
             {
                 <p class="desc">Passwords are required to be a minimum of 7 characters in length.</p>
                 <p>
