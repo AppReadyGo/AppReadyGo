@@ -11,6 +11,7 @@ using NHibernate.Linq;
 using System.Collections.Generic;
 using System.Drawing;
 using AppReadyGo.Core.QueryResults;
+using AppReadyGo.Domain.Model.Users;
 
 namespace AppReadyGo.Domain.Queries.Application
 {
@@ -123,6 +124,14 @@ namespace AppReadyGo.Domain.Queries.Application
                         .Select(p => p.Application.Id)
                         .ToArray();
 
+            var appDownloaded = session.Query<ApiMember>()
+                        .SelectMany(u => u.DownloadedApplications)
+                        .Where(a => appIds.Contains(a.Id))
+                        .Select(a => a.Id)
+                        .GroupBy(id => id)
+                        .Select(x => new { ApplicationId = x.Key, Count = x.Count() })
+                        .ToArray();
+
             // Aplicatyion is not active if was not recived data for 3 days
             DateTime dt = DateTime.Now.AddDays(-3);
 
@@ -135,6 +144,8 @@ namespace AppReadyGo.Domain.Queries.Application
                 application.IsActive = count != null && count.LastRecivedDataDate < dt ? true : false;
 
                 application.Published = appPublished.Contains(application.Id);
+
+                application.Downloaded = appDownloaded.Where(x => x.ApplicationId == application.Id).Select(x => x.Count).SingleOrDefault();
             }
             log.WriteInformation("Get all applications for portfolio ->");
 

@@ -16,5 +16,7 @@ namespace AppReadyGo.Core.QueryResults.Application
         public string IconExt { get; set; }
 
         public bool Published { get; set; }
+
+        public int Downloaded { get; set; }
     }
 }

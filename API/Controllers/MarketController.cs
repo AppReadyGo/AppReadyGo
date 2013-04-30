@@ -14,6 +14,7 @@ using AppReadyGo.Core.Entities;
 using AppReadyGo.Core.Queries.Users;
 using AppReadyGo.Core;
 using AppReadyGo.Core.Queries.Application;
+using AppReadyGo.Core.Commands.Application;
 
 namespace AppReadyGo.API.Controllers
 {
@@ -88,7 +89,9 @@ namespace AppReadyGo.API.Controllers
         public HttpResponseMessage Get([FromUri]string filename)
         {
             //TODO: Add method to update downloaded count.
-            //var result = ObjectContainer.Instance.Dispatch(new ApplicationDownloadedCommand(appId));
+            int appId = 0;
+            string email = string.Empty;
+            var result = ObjectContainer.Instance.Dispatch(new ApplicationDownloadedCommand(email, appId));
             
             string path = HttpContext.Current.Server.MapPath("~/" + filename);
             if (!File.Exists(path))
