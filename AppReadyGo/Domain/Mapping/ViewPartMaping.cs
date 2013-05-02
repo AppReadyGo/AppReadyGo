@@ -12,6 +12,7 @@ namespace AppReadyGo.Domain.Mapping
     {
         public ViewPartMaping()
         {
+            Table("ViewParts");
             Id(x => x.Id, map => map.Generator(Generators.Identity));
             Property(p => p.StartDate, map => map.NotNullable(true));
             Property(p => p.FinishDate, map => map.NotNullable(true));

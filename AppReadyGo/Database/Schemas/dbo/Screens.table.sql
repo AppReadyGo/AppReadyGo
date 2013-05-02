@@ -13,7 +13,5 @@ ADD CONSTRAINT [PK_Screens] PRIMARY KEY CLUSTERED ([ID] ASC);
 GO;
 
 ALTER TABLE [dbo].[Screens]
-    ADD CONSTRAINT [FK_Screens_Application] FOREIGN KEY ([ApplicationID]) REFERENCES [dbo].[Application] ([ID]) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
+    ADD CONSTRAINT [FK_Screens_Application] FOREIGN KEY ([ApplicationID]) REFERENCES [dbo].[Applications] ([ID]);
 GO

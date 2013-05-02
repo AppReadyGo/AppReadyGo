@@ -10,12 +10,14 @@ using AppReadyGo.Core.Queries.Admin;
 using AppReadyGo.Controllers.Master;
 using AppReadyGo.Core;
 using AppReadyGo.Model;
-using AppReadyGo.Model.Pages.Admin;
 using AppReadyGo.Model.Master;
 using AppReadyGo.Common;
 using System.Web.Security;
 using AppReadyGo.Core.Commands.Users;
 using AppReadyGo.Common.Mails;
+using AppReadyGo.Web.Model.Pages.Admin;
+using AppReadyGo.Web.Controllers;
+using AppReadyGo.Core.Queries.Content;
 
 namespace AppReadyGo.Controllers
 {
@@ -35,7 +37,7 @@ namespace AppReadyGo.Controllers
             //ViewBag.Applications = membership.Applications;
             //ViewBag.Roles = membership.Roles;
             //ViewBag.Users = membership.Users;
-            return View(new AdminModel());
+            return View(new AdminMasterModel(AdminMasterModel.MenuItem.Members));
         }
 
         public ActionResult UserEdit(Guid id)
@@ -253,6 +255,120 @@ namespace AppReadyGo.Controllers
 
             return View(model);
         }
+
+        public ActionResult ContentManager()
+        {
+            return View(new ContentMasterModel(ContentMasterModel.MenuItem.None));
+        }
+
+        public ActionResult ContentItems(string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")
+        {
+            var orderBy = string.IsNullOrEmpty(orderby) ? GetAllKeysQuery.OrderByColumn.Url : (GetAllKeysQuery.OrderByColumn)Enum.Parse(typeof(GetAllKeysQuery.OrderByColumn), orderby, true);
+            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == GetAllKeysQuery.OrderByColumn.Url) ? false : true) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
+
+            var data = ObjectContainer.Instance.RunQuery(new GetAllKeysQuery(srch, orderBy, asc, cp, 15));
+
+            var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
+
+            var model = new ContentItemsModel
+            {
+                Paging = new PagingModel
+                {
+                    IsOnePage = data.TotalPages == 1,
+                    Count = data.Count,
+                    PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
+                    NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
+                    TotalPages = data.TotalPages,
+                    CurPage = data.CurPage,
+                    UrlPart = string.Concat(searchStrUrlPart, string.IsNullOrEmpty(orderby) ? string.Empty : string.Concat("&orderby=", orderby), string.IsNullOrEmpty(order) ? string.Empty : string.Concat("&order=", order)),
+                    SearchStrUrlPart = searchStrUrlPart,
+                    SearchStr = srch
+                },
+                IdOrder = orderBy == GetAllKeysQuery.OrderByColumn.Id && asc ? "desc" : "asc",
+                UrlOrder = orderBy == GetAllKeysQuery.OrderByColumn.Url && asc ? "desc" : "asc",
+                Keys = data.Keys.Select((k, i) => new ContentItemsModel.ContentItemsKeyModel
+                {
+                    Id = k.Id,
+                    Url = k.Url,
+                    IsAlternative = i % 2 != 0,
+                    ItemsCount = k.ItemsCount
+                })
+            };
+            return View(model);
+        }
+
+        public ActionResult ContentItem(int id, string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")
+        {
+            var orderBy = string.IsNullOrEmpty(orderby) ? GetAllKeyItemsQuery.OrderByColumn.SubKey : (GetAllKeyItemsQuery.OrderByColumn)Enum.Parse(typeof(GetAllKeyItemsQuery.OrderByColumn), orderby, true);
+            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == GetAllKeyItemsQuery.OrderByColumn.SubKey) ? false : true) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
+
+            var data = ObjectContainer.Instance.RunQuery(new GetAllKeyItemsQuery(id, srch, orderBy, asc, cp, 15));
+
+            var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
+
+            var model = new ContentItemModel
+            {
+                KeyId = id,
+                KeyUrl = data.KeyUrl,
+                Paging = new PagingModel
+                {
+                    IsOnePage = data.TotalPages == 1,
+                    Count = data.Count,
+                    PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
+                    NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
+                    TotalPages = data.TotalPages,
+                    CurPage = data.CurPage,
+                    UrlPart = string.Concat(searchStrUrlPart, string.IsNullOrEmpty(orderby) ? string.Empty : string.Concat("&orderby=", orderby), string.IsNullOrEmpty(order) ? string.Empty : string.Concat("&order=", order)),
+                    SearchStrUrlPart = searchStrUrlPart,
+                    SearchStr = srch
+                },
+                IdOrder = orderBy == GetAllKeyItemsQuery.OrderByColumn.Id && asc ? "desc" : "asc",
+                SubKeyOrder = orderBy == GetAllKeyItemsQuery.OrderByColumn.SubKey && asc ? "desc" : "asc",
+                IsHtmlOrder = orderBy == GetAllKeyItemsQuery.OrderByColumn.IsHtml && asc ? "desc" : "asc",
+                Items = data.Items.Select((item, i) => new ContentItemModel.ContentItemsItemModel
+                {
+                    Id = item.Id,
+                    SubKey = item.SubKey,
+                    IsHtml = item.IsHTML,
+                    IsAlternative = i % 2 != 0
+                })
+            };
+            return View(model);
+        }
+
+        public ActionResult EditContentItem(int id)
+        {
+            return View(new ContentItemModel());
+        }
+
+        [HttpPost]
+        public ActionResult EditContentItem(ContentItemModel model)
+        {
+            return View(model);
+        }
+
+        public ActionResult ContentPages()
+        {
+            return View(new ContentPageModel());
+        }
+
+        [HttpPost]
+        public ActionResult ContentPages(ContentPageModel model)
+        {
+            return View(model);
+        }
+
+        public ActionResult ContentMails()
+        {
+            return View(new ContentMailModel());
+        }
+
+        [HttpPost]
+        public ActionResult ContentMails(ContentMailModel model)
+        {
+            return View(model);
+        }
+
 
         /*
                  

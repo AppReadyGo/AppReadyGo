@@ -151,8 +151,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\Admin\AllMembersResult.cs" />
     <Compile Include="Queries\Admin\AllStaffResult.cs" />
+    <Compile Include="Queries\Admin\AllKeysResult.cs" />
     <Compile Include="Queries\Admin\GetAllMembersQuery.cs" />
     <Compile Include="Queries\Admin\GetAllStaffQuery.cs" />
+    <Compile Include="QueryResults\Admin\GetAllKeyItemsQueryResult.cs" />
+    <Compile Include="QueryResults\Admin\KeyDetailsResult.cs" />
     <Compile Include="Queries\Admin\LogDataQuery.cs" />
     <Compile Include="Queries\Analytics\ABCompareViewDataQuery.cs" />
     <Compile Include="Queries\Analytics\ClickHeatMapDataQuery.cs" />
@@ -174,6 +177,7 @@
     <Compile Include="Queries\Application\GetScreenDetailsQuery.cs" />
     <Compile Include="Queries\Application\GetScreenEditDataQuery.cs" />
     <Compile Include="Queries\Application\ScreensQuery.cs" />
+    <Compile Include="Queries\Content\GetAllKeyItemsQuery.cs" />
     <Compile Include="Queries\Content\GetAllKeysQuery.cs" />
     <Compile Include="Queries\Content\GetAllMailsQuery.cs" />
     <Compile Include="Queries\Content\GetAllPagesQuery.cs" />

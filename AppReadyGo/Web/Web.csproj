@@ -276,7 +276,11 @@
     <Compile Include="Model\Pages\Account\ResetPasswordModel.cs" />
     <Compile Include="Model\Pages\Account\UnsubscribeModel.cs" />
     <Compile Include="Model\Pages\Admin\AdminMasterModel.cs" />
-    <Compile Include="Model\Pages\Admin\AdminModel.cs" />
+    <Compile Include="Model\Pages\Admin\ContentItemModel.cs" />
+    <Compile Include="Model\Pages\Admin\ContentMasterModel.cs" />
+    <Compile Include="Model\Pages\Admin\ContentPageModel.cs" />
+    <Compile Include="Model\Pages\Admin\ContentMailModel.cs" />
+    <Compile Include="Model\Pages\Admin\ContentItemsModel.cs" />
     <Compile Include="Model\Pages\Admin\LogsModel.cs" />
     <Compile Include="Model\Pages\Analytics\ABCompareModel.cs" />
     <Compile Include="Model\Pages\Analytics\ABFilterParametersModel.cs" />
@@ -506,6 +510,7 @@
     <Content Include="Restricted\Packages\fingerprint-1.9.07.properties" />
     <Content Include="Restricted\Packages\fingerprint-1.9.23.properties" />
     <Content Include="Restricted\Packages\fingerprint-1.9.26.properties" />
+    <None Include="Properties\PublishProfiles\QA.pubxml" />
     <None Include="ThridParty\jquery-1.7.1.intellisense.js" />
     <Content Include="Restricted\Packages\fingerprint-1.0.jar" />
     <Content Include="Restricted\Packages\fingerprint-1.8.62.jar" />
@@ -615,6 +620,13 @@
     <None Include="Views\Account\ResetPassword.cshtml" />
     <None Include="Views\Account\TermsAndConditions.cshtml" />
     <None Include="Views\Account\Unsubscribe.cshtml" />
+    <Content Include="Views\Admin\_Content.cshtml" />
+    <Content Include="Views\Admin\ContentMails.cshtml" />
+    <Content Include="Views\Admin\ContentItems.cshtml" />
+    <Content Include="Views\Admin\ContentPages.cshtml" />
+    <Content Include="Views\Admin\ContentManager.cshtml" />
+    <Content Include="Views\Admin\ContentItem.cshtml" />
+    <Content Include="Views\Admin\EditContentItem.cshtml" />
     <None Include="Views\Admin\Forms\LogsFilter.cshtml" />
     <Content Include="Views\Admin\Index.aspx" />
     <None Include="Views\Admin\Logs.cshtml" />
@@ -687,8 +699,6 @@
     <Content Include="Views\Content\PublicPageContent.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\AfterLogin.Master" />
-    <Content Include="Views\Shared\AfterLoginContent.Master" />
-    <Content Include="Views\Shared\AfterLoginLeftMenu.Master" />
     <Content Include="Views\Shared\Mail.Master" />
     <Content Include="Views\Shared\Main.Master" />
     <Content Include="Views\Shared\_AfterLogin.cshtml" />
@@ -696,7 +706,6 @@
     <Content Include="Views\Shared\_Analytics.cshtml" />
     <Content Include="Views\Shared\_BeforeLogin.cshtml" />
     <Content Include="Views\Shared\_Main.cshtml" />
-    <Content Include="Views\Shared\_MainTmp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\m\Models\" />

@@ -14,6 +14,8 @@ using AppReadyGo.Common.Mails;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.IO;
+using AppReadyGo.Common;
+using AppReadyGo.Core.Queries.Content;
 
 namespace AppReadyGo.Controllers
 {
@@ -28,6 +30,9 @@ namespace AppReadyGo.Controllers
             }
             else
             {
+                var key = ObjectContainer.Instance.RunQuery(new GetKeyQuery("home"));
+                ViewBag.Slideshow = key.Items.Single(x => x.SubKey == "slideshow").Value;
+                ViewBag.Content = key.Items.Single(x => x.SubKey == "content").Value;
                 return View(new BeforeLoginMasterModel(BeforeLoginMasterModel.MenuItem.Home));
             }
         }

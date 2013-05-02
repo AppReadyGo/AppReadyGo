@@ -13,14 +13,19 @@ namespace AppReadyGo.Core
     public class CurrentUserDetails
     {
         public int Id { get; private set; }
-        public string DisplayName { get; private set; }
-        public string Email { get; set; }
 
-        public CurrentUserDetails(int id, string email, string displayName)
+        public string DisplayName { get; private set; }
+
+        public string Email { get; private set; }
+
+        public UserType Type { get; private set; }
+
+        public CurrentUserDetails(int id, UserType type, string email, string displayName)
         {
             this.Id = id;
             this.Email = email;
             this.DisplayName = displayName;
+            this.Type = type;
         }
     }
 
@@ -38,7 +43,7 @@ namespace AppReadyGo.Core
                     int userId = int.Parse(HttpContext.Current.User.Identity.Name);
                     var details = container.RunQuery(new GetUserDetailsByIdQuery(userId));
                     string displayName = string.IsNullOrEmpty(details.FirstName) || string.IsNullOrEmpty(details.LastName) ? details.Email : string.Format("{0} {1}", details.FirstName, details.LastName);
-                    this.CurrentUser = new CurrentUserDetails(userId, details.Email, displayName);
+                    this.CurrentUser = new CurrentUserDetails(userId, details.Type, details.Email, displayName);
                     HttpContext.Current.Session["CurrentUserDetails"] = this.CurrentUser;
                 }
                 else

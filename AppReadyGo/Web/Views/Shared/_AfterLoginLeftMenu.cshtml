@@ -15,9 +15,6 @@
     <div class="left-menu">
         @RenderSection("leftMenu")
     </div>
-    <div class="footer">
-        <span>Copyright &#64; 2011 @(DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "") <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
-    </div>
 </div>
 <div class="right-panel">
     @RenderBody()

@@ -12,6 +12,8 @@ namespace AppReadyGo.Domain.Mapping
     {
         public ApplicationMaping()
         {
+            Table("Applications");
+
             Id(x => x.Id, map => map.Generator(Generators.Identity));
             Property(x => x.Name, map =>
             {

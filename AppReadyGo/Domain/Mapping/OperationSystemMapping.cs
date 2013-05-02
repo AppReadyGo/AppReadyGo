@@ -10,18 +10,9 @@ namespace AppReadyGo.Domain.Mapping
 {
     internal class OperationSystemMapping : NameableMapping<OperationSystem>
     {
-        static OperationSystemMapping()
+        public OperationSystemMapping()
         {
-            int i = 5;
+            Table("OperationSystems");
         }
-        //public OperationSystemMapping()
-        //{
-        //    Id(x => x.Id, map => map.Generator(Generators.Identity));
-        //    Property(x => x.Name, map =>
-        //    {
-        //        map.Length(100);
-        //        map.NotNullable(true);
-        //    });
-        //}
     }
 }

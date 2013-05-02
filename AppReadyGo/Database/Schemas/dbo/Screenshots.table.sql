@@ -10,5 +10,5 @@ ADD CONSTRAINT [PK_Screenshots] PRIMARY KEY CLUSTERED ([ID] ASC);
 GO;
 
 ALTER TABLE [dbo].[Screenshots]
-ADD CONSTRAINT [FK_Screenshots_Application] FOREIGN KEY ([ApplicationID]) REFERENCES [dbo].[Application] ([ID]);
+ADD CONSTRAINT [FK_Screenshots_Application] FOREIGN KEY ([ApplicationID]) REFERENCES [dbo].[Applications] ([ID]);
 GO

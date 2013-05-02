@@ -35,7 +35,7 @@ namespace AppReadyGo.Domain.CommandHandlers.Users
         {
             var country = session.Get<Country>(cmd.CountryId);
             var appTypes = cmd.ApplicationTypes != null ? cmd.ApplicationTypes.Select(x => session.Get<ApplicationType>(x)).ToArray() : null;
-            var user = new ApiMember(cmd.Email, cmd.Password, cmd.FirstName, cmd.LastName, cmd.Gender, cmd.AgeRange, country, appTypes);
+            var user = new ApiMember(cmd.Email, cmd.Password, cmd.FirstName, cmd.LastName, cmd.Gender, cmd.AgeRange, country, cmd.Zip, appTypes);
             session.Save(user);
             return user.Id;
         }

@@ -12,6 +12,7 @@ namespace AppReadyGo.Domain.Mapping
     {
         public PageViewMaping()
         {
+            Table("PageViews");
             Id(x => x.Id, map => { map.Generator(Generators.Identity); });
             Property(p => p.Date, map => map.NotNullable(true));
             OneToOne(p => p.PreviousPageView, map => { });

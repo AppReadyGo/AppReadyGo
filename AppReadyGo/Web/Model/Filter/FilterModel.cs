@@ -110,7 +110,7 @@ namespace AppReadyGo.Model.Filter
             }
         }
 
-        public string GetUrlPart(int portfolioId, int applicationId, string screenSize, string path, DateTime dateFrom, DateTime dateTo)
+        public string GetUrlPart(int applicationId, string screenSize, string path, DateTime dateFrom, DateTime dateTo)
         {
             var parts = new List<string>() { string.Format("aid={0}", applicationId) };
             if (!string.IsNullOrEmpty(screenSize)) parts.Add(string.Format("ss={0}", screenSize));

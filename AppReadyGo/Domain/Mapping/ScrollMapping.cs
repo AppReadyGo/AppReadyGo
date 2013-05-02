@@ -13,6 +13,7 @@ namespace AppReadyGo.Domain.Mapping
 
         public ScrollMapping()
         {
+            Table("Scrolls");
             Id(p => p.Id, map => map.Generator(Generators.Identity));
             ManyToOne(p => p.FirstTouch, map =>
             {

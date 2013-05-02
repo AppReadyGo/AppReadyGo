@@ -10,5 +10,9 @@ namespace AppReadyGo.Core.QueryResults.Content
         public bool IsHTML { get; set; }
 
         public string Value { get; set; }
+
+        public string SubKey { get; set; }
+
+        public int Id { get; set; }
     }
 }

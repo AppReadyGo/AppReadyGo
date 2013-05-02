@@ -1,6 +1,5 @@
 ﻿using AppReadyGo.Core.QueryResults.Application;
 using System.Collections.Generic;
-using AppReadyGo.Model.Pages.Admin;
 
 namespace AppReadyGo.Model.Pages.Application
 {
