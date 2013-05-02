@@ -145,4 +145,7 @@
   <ItemGroup>
     <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\CreateApplicationAndAnalyticData.sql" />
+  </ItemGroup>
 </Project>
