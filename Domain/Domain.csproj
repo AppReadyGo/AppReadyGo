@@ -117,7 +117,7 @@
     <Compile Include="Mapping\Content\PageMapping.cs" />
     <Compile Include="Mapping\Content\ThemeMapping.cs" />
     <Compile Include="Mapping\ApplicationTypeMapping.cs" />
-    <Compile Include="Mapping\ScreenshotMapping.cs" />
+    <Compile Include="Mapping\ScreensMapping.cs" />
     <Compile Include="Mapping\CountryMapping.cs" />
     <Compile Include="Mapping\LanguageMapping.cs" />
     <Compile Include="Mapping\Logs\CategoryMapping.cs" />
@@ -126,9 +126,10 @@
     <Compile Include="Mapping\OperationSystemMapping.cs" />
     <Compile Include="Mapping\PublishDetailsMapping.cs" />
     <Compile Include="Mapping\PageViewMaping.cs" />
-    <Compile Include="Mapping\ScreenMapping.cs" />
+    <Compile Include="Mapping\ScreenshotsMapping.cs" />
     <Compile Include="Mapping\ScrollMapping.cs" />
     <Compile Include="Mapping\Users\ApiMemberMapping.cs" />
+    <Compile Include="Mapping\DownloadedApplicationMapping.cs" />
     <Compile Include="Mapping\Users\MemberMapping.cs" />
     <Compile Include="Mapping\Users\StaffMapping.cs" />
     <Compile Include="Mapping\Users\UserMapping.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Model\Content\Mail.cs" />
     <Compile Include="Model\Content\Page.cs" />
     <Compile Include="Model\Content\Theme.cs" />
+    <Compile Include="Model\DownloadedApplication.cs" />
     <Compile Include="Model\Country.cs" />
     <Compile Include="Model\Events\ClickEvent.cs" />
     <Compile Include="Model\Events\IEvent.cs" />
@@ -158,7 +160,6 @@
     <Compile Include="Model\Events\SessionInfoEvent.cs" />
     <Compile Include="Model\Events\ViewPartEvent.cs" />
     <Compile Include="Model\Events\VisitEvent.cs" />
-    <Compile Include="Model\EyeTrackerData.cs" />
     <Compile Include="Model\Language.cs" />
     <Compile Include="Model\Logs\Category.cs" />
     <Compile Include="Model\Logs\Log.cs" />
@@ -200,7 +201,8 @@
     <Compile Include="QueriesHandlers\Application\GetScreenDetailsQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetScreenEditDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\ScreensQueryHandler.cs" />
-    <Compile Include="QueriesHandlers\Content\GetAllKeysQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllKeyItemsQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllKeysQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Content\GetAllMailsQuery.cs" />
     <Compile Include="QueriesHandlers\Content\GetAllPagesQuery.cs" />
     <Compile Include="QueriesHandlers\Content\GetAllThemesQuery.cs" />

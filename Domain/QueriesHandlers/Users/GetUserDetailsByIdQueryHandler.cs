@@ -18,6 +18,7 @@ namespace AppReadyGo.Domain.Queries
                     .Where(u => u.Id == query.Id)
                     .Select(u => new UserDetailsResult
                     {
+                        Type = u.Type,
                         Email = u.Email,
                         FirstName = u.FirstName,
                         LastName = u.LastName

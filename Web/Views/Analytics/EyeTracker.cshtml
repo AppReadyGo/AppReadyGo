@@ -14,8 +14,10 @@
     <script src="@Html.Content("~/Scripts/ThridParty/DateFormat.js")" type="text/javascript"></script>
     <script src="@Html.Content("~/Scripts/ThridParty/Flot/jquery.flot.min.js")" type="text/javascript"></script>
     <script src="@Html.Content("~/Scripts/ThridParty/Flot/jquery.flot.resize.min.js")" type="text/javascript"></script>
-    <link href="@Html.Content("~/Content/after.login.master.css")" rel="stylesheet" type="text/css" />
-    <link href="@Html.Content("~/Content/shared/filter.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Html.Content("~/Content/tmp/after.login.master.css")" rel="stylesheet" type="text/css" />
+    <link href="@Html.Content("~/Content/tmp/shared/filter.css")" rel="stylesheet" type="text/css" />
+
     <link href="@Html.Content("~/Content/analytics.screen.css")" rel="stylesheet" type="text/css" />
     <script src="@Html.Content("~/Scripts/filter.js")" type="text/javascript"></script>
     <script type="text/javascript">
@@ -49,7 +51,7 @@
     <div class="thumbnails">
     @foreach (var screen in Model.Screens)
     {
-        <a href="@Model.GetUrlPart(Model.SelectedPortfolioId, screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.SelectedDateFrom, Model.SelectedDateTo)"><img src="/Thumbnails/@screen.Id@screen.FileExtension"/></a>    
+        <a href="@Model.GetUrlPart(screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.SelectedDateFrom, Model.SelectedDateTo)"><img src="/Thumbnails/@screen.Id@screen.FileExtension"/></a>    
     }
     </div>
 }

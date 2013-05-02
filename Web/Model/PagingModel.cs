@@ -1,5 +1,5 @@
 ﻿using AppReadyGo.Model.Master;
-using AppReadyGo.Model.Pages.Admin;
+using AppReadyGo.Web.Model.Pages.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -27,6 +27,8 @@ namespace AppReadyGo.Domain.Queries
                                 .SelectMany(k => k.Items)
                                 .Select(i => new ItemResult
                                 { 
+                                    Id = i.Id,
+                                    SubKey = i.SubKey,
                                     IsHTML = i.IsHTML,
                                     Value = i.Value
                                 })

@@ -1,0 +1,19 @@
+﻿@model AppReadyGo.Web.Model.Pages.Admin.ContentItemModel
+@{
+    Layout = "~/Views/Admin/_Content.cshtml";
+}
+@section title { Content Items }
+<h3>Edit content item for @Model.KeyUrl and @Model.SubKey</h3>
+@if (Model.IsHTML)
+{
+    @Html.TextAreaFor(m => m.Value);
+}
+else
+{
+    @Html.TextBoxFor(m => m.Value);
+}
+<a href="#" class="link2" onClick="$(this).closest('form').submit();"><span><span>Update</span></span></a>
+
+
+
+

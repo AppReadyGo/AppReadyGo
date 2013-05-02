@@ -7,6 +7,8 @@ namespace AppReadyGo.Core.QueryResults.Users
 {
     public class UserDetailsResult
     {
+        public UserType Type { get; set; }
+
         public string Email { get; set; }
 
         public string FirstName { get; set; }

@@ -8,5 +8,9 @@ namespace AppReadyGo.Domain.Mapping
 {
     internal class LanguageMapping : NameableMapping<Language>
     {
+        public LanguageMapping()
+        {
+            Table("Languages");
+        }
     }
 }

@@ -87,29 +87,23 @@
     <Build Include="Schemas\dbo\Keys\PackageEvent.FK_PACKAGEEVENT_LANGUAGE.fkey.sql" />
     <Build Include="Schemas\dbo\Keys\PackageEvent.FK_PACKAGEEVENT_OPERATIONSYSTEM.fkey.sql" />
     <Build Include="Schemas\dbo\AccountProfiler.table.sql" />
-    <Build Include="Schemas\dbo\Application.table.sql" />
-    <Build Include="Schemas\dbo\Browser.table.sql" />
+    <Build Include="Schemas\dbo\Applications.table.sql" />
+    <Build Include="Schemas\dbo\Browsers.table.sql" />
     <Build Include="Schemas\dbo\Cities.table.sql" />
-    <Build Include="Schemas\dbo\Click.table.sql" />
-    <Build Include="Schemas\dbo\ClickEvent.table.sql" />
+    <Build Include="Schemas\dbo\Clicks.table.sql" />
     <Build Include="Schemas\dbo\Continents.table.sql" />
     <Build Include="Schemas\dbo\Countries.table.sql" />
     <Build Include="Schemas\dbo\GeoKeys.table.sql" />
-    <Build Include="Schemas\dbo\Language.table.sql" />
-    <Build Include="Schemas\dbo\OperationSystem.table.sql" />
-    <Build Include="Schemas\dbo\PackageEvent.table.sql" />
+    <Build Include="Schemas\dbo\Languages.table.sql" />
+    <Build Include="Schemas\dbo\OperationSystems.table.sql" />
     <Build Include="Schemas\dbo\Publishes.table.sql" />
-    <Build Include="Schemas\dbo\PageView.table.sql" />
+    <Build Include="Schemas\dbo\PageViews.table.sql" />
     <Build Include="Schemas\dbo\Regions.table.sql" />
     <Build Include="Schemas\dbo\Screens.table.sql" />
-    <Build Include="Schemas\dbo\Scroll.table.sql" />
-    <Build Include="Schemas\dbo\ScrollEvent.table.sql" />
-    <Build Include="Schemas\dbo\SessionInfoEvent.table.sql" />
+    <Build Include="Schemas\dbo\Scrolls.table.sql" />
     <Build Include="Schemas\dbo\SystemInfo.table.sql" />
     <Build Include="Schemas\dbo\Targets.table.sql" />
-    <Build Include="Schemas\dbo\ViewPart.table.sql" />
-    <Build Include="Schemas\dbo\ViewPartEvent.table.sql" />
-    <Build Include="Schemas\dbo\VisitEvent.table.sql" />
+    <Build Include="Schemas\dbo\ViewParts.table.sql" />
     <Build Include="Schemas\log\Keys\FK_CategoryLog_Audit.fkey.sql" />
     <Build Include="Schemas\log\Keys\FK_CategoryLog_Category.fkey.sql" />
     <Build Include="Schemas\log\Keys\PK_Categories.pkey.sql" />
@@ -138,6 +132,7 @@
     <None Include="Scripts\RemovePortfolios.sql" />
     <Build Include="Schemas\dbo\ApplicationTypes.table.sql" />
     <Build Include="Schemas\dbo\Screenshots.table.sql" />
+    <Build Include="Schemas\dbo\DownloadedApplications.table.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />

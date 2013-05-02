@@ -15,7 +15,8 @@
 	[AcceptedTermsAndConditions] BIT NOT NULL,
 	[GenderID]		TINYINT			NULL,
 	[AgeRange]			SMALLINT		NULL,
-	[CountryID]		INT				NULL
+	[CountryID]		INT				NULL,
+	[Zip]			NVARCHAR(5)		NULL
 );
 GO
 

@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Application] (
+﻿CREATE TABLE [dbo].[Applications] (
     [ID]			INT				IDENTITY (1, 1) NOT NULL,
     [Name]			NVARCHAR (50)	NOT NULL,
     [Description]	NVARCHAR (500)	NULL,
@@ -9,12 +9,12 @@
 );
 GO;
 
-ALTER TABLE [dbo].[Application]
-ADD CONSTRAINT [PK_Application] PRIMARY KEY CLUSTERED ([ID] ASC);
+ALTER TABLE [dbo].[Applications]
+ADD CONSTRAINT [PK_Applications] PRIMARY KEY CLUSTERED ([ID] ASC);
 GO;
 
-ALTER TABLE [dbo].[Application]
-ADD CONSTRAINT [FK_Application_User] FOREIGN KEY ([UserID]) REFERENCES [usr].[Users] ([ID]);
+ALTER TABLE [dbo].[Applications]
+ADD CONSTRAINT [FK_Applications_Users] FOREIGN KEY ([UserID]) REFERENCES [usr].[Users] ([ID]);
 GO
 
 

@@ -21,13 +21,16 @@
 					<div class="right">
 						<nav>
 							<ul>
-                                <li @Model.AnalyticsCssClassAttribute><a href="/">Analytics</a></li>
+                                @if(!Model.IsAdmin)
+                                {
+                                    <li @Model.AnalyticsCssClassAttribute><a href="/">Analytics</a></li>
                                 @*<li @Model.MyAccountCssClassAttribute><a href="/">My Account</a></li>*@
                                 <li @Model.TutorialsCssClassAttribute><a href="/p/getstarted">Get Started</a></li>
                                 <li @Model.ProductsCssClassAttribute><a href="/p/products">Products</a></li>
                                 <li @Model.PlanAndPricingCssClassAttribute><a href="/p/planandpricing">Plans and Pricing</a></li>
                                 @*<li @Model.ContactsCssClassAttribute><a href="/Contacts">Contacts</a></li>*@
-                                @if(Model.IsAdmin)
+                                }
+                                else
                                 {
                                     <li @Model.AdministratorCssClassAttribute><a href="/Admin">Administrator</a></li>
                                 }

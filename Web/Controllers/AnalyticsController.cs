@@ -426,7 +426,7 @@ namespace AppReadyGo.Controllers
                     UsageChartData = new JavaScriptSerializer().Serialize(usageInitData)
                 };
 
-                return View("~/Views/Analytics/AppReadyGo.cshtml", model);
+                return View("~/Views/Analytics/EyeTracker.cshtml", model);
             }
             else
             {

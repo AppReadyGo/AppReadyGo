@@ -6,7 +6,7 @@ using System.Web;
 using AppReadyGo.Model.Filter;
 using AppReadyGo.Model.Master;
 
-namespace AppReadyGo.Model.Pages.Admin
+namespace AppReadyGo.Web.Model.Pages.Admin
 {
     public class AdminMasterModel : AfterLoginMasterModel
     {
@@ -27,7 +27,9 @@ namespace AppReadyGo.Model.Pages.Admin
         {
             Logs,
             Staff,
-            Members
+            Members,
+            ApiMembers,
+            ContentManager
         }
     }
 }

@@ -8,5 +8,9 @@ namespace AppReadyGo.Domain.Mapping
 {
     internal class BrowserMapping : NameableMapping<Browser>
     {
+        public BrowserMapping()
+        {
+            Table("Browsers");
+        }
     }
 }

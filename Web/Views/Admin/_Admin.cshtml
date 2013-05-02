@@ -1,5 +1,5 @@
 ﻿@using AppReadyGo.Helpers;
-@using AppReadyGo.Model.Pages.Admin
+@using AppReadyGo.Web.Model.Pages.Admin
 @model AdminMasterModel
 @{
     Layout = "~/Views/Shared/_AfterLoginLeftMenu.cshtml";
@@ -17,6 +17,8 @@
         <li class="@Model.GetMenuItemClass(AdminMasterModel.MenuItem.Logs)"><span></span><a href="/Admin/Logs">Logs</a></li>
         <li class="@Model.GetMenuItemClass(AdminMasterModel.MenuItem.Staff)"><span></span><a href="/Admin/Staff">Staff</a></li>
         <li class="@Model.GetMenuItemClass(AdminMasterModel.MenuItem.Members)"><span></span><a href="/Admin/Members">Members</a></li>
+        <li class="@Model.GetMenuItemClass(AdminMasterModel.MenuItem.ApiMembers)"><span></span><a href="/Admin/ApiMembers">Api Members</a></li>
+        <li class="@Model.GetMenuItemClass(AdminMasterModel.MenuItem.ContentManager)"><span></span><a href="/Admin/ContentManager">Content Manager</a></li>
     </ul>
 
 }

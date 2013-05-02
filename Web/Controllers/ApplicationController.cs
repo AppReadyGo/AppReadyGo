@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Web;
-using System.Web.Mvc;
+﻿using AppReadyGo.Common;
 using AppReadyGo.Core;
 using AppReadyGo.Core.Commands.Application;
 using AppReadyGo.Core.Entities;
 using AppReadyGo.Core.Logger;
 using AppReadyGo.Core.Queries.Analytics;
 using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.Queries.Users;
 using AppReadyGo.Core.QueryResults.Application;
-using AppReadyGo.Controllers.Master;
 using AppReadyGo.Model.Master;
 using AppReadyGo.Model.Pages.Application;
 using AppReadyGo.Model.Pages.Portfolio;
-using AppReadyGo.Common;
-using AppReadyGo.Core.QueryResults.Analytics;
 using AppReadyGo.Web.Model.Pages.Application;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Web;
+using System.Web.Mvc;
 
 namespace AppReadyGo.Controllers
 {
@@ -34,6 +31,11 @@ namespace AppReadyGo.Controllers
         }
         public ActionResult Index(string srch = "", int scol = 1, int cp = 1)
         {
+            if (ObjectContainer.Instance.CurrentUserDetails.Type == UserType.Staff)
+            {
+                return RedirectToAction("", "Admin");
+            }
+
             var data = ObjectContainer.Instance.RunQuery(new GetAllApplicationsQuery(srch, cp, 15));
 
             if (!data.Applications.Any())

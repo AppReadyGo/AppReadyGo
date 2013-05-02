@@ -22,6 +22,7 @@ namespace AppReadyGo.Domain.Model.Users
         public virtual bool SpecialAccess { get; protected set; }
         public virtual bool AcceptedTermsAndConditions { get; protected set; }
         public virtual Membership Membership { get; protected set; }
+        public virtual string Zip { get; protected set; }
 
         public virtual UserType Type
         {

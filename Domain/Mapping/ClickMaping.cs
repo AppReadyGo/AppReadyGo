@@ -12,6 +12,7 @@ namespace AppReadyGo.Domain.Mapping
     {
         public ClickMaping()
         {
+            Table("Clicks");
             Id(x => x.Id, map => map.Generator(Generators.Identity));
             Property(p => p.Date, map => map.NotNullable(true));
             Property(p => p.X, map => map.NotNullable(true));
