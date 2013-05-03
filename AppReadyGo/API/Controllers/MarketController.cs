@@ -179,6 +179,7 @@ namespace AppReadyGo.API.Controllers
             }
         }
 
+        // TODO: Yura: What does it mean?
         /// <summary>
         /// TASK comple confirmation 
         /// </summary>
