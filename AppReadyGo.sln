@@ -22,46 +22,70 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Client.Test", "API.Client.Test\API.Client.Test.csproj", "{F1B9302A-E5AF-4195-995F-D8754F8962CF}"
 EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		QA|Any CPU = QA|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AD8B009A-AB15-4261-9739-E265948A9811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD8B009A-AB15-4261-9739-E265948A9811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD8B009A-AB15-4261-9739-E265948A9811}.QA|Any CPU.ActiveCfg = QA|Any CPU
+		{AD8B009A-AB15-4261-9739-E265948A9811}.QA|Any CPU.Build.0 = QA|Any CPU
 		{AD8B009A-AB15-4261-9739-E265948A9811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD8B009A-AB15-4261-9739-E265948A9811}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DB896DAD-455B-486C-9B5F-803FED7F5777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DB896DAD-455B-486C-9B5F-803FED7F5777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB896DAD-455B-486C-9B5F-803FED7F5777}.QA|Any CPU.ActiveCfg = QA|Any CPU
+		{DB896DAD-455B-486C-9B5F-803FED7F5777}.QA|Any CPU.Build.0 = QA|Any CPU
 		{DB896DAD-455B-486C-9B5F-803FED7F5777}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB896DAD-455B-486C-9B5F-803FED7F5777}.Release|Any CPU.Build.0 = Release|Any CPU
 		{84076534-5016-4915-B050-06518D050434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{84076534-5016-4915-B050-06518D050434}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84076534-5016-4915-B050-06518D050434}.QA|Any CPU.ActiveCfg = QA|Any CPU
+		{84076534-5016-4915-B050-06518D050434}.QA|Any CPU.Build.0 = QA|Any CPU
 		{84076534-5016-4915-B050-06518D050434}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84076534-5016-4915-B050-06518D050434}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6696BBD1-9B7A-44F9-AB0E-BE264402E5CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6696BBD1-9B7A-44F9-AB0E-BE264402E5CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6696BBD1-9B7A-44F9-AB0E-BE264402E5CC}.QA|Any CPU.ActiveCfg = QA|Any CPU
+		{6696BBD1-9B7A-44F9-AB0E-BE264402E5CC}.QA|Any CPU.Build.0 = QA|Any CPU
 		{6696BBD1-9B7A-44F9-AB0E-BE264402E5CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6696BBD1-9B7A-44F9-AB0E-BE264402E5CC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B73E5FF1-F3CD-4F2E-849A-57ED9926CCE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B73E5FF1-F3CD-4F2E-849A-57ED9926CCE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B73E5FF1-F3CD-4F2E-849A-57ED9926CCE0}.QA|Any CPU.ActiveCfg = QA|Any CPU
+		{B73E5FF1-F3CD-4F2E-849A-57ED9926CCE0}.QA|Any CPU.Build.0 = QA|Any CPU
 		{B73E5FF1-F3CD-4F2E-849A-57ED9926CCE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B73E5FF1-F3CD-4F2E-849A-57ED9926CCE0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1BC47F5F-9A10-4908-91BF-52A3B34CAA2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1BC47F5F-9A10-4908-91BF-52A3B34CAA2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BC47F5F-9A10-4908-91BF-52A3B34CAA2A}.QA|Any CPU.ActiveCfg = QA|Any CPU
+		{1BC47F5F-9A10-4908-91BF-52A3B34CAA2A}.QA|Any CPU.Build.0 = QA|Any CPU
 		{1BC47F5F-9A10-4908-91BF-52A3B34CAA2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BC47F5F-9A10-4908-91BF-52A3B34CAA2A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8C379DD1-93A3-4B68-A3AE-E7C2CE5A8A0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8C379DD1-93A3-4B68-A3AE-E7C2CE5A8A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C379DD1-93A3-4B68-A3AE-E7C2CE5A8A0F}.QA|Any CPU.ActiveCfg = QA|Any CPU
+		{8C379DD1-93A3-4B68-A3AE-E7C2CE5A8A0F}.QA|Any CPU.Build.0 = QA|Any CPU
 		{8C379DD1-93A3-4B68-A3AE-E7C2CE5A8A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C379DD1-93A3-4B68-A3AE-E7C2CE5A8A0F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.QA|Any CPU.ActiveCfg = QA|Any CPU
+		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.QA|Any CPU.Build.0 = QA|Any CPU
+		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.QA|Any CPU.Deploy.0 = QA|Any CPU
 		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{524F9C95-72F7-4EEA-95CD-915CC887DD1A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{F1B9302A-E5AF-4195-995F-D8754F8962CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1B9302A-E5AF-4195-995F-D8754F8962CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1B9302A-E5AF-4195-995F-D8754F8962CF}.QA|Any CPU.ActiveCfg = QA|Any CPU
+		{F1B9302A-E5AF-4195-995F-D8754F8962CF}.QA|Any CPU.Build.0 = QA|Any CPU
 		{F1B9302A-E5AF-4195-995F-D8754F8962CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1B9302A-E5AF-4195-995F-D8754F8962CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
@@ -75,9 +99,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Logging.5.0.505.1\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Logging.Database.5.0.505.0\lib\NET35
-	EndGlobalSection
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

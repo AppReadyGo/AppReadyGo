@@ -10,16 +10,16 @@ INSERT INTO [Fingerprint].[usr].[Memberships]
 GO
 
 INSERT INTO [usr].[Users] ([UserTypeID], [Email], [Password], [PasswordSalt], [CreateDate], [Activated], [FirstName], [LastName],[Unsubscribed], [SpecialAccess],[MembershipID], [AcceptedTermsAndConditions])
-VALUES (1/*Staff*/, 'dev@mobillify.com', 'XW0mA5DzfN4XL851H/i1xNFFbMOdtjVAL6fjBN5monE='/*111111*/, '/WCjbQ==', '20120101', 1, 'Development', 'Mobillify', 0, 1, (select [ID] from [usr].[Memberships] where Name = 'Pro'), 1);
+VALUES (1/*Staff*/, 'test@appreadygo.com', 'XW0mA5DzfN4XL851H/i1xNFFbMOdtjVAL6fjBN5monE='/*111111*/, '/WCjbQ==', '20120101', 1, 'Development', 'AppReadyGo', 0, 1, (select [ID] from [usr].[Memberships] where Name = 'Pro'), 1);
 
 GO
 
 INSERT INTO [usr].[UserStaffRoles](UserID, RoleID)
-VALUES((SELECT ID FROM [usr].[Users] WHERE Email = 'dev@mobillify.com'), 1)
+VALUES((SELECT ID FROM [usr].[Users] WHERE Email = 'test@appreadygo.com'), 1)
 GO
 
 INSERT INTO [dbo].[Portfolio] ([Description] ,[TimeZone] ,[CreateDate] ,[UserId])
-VALUES ('Demo Portfolio', 0, '20120525', (SELECT ID FROM [usr].[Users] WHERE Email = 'dev@mobillify.com'));
+VALUES ('Demo Portfolio', 0, '20120525', (SELECT ID FROM [usr].[Users] WHERE Email = 'test@appreadygo.com'));
 GO
 
 INSERT INTO [dbo].[Application] ([Description] ,[CreateDate] ,[Type] ,[PortfolioId])

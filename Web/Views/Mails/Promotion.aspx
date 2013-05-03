@@ -41,15 +41,13 @@ Inherits="System.Web.Mvc.ViewPage<AppReadyGo.Model.Mails.PromotionEmailModel>" %
                                 <table border="0" cellpadding="0" cellspacing="0" width="500">
                                     <tbody><tr>
                                         <td valign="top" style="border-collapse:collapse;background-color:#ffffff">
-
-                                                
                                             <table border="0" cellpadding="20" cellspacing="0" width="100%">
                                                 <tbody><tr>
                                                     <td valign="top" style="border-collapse:collapse">
                                                         <div style="color:#505050;font-family:Arial;font-size:14px;line-height:157%;text-align:left">
 <%=Model.Body %>
                                                         </div>
-                                                                                                        </td>
+                                                    </td>
                                                 </tr>
                                             </tbody></table>
                                                 
