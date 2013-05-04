@@ -647,42 +647,40 @@ The terms and conditions contained in this Agreement that by their sense and con
 </p>'),
 (2, 1, 'slideshow', '
 <img src="/content/images/screens.png" />
-    <h1><strong>Get</strong> you user<br /> 
-        <strong>Improve</strong> your app</h1>
-    <h3>
-        Welcome to the worlds leading platform for fearless innovation and App testing!        
-    </h3>
-    <a href="/account/register" class="button yellow btn-getstarted">Get Started Now</a>'),
+    <h1>
+        Appstore where you meet your target audience        
+    </h1>
+    <a href="/account/register" class="button yellow btn-getstarted">Publish Now</a>'),
 (2, 1, 'content', '
     <article id="features">
-        <h2>Have your app continuously tested and rated by your target audience and monitor it with our visual analytics system, starting from the pre-launch stage!</h2>
-        <!--ul>
+        <!--h2>Has your app been used and rated by early adopters starting from the demo version</h2-->
+        <ul>
             <li>
                 <img src="/content/images/touchmap_grey.png" />
-                <h3>TouchMap</h3>
-                <p>See where users touch in any area of an application.</p>
+                <h3>Feedback</h3>
+                <p>Has your app been used and rated by early adopters starting from the demo version</p>
             </li>
             <li>
                 <img src="/content/images/eyetrack_grey.png" />
-                <h3>EyeTrack</h3>
-                <p>Check you how much attention users spend on each part of the content.</p>
+                <h3>App score</h3>
+                <p>Reach a high score on AppReadyGo and be confident in success of your app</p>
             </li>
             <li>
                 <img src="/content/images/playback_grey.png" />
-                <h3>PlayBack</h3>
-                <p>Understand how users reach specific application features.</p>
+                <h3>Revew</h3>
+                <p>Get a professional feedback from UX designers on each stage of your project</p>
             </li>
-            <li>
-                <img src="/content/images/eyetrack_grey.png" />
-                <h3>A/B compare</h3>
-                <p>Compare two versions of a design to see which performs better.</p>
+			  <li>
+                <img src="/content/images/playback_grey.png" />
+                <h3>Analytics</h3>
+                <p>See how users interact with an application and make it better</p>
             </li>
-        </ul-->
+        </ul>
         <p class="clear"></p>
     </article><!-- /#features --> 
-    <article id="action">
+    <!--article id="action">
         <span><strong>Make sure your hard work & investment pays off! Reach to a high score on AppReadyGo and ensure your app success on the market!</strong></span>
-        <a href="/account/register" class="button green btn-getstarted">Get Started</a>
+        <a href="/account/register" class="button green btn-getstarted">Get Started</a-->
     </article><!-- /#action --> 
     <!--article id="info">
         <iframe width="320" height="240" src="http://www.youtube.com/embed/hTausXI9aYw" frameborder="0" allowfullscreen class="video"></iframe>
