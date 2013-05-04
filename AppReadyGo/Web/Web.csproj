@@ -617,10 +617,10 @@
     <Content Include="ThridParty\selectBoxIt-3.4.0\jquery.selectBoxIt.css" />
     <Content Include="ThridParty\selectBoxIt-3.4.0\jquery.selectBoxIt.min.js" />
     <Content Include="underconstruction.htm" />
-    <None Include="Views\Account\Details.cshtml" />
-    <None Include="Views\Account\ResetPassword.cshtml" />
-    <None Include="Views\Account\TermsAndConditions.cshtml" />
-    <None Include="Views\Account\Unsubscribe.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\TermsAndConditions.cshtml" />
+    <Content Include="Views\Account\Unsubscribe.cshtml" />
     <Content Include="Views\Admin\_Content.cshtml" />
     <Content Include="Views\Admin\ContentMails.cshtml" />
     <Content Include="Views\Admin\ContentItems.cshtml" />
@@ -628,25 +628,25 @@
     <Content Include="Views\Admin\ContentManager.cshtml" />
     <Content Include="Views\Admin\ContentItem.cshtml" />
     <Content Include="Views\Admin\EditContentItem.cshtml" />
-    <None Include="Views\Admin\Forms\LogsFilter.cshtml" />
+    <Content Include="Views\Admin\Forms\LogsFilter.cshtml" />
     <Content Include="Views\Admin\Index.aspx" />
-    <None Include="Views\Admin\Logs.cshtml" />
+    <Content Include="Views\Admin\Logs.cshtml" />
     <Content Include="Views\Admin\Members.aspx" />
     <Content Include="Views\Admin\Membership.aspx" />
     <Content Include="Views\Admin\Staff.aspx" />
     <Content Include="Views\Admin\UserEdit.aspx" />
     <Content Include="Views\Analytics\Usage.aspx" />
     <Content Include="Views\Application\Publishes.cshtml" />
-    <None Include="Views\Application\Edit.cshtml" />
+    <Content Include="Views\Application\Edit.cshtml" />
     <Content Include="Views\Application\Fingerprint.aspx" />
     <Content Include="Views\Application\Forms\ScreenForm.ascx" />
-    <None Include="Views\Application\New.cshtml" />
+    <Content Include="Views\Application\New.cshtml" />
     <Content Include="Views\Application\ScreenEdit.aspx" />
     <Content Include="Views\Application\ScreenNew.aspx" />
     <Content Include="Views\Application\Screens.aspx" />
-    <None Include="Views\Content\Authenticated404.cshtml" />
-    <None Include="Views\Content\AuthenticatedError.cshtml" />
-    <None Include="Views\Content\AuthenticatedPageContent.cshtml" />
+    <Content Include="Views\Content\Authenticated404.cshtml" />
+    <Content Include="Views\Content\AuthenticatedError.cshtml" />
+    <Content Include="Views\Content\AuthenticatedPageContent.cshtml" />
     <Content Include="Views\Home\ComingSoon.aspx" />
     <Content Include="Views\Home\Mails\Basic.aspx" />
     <Content Include="Views\Home\PlayGround.aspx" />
@@ -655,7 +655,7 @@
     <Content Include="Views\Portfolio\Edit.aspx" />
     <Content Include="Views\Portfolio\Form.ascx" />
     <Content Include="Views\Portfolio\New.aspx" />
-    <None Include="Views\Secure\ChangePassword.cshtml" />
+    <Content Include="Views\Secure\ChangePassword.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -687,7 +687,7 @@
     <Content Include="Views\Account\Forms\LogOnForm.cshtml" />
     <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <None Include="Views\Admin\_Admin.cshtml" />
+    <Content Include="Views\Admin\_Admin.cshtml" />
     <Content Include="Views\Analytics\ABCompare.cshtml" />
     <Content Include="Views\Analytics\Dashboard.cshtml" />
     <Content Include="Views\Analytics\EyeTracker.cshtml" />

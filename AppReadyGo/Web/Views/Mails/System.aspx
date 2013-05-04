@@ -62,7 +62,7 @@ Inherits="System.Web.Mvc.ViewPage<AppReadyGo.Model.Mails.SystemEmailModel>" %>
                                                 <tbody><tr>
                                                     <td colspan="2" valign="middle" style="border-collapse:collapse;background-color:#ffffff;border:0">
                                                         <div style="color:#707070;font-family:Arial;font-size:11px;line-height:150%;text-align:left">
-                                                            <p>Join our fantastic community: <a href="http://twitter.com/mobillify" style="color:#707070;font-weight:normal;text-decoration:underline" target="_blank">follow us on Twitter</a> and <a href="http://www.facebook.com/mobillify" style="color:#707070;font-weight:normal;text-decoration:underline" target="_blank">join us on Facebook</a></p>
+                                                            <p>Join our fantastic community: <a href="http://twitter.com/appreadygo" style="color:#707070;font-weight:normal;text-decoration:underline" target="_blank">follow us on Twitter</a><!-- and <a href="http://www.facebook.com/appreadygo" style="color:#707070;font-weight:normal;text-decoration:underline" target="_blank">join us on Facebook</a--></p>
 <p>Contact us at: <%:Model.ContactUsEmail %>.</p>
                                                         </div>
                                                     </td>
