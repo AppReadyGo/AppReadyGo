@@ -6,7 +6,7 @@ using AppReadyGo.Core.Entities;
 
 namespace AppReadyGo.Core.Commands.API
 {
-    public class AddPackageCommand : ICommand<int>
+    public class AddPackageCommand : ICommand<long>
     {
         public long ApplicationId { get; protected set; }
         public Location Location { get; protected set; }
@@ -72,15 +72,15 @@ namespace AppReadyGo.Core.Commands.API
             /// <summary>
             /// Click/Touches 
             /// </summary>
-            public IList<Click> Clicks { get; set; }
+            public IEnumerable<Click> Clicks { get; set; }
             /// <summary>
             /// Scrolls for this session
             /// </summary>
-            public IList<Scroll> Scrolls { get; set; }
+            public IEnumerable<Scroll> Scrolls { get; set; }
             /// <summary>
             /// Parts on the main view data 
             /// </summary>
-            public IList<ViewPart> ScreenViewParts { get; set; }
+            public IEnumerable<ViewPart> ScreenViewParts { get; set; }
         }
 
         public class Click
@@ -90,8 +90,6 @@ namespace AppReadyGo.Core.Commands.API
             public int ClientY { get; set; }
 
             public DateTime Date { get; set; }
-
-            public long VisitInfoId { get; set; }
 
             public int Press { get; set; }
 
@@ -120,9 +118,6 @@ namespace AppReadyGo.Core.Commands.API
             public DateTime FinishDate { get; set; }
 
             public int Orientation { get; set; }
-
-            //[System.Obsolete("don`t use this property", true)]
-            public long VisitInfoId { get; set; }
         }
     }
 }

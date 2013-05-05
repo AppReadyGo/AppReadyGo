@@ -14,5 +14,21 @@ namespace AppReadyGo.Domain.Model
         public virtual int Y { get; set; }
         public virtual int Orientation { get; set; }
         public virtual PageView PageView { get; set; }
+
+        public ViewPart()
+        {
+        }
+
+        public ViewPart(PageView pageView, DateTime startDate, DateTime finishDate, int x, int y, int orientation)
+        {
+            this.StartDate = startDate;
+            this.FinishDate = finishDate;
+            this.X = x;
+            this.Y = y;
+            this.Orientation = orientation;
+            this.PageView = pageView;
+
+            this.PageView.AddViewPart(this);
+        }
     }
 }

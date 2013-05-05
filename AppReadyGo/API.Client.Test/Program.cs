@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using AppReadyGo.API.Models;
+using System.Net;
 
 namespace API.Client.Test
 {

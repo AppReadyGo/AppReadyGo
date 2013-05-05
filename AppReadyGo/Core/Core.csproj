@@ -110,11 +110,8 @@
     <Compile Include="Commands\Content\UpdateMailCommand.cs" />
     <Compile Include="Commands\Content\UpdatePageCommand.cs" />
     <Compile Include="Commands\Content\UpdateThemeCommand.cs" />
-    <Compile Include="Commands\CreatePortfolioCommand.cs" />
     <Compile Include="Commands\Extentions.cs" />
     <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\RemovePortfolioCommand.cs" />
-    <Compile Include="Commands\UpdatePortfolioCommand.cs" />
     <Compile Include="Commands\Users\AcceptTermsAndConditionsCommand.cs" />
     <Compile Include="Commands\Users\ActivateUserCommand.cs" />
     <Compile Include="Commands\Users\CreateUserCommand.cs" />

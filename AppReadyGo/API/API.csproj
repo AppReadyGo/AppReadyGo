@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GoogleAnalyticsDotNet.Common">
+      <HintPath>..\packages\GaDotNet1.2\Binaries\Release\GoogleAnalyticsDotNet.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -130,10 +133,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Analytics\TouchDetails.cs" />
+    <Compile Include="Models\Analytics\ViewAreaDetails.cs" />
+    <Compile Include="Models\Analytics\ScrollDetails.cs" />
     <Compile Include="Models\Application.cs" />
-    <Compile Include="Models\FPData.cs" />
+    <Compile Include="Models\Analytics\FingerPrintData.cs" />
     <Compile Include="Models\IMarketAppsRepository.cs" />
     <Compile Include="Models\IMarketTestersRepository.cs" />
+    <Compile Include="Models\Analytics\SessionInfo.cs" />
+    <Compile Include="Models\Analytics\SystemInfo.cs" />
+    <Compile Include="Models\Analytics\Package.cs" />
     <Compile Include="Models\MarketAppsRepository.cs" />
     <Compile Include="Models\MarketTestersRepository.cs" />
     <Compile Include="Models\Tester.cs" />

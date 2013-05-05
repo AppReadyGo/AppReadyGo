@@ -44,7 +44,7 @@ namespace AppReadyGo.Domain.Mapping
                 map =>
                 {
                     map.Key(k => k.Column("ApplicationID"));
-                    map.Table("Screen");
+                    map.Table("Screens");
                     map.Inverse(true);
                     map.Access(Accessor.Field);
                     map.Cascade(Cascade.All);
@@ -53,6 +53,15 @@ namespace AppReadyGo.Domain.Mapping
 
             Set(
               x => x.Publishes,
+              map =>
+              {
+                  map.Key(k => k.Column("ApplicationID"));
+                  map.Access(Accessor.Field);
+              },
+              r => r.OneToMany());
+
+            Set(
+              x => x.PageViews,
               map =>
               {
                   map.Key(k => k.Column("ApplicationID"));
