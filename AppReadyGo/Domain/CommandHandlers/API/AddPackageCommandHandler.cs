@@ -47,6 +47,21 @@ namespace AppReadyGo.Domain.CommandHandlers.API
 
             application.AddPageView(pageView);
 
+            foreach (var click in clicks)
+            {
+                session.SaveOrUpdate(click);
+            }
+
+            foreach (var part in viewParts)
+            {
+                session.SaveOrUpdate(part);
+            }
+
+            foreach (var scroll in scrolls)
+            {
+                session.SaveOrUpdate(scroll);
+            }
+
             session.SaveOrUpdate(pageView);
 
             return pageView.Id;
