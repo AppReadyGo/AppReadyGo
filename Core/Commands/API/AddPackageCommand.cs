@@ -8,7 +8,7 @@ namespace AppReadyGo.Core.Commands.API
 {
     public class AddPackageCommand : ICommand<long>
     {
-        public long ApplicationId { get; protected set; }
+        public int ApplicationId { get; protected set; }
         public Location Location { get; protected set; }
         public string OS { get; protected set; }
         public string Browser { get; protected set; }
@@ -17,7 +17,7 @@ namespace AppReadyGo.Core.Commands.API
         public SystemInfo SystemInfo { get; protected set; }
         public IEnumerable<Session> Sessions { get; protected set; }
 
-        public AddPackageCommand(long appId, 
+        public AddPackageCommand(int appId, 
             Location location,
             string os, 
             string browser, 
