@@ -26,10 +26,22 @@ namespace AppReadyGo.Domain.Model
         /// </summary>
         public virtual Click LastTouch { get; protected set; }
 
-
         /// <summary>
         /// Page View ID
         /// </summary>
         public virtual PageView PageView { get; protected set; }
+
+        public Scroll()
+        {
+        }
+
+        public Scroll(PageView pageView, Click firstTouch, Click lastTouch)
+        {
+            this.PageView = pageView;
+            this.FirstTouch = firstTouch;
+            this.LastTouch = lastTouch;
+
+            this.PageView.AddScroll(this);
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace AppReadyGo.Domain.Model
         private Iesi.Collections.Generic.ISet<Screen> screens;
         private Iesi.Collections.Generic.ISet<PublishDetails> publishes;
         private Iesi.Collections.Generic.ISet<Screenshot> screenshots;
+        private Iesi.Collections.Generic.ISet<PageView> pageViews;
 
         /// <summary>
         /// application ID 
@@ -52,6 +53,8 @@ namespace AppReadyGo.Domain.Model
 
         public virtual IEnumerable<Screenshot> Screenshots { get { return screenshots; } }
 
+        public virtual IEnumerable<PageView> PageViews { get { return pageViews; } }
+
         public virtual string IconExt { get; protected set; }
 
         public Application()
@@ -59,6 +62,7 @@ namespace AppReadyGo.Domain.Model
             this.screens = new HashedSet<Screen>();
             this.publishes = new HashedSet<PublishDetails>();
             this.screenshots = new HashedSet<Screenshot>();
+            this.pageViews = new HashedSet<PageView>();
             this.CreateDate = DateTime.UtcNow;
         }
 
@@ -111,6 +115,11 @@ namespace AppReadyGo.Domain.Model
         public virtual void RemoveScreenshot(Screenshot screenshot)
         {
             this.screenshots.Remove(screenshot);
+        }
+
+        public virtual void AddPageView(PageView pageView)
+        {
+            this.pageViews.Add(pageView);
         }
     }
 }

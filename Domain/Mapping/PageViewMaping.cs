@@ -21,7 +21,7 @@ namespace AppReadyGo.Domain.Mapping
                 map.Length(256);
                 map.NotNullable(true);
             });
-            Property(p => p.Ip, map => map.Length(15));
+
             ManyToOne(p => p.Language, map =>
             {
                 map.Lazy(LazyRelation.NoLazy);
@@ -56,18 +56,28 @@ namespace AppReadyGo.Domain.Mapping
                
             });
 
-            Bag(p => p.Clicks, map =>
+            Set(p => p.Clicks, map =>
             {
                 map.Key(k => k.Column("PageViewId"));
                 map.Lazy(CollectionLazy.Lazy);
                 map.Cascade(Cascade.All);
+                map.Access(Accessor.Field);
             }, prop => prop.OneToMany());
 
-            Bag(p => p.ViewParts, map =>
+            Set(p => p.ViewParts, map =>
             {
                 map.Key(k => k.Column("PageViewId"));
                 map.Lazy(CollectionLazy.Lazy);
                 map.Cascade(Cascade.All);
+                map.Access(Accessor.Field);
+            }, prop => prop.OneToMany()); 
+            
+            Set(p => p.Scrolls, map =>
+            {
+                map.Key(k => k.Column("PageViewId"));
+                map.Lazy(CollectionLazy.Lazy);
+                map.Cascade(Cascade.All);
+                map.Access(Accessor.Field);
             }, prop => prop.OneToMany());
         }
     }

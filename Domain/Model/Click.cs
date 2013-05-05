@@ -11,11 +11,31 @@ namespace AppReadyGo.Domain.Model
     /// </summary>
     public class Click
     {
-        public virtual long Id { get; set; }
-        public virtual DateTime Date { get; set; }
-        public virtual int X { get; set; }
-        public virtual int Y { get; set; }
-        public virtual int Orientation { get; set; }
-        public virtual PageView PageView { get; set; }
+        public virtual long Id { get; protected set; }
+
+        public virtual DateTime Date { get; protected set; }
+
+        public virtual int X { get; protected set; }
+
+        public virtual int Y { get; protected set; }
+
+        public virtual int Orientation { get; protected set; }
+
+        public virtual PageView PageView { get; protected set; }
+
+        public Click()
+        {
+        }
+
+        public Click(PageView pageView, DateTime date, int x, int y, int orientation)
+        {
+            this.PageView = pageView;
+            this.Date = date;
+            this.X = x;
+            this.Y = y;
+            this.Orientation = orientation;
+
+            this.PageView.AddClick(this);
+        }
     }
 }
