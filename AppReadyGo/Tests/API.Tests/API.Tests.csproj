@@ -117,6 +117,14 @@
       <Project>{B73E5FF1-F3CD-4F2E-849A-57ED9926CCE0}</Project>
       <Name>API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{8c379dd1-93a3-4b68-a3ae-e7c2ce5a8a0f}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core.csproj">
+      <Project>{6696bbd1-9b7a-44f9-ab0e-be264402e5cc}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

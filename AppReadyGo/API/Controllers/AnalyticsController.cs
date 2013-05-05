@@ -60,6 +60,11 @@ namespace AppReadyGo.API.Controllers
                     },
                     data.Package.SessionsInfo.Select(s => new AddPackageCommand.Session
                     {
+                        ClientHeight = s.ClientHeight,
+                        ClientWidth = s.ClientWidth,
+                        Path = s.PageUri,
+                        CloseDate = s.SessionCloseDate,
+                        StartDate = s.SessionStartDate,
                         ScreenViewParts = s.ViewAreaDetails.Select(v => new AddPackageCommand.ViewPart
                         {
                             FinishDate = v.FinishDate,

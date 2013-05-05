@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using AppReadyGo.API.Models.Analytics;
 using AppReadyGo.API.Controllers;
+using AppReadyGo.Common;
 
 namespace AppReadyGo.API.Tests.Controllers
 {
@@ -41,9 +42,11 @@ namespace AppReadyGo.API.Tests.Controllers
         [TestMethod]
         public void AnalyticsSubmitPackage()
         {
+            ObjectContainer.Instance.GetType();
             var data = CreatePackage();
             var controller = new AnalyticsController();
             var view = controller.SubmitPackage(data);
+            Assert.IsTrue(view);
         }
 
         [TestMethod]
@@ -77,9 +80,12 @@ namespace AppReadyGo.API.Tests.Controllers
                 Ip = "0.0.0.1",
                 Package = new Package
                 {
-                    ClientKey = "123-123-123",
+                    ClientKey = "123-123-0001",
                     ScreenHeight = 100,
                     ScreenWidth = 200,
+                    SystemInfo = new SystemInfo
+                    {
+                    },
                     SessionsInfo = new SessionInfo[]
                     {
                         new SessionInfo
