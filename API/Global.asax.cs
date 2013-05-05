@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppReadyGo.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,6 +23,8 @@ namespace AppReadyGo.API
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ObjectContainer.Instance.GetType();
         }
     }
 }
