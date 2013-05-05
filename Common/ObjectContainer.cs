@@ -19,6 +19,7 @@ using NHibernate.Driver;
 using NHibernate.Dialect;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using System.Web;
 
 namespace AppReadyGo.Common
 {
@@ -65,6 +66,8 @@ namespace AppReadyGo.Common
             var dbSettings = (DatabaseSettings)ConfigurationManager.GetSection("dataConfiguration");
             this.sessionFactory = BuildSessionFactory(typeof(NHibernateHelper), ConfigurationManager.ConnectionStrings[dbSettings.DefaultDatabase].ToString());
 
+            bool isWebApp = HttpContext.Current != null;
+
             var parentCommandHandler = typeof(ICommandHandler<,>);
             foreach (var type in parentCommandHandler.Assembly.GetTypes())
             {
@@ -73,7 +76,14 @@ namespace AppReadyGo.Common
                     var @interface = type.GetInterfaces().FirstOrDefault();
                     if (@interface != null && @interface.IsGenericType && @interface.GetGenericTypeDefinition() == parentCommandHandler)
                     {
-                        container.Register(Component.For(@interface).ImplementedBy(type).LifeStyle.PerWebRequest);
+                        if (isWebApp)
+                        {
+                            container.Register(Component.For(@interface).ImplementedBy(type).LifeStyle.PerWebRequest);
+                        }
+                        else
+                        {
+                            container.Register(Component.For(@interface).ImplementedBy(type).LifeStyle.PerThread);
+                        }
                     }
                 }
             }
@@ -86,14 +96,29 @@ namespace AppReadyGo.Common
                     var @interface = type.GetInterfaces().FirstOrDefault();
                     if (@interface != null && @interface.IsGenericType && @interface.GetGenericTypeDefinition() == parentQueryHandler)
                     {
-                        container.Register(Component.For(@interface).ImplementedBy(type).LifeStyle.PerWebRequest);
+                        if (isWebApp)
+                        {
+                            container.Register(Component.For(@interface).ImplementedBy(type).LifeStyle.PerWebRequest);
+                        }
+                        else
+                        {
+                            container.Register(Component.For(@interface).ImplementedBy(type).LifeStyle.PerThread);
+                        }
                     }
                 }
             }
             container.Register(Component.For<IObjectContainer>().Instance(this));
             container.Register(Component.For<IRepository>().ImplementedBy<Repository>());
-            container.Register(Component.For<ISecurityContext>().ImplementedBy<SecurityContext>().LifeStyle.PerWebRequest);
-            container.Register(Component.For<IValidationContext>().ImplementedBy<ValidationContext>().LifeStyle.PerWebRequest);
+            if (isWebApp)
+            {
+                container.Register(Component.For<ISecurityContext>().ImplementedBy<SecurityContext>().LifeStyle.PerWebRequest);
+                container.Register(Component.For<IValidationContext>().ImplementedBy<ValidationContext>().LifeStyle.PerWebRequest);
+            }
+            else
+            {
+                container.Register(Component.For<ISecurityContext>().ImplementedBy<SecurityContext>().LifeStyle.PerThread);
+                container.Register(Component.For<IValidationContext>().ImplementedBy<ValidationContext>().LifeStyle.PerThread);
+            }
 
             this.repository = container.Resolve<IRepository>();
         }
