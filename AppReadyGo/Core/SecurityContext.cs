@@ -35,7 +35,7 @@ namespace AppReadyGo.Core
 
         public SecurityContext(IObjectContainer container)
         {
-            if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
+            if (HttpContext.Current != null && HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 var userDetails = HttpContext.Current.Session["CurrentUserDetails"] as CurrentUserDetails;
                 if (userDetails == null)
