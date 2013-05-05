@@ -8,6 +8,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using AppReadyGo.API.Models.Analytics;
+using AppReadyGo.API.Controllers;
 
 namespace AppReadyGo.API.Tests.Controllers
 {
@@ -38,6 +39,14 @@ namespace AppReadyGo.API.Tests.Controllers
         }
 
         [TestMethod]
+        public void AnalyticsSubmitPackage()
+        {
+            var data = CreatePackage();
+            var controller = new AnalyticsController();
+            var view = controller.SubmitPackage(data);
+        }
+
+        [TestMethod]
         public void AnalyticsSubmitPackageByNetwork()
         {
             HttpClient client = new HttpClient();
@@ -46,6 +55,23 @@ namespace AppReadyGo.API.Tests.Controllers
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+            var data = CreatePackage();
+
+            var response = client.PostAsJsonAsync("submitpackage", data).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var res = response.Content.ReadAsStringAsync();
+                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
+            }
+            else
+            {
+                var res = response.Content.ReadAsAsync<bool>();
+                Assert.IsTrue(res.Result);
+            }
+        }
+
+        private static FingerPrintData CreatePackage()
+        {
             var data = new FingerPrintData
             {
                 Ip = "0.0.0.1",
@@ -113,18 +139,7 @@ namespace AppReadyGo.API.Tests.Controllers
                     }
                 }
             };
-
-            var response = client.PostAsJsonAsync("submitpackage", data).Result;
-            if (!response.IsSuccessStatusCode)
-            {
-                var res = response.Content.ReadAsStringAsync();
-                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
-            }
-            else
-            {
-                var res = response.Content.ReadAsAsync<bool>();
-                Assert.IsTrue(res.Result);
-            }
+            return data;
         }
     }
 }
