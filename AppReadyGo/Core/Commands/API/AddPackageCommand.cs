@@ -38,6 +38,11 @@ namespace AppReadyGo.Core.Commands.API
 
         public IEnumerable<ValidationResult> Validate(IValidationContext validation)
         {
+            if (!this.Sessions.Any())
+            {
+                yield return new ValidationResult(ErrorCode.WrongParameter, "Sessions must to be at least one.");
+            }
+
             if (this.ScreenWidth <= 0)
             {
                 yield return new ValidationResult(ErrorCode.WrongParameter, "ScreenWidth must to be positive and greate than zero");
