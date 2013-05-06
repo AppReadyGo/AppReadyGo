@@ -73,7 +73,8 @@ namespace AppReadyGo.Controllers
                     Description = a.Description,
                     Icon = string.IsNullOrEmpty(a.IconExt) ?  "/content/images/no_icon.png" : string.Format("/Restricted/Icons/{0}{1}", a.Id, a.IconExt),
                     Published = a.Published,
-                    Downloaded = a.Downloaded
+                    Downloaded = a.Downloaded,
+                    HasScreens = a.HasScreens
                 }).ToArray(),
                 TopApplications = data.TopApplications.Select((a, i) => new TopApplicationsItemModel
                 {

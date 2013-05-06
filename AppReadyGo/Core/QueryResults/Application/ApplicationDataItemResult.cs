@@ -18,5 +18,7 @@ namespace AppReadyGo.Core.QueryResults.Application
         public bool Published { get; set; }
 
         public int Downloaded { get; set; }
+
+        public bool HasScreens { get; set; }
     }
 }

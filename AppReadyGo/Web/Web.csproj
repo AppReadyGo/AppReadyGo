@@ -639,11 +639,11 @@
     <Content Include="Views\Application\Publishes.cshtml" />
     <Content Include="Views\Application\Edit.cshtml" />
     <Content Include="Views\Application\Fingerprint.aspx" />
-    <Content Include="Views\Application\Forms\ScreenForm.ascx" />
+    <Content Include="Views\Application\Forms\ScreenForm.cshtml" />
     <Content Include="Views\Application\New.cshtml" />
-    <Content Include="Views\Application\ScreenEdit.aspx" />
-    <Content Include="Views\Application\ScreenNew.aspx" />
-    <Content Include="Views\Application\Screens.aspx" />
+    <Content Include="Views\Application\ScreenEdit.cshtml" />
+    <Content Include="Views\Application\ScreenNew.cshtml" />
+    <Content Include="Views\Application\Screens.cshtml" />
     <Content Include="Views\Content\Authenticated404.cshtml" />
     <Content Include="Views\Content\AuthenticatedError.cshtml" />
     <Content Include="Views\Content\AuthenticatedPageContent.cshtml" />

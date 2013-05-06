@@ -29,5 +29,7 @@ namespace AppReadyGo.Model.Pages.Portfolio
         public IEnumerable<object> AnalyticsVersions { get; set; }
 
         public string Icon { get; set; }
+
+        public bool HasScreens { get; set; }
     }
 }

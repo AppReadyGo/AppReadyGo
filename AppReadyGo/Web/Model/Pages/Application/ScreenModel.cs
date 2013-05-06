@@ -5,10 +5,11 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using AppReadyGo.Common;
+using AppReadyGo.Model.Master;
 
 namespace AppReadyGo.Model.Pages.Application
 {
-    public class ScreenModel
+    public class ScreenModel : AfterLoginMasterModel
     {
         public int Id { get; set; }
 
@@ -30,5 +31,10 @@ namespace AppReadyGo.Model.Pages.Application
         public int ApplicationId { get; set; }
 
         public ScreenReturn ScreenReturn { get; set; }
+
+        public ScreenModel()
+            : base(MenuItem.Analytics)
+        {
+        }
     }
 }
