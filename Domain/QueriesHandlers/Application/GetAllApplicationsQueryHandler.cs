@@ -50,7 +50,8 @@ namespace AppReadyGo.Domain.Queries.Application
                                                 Name = a.Name,
                                                 Type = a.Type.Name,
                                                 Description = a.Description,
-                                                IconExt = a.IconExt
+                                                IconExt = a.IconExt,
+                                                HasScreens = a.Screens.Any()
                                             })
                                             .ToArray();
 
@@ -146,6 +147,7 @@ namespace AppReadyGo.Domain.Queries.Application
                 application.Published = appPublished.Contains(application.Id);
 
                 application.Downloaded = appDownloaded.Where(x => x.ApplicationId == application.Id).Select(x => x.Count).SingleOrDefault();
+
             }
             log.WriteInformation("Get all applications for portfolio ->");
 

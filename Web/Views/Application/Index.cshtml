@@ -120,14 +120,22 @@
 				        <br />
 				        <div class="row-actions">
 					        <span class='edit'><a href="/Application/Edit/@app.Id">Edit</a> | </span>
-					        <span class='delete'><a class='submitdelete' href='/Application/Remove/@app.Id' onclick="javascript:return confirm('Are you realy want to remove @app.Description application? The operation is not recoverable!');">Delete</a> | </span>
+					        <span class='delete'><a href='/Application/Remove/@app.Id' onclick="javascript:return confirm('Are you realy want to remove @app.Description application? The operation is not recoverable!');">Delete</a> | </span>
 					        @if(app.Published)
                             {
-                                <span class='upload'><a href="/Application/Publishes/@app.Id">Publishes</a></span>
+                                <span class='upload'><a href="/Application/Publishes/@app.Id">Publishes</a> | </span>
                             }
                             else
                             {
-                                <span class='upload'><a href="/Application/Publish/@app.Id">Publish</a></span>
+                                <span class='upload'><a href="/Application/Publish/@app.Id">Publish</a> | </span>
+                            }
+                            @if(app.HasScreens)
+                            {
+					            <span class='screens'><a href="/Application/ScreenNew/@app.Id">Add Screen</a></span>
+                            }
+                            else
+                            {
+					            <span class='screens'><a href="/Application/Screens/@app.Id">Screens</a></span>
                             }
 				        </div>          
                     </td>
