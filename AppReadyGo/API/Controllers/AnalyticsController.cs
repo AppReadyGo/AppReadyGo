@@ -56,13 +56,13 @@ namespace AppReadyGo.API.Controllers
                     return false;
                 }
 
-                if (string.IsNullOrEmpty(data.Package.ClientKey) || data.Package.ClientKey.Length < 5)
+                int appId = 0;
+                if (string.IsNullOrEmpty(data.Package.ClientKey) || data.Package.ClientKey.Length < 5 || !int.TryParse(data.Package.ClientKey.Split(new char[] { '-' })[2], out appId))
                 {
+                    log.WriteError("Error to submit package the ClientKey:{0} is wrong", data.Package.ClientKey);
+                    return false;
                 }
-                // TODO: Add validation for object
 
-                // Get app id from key
-                int appId = int.Parse(data.Package.ClientKey.Split(new char[] { '-' })[2]);
                 Location location = null;// TODO: get the location by ip
                 // We have to create some queue to hold the ips and process the queue by other service.
                 // However, all the logic have to write to some queue and not to strate to database.
