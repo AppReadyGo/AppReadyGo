@@ -41,14 +41,33 @@ namespace AppReadyGo.API.Controllers
         public bool SubmitPackage([FromBody] FingerPrintData data)
         {
             try
-            { 
+            {
+                if (googleAnalytics)
+                {
+                    // Google analytics
+                    GooglePageView pageView = new GooglePageView("Submit Package", "api.appreadygo.com", "/Analytics/SubmitPackage");
+                    TrackingRequest request = new RequestFactory().BuildRequest(pageView);
+                    GoogleTracking.FireTrackingEvent(request);
+                }
+
+                if (data == null || data.Package == null)
+                {
+                    log.WriteError("Error to submit package the parameter is null");
+                    return false;
+                }
+
+                if (string.IsNullOrEmpty(data.Package.ClientKey) || data.Package.ClientKey.Length < 5)
+                {
+                }
                 // TODO: Add validation for object
 
                 // Get app id from key
                 int appId = int.Parse(data.Package.ClientKey.Split(new char[] { '-' })[2]);
                 Location location = null;// TODO: get the location by ip
+                // We have to create some queue to hold the ips and process the queue by other service.
+                // However, all the logic have to write to some queue and not to strate to database.
 
-                ObjectContainer.Instance.Dispatch(new AddPackageCommand(
+                var res = ObjectContainer.Instance.Dispatch(new AddPackageCommand(
                     appId,
                     location,
                     data.Package.SystemInfo.RealVersionName,
@@ -102,22 +121,13 @@ namespace AppReadyGo.API.Controllers
                         })
                     })));
 
-                if (googleAnalytics)
-                {
-                    // Google analytics
-                    GooglePageView pageView = new GooglePageView("Submit Package", "api.appreadygo.com", "/Analytics/SubmitPackage");
-                    TrackingRequest request = new RequestFactory().BuildRequest(pageView);
-                    GoogleTracking.FireTrackingEvent(request);
-                }
-
-                return true;
+                return !res.Validation.Any();
             }
             catch (Exception ex)
             {
                 log.WriteError(ex, "Error to submit package for application:{0}", data.Package.ClientKey);
                 return false;
             }
-            return true;
         }
     }
 }
