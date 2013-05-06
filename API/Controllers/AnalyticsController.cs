@@ -121,7 +121,15 @@ namespace AppReadyGo.API.Controllers
                         })
                     })));
 
-                return !res.Validation.Any();
+                if (res.Validation.Any())
+                {
+                    log.WriteError("Error to submit package for application:{0}, with errors:{1}", data.Package.ClientKey, string.Join(", ", res.Validation.Select(x => string.Format("Error:{0} - {1}", x.ErrorCode, x.Message))));
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
             catch (Exception ex)
             {
