@@ -647,9 +647,9 @@ The terms and conditions contained in this Agreement that by their sense and con
 </p>'),
 (2, 1, 'slideshow', '
 <img src="/content/images/screens.png" />
-    <h1>
+    <h2>
         Appstore where you meet your target audience        
-    </h1>
+    </h2>
     <a href="/account/register" class="button yellow btn-getstarted">Publish Now</a>'),
 (2, 1, 'content', '
     <article id="features">
@@ -668,7 +668,7 @@ The terms and conditions contained in this Agreement that by their sense and con
             <li>
                 <img src="/content/images/playback_grey.png" />
                 <h3>Revew</h3>
-                <p>Get a professional feedback from UX designers on each stage of your project</p>
+                <p>Get a feedback from UX designers on each stage of your project</p>
             </li>
 			  <li>
                 <img src="/content/images/playback_grey.png" />
@@ -710,9 +710,20 @@ GO
 SET IDENTITY_INSERT [dbo].[ApplicationTypes] ON
 
 INSERT INTO [dbo].[ApplicationTypes](ID, Name)
-VALUES  (1, 'Music'),
-		(2, 'Navigation'),
-		(3, 'Productivity');
+VALUES  (1, 'Books & References'),
+		(2,	'Games'),
+		(3,	'Business'),
+		(4,	'Comics'),
+		(5,	'Communication'),
+		(6,	'Education'),
+		(7,	'Entertaiment'),
+		(8,	'Finance'),
+		(9,	'Health & Fitness'),
+		(10,'Libraries & Dome'),
+		(11, 'Medical'),
+		(12, 'Productivity'),
+		(13, 'Social'),
+		(14, 'Shopping');
 
 SET IDENTITY_INSERT [dbo].[ApplicationTypes] OFF
 GO
