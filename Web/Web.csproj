@@ -653,7 +653,7 @@
     <Content Include="Views\Content\AuthenticatedPageContent.cshtml" />
     <Content Include="Views\Home\ComingSoon.aspx" />
     <Content Include="Views\Home\Mails\Basic.aspx" />
-    <Content Include="Views\Home\PlayGround.aspx" />
+    <None Include="Views\Home\PlayGround.cshtml" />
     <Content Include="Views\Mails\Promotion.aspx" />
     <Content Include="Views\Mails\System.aspx" />
     <Content Include="Views\Portfolio\Edit.aspx" />
