@@ -22,8 +22,13 @@
 <div class="content-wrapper">
     <article class="center">
         <div class="form-wrapper">
-            <form action="" method="post" enctype="multipart/form-data"> 
-                <p>
+            <header>
+                <h1>Add application</h1>
+            </header>
+            <div class="sub-wrapper">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <p class="required">
                     @Html.LabelFor(m => m.Name)<br> 
                     @Html.TextBoxFor(m => m.Name)
                     @Html.ValidationMessageFor(m => m.Name, null, new { @class = "error" })
@@ -33,7 +38,7 @@
                     @Html.TextAreaFor(m => m.Description)
                     @Html.ValidationMessageFor(m => m.Description, null, new { @class = "error" })
                 </p>
-                <p>
+                <p class="required">
                     @Html.LabelFor(m => m.Type)<br> 
                     @Html.DropDownListFor(m => m.Type, Model.Types)
                     @Html.ValidationMessageFor(m => m.Type, null, new { @class = "error" })
@@ -69,13 +74,13 @@
                     <label>APK</label><br> 
                     <input type="file" name="package_file" />
                 </p>
-                <p class="submit">
-                    @Html.ValidationSummary(true, null, new { @class = "error" })
+                <p class="actions">
+                    @Html.ValidationMessage("error", new { @class = "error" })
                     <input type="submit" value="Save" class="button green medium"/>
-                    <input type="submit" value="Publish" class="button green medium"/>
+                    <a href="/Application">Cancel</a>
                 </p>
-
-            </form>
+            }
+            </div>
         </div>
     </article>
 </div>
