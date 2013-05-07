@@ -11,8 +11,19 @@
 {
     <script src="@Html.Content("~/Scripts/table.js")" type="text/javascript"></script>
 }
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+		           <li><h4>Applications</h4></li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
+<div style="clear:both;"></div>
 <div class="content-wrapper" id="app_page">
-<h2>Applications</h2>
 <div class="a-r top-panel">
 	<table class="tbl fixed" cellspacing="0">
 		<thead>
@@ -131,11 +142,11 @@
                             }
                             @if(app.HasScreens)
                             {
-					            <span class='screens'><a href="/Application/ScreenNew/@app.Id">Add Screen</a></span>
+					            <span class='screens'><a href="/Application/Screens/@app.Id">Screens</a></span>
                             }
                             else
                             {
-					            <span class='screens'><a href="/Application/Screens/@app.Id">Screens</a></span>
+					            <span class='screens'><a href="/Application/ScreenNew/@app.Id">Add Screen</a></span>
                             }
 				        </div>          
                     </td>

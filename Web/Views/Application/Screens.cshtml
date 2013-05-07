@@ -94,8 +94,8 @@
                     <span>@item.Path</span>
 			        <br />
 			        <div class="row-actions">
-                        <span class='edit'><a href="/Application/ScreenEdit/<%= item.Id %>">Edit</a> | </span>
-				        <span class='delete'><a class='submitdelete' href='/Application/ScreenRemove/<%= item.Id %>' onclick="javascript:return confirm('Are you realy want to remove the screen? The operation is not recoverable!');">Delete</a></span>
+                        <span class='edit'><a href="/Application/ScreenEdit/@item.Id">Edit</a> | </span>
+				        <span class='delete'><a class='submitdelete' href='/Application/ScreenRemove/@item.Id' onclick="javascript:return confirm('Are you realy want to remove the screen? The operation is not recoverable!');">Delete</a></span>
 			        </div>          
                 </td>
 		        <td class="role column-width">@item.Width</td>

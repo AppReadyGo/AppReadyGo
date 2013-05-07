@@ -1,0 +1,150 @@
+﻿@using AppReadyGo.Model.Pages.Home
+@using AppReadyGo.Model
+@using AppReadyGo.Model.Master
+@{
+    Layout = "~/Views/Shared/_BeforeLogin.cshtml";
+}
+@section title { PlayGround }
+@section header { }
+<section id="content">
+    <div class="content-wrapper">
+
+
+
+
+<style type="text/css">
+    article h1{font-size:25px;}
+    article ol{list-style:none;}
+    article span{font-size:95px;float:left;margin-right:20px;color:#6E9F31;font-weight:bold;}
+    article .arrow{text-align:center;margin:30px;clear:both;}
+    article .button{margin:20px;}
+    #intro .button{margin:20px;}
+</style>
+<article id="intro">    
+	<h1>How It Works</h1>
+    <a style="float:right;" href="/account/register" class="button green big">Get started now »</a>
+	<h4>Getting something designed at 99designs is as easy as 1-2-3.</h4>
+	<p>
+        We help you host a “design contest”, where thousands of designers compete to create a design you love, or your money back!
+	</p>
+</article>
+<article>
+	<ol>
+		<li>
+			<span>1</span>
+			<h3>Launch your design contest</h3>
+			<p>
+			 Create a design brief which is simply a <strong>clear outline of what you need designed</strong>. To begin, post this brief to 99designs and <strong>choose a design package</strong>.
+			</p>
+			<p class="arrow"><img src="/content/images/arrow-down.png" alt=" "></p>
+		</li>
+		<li>
+			<span>2</span>
+			<h3>Collaborate with the designers</h3>
+			<p>
+				Designers then submit concepts to <strong>compete for your prize</strong>.  Be sure to <strong>provide continual feedback</strong> to help the designers deliver a concept you love!
+			</p>
+			<p class="arrow"><img src="/content/images/arrow-down.png" alt=" "></p>
+		</li>
+		<li>
+			<span>3</span>
+			<h3>Choose your favorite design</h3>
+			<p>
+				At the completion of your contest, you'll need to <strong>pick your favorite design</strong> and <strong>award a winner</strong>. You'll then <strong>receive the final design</strong> along with copyright to the original art work.
+			</p>
+			<p><em>It's that easy!</em></p>
+		</li>
+	</ol>
+</article>
+
+<style>
+    .featurette {
+        padding-top: 0;
+        overflow: hidden;
+        margin: 60px 0 60px 0;
+        height: 280px;
+        font-family: "Open Sans",Helvetica,Arial,sans-serif;
+        color: #838383;
+    }
+    .featurette img {
+        margin-right: 40px;
+        margin-top: 0;
+        width: auto	9;
+        height: auto;
+        max-width: 100%;
+        vertical-align: middle;
+        border: 0;
+        -ms-interpolation-mode: bicubic;
+    }
+    .featurette h2 {
+        padding-top: 10px;
+        font-size: 22px;
+        color: #333;
+        text-transform: none;
+        font-family: 'Open Sans','Lucida Sans Unicode','Lucida Grande',sans-serif;
+        letter-spacing: -0.033333em;
+        line-height: 120%;
+        margin: 0 0 30px;
+        font-weight: 300;
+    }
+    .featurette .muted-italic {
+        color: #999;
+        font-style: italic;
+    }
+    .featurette p {
+        font-family: 'Open Sans','Lucida Sans Unicode','Lucida Grande',sans-serif;
+        letter-spacing: -0.033333em;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 24px;
+        margin: 0 0 10px;
+    }
+    .featurette em {
+        font-style: italic;
+    }
+    .featurette-divider {
+        margin: 40px 0;
+        display: none!important;
+        border: 0;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #fff;
+    }
+    .pull-right {
+        float: right;
+    } 
+    .pull-left {
+        float: left;
+    }
+</style>
+
+     <!-- featurettes start -->
+      <div class="featurette">
+        <img class="featurette-image pull-left" src="https://d1wh1qqqu6lwfi.cloudfront.net/static/public/img/feature-icons/invoice-templates-icon.png" alt="Invoice templates" />
+        <h2>Look great, <span class="muted-italic">your way</span></h2>
+        <p>Customize your invoices to make them perfectly <em>you</em>. Choose a template, upload your own logo in seconds, and even pick a color scheme that matches your look. The result: Clean, professional invoices that let you shine.</p>
+      </div>
+
+      <hr class="featurette-divider visible-phone">
+
+      <div class="featurette">
+        <img class="featurette-image pull-right" src="https://d1wh1qqqu6lwfi.cloudfront.net/static/public/img/feature-icons/free-software-unlimited-icon.png" alt="Unlimited invoicing software">
+        <h2>No limits, <span class="muted-italic">totally free</span></h2>
+        <p>Send as many invoices as you want, to as many customers as you want, and there's never a charge. In fact, all our invoicing features are free and unlimited.</p>
+      </div>
+
+      <hr class="featurette-divider visible-phone">
+
+      <div class="featurette">
+        <img class="featurette-image pull-left" src="https://d1wh1qqqu6lwfi.cloudfront.net/static/public/img/feature-icons/credit-card-icon.png" alt="Accept credit cards">
+        <h2>Accept credit cards, <span class="muted-italic">get paid even faster</span></h2>
+        <p>Add a "Pay Now" button to your invoices so your customers can pay you by credit card immediately. Getting set up is easy, and you pay a simple, flat fee of 2.9% plus 30 cents. <br /><br /><a href="/payments">Learn more &nbsp;&rsaquo;</a></p>
+      </div>
+
+      <hr class="featurette-divider visible-phone">
+      <!-- featurettes end -->
+
+
+
+    </div><!-- /.content-wrapper --> 
+    <p class="clear"></p>
+</section><!-- /#content --> 

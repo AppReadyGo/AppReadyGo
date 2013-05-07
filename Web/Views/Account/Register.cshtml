@@ -8,30 +8,41 @@
     <div class="content-wrapper">
         <article class="center">
             <div class="form-wrapper">
-            <h2>Sign Up, Free</h2>
-            @using (Html.BeginForm(null, null, FormMethod.Post, new { autocomplete = "off" })) 
-            {
-                <p class="desc">Passwords are required to be a minimum of 7 characters in length.</p>
-                <p>
-                    @Html.LabelFor(m => m.Email)<br> 
-                    @Html.TextBoxFor(m => m.Email, new { autocomplete="off" })
-                    @Html.ValidationMessageFor(m => m.Email, null, new { @class = "error" })
-                </p>
-                <p>
-                    @Html.LabelFor(m => m.Password)<br> 
-                    @Html.PasswordFor(m => m.Password, new { autocomplete = "off" })
-                    @Html.ValidationMessageFor(m => m.Password, null, new { @class = "error" })
-                </p>
-                <p>
-                    @Html.LabelFor(m => m.ConfirmPassword)<br> 
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { autocomplete = "off" })
-                    @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @class = "error" })
-                    @Html.ValidationSummary(true, null, new { @class = "error" })
-                </p>
-	            <p class="submit">
-                    <input type="submit" value="Register" class="button green medium" id="btn_register"/>
-                </p>
-            }
+                <header>
+                    <h1>Sign Up, Free</h1>
+                    <h2>Some subtitle like why the user should register</h2>
+                    <!--h3>Some subtitle subtitle</h3-->
+                </header>
+                <div class="sub-wrapper">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { autocomplete = "off" })) 
+                {
+                    <p class="required">
+                        @Html.LabelFor(m => m.Email)<br> 
+                        @Html.TextBoxFor(m => m.Email, new { autocomplete="off" })
+                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "error" })
+                    </p>
+                    <p class="required">
+                        @Html.LabelFor(m => m.Password)<br> 
+                        @Html.PasswordFor(m => m.Password, new { autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "error" })
+                    </p>
+                    <p class="required">
+                        @Html.LabelFor(m => m.ConfirmPassword)<br> 
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @class = "error" })
+                        @Html.ValidationMessage("error", new { @class = "error" })
+                    </p>
+	                <p class="actions">
+                        <input type="submit" value="Register" class="button green medium" id="btn_register"/>
+                    </p>
+                }
+                </div>
+                <div class="divider"><em>or</em></div>
+                <p class="opneid">
+                    <a id="google_signup" data-original-title="Sign up with your Google™ account" href="/Account/Google/">Google™</a>
+                    <a id="yahoo_signup" data-original-title="Sign up with your Yahoo! ID" href="/Account/Yahoo/">Yahoo!</a>
+                </p>               
+                <p>Already have an account? <a href="/Account/LogOn">Sign in now!</a></p>
             </div>
         </article>
     </div>

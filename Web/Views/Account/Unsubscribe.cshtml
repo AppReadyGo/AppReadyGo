@@ -1,30 +1,32 @@
-﻿@model AppReadyGo.Model.Pages.Account.ForgotPasswordModel
+﻿@model AppReadyGo.Model.Pages.Account.UnsubscribeModel
 {
     Layout = "~/Views/Shared/_Content.cshtml";
 }
 @section title { Unsubscribe }
-@section header 
-{ 
-    <link href="@Url.Content("~/Content/account.css")" rel="stylesheet" type="text/css" />
-}
-<div>
-    @using (Html.BeginForm()) 
-    {
-        <h3>Unsubscribe</h3>
-        <p>
-            Use the form below to unsubscribe your email from all promotions. 
-        </p>
-                                
-        <div class="editor-label">
-            @Html.LabelFor(m => m.Email)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(m => m.Email, new { autocomplete="off" })
-            @Html.ValidationMessageFor(m => m.Email)
-        </div>
-        @Html.ValidationSummary(true)
-        <p>
-            <input type="submit" value="Unsubscribe" />
-        </p>
-    }
-</div>
+@section header { }
+<section id="content">
+    <div class="content-wrapper">
+        <article class="center">
+            <div class="form-wrapper">
+                <header>
+                    <h1>Unsubscribe</h1>
+                    <h2>Use the form below to unsubscribe your email from all promotions. </h2>
+                </header>
+                <div class="sub-wrapper">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { autocomplete = "off" })) 
+                {
+                    <p class="required">
+                        @Html.LabelFor(m => m.Email)<br>
+                        @Html.TextBoxFor(m => m.Email, new { autocomplete="off" }) 
+                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "error" })
+                        @Html.ValidationMessage("error", new { @class = "error" })
+                    </p>
+                    <p class="actions">
+	                    <input type="submit" value="Unsubscribe" class="button green medium"/>
+                    </p>
+                }
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

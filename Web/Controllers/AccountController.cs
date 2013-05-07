@@ -34,11 +34,11 @@ namespace AppReadyGo.Controllers
                 var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.UserName));
                 if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
                 {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    ModelState.AddModelError("error", "The user name or password provided is incorrect.");
                 }
                 else if(!securedDetails.Activated)
                 {
-                    ModelState.AddModelError("", "You account is not activated, please use the link from activation email to activate your account.");
+                    ModelState.AddModelError("error", "You account is not activated, please use the link from activation email to activate your account.");
                 }
                 // Temprorary access just for special users
                 else if (!securedDetails.SpecialAccess && securedDetails.Roles == null)
@@ -47,7 +47,7 @@ namespace AppReadyGo.Controllers
                 }
                 else if (!Membership.Provider.ValidateUser(model.UserName, model.Password))
                 {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    ModelState.AddModelError("error", "The user name or password provided is incorrect.");
                 }
                 //else if (!securedDetails.AcceptedTermsAndConditions)
                 //{
@@ -132,7 +132,7 @@ namespace AppReadyGo.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(result.Validation));
+                    ModelState.AddModelError("error", ErrorCodeToString(result.Validation));
                 }
             }
 
@@ -186,7 +186,7 @@ namespace AppReadyGo.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The user does not exits in the system.");
+                    ModelState.AddModelError("error", "The user does not exits in the system.");
                 }
             }
 
@@ -222,7 +222,7 @@ namespace AppReadyGo.Controllers
                 var result = ObjectContainer.Instance.Dispatch(new ResetPasswordCommand(email, model.NewPassword));
                 if (result.Validation.Any())
                 {
-                    ModelState.AddModelError("", "Wrong password.");
+                    ModelState.AddModelError("error", "Wrong password.");
                 }
                 else if (!result.Result.HasValue)
                 {
@@ -266,7 +266,7 @@ namespace AppReadyGo.Controllers
                 var result = ObjectContainer.Instance.Dispatch(new UnsubscribeCommand(model.Email));
                 if (result.Validation.Any())
                 {
-                    ModelState.AddModelError("", "Wrong email.");
+                    ModelState.AddModelError("error", "Wrong email.");
                 }
                 return Redirect("~/p/unsubscrubed-successful");
             }

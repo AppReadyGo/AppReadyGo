@@ -46,13 +46,12 @@ div.user-info form{float:right;margin-left:20px;}
 .crumb .inner ul li {overflow:hidden;float:left;line-height:50px;padding-right:18px;background:url(images/crumb-separator.png) no-repeat center right;height:53px;}
 .crumb .inner ul li h4{padding-left:10px;line-height:50px;margin:0px;}
 .crumb a {color:#464646;}
-.main-content{padding:6px 0px 0px 0px !important;}
+.main-content{padding:6px 0px 1px 0px !important}
 
 .form-wrapper { width: 600px;}
-.form-wrapper textarea{
-    font-size: 18px;
-    height:300px;
-}
+.form-wrapper textarea{font-size: 18px;height:300px;}
+
+.main-content .content-wrapper {margin: 30px;}
 
 /*Icons*/
 div.status-ok{margin:4px auto auto; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -321px -41px transparent;}
@@ -66,6 +65,9 @@ div.status-not-published{margin:4px auto auto; width:20px;height:20px; backgroun
 #app_page .top-panel{width:22%;padding-top:42px;}
 #app_page .wrap{width:75%;}
 #app_page .top-panel table{margin-bottom:20px;}
+
+#screen span.size span{line-height:43px;margin:5px 11px 5px 5px;}
+#screen span.size input {width:46%;}
 
 /* tables */
 select{padding:2px;height:2em}
@@ -89,7 +91,7 @@ br.clear { height: 2px; line-height: 2px;}
 
 table.fixed{table-layout:fixed}
 
-.sorting-indicator{display:none;width:7px;height:4px;margin-top:8px;margin-left:7px;background-image:url(../images/sort.gif);background-repeat:no-repeat}
+.sorting-indicator{display:none;width:7px;height:4px;margin-top:8px;margin-left:7px;background-image:url(images/sort.gif);background-repeat:no-repeat}
 th.sorted.asc .sorting-indicator,th.desc:hover span.sorting-indicator{display:block;background-position:0 0}
 th.sorted.desc .sorting-indicator,th.asc:hover span.sorting-indicator{display:block;background-position:-7px 0}
 
@@ -143,6 +145,7 @@ tr.portf{cursor:pointer;}
 .app-alt{background-color:#bec3c4}
 
 td.no-app{text-align:center;}
+.tbl .column-image {width:60px;}
 
 .tbl, .alt {background-color: #e7eef1;}
 

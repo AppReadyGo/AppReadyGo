@@ -322,6 +322,7 @@
     <Content Include="Areas\m\Views\Home\PageContent.aspx" />
     <Content Include="Content\beforelogin.css" />
     <Content Include="Content\Images\arrow-down.png" />
+    <Content Include="Content\Images\form_divider.png" />
     <Content Include="Content\Images\bg.png" />
     <Content Include="Content\Images\crumb-left.png" />
     <Content Include="Content\Images\crumb-middle.png" />
@@ -342,6 +343,8 @@
     <Content Include="Content\Images\small-header-box-left.png" />
     <Content Include="Content\Images\small-header-box-right.png" />
     <Content Include="Content\Images\small-header-box-tail.png" />
+    <Content Include="Content\Images\sort.gif" />
+    <Content Include="Content\Images\openid_buttons.png" />
     <Content Include="Content\Images\sprite.10.png" />
     <Content Include="Content\Images\tail-top.gif" />
     <Content Include="Content\Images\touchmap_grey.png" />
@@ -526,6 +529,7 @@
     <None Include="ThridParty\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\analytics.dashboard.js" />
     <Content Include="Scripts\analytics.selector.js" />
+    <Content Include="Scripts\application.screen.js" />
     <Content Include="Scripts\filter.js" />
     <Content Include="ThridParty\jquery-ui-1.8.20.js" />
     <Content Include="ThridParty\jquery-ui-1.8.20.min.js" />
@@ -684,7 +688,6 @@
     <Content Include="Views\Shared_\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\Forms\LogOnForm.cshtml" />
     <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Admin\_Admin.cshtml" />

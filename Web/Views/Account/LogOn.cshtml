@@ -9,7 +9,38 @@
 <section id="content">
     <div class="content-wrapper">
         <article class="center">
-            @Html.Partial("Forms/LogOnForm", Model)
+            <div id="login" class="form-wrapper">
+                <header>
+                    <h1>Welcome back!</h1>
+                </header>
+                <div class="sub-wrapper">
+                @using (Html.BeginForm()) 
+                {
+	                <p class="required">
+		                @Html.LabelFor(m => m.UserName)<br>
+		                @Html.TextBoxFor(m => m.UserName)
+                        @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "error" })
+	                </p>
+	                <p class="required">
+		                @Html.LabelFor(m => m.Password)<br>
+		                @Html.PasswordFor(m => m.Password)
+                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "error" })
+                        @Html.ValidationMessage("error", new { @class = "error" })
+	                </p>
+	                <p class="forgetmenot"><label for="RememberMe">@Html.CheckBoxFor(m => m.RememberMe) Remember Me</label></p>
+                    <p class="forgot-pass">@Html.ActionLink("Forgot Password ?", "ForgotPassword")</p>
+	                <p class="actions">
+		                <input type="submit" value="Log in" class="button green medium" id="btn_login"/>
+	                </p>
+                }
+                </div>
+                <div class="divider"><em>or</em></div>
+                <p class="opneid">
+                    <a id="google_signin" data-original-title="Sign in with your Google™ account" href="/Account/Google/">Google™</a>
+                    <a id="yahoo_signin" data-original-title="Sign in with your Yahoo! ID" href="/Account/Yahoo/">Yahoo!</a>
+                </p>               
+                <p>Don't have an account yet? <a href="/Account/Register/">Sign up now!</a></p>
+            </div>
         </article>
     </div>
 </section>
