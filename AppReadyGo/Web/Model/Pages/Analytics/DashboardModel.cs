@@ -10,15 +10,19 @@ using System.Web.Mvc;
 
 namespace AppReadyGo.Model.Pages.Analytics
 {
-    public class DashboardModel : FilterModel
+    public class DashboardModel : AnalyticsMasterModel
     {
+        public FilterModel Filter { get; set; }
+
         public string UsageChartData { get; set; }
 
         public ContentOverviewModel[] ContentOverviewData { get; set; }
 
         public DashboardModel(FilterParametersModel filter, MenuItem selectedItem, FilterDataResult filterDataResult, bool isSingleMode)
-            : base(filter, selectedItem, filterDataResult, isSingleMode)
+            : base(selectedItem)
         {
+            this.Filter = new FilterModel(filter, filterDataResult, isSingleMode, selectedItem);
+            this.FilterUrlPart = this.Filter.GetUrlPart();
         }
     }
 

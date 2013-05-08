@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using AppReadyGo.Core.QueryResults.Analytics.QueryResults;
 using AppReadyGo.Model.Filter;
+using AppReadyGo.Model.Master;
+using System.Collections.Generic;
 using System.Web.Mvc;
-using AppReadyGo.Core.QueryResults.Analytics.QueryResults;
 
 namespace AppReadyGo.Model.Pages.Analytics
 {
-    public class ABCompareModel : FilterModel
+    public class ABCompareModel : AnalyticsMasterModel
     {
+        public FilterModel Filter { get; set; }
+
         public IEnumerable<SelectListItem> FirstScreenPathes { get; set; }
 
         public IEnumerable<SelectListItem> SecondScreenPathes { get; set; }
@@ -22,7 +22,7 @@ namespace AppReadyGo.Model.Pages.Analytics
         {
             get
             {
-                return this.GetUrlPart(this.FirstPath);
+                return this.Filter.GetUrlPart(this.FirstPath);
             }
         }
 
@@ -30,7 +30,7 @@ namespace AppReadyGo.Model.Pages.Analytics
         {
             get
             {
-                return this.GetUrlPart(this.SecondPath);
+                return this.Filter.GetUrlPart(this.SecondPath);
             }
         }
 
@@ -41,8 +41,10 @@ namespace AppReadyGo.Model.Pages.Analytics
         public bool SecondHasClicks { get; set; }
 
         public ABCompareModel(FilterParametersModel filter, MenuItem selectedItem, FilterDataResult filterDataResult, bool isSingleMode)
-            : base(filter, selectedItem, filterDataResult, isSingleMode)
+            : base(selectedItem)
         {
+            this.Filter = new FilterModel(filter, filterDataResult, isSingleMode, selectedItem);
+            this.FilterUrlPart = this.Filter.GetUrlPart();
         }
     }
 }

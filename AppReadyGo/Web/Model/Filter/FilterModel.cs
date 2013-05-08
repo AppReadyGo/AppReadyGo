@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 
 namespace AppReadyGo.Model.Filter
 {
-    public class FilterModel : AnalyticsMasterModel
+    public class FilterModel
     {
         public int SelectedApplicationId { get; protected set; }
         public DateTime SelectedDateFrom { get; protected set; }
@@ -19,8 +19,8 @@ namespace AppReadyGo.Model.Filter
         public string SelectedScreenSize { get; protected set; }
         public string SelectedPath { get; protected set; }
 
-        public IEnumerable<SelectListItem> Pathes { get; protected set; }
-        public IEnumerable<SelectListItem> ScreenSizes { get; protected set; }
+        public IEnumerable<SelectListItem> SelectListPathes { get; protected set; }
+        public IEnumerable<SelectListItem> SelectListScreenSizes { get; protected set; }
 
         public string FormAction { get; protected set; }
 
@@ -37,8 +37,10 @@ namespace AppReadyGo.Model.Filter
         public bool IsSingleMode { get; protected set; }
         public string ApplicationName { get; protected set; }
 
-        public FilterModel(FilterParametersModel filter, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, FilterDataResult filterDataResult, bool isSingleMode, string placeHolderHTML = null)
-            : base(leftMenuSelectedItem)
+        public int? ScreenId { get; set; }
+        public IEnumerable<string> Pathes { get; set; }
+    
+        public FilterModel(FilterParametersModel filter, FilterDataResult filterDataResult, bool isSingleMode, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, string placeHolderHTML = null)
         {
             this.PlaceHolderHTML = placeHolderHTML;
 
@@ -68,6 +70,8 @@ namespace AppReadyGo.Model.Filter
 
             var curApplication = filterDataResult.Applications.Single(a => a.Id == filter.ApplicationId);
 
+            this.Pathes = curApplication.Pathes;
+
             this.SelectedApplicationId = curApplication.Id;
             this.ApplicationName = curApplication.Name;
                     
@@ -75,7 +79,7 @@ namespace AppReadyGo.Model.Filter
             this.SelectedPath = string.IsNullOrEmpty(filter.Path) ? (isSingleMode ? curApplication.Pathes.First() : null) : filter.Path;
 
             sizes.AddRange(curApplication.ScreenSizes.Select(s => new SelectListItem { Value = s.ToFormatedString(), Text = s.ToFormatedString(), Selected = s.ToFormatedString() == this.SelectedScreenSize }));
-            pathes.AddRange(curApplication.Pathes.Select(p => new SelectListItem { Value = p, Text = p, Selected = p == this.SelectedPath }));
+            pathes.AddRange(this.Pathes.Select(p => new SelectListItem { Value = p, Text = p, Selected = p == this.SelectedPath }));
 
             if (!isSingleMode)
             {
@@ -83,10 +87,8 @@ namespace AppReadyGo.Model.Filter
                 pathes.Insert(0, new SelectListItem { Value = "", Text = "All Pathes", Selected = this.SelectedPath == null });
             }
 
-            this.ScreenSizes = sizes;
-            this.Pathes = pathes;
-
-            this.FilterUrlPart = GetUrlPart();
+            this.SelectListScreenSizes = sizes;
+            this.SelectListPathes = pathes;
        }
 
         public string GetUrlPart(string path = null)
@@ -121,7 +123,5 @@ namespace AppReadyGo.Model.Filter
             parts.Add(string.Format("td={0}", dateTo.ToString("dd-MMM-yyyy")));
             return "?" + string.Join("&", parts.ToArray());
         }
-
-        public int? ScreenId { get; set; }
     }
 }

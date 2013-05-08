@@ -62,7 +62,7 @@
     </style>
 }
 @section topmenu { }
-@Html.Partial("~/Views/Analytics/Filter.cshtml", Model)
+@Html.Partial("~/Views/Analytics/Filter.cshtml", Model.Filter)
 <div>
     <table class="fingerprint">
         <tr>
@@ -72,19 +72,19 @@
                     <div class="thumbnails">
                     @foreach (var screen in Model.Screens)
                     {
-                        <a href="@Model.GetUrlPart(screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.SelectedDateFrom, Model.SelectedDateTo) %>"><img src="/Thumbnails/<%=screen.Id %><%=screen.FileExtension %>"/></a>    
+                        <a href="@Model.Filter.GetUrlPart(screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.Filter.SelectedDateFrom, Model.Filter.SelectedDateTo) %>"><img src="/Thumbnails/<%=screen.Id %><%=screen.FileExtension %>"/></a>    
                     }
                     </div>
                 }
-                @if (!Model.HasClicks)
+                @if (!Model.Filter.HasClicks)
                 {
                     <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/content/images/notice_nobody_used.png" />
                 }
-                else if (Model.ClicksAmount == 0)
+                else if (Model.Filter.ClicksAmount == 0)
                 {
                     <img alt="Oops, ther is no data for this time period" class="notice" src="/content/images/notice_no-data.png" />
                 }
-                else if (!Model.ScreenId.HasValue && !Model.HasScrolls)
+                else if (!Model.Filter.ScreenId.HasValue && !Model.Filter.HasScrolls)
                 {
                     <img alt="Ahem! We have the data but no screenshot." class="notice" src="/content/images/notice_no_screen_shot.png" style="margin-bottom:40px;" />
                 }
@@ -110,14 +110,14 @@
                 }
             </td>
             <td>
-                @if (Model.HasClicks && Model.ClicksAmount > 0 && (Model.ScreenId.HasValue || Model.HasScrolls))
+                @if (Model.Filter.HasClicks && Model.Filter.ClicksAmount > 0 && (Model.Filter.ScreenId.HasValue || Model.Filter.HasScrolls))
                 {
                     <div class="charts">
                         <div class="title"><span>Visits (@Model.VisitsAmount)</span></div>
                         <div id="visits_graph" style="height:200px;width:575px;"></div>
                     </div>
                     <div class="charts">
-                        <div class="title"><span>Clicks (@Model.ClicksAmount)</span></div>
+                        <div class="title"><span>Clicks (@Model.Filter.ClicksAmount)</span></div>
                         <div id="clicks_graph" style="height:200px;width:575px;"></div>
                     </div>
                     @*<div class="charts">

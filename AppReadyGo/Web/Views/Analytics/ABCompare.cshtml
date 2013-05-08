@@ -219,7 +219,7 @@
 }
 @section topmenu { }
 
-@Html.Partial("~/Views/Analytics/Filter.cshtml", Model)
+@Html.Partial("~/Views/Analytics/Filter.cshtml", Model.Filter)
 <div>
     <article>
         <p><a id="showFirstImage" style="cursor:pointer;">Show Screen</a> &nbsp; @Html.DropDownList("firstScreen", Model.FirstScreenPathes)</p>
