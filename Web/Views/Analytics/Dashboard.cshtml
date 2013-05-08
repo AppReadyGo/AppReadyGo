@@ -29,7 +29,7 @@
     </script>
 }
 @section topmenu { }
-@Html.Partial("~/Views/Analytics/Filter.cshtml", Model)
+@Html.Partial("~/Views/Analytics/Filter.cshtml", Model.Filter)
 <table class="dashboard">
 <tr>
     <td colspan="2">
@@ -39,71 +39,53 @@
         </div>
     </td>
 </tr>
-@*<tr>  
-    <td>
-        <div class="title"><span>Visitors</span></div>
-        <div id="visitors_charts_place_holder" style="height:200px;width:437px;"></div>
-    </td>
-    <td>
-        <div class="title"><span>Map Overlay</span></div>
-        <img src="/Content/images/world_map.jpg" class="item" />
-    </td>
-</tr>*@
 <tr>  
-    @*<td>
-        <div class="title"><span>Trafic Sources</span></div>
-        <div class="item"></div>
-    </td>*@
     <td colspan="2">
         <div class="title"><span>Content Overview</span></div>
-         <section id="content" class="content-overview">
-
-        <table class="content-overview">
-            <thead>
-                <tr>
-                    <th class="index"></th>
-                    <th class="path">Active screens</th>
-                    <th class="visit">Visits</th>
-                    <th class="action"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.ContentOverviewData.Any())
-                {
-                    @Model.Pathes.ToString();
-
-                    foreach (var item in Model.ContentOverviewData)
-                    {
-                        <tr class="@(item.IndexIsOdd ? "odd" : "")">
-                            <td class="index">
-                                @item.Index
-                            </td>
-                            <td class="path">
-                                <a href="@item.GetPathUrl(Model.FilterUrlPart)">@item.Path</a>
-                            </td>
-                            <td class="view">
-                                @item.Views
-                            </td>
-                            <td class="action">
-                                <a href="/Application/Screens/@item.ApplicationId">Add/Edit Screen</a>
-                            </td>
-                        </tr>
-                    }
-                }
-                else
-                {                     
+        <section id="content" class="content-overview">
+            <table class="content-overview">
+                <thead>
                     <tr>
-                        <td class="index"></td>
-                        <td class="path">Ooppss... there is no data for this time period</td>
-                        <td class="view"></td>
-                        <td class="action"></td>
+                        <th class="index"></th>
+                        <th class="path">Active screens</th>
+                        <th class="visit">Visits</th>
+                        <th class="action"></th>
                     </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ContentOverviewData.Any())
+                    {
+                        foreach (var item in Model.ContentOverviewData)
+                        {
+                            <tr class="@(item.IndexIsOdd ? "odd" : "")">
+                                <td class="index">
+                                    @item.Index
+                                </td>
+                                <td class="path">
+                                    <a href="@item.GetPathUrl(Model.FilterUrlPart)">@item.Path</a>
+                                </td>
+                                <td class="view">
+                                    @item.Views
+                                </td>
+                                <td class="action">
+                                    <a href="/Application/Screens/@item.ApplicationId">Add/Edit Screen</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {                     
+                        <tr>
+                            <td class="index"></td>
+                            <td class="path">Ooppss... there is no data for this time period</td>
+                            <td class="view"></td>
+                            <td class="action"></td>
+                        </tr>
                      
-                }  
-            </tbody>
-        </table>
+                    }  
+                </tbody>
+            </table>
         </section>
-        @*<div class="item"></div>*@
     </td>
 </tr>
 <tr>
@@ -111,13 +93,13 @@
     <div class="title"><span>All Screens</span></div>
         <table class="content-overview">
             <tbody>
-                @if (Model.Pathes.Any())
+                @if (Model.Filter.Pathes.Any())
                 {
-                    foreach (var item in Model.Pathes)
+                    foreach (var item in Model.Filter.Pathes)
                     {
                       <tr>
                         <td class="path">
-                           <a href="@Model.GetUrlPart(item.Value)"> @item.Value</a>
+                           <a href="@Model.Filter.GetUrlPart(item)">@item</a>
                          </td>
                       </tr>
                     }

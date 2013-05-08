@@ -45,22 +45,22 @@
     </style>
 }
 @section topmenu { }
-@Html.Partial("~/Views/Analytics/Filter.cshtml", Model)
+@Html.Partial("~/Views/Analytics/Filter.cshtml", Model.Filter)
 @if (Model.Screens.Any())
 {
     <div class="thumbnails">
     @foreach (var screen in Model.Screens)
     {
-        <a href="@Model.GetUrlPart(screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.SelectedDateFrom, Model.SelectedDateTo)"><img src="/Thumbnails/@screen.Id@screen.FileExtension"/></a>    
+        <a href="@Model.Filter.GetUrlPart(screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.Filter.SelectedDateFrom, Model.Filter.SelectedDateTo)"><img src="/Thumbnails/@screen.Id@screen.FileExtension"/></a>    
     }
     </div>
 }
 <div>
-    @if (!Model.HasScrolls)
+    @if (!Model.Filter.HasScrolls)
     {
         <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/content/images/notice_nobody_used.png" />
     }
-    else if (Model.ScrollsAmount == 0)
+    else if (Model.Filter.ScrollsAmount == 0)
     {
         <img alt="Oops, ther is no data for this time period" class="notice" src="/content/images/notice_no-data.png" />
     }
@@ -87,7 +87,7 @@
                 <img id="image" src="/Analytics/ViewHeatMapImage/@Model.FilterUrlPart" />
             </td><td>
             <div class="charts">
-                <div class="title"><span>Screen Usage Data (@Model.ScrollsAmount scrolls)</span></div>
+                <div class="title"><span>Screen Usage Data (@Model.Filter.ScrollsAmount scrolls)</span></div>
                 <div id="usage_charts_place_holder" style="height:200px;width:575px;"></div>
             </div>
             </td></tr>

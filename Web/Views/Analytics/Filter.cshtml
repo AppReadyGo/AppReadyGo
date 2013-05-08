@@ -55,35 +55,20 @@
             }
             <li><strong>Application:</strong></li>
             <li class="stricted-width">@Model.ApplicationName</li>
-            @*<li class="multiselect"><button id="advanced_filter_btn">Advanced filter</button></li>*@
         </ul>
     </div>
     <div class="advanced_filter" id="advanced_filter">
-       @*By PM <p>
-            <label>
-                <strong>Portfolio:</strong>
-                @ Html.DropDownList("SelectedPortfolioId", Model.Portfolios)
-            </label>
-            <label>
-                <strong>Application:</strong>
-                @ Html.DropDownList("SelectedApplicationId", Model.Applications)
-            </label>
-        </p>*@
         <p>
             <label>
                 <strong>Screen size: </strong>
-                @Html.DropDownList("SelectedScreenSize", Model.ScreenSizes)
+                @Html.DropDownList("SelectedScreenSize", Model.SelectListScreenSizes)
             </label>
              &nbsp; 
             <label>
                 <strong>Path: </strong>
-                @Html.DropDownList("SelectedPath", Model.Pathes)
+                @Html.DropDownList("SelectedPath", Model.SelectListPathes)
             </label>
              &nbsp; 
-            <!--label>OS <select><option>All</option></select></label>
-            <label>Language <select><option>All</option></select></label>
-            <label>Country <select><option>All</option></select></label>
-            <label>City <select><option>All</option></select></label-->
             <label>
                 <strong>Date Range: </strong>
                 <a id="date_range_btn">@Model.SelectedDateFrom.ToString("dd MMM yyyy") - @Model.SelectedDateTo.ToString("dd MMM yyyy")</a>
@@ -99,7 +84,7 @@
                     <td class="picker-wrapper">
                         <span id="datepicker_to"></span>
                     </td>
-                    <td class="form-wrapper">
+                    <td>
                         <p>
                             <label>
                                 <strong>Preset range:</strong>
