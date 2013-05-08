@@ -44,8 +44,11 @@ namespace AppReadyGo.API.Controllers
 
 
         // TODO: Yura: We do not need the last parameter, you will not call for the method if user did not accept terms and conditions.
+        // PM : did you remove the last paramameter?
         // TODO: Yura: Do you need methods that will return all countries and applic aion types (interests) that exists in system?
+        // PM : we need it bt not now, lets move on and work only with 10-12 countries right now
         // TODO: Yura: I think we also need method to update the details
+        // PM : agree 
         [HttpPost]
         public bool Register(string firstName, string lastName, string email, string pass, Gender gender, AgeRange ageRange, int contryId, string zip, int[] interest)
         {
@@ -63,6 +66,7 @@ namespace AppReadyGo.API.Controllers
             if (!result.Validation.Any())
             {
                 // TODO: Yura: do we need the activation email process. Are we sure that the email exists?
+                // PM : no we dont need it. user will see his email on the "Account" page nad all the money will be pransfered to this email
                 //new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
                 return true;
             }
@@ -85,8 +89,9 @@ namespace AppReadyGo.API.Controllers
         }
 
         // Yura: What is the method? Does the method return package? I need explanation about ranges.
+        //PM : Ranges allow you to download a big app package, this method is "Download App"
         [HttpGet]
-        public HttpResponseMessage Get([FromUri]string filename)
+        public HttpResponseMessage GetApp([FromUri]string filename)
         {
             //TODO: Add method to update downloaded count.
             int appId = 0;
@@ -180,6 +185,7 @@ namespace AppReadyGo.API.Controllers
         }
 
         // TODO: Yura: What does it mean?
+        // PM : it means User (tester) has completed a task (used an app, reviewed it or something else)
         /// <summary>
         /// TASK comple confirmation 
         /// </summary>
