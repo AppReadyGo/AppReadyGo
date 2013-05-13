@@ -15,6 +15,7 @@ using AppReadyGo.Core.Queries.Users;
 using AppReadyGo.Core;
 using AppReadyGo.Core.Queries.Application;
 using AppReadyGo.Core.Commands.Application;
+using AppReadyGo.API.Models.Market;
 
 namespace AppReadyGo.API.Controllers
 {
@@ -26,10 +27,10 @@ namespace AppReadyGo.API.Controllers
         static readonly IMarketTestersRepository mTestersRepository = new MarketTestersRepository();
 
         [HttpPost]
-        public bool Login(string email, string pass)
+        public bool Login([FromBody] LoginModel model)
         {
-            var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(email));
-            if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(pass, securedDetails.PasswordSalt))
+            var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
+            if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
             {
                 // "The user name or password provided is incorrect."
                 return false;
