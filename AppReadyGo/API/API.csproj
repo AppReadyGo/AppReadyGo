@@ -144,6 +144,7 @@
     <Compile Include="Models\Analytics\Package.cs" />
     <Compile Include="Models\MarketAppsRepository.cs" />
     <Compile Include="Models\MarketTestersRepository.cs" />
+    <Compile Include="Models\Market\RegisterModel.cs" />
     <Compile Include="Models\Market\LoginModel.cs" />
     <Compile Include="Models\Tester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

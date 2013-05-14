@@ -51,18 +51,18 @@ namespace AppReadyGo.API.Controllers
         // TODO: Yura: I think we also need method to update the details
         // PM : agree 
         [HttpPost]
-        public bool Register(string firstName, string lastName, string email, string pass, Gender gender, AgeRange ageRange, int contryId, string zip, int[] interest)
+        public bool Register([FromBody] RegisterModel model)
         {
-            if (string.IsNullOrEmpty(email))
+            if (string.IsNullOrEmpty(model.Email))
             {
                 return false;
             }
-            if (string.IsNullOrEmpty(pass))
+            if (string.IsNullOrEmpty(model.Password))
             {
                 return false;
             }
-
-            var result = ObjectContainer.Instance.Dispatch(new CreateAPIMemberCommand(email, pass, firstName, lastName, gender, ageRange, contryId, zip, interest));
+            /*
+            var result = ObjectContainer.Instance.Dispatch(new CreateAPIMemberCommand(model.Email, model.Password, model.FirstName, model.LastName, model.Gender, model.AgeRange, model.ContryId, model.Zip, model.Interests));
 
             if (!result.Validation.Any())
             {
@@ -74,7 +74,8 @@ namespace AppReadyGo.API.Controllers
             else
             {
                 return false;
-            }
+            }*/
+            return true;
         }
 
         /// <summary>
