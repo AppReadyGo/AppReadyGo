@@ -17,7 +17,7 @@ namespace AppReadyGo.API.Tests.Controllers
     [TestClass]
     public class MarketClientTest
     {
-        static readonly Uri _baseAddress = new Uri("http://localhost:63321/api/Market/");
+        static readonly Uri _baseAddress = new Uri("http://localhost:63321/api/market/");
 
         [TestMethod]
         public void MarketLoginByNetwork()
@@ -52,9 +52,9 @@ namespace AppReadyGo.API.Tests.Controllers
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var data = new RegisterModel { ContryId = 1, Email = "test@test.com", Password = "1234", FirstName = "xxx" };
+            var data = new RegisterModel { ContryId = 1, Email = "test@test.com", FirstName = "xxx", Password = "121" };
 
-            var response = client.PostAsJsonAsync("Register", data).Result;
+            var response = client.PostAsJsonAsync("register", data).Result;
             if (!response.IsSuccessStatusCode)
             {
                 var res = response.Content.ReadAsStringAsync();
@@ -73,10 +73,10 @@ namespace AppReadyGo.API.Tests.Controllers
 
             System.Net.WebRequest req = System.Net.WebRequest.Create("http://localhost:63321/api/Market/Register");
             //Add these, as we're doing a POST
-            req.ContentType = "application/x-www-form-urlencoded";
+            req.ContentType = "application/json";
             req.Method = "POST";
             //We need to count how many bytes we're sending. Post'ed Faked Forms should be name=value&
-            byte[] bytes = System.Text.Encoding.ASCII.GetBytes("{{\"email\":\"test@test.com\"}}");
+            byte[] bytes = System.Text.Encoding.ASCII.GetBytes("{\"email\":\"test@test.com\",\"pass\":\"121\",\"firstname\":\"xxx\",\"lastname\":null,\"gender\":0,\"agerange\":0,\"countryid\":1,\"zip\":null,\"interests\":null}");
             req.ContentLength = bytes.Length;
             System.IO.Stream os = req.GetRequestStream();
             os.Write(bytes, 0, bytes.Length); //Push it out there
