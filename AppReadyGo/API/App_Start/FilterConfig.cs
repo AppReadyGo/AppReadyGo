@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using AppReadyGo.API.Models.Market;
 
 namespace AppReadyGo.API
 {

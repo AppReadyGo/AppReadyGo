@@ -4,16 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AppReadyGo.Core.Entities;
+using System.Web.Mvc;
+using System.Web.Routing;
+using System.Diagnostics;
+using System.IO;
 
 namespace AppReadyGo.API.Models.Market
 {
     [JsonObject(MemberSerialization.OptOut)]
     public class RegisterModel
     {
-        [JsonProperty(PropertyName = "email")]
+        [JsonProperty(PropertyName = "email", Required = Required.Always)]
         public string Email { get; set; }
 
-        [JsonProperty(PropertyName = "pass")]
+        [JsonProperty(PropertyName = "pass", Required = Required.Always)]
         public string Password { get; set; }
 
         [JsonProperty(PropertyName = "firstname")]

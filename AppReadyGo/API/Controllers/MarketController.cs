@@ -29,6 +29,7 @@ namespace AppReadyGo.API.Controllers
         [HttpPost]
         public bool Login([FromBody] LoginModel model)
         {
+            var body = HttpContext.Current.Request.Body();
             var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
             if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
             {
@@ -53,6 +54,8 @@ namespace AppReadyGo.API.Controllers
         [HttpPost]
         public bool Register([FromBody] RegisterModel model)
         {
+            // For the test proposes, retun body of current request
+            var body = HttpContext.Current.Request.Body();
             if (string.IsNullOrEmpty(model.Email))
             {
                 return false;
@@ -77,6 +80,7 @@ namespace AppReadyGo.API.Controllers
             }*/
             return true;
         }
+
 
         /// <summary>
         /// Get all apps for this account 
@@ -218,5 +222,15 @@ namespace AppReadyGo.API.Controllers
         }
 
 
+    }
+
+    public static class Ext
+    {
+        public static string Body(this HttpRequest request)
+        {
+            Stream req = request.InputStream;
+            req.Seek(0, System.IO.SeekOrigin.Begin);
+            return new StreamReader(req).ReadToEnd();
+        }
     }
 }
