@@ -228,6 +228,7 @@
     <Compile Include="QueryResults\Application\ApplicationResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationScreenResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationsDataResult.cs" />
+    <Compile Include="QueryResults\Application\PagingResult.cs" />
     <Compile Include="QueryResults\Application\PublishesDataResult.cs" />
     <Compile Include="QueryResults\Application\ExtendedApplicationResult.cs" />
     <Compile Include="QueryResults\Application\PublishDetailsResult.cs" />

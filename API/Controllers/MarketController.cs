@@ -117,17 +117,23 @@ namespace AppReadyGo.API.Controllers
         /// <param name="email"></param>
         /// <returns></returns>
         [HttpGet]
-        public ApplicationModel[] GetApps(string email, int curPage, int pageSize)
+        public PaggingModel<ApplicationModel> GetApps(string email, int curPage, int pageSize)
         {
-            var applications = ObjectContainer.Instance.RunQuery(new GetApplicationsForUserQuery(email, curPage, pageSize));
-            return applications.Select(a => new ApplicationModel 
-            { 
-                Id = a.Id, 
-                Name = a.Name,
-                Description = a.Description,
-                HasIcon = a.HasIcon
-            })
-            .ToArray();
+            var res = ObjectContainer.Instance.RunQuery(new GetApplicationsForUserQuery(email, curPage, pageSize));
+            return new PaggingModel<ApplicationModel>
+            {
+                Collection = res.Collection.Select(a => new ApplicationModel
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    Description = a.Description,
+                    HasIcon = a.HasIcon
+                })
+                .ToArray(),
+                CurPage = res.CurPage,
+                PageSize = res.PageSize,
+                ItemsCount = res.ItemsCount
+            };
         }
 
         // Yura: What is the method? Does the method return package? I need explanation about ranges.

@@ -17,7 +17,7 @@ namespace AppReadyGo.API.Tests.Controllers
     [TestClass]
     public class MarketClientTest
     {
-        static readonly Uri _baseAddress = new Uri("http://localhost:63321/api/market/");
+        static readonly Uri _baseAddress = new Uri("http://localhost:63321/market/");
 
         [TestMethod]
         public void MarketLoginByNetwork()
@@ -68,24 +68,26 @@ namespace AppReadyGo.API.Tests.Controllers
         }
 
         [TestMethod]
-        public void MarketRegisterByNetwork1()
+        public void MarketGetAppsByNetwork()
         {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = _baseAddress;
 
-            System.Net.WebRequest req = System.Net.WebRequest.Create("http://localhost:63321/api/Market/Register");
-            //Add these, as we're doing a POST
-            req.ContentType = "application/json";
-            req.Method = "POST";
-            //We need to count how many bytes we're sending. Post'ed Faked Forms should be name=value&
-            byte[] bytes = System.Text.Encoding.ASCII.GetBytes("{\"email\":\"test@test.com\",\"pass\":\"121\",\"firstname\":\"xxx\",\"lastname\":null,\"gender\":0,\"agerange\":0,\"countryid\":1,\"zip\":null,\"interests\":null}");
-            req.ContentLength = bytes.Length;
-            System.IO.Stream os = req.GetRequestStream();
-            os.Write(bytes, 0, bytes.Length); //Push it out there
-            os.Close();
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            System.Net.WebResponse resp = req.GetResponse();
-            //if (resp == null) return null;
-            System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-            var res = sr.ReadToEnd().Trim();
+
+            var response = client.GetAsync("GetApps/?email=some&curPage=1&pageSize=10").Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var res = response.Content.ReadAsStringAsync();
+                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
+            }
+            else
+            {
+                var res = response.Content.ReadAsStringAsync();
+                //Assert.IsTrue(res.Result);
+            }
         }
 
         //[TestMethod]
