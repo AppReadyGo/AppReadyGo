@@ -7,7 +7,7 @@ using System.Web;
 namespace AppReadyGo.API.Models.Market
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class ApplicationModel
+    public class ApplicationModel : PaggingModel
     {
         public int Id { get; set; }
 
