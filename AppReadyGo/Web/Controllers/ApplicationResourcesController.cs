@@ -35,19 +35,6 @@ namespace AppReadyGo.Web.Controllers
             }
         }
 
-        public FileContentResult Screen(int appId, int id)
-        {
-            var dir = Server.MapPath("~/Content/Images/no_icon.png");
-            if (System.IO.File.Exists(dir))
-            {
-                return new FileContentResult(System.IO.File.ReadAllBytes(dir), "image/png"); ;
-            }
-            else
-            {
-                throw new HttpException(404, "Not found");
-            }
-        }
-
         public FileContentResult ScreenShot(int appId, int id)
         {
             var dir = Server.MapPath("~/Content/Images/no_icon.png");

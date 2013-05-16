@@ -30,6 +30,6 @@ namespace AppReadyGo.Model.Pages.Application
     {
         public bool IsAlternative { get; set; }
 
-        public string FileExtention { get; set; }
+        public string FileName { get; set; }
     }
 }

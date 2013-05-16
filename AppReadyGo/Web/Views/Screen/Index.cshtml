@@ -1,0 +1,121 @@
+﻿@using AppReadyGo.Helpers;
+@using AppReadyGo.Model.Pages.Application;
+@model ScreensListModel
+@{
+    Layout = "~/Views/Shared/_AfterLogin.cshtml";
+}
+@section title { @Model.ApplicationDescription - Screens }
+@section header 
+{ 
+    <script src="@Url.Content("~/Scripts/table.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/application.screens.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/ThridParty/fancyBox-v2.1.4/jquery.fancybox.css")" type="text/css" media="screen" />
+    <script type="text/javascript" src="@Url.Content("~/ThridParty/fancyBox-v2.1.4/jquery.fancybox.pack.js")"></script>
+
+    <script type="text/javascript">
+         $(function () {
+             $('#the-list .column-image a').fancybox();
+         });
+    </script>
+}
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+		           <li><a href="/Application"><h4>Applications</h4></a></li>
+		           <li><h4>@Model.ApplicationDescription - Screens</h4></li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<div class="content-wrapper">
+<div class="wrap">  
+	<div class="t-nav">
+        <div class="a-l search-box">
+			<input type="search" id="search-input" name="s" value="@Model.Pagging.SearchStr" />
+            <a class="link2" onclick="javascript: document.location.href = '/Application/@Model.ApplicationId/Screen?cp=1&srch=' + escape($('#search-input').val());"><span><span>Search</span></span></a>
+		</div>
+        <div class="a-l actions">
+            <a href="/Application/@Model.ApplicationId/Screen/New" class="link2"><span><span>+ Add Screen</span></span></a>
+        </div>
+		<div class='t-nav-pages @(Model.Pagging.IsOnePage ? "one-page" : "")'>
+			<span class="d-num">@Model.Pagging.Count items</span>
+			<span class='pagination-links'>
+				<a class='first-page @(Model.Pagging.IsOnePage ? "disabled" : "")' title='Go to the first page' href='/Application/@Model.ApplicationId/Screen?cp=1@Model.Pagging.UrlPart'>&laquo;</a>
+				<a class='prev-page @(Model.Pagging.PreviousPage.HasValue ? "" : "disabled")' title='Go to the previous page' href='/Application/@Model.ApplicationId/Screen?cp=@(Model.Pagging.PreviousPage.HasValue ? Model.Pagging.PreviousPage.Value : 1)@Model.Pagging.UrlPart'>&lsaquo;</a>
+				<span class="paging-input">
+					<input class='cur-p' title='Current page' type='text' name='paged' value='@Model.Pagging.CurPage' size='1' /> of <span class='total-pages'>@Model.Pagging.TotalPages</span>
+				</span>
+				<a class='next-page @(Model.Pagging.NextPage.HasValue ? "" : "disabled")' title='Go to the next page' href='/Application/@Model.ApplicationId/Screen?cp=@(Model.Pagging.NextPage.HasValue ? Model.Pagging.NextPage.Value : Model.Pagging.TotalPages)@Model.Pagging.UrlPart %>'>&rsaquo;</a>
+				<a class='last-page @(Model.Pagging.IsOnePage ? "disabled" : "")' title='Go to the last page' href='/Application/@Model.ApplicationId/Screen?cp=@Model.Pagging.TotalPages@Model.Pagging.UrlPart'>&raquo;</a>
+			</span>
+		</div>
+	</div><!-- /table-head -->
+	<table class="tbl fixed" cellspacing="0">
+		<thead>
+		<tr>
+			<th scope='col' class='manage-column column-image'>Image</th>
+			<th scope='col' class='manage-column column-path sortable'><a href="/Application/@Model.ApplicationId/Screen?cp=1&orderby=path&order=@(Model.PathOrder + Model.Pagging.SearchStrUrlPart)"><span>Path</span><span class="sorting-indicator"></span></th>
+			<th scope='col' class='manage-column column-width sortable'><a href="/Application/@Model.ApplicationId/Screen?cp=1&orderby=width&order=@(Model.WidthOrder + Model.Pagging.SearchStrUrlPart)"><span>Width</span><span class="sorting-indicator"></span></th>
+			<th scope='col' class='manage-column column-height sortable'><a href="/Application/@Model.ApplicationId/Screen?cp=1&orderby=height&order=@(Model.HeightOrder + Model.Pagging.SearchStrUrlPart)"><span>Height</span><span class="sorting-indicator"></span></th>
+		</tr>
+		</thead>
+		<tfoot>
+		<tr>
+			<th scope='col' class='manage-column column-image'>Image</th>
+			<th scope='col' class='manage-column column-path sortable'><a href="/Application/@Model.ApplicationId/Screen?cp=1&orderby=path&order=<%=Model.PathOrder + Model.SearchStrUrlPart %>"><span>Path</span><span class="sorting-indicator"></span></th>
+			<th scope='col' class='manage-column column-width sortable'><a href="/Application/@Model.ApplicationId/Screen?cp=1&orderby=width&order=<%=Model.WidthOrder + Model.SearchStrUrlPart %>"><span>Width</span><span class="sorting-indicator"></span></th>
+			<th scope='col' class='manage-column column-height sortable'><a href="/Application/@Model.ApplicationId/Screen?cp=1&orderby=height&order=<%=Model.HeightOrder + Model.SearchStrUrlPart %>"><span>Height</span><span class="sorting-indicator"></span></th>
+		</tr>
+		</tfoot>
+		<tbody id="the-list" class='list:user'>
+        @if (Model.Screens.Any())
+        {
+            foreach (var item in Model.Screens)
+            {	
+	        <tr class="@(item.IsAlternative ? "" : "alternate")">
+		        <td class="column-image">
+                    <a data-fancybox-group="gallery" href="/Application/@Model.ApplicationId/Screen/Image/@item.Id/@item.FileName" title="Path: @item.Path, Width: @item.Width, Height: @item.Height">
+                        <img width="60" height="60" src="/Application/@Model.ApplicationId/Screen/Image/@item.Id/@item.FileName" title="Path: @item.Path, Width: @item.Width, Height: @item.Height"/>
+                    </a>
+		        </td>
+		        <td class="role column-path">
+                    <span>@item.Path</span>
+			        <br />
+			        <div class="row-actions">
+                        <span class='edit'><a href="/Application/@Model.ApplicationId/Screen/Edit/@item.Id">Edit</a> | </span>
+				        <span class='delete'><a class='submitdelete' href='/Application/@Model.ApplicationId/Screen/Remove/@item.Id' onclick="javascript:return confirm('Are you realy want to remove the screen? The operation is not recoverable!');">Delete</a></span>
+			        </div>          
+                </td>
+		        <td class="role column-width">@item.Width</td>
+		        <td class="role column-height">@item.Height</td>
+	        </tr>
+            }
+        
+        }
+        else
+        {
+            <tr class="no-items"><td colspan="4" class="colspanchange">No screens were found.</td></tr>
+        }
+		</tbody>
+	</table>
+	<div class="t-nav bottom">
+		<div class='t-nav-pages @(Model.Pagging.IsOnePage ? "one-page" : "")'>
+			<span class="d-num">@Model.Pagging.Count items</span>
+			<span class='pagination-links'>
+				<a class='first-page @(Model.Pagging.IsOnePage ? "disabled" : "")' title='Go to the first page' href='/Application/@Model.ApplicationId/Screen?cp=1@Model.UrlPart'>&laquo;</a>
+				<a class='prev-page @(Model.Pagging.PreviousPage.HasValue ? "" : "disabled")' title='Go to the previous page' href='/Application/@Model.ApplicationId/Screen?cp=@(Model.Pagging.PreviousPage.HasValue ? Model.Pagging.PreviousPage.Value : 1)@Model.Pagging.UrlPart'>&lsaquo;</a>
+				<span class="paging-input">@Model.Pagging.CurPage of <span class='total-pages'>@Model.Pagging.TotalPages</span></span>
+				<a class='next-page @(Model.Pagging.NextPage.HasValue ? "" : "disabled")' title='Go to the next page' href='/Application/@Model.ApplicationId/Screen?cp=@(Model.Pagging.NextPage.HasValue ? Model.Pagging.NextPage.Value : Model.Pagging.TotalPages)@Model.Pagging.UrlPart'>&rsaquo;</a>
+				<a class='last-page @(Model.Pagging.IsOnePage ? "disabled" : "")' title='Go to the last page' href='/Application/@Model.ApplicationId/Screen?cp=@Model.Pagging.TotalPages@Model.Pagging.UrlPart'>&raquo;</a>
+			</span>
+		</div>
+		<br class="clear" />
+	</div>
+</div><!-- /wrap -->
+<br class="clear" />
+</div>
+</asp:Content>

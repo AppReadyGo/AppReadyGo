@@ -15,7 +15,7 @@
 			<div class="inner">
                 <ul>
 		           <li><a href="/Application"><h4>Applications</h4></a></li>
-		           <li><a href="/Application/Screens/@Model.ApplicationId"><h4>@ViewBag.ApplicationDescription - Screens</h4></a></li>
+		           <li><a href="/Application/@Model.ApplicationId/Screen"><h4>@ViewBag.ApplicationDescription - Screens</h4></a></li>
 		           <li><h4>Add Screen</h4></li>
 		        </ul>
 			</div>
@@ -27,7 +27,7 @@
     <article class="center">
         <div class="form-wrapper">
             <header>
-                <h1>Publish to testers</h1>
+                <h1>Add screen</h1>
             </header>
             <div class="sub-wrapper">
             @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))

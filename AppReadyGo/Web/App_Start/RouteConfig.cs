@@ -83,6 +83,13 @@ namespace AppReadyGo.Web
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
+            routes.MapRoute(
+                "Screen controller",
+                "Application/{appId}/screen/{action}/{id}/{file}",
+                new { controller = "Screen", action = "Index", id = UrlParameter.Optional, file = UrlParameter.Optional },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
             // Appication resources
             routes.MapRoute(
                 "Application Resources",
@@ -91,12 +98,12 @@ namespace AppReadyGo.Web
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
-            routes.MapRoute(
-                "ApplicationScreen",
-                "Application/Screen/{appId}/{width}/{height}/{file}",
-                new { controller = "Application", action = "Screen", appId = UrlParameter.Optional },
-                new[] { "AppReadyGo.Controllers" } // Namespaces
-            );
+            //routes.MapRoute(
+            //    "ApplicationScreen",
+            //    "Application/Screen/{appId}/{width}/{height}/{file}",
+            //    new { controller = "Application", action = "Screen", appId = UrlParameter.Optional },
+            //    new[] { "AppReadyGo.Controllers" } // Namespaces
+            //);
 
             routes.MapRoute(
                 "ApplicationClickHeatMapImage",
