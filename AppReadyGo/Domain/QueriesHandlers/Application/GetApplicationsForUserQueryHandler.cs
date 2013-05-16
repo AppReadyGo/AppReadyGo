@@ -25,6 +25,24 @@ namespace AppReadyGo.Domain.Queries
                         HasIcon = a.IconExt != null
                     })
                     .ToArray();
+
+            // TODO: add paging
+            //var apps = session.Query<AppReadyGo.Domain.Model.Application>();
+            //int count = 
+
+            //var skip = query.PageSize * (query.CurPage - 1);
+            //result.Transactions = allTransactions.Skip(skip)
+            //            .Take(query.PageSize)
+            //            .ToArray();
+
+            //        .Select(a => new APIApplicationResult
+            //        {
+            //            Id = a.Id,
+            //            Name = a.Name,
+            //            Description = a.Description,
+            //            HasIcon = a.IconExt != null
+            //        })
+            //        .ToArray();
         }
     }
 }

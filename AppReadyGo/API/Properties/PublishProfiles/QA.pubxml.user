@@ -13,10 +13,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2013 15:31:30</publishTime>
     </File>
     <File Include="bin/AppReadyGo.API.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/16/2013 16:23:00</publishTime>
     </File>
     <File Include="bin/AppReadyGo.API.pdb">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/16/2013 16:23:00</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Common.dll">
       <publishTime>05/16/2013 16:03:33</publishTime>
@@ -79,7 +79,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/25/2013 09:03:04</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>04/17/2013 15:31:00</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>04/17/2013 15:30:59</publishTime>

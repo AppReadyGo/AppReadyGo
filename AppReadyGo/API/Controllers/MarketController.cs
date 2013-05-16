@@ -117,9 +117,9 @@ namespace AppReadyGo.API.Controllers
         /// <param name="email"></param>
         /// <returns></returns>
         [HttpGet]
-        public ApplicationModel[] GetApps(string email)
+        public ApplicationModel[] GetApps(string email, int curPage, int pageSize)
         {
-            var applications = ObjectContainer.Instance.RunQuery(new GetApplicationsForUserQuery(email));
+            var applications = ObjectContainer.Instance.RunQuery(new GetApplicationsForUserQuery(email, curPage, pageSize));
             return applications.Select(a => new ApplicationModel 
             { 
                 Id = a.Id, 
