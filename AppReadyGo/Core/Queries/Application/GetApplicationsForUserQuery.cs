@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppReadyGo.Core.Queries.Application
 {
-    public class GetApplicationsForUserQuery : IQuery<IEnumerable<APIApplicationResult>>
+    public class GetApplicationsForUserQuery : IQuery<PagingResult<APIApplicationResult>>
     {
         public string Email { get; private set; }
         public int CurPage { get; private set; }

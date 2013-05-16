@@ -11,38 +11,33 @@ using AppReadyGo.Core.QueryResults.Application;
 
 namespace AppReadyGo.Domain.Queries
 {
-    public class GetApplicationsForUserQueryHandler : IQueryHandler<GetApplicationsForUserQuery, IEnumerable<APIApplicationResult>>
+    public class GetApplicationsForUserQueryHandler : IQueryHandler<GetApplicationsForUserQuery, PagingResult<APIApplicationResult>>
     {
-        public IEnumerable<APIApplicationResult> Run(ISession session, GetApplicationsForUserQuery query)
+        public PagingResult<APIApplicationResult> Run(ISession session, GetApplicationsForUserQuery query)
         {
+            var res = new PagingResult<APIApplicationResult>
+            {
+                CurPage = query.CurPage,
+                PageSize = query.PageSize
+            };
+
             // TODO: Change application filtering by user details
-            return session.Query<AppReadyGo.Domain.Model.Application>()
-                    .Select(a => new APIApplicationResult
-                    {
-                        Id = a.Id,
-                        Name = a.Name,
-                        Description = a.Description,
-                        HasIcon = a.IconExt != null
-                    })
-                    .ToArray();
+            var appsQuery = session.Query<AppReadyGo.Domain.Model.Application>();
+            res.ItemsCount = appsQuery.Count();
 
-            // TODO: add paging
-            //var apps = session.Query<AppReadyGo.Domain.Model.Application>();
-            //int count = 
+            var skip = query.PageSize * (query.CurPage - 1);
+            res.Collection = appsQuery.Select(a => new APIApplicationResult
+                        {
+                                Id = a.Id,
+                                Name = a.Name,
+                                Description = a.Description,
+                                HasIcon = a.IconExt != null
+                        })
+                        .Skip(skip)
+                        .Take(query.PageSize)
+                        .ToArray();
 
-            //var skip = query.PageSize * (query.CurPage - 1);
-            //result.Transactions = allTransactions.Skip(skip)
-            //            .Take(query.PageSize)
-            //            .ToArray();
-
-            //        .Select(a => new APIApplicationResult
-            //        {
-            //            Id = a.Id,
-            //            Name = a.Name,
-            //            Description = a.Description,
-            //            HasIcon = a.IconExt != null
-            //        })
-            //        .ToArray();
+            return res;
         }
     }
 }
