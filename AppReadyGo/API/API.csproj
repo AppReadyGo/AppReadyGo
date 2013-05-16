@@ -129,24 +129,22 @@
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarketController.cs" />
+    <Compile Include="Filters\GoogleAnalyticsFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Analytics\TouchDetails.cs" />
     <Compile Include="Models\Analytics\ViewAreaDetails.cs" />
     <Compile Include="Models\Analytics\ScrollDetails.cs" />
-    <Compile Include="Models\Application.cs" />
+    <Compile Include="Models\Market\ApplicationModel.cs" />
     <Compile Include="Models\Analytics\FingerPrintData.cs" />
-    <Compile Include="Models\IMarketAppsRepository.cs" />
-    <Compile Include="Models\IMarketTestersRepository.cs" />
     <Compile Include="Models\Analytics\SessionInfo.cs" />
     <Compile Include="Models\Analytics\SystemInfo.cs" />
     <Compile Include="Models\Analytics\Package.cs" />
-    <Compile Include="Models\MarketAppsRepository.cs" />
-    <Compile Include="Models\MarketTestersRepository.cs" />
     <Compile Include="Models\Market\RegisterModel.cs" />
     <Compile Include="Models\Market\LoginModel.cs" />
-    <Compile Include="Models\Tester.cs" />
+    <Compile Include="Models\Market\SettingsModel.cs" />
+    <Compile Include="Models\Market\TaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +204,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\Production.pubxml" />
+    <None Include="Properties\PublishProfiles\QA.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -250,6 +250,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Web.QA.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

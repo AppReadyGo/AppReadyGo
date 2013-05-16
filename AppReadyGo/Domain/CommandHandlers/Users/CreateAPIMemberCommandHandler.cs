@@ -9,26 +9,6 @@ using AppReadyGo.Domain.Model;
 
 namespace AppReadyGo.Domain.CommandHandlers.Users
 {
-    public class CreateMemberCommandHandler : ICommandHandler<CreateMemberCommand, int>
-    {
-        public int Execute(ISession session, CreateMemberCommand cmd)
-        {
-            var user = new Member(cmd.Email, cmd.Password);
-            session.Save(user);
-            return user.Id;
-        }
-    }
-
-    public class CreateStaffCommandHandler : ICommandHandler<CreateStaffCommand, int>
-    {
-        public int Execute(ISession session, CreateStaffCommand cmd)
-        {
-            var user = new Staff(cmd.Email, cmd.Password);
-            session.Save(user);
-            return user.Id;
-        }
-    }
-
     public class CreateAPIMemberCommandHandler : ICommandHandler<CreateAPIMemberCommand, int>
     {
         public int Execute(ISession session, CreateAPIMemberCommand cmd)

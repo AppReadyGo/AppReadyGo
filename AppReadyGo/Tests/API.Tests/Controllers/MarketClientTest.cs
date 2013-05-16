@@ -52,7 +52,7 @@ namespace AppReadyGo.API.Tests.Controllers
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var data = new RegisterModel { ContryId = 1, Email = "test@test.com", FirstName = "xxx", Password = "121" };
+            var data = new UserModel { ContryId = 1, Email = "test@test.com", FirstName = "xxx", Password = "121" };
 
             var response = client.PostAsJsonAsync("register", data).Result;
             if (!response.IsSuccessStatusCode)

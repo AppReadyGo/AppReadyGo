@@ -22,10 +22,10 @@ namespace AppReadyGo.Domain.CommandHandlers
         {
             this.session = session;
         }
-        public bool IsEmailExists(string email)
+        public bool IsEmailExists(string email, int? userId)
         {
             return this.session.Query<User>()
-                            .Where(u => u.Email.ToLower() == email.ToLower())
+                            .Where(u => u.Email.ToLower() == email.ToLower() && (!userId.HasValue || userId.Value != u.Id))
                             .Any();
         }
 

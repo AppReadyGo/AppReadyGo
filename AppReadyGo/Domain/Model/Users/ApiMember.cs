@@ -64,8 +64,10 @@ namespace AppReadyGo.Domain.Model.Users
             }
         }
 
-        public virtual void Update(string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string Zip, ApplicationType[] appTypes)
+        public virtual void Update(string email, string password, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string Zip, ApplicationType[] appTypes)
         {
+            this.Email = email;
+            this.Password = Encryption.SaltedHash(password, this.PasswordSalt); ;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Gender = gender;

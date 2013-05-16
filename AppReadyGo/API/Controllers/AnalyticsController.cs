@@ -23,13 +23,15 @@ using System.Configuration;
 using GoogleAnalyticsDotNet.Common.Data;
 using GoogleAnalyticsDotNet.Common.Helpers;
 using GoogleAnalyticsDotNet.Common;
+using AppReadyGo.API.Filters;
 
 namespace AppReadyGo.API.Controllers
 {
+    [GoogleAnalyticsFilter]
     public class AnalyticsController : ApiController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
-        private static bool googleAnalytics = bool.Parse(ConfigurationManager.AppSettings["GoogleAnalytics"]);
+
         [HttpGet]
         public bool Index()
         {
@@ -42,14 +44,6 @@ namespace AppReadyGo.API.Controllers
         {
             try
             {
-                if (googleAnalytics)
-                {
-                    // Google analytics
-                    GooglePageView pageView = new GooglePageView("Submit Package", "api.appreadygo.com", "/Analytics/SubmitPackage");
-                    TrackingRequest request = new RequestFactory().BuildRequest(pageView);
-                    GoogleTracking.FireTrackingEvent(request);
-                }
-
                 if (data == null || data.Package == null)
                 {
                     log.WriteError("Error to submit package the parameter is null");

@@ -12,8 +12,11 @@ using System.IO;
 namespace AppReadyGo.API.Models.Market
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class RegisterModel
+    public class UserModel
     {
+        [JsonProperty(PropertyName = "id", Required = Required.Default)]
+        public int? Id { get; set; }
+
         [JsonProperty(PropertyName = "email", Required = Required.Always)]
         public string Email { get; set; }
 
@@ -27,13 +30,13 @@ namespace AppReadyGo.API.Models.Market
         public string LastName { get; set; }
 
         [JsonProperty(PropertyName = "gender")]
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
 
         [JsonProperty(PropertyName = "agerange")]
-        public AgeRange AgeRange { get; set; }
+        public AgeRange? AgeRange { get; set; }
 
         [JsonProperty(PropertyName = "countryid")]
-        public int ContryId { get; set; }
+        public int? ContryId { get; set; }
 
         [JsonProperty(PropertyName = "zip")]
         public string Zip { get; set; }

@@ -8,5 +8,8 @@ namespace AppReadyGo.Core.QueryResults.Application
 {
     public class APIApplicationResult : ApplicationResult
     {
+        public string Description { get; set; }
+
+        public bool HasIcon { get; set; }
     }
 }

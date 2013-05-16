@@ -96,12 +96,13 @@
     <Compile Include="CommandHandlers\Content\UpdatePageCommandHandler.cs" />
     <Compile Include="CommandHandlers\CreatePortfolioCommandHandler.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
-    <Compile Include="CommandHandlers\RemovePortfolioCommandHandler.cs" />
     <Compile Include="CommandHandlers\StoredProcedureCommandHandler.cs" />
-    <Compile Include="CommandHandlers\UpdatePortfolioCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\AcceptTermsAndConditionsCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\ActivateUserCommandHandler.cs" />
-    <Compile Include="CommandHandlers\Users\CreateUserCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\UpdateAPIMemberCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\CreateStaffCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\CreateAPIMemberCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\CreateMemberCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\DeactivateUserCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\GrantSpecialAccessCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\RemoveUserCommandHandler.cs" />

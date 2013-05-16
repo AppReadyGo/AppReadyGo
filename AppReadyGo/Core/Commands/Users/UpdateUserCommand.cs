@@ -1,17 +1,22 @@
-﻿using AppReadyGo.Core.Entities;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AppReadyGo.Core.Commands.Users
 {
-
-    public abstract class CreateUserCommand : ICommand<int>
+    public abstract class UpdateUserCommand : ICommand<int>
     {
         public string Email { get; protected set; }
 
         public string Password { get; protected set; }
 
-        protected CreateUserCommand(string email, string password)
+        public int UserId { get; set; }
+
+        protected UpdateUserCommand(int userId, string email, string password)
         {
+            this.UserId = userId;
             this.Email = email;
             this.Password = password;
         }
@@ -33,7 +38,7 @@ namespace AppReadyGo.Core.Commands.Users
                 yield return new ValidationResult(ErrorCode.WrongEmail, "The email is wrong.");
             }
 
-            if (validation.IsEmailExists(this.Email))
+            if (validation.IsEmailExists(this.Email, this.UserId))
             {
                 yield return new ValidationResult(ErrorCode.EmailExists, "The email exists in the system.");
             }
