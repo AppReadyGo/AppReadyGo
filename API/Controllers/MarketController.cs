@@ -16,20 +16,34 @@ using AppReadyGo.Core;
 using AppReadyGo.Core.Queries.Application;
 using AppReadyGo.Core.Commands.Application;
 using AppReadyGo.API.Models.Market;
+using System.Configuration;
+using AppReadyGo.Core.Logger;
+using System.Reflection;
+using GoogleAnalyticsDotNet.Common.Data;
+using GoogleAnalyticsDotNet.Common.Helpers;
+using GoogleAnalyticsDotNet.Common;
+using AppReadyGo.API.Filters;
 
 namespace AppReadyGo.API.Controllers
 {
+    [GoogleAnalyticsFilter]
     public class MarketController : ApiController
     {
-        // TODO: Yura: Why do we need the repositories? We already have DAL, this is just add additional layer that we don't need
-        // In addition the approach to init objects, prevent test creating.
-        static readonly IMarketAppsRepository mAppsRepository = new MarketAppsRepository();
-        static readonly IMarketTestersRepository mTestersRepository = new MarketTestersRepository();
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
+        [HttpGet]
+        public SettingsModel GetSettings()
+        {
+            return new SettingsModel
+            {
+                WebApplicationBaseURL = ConfigurationManager.AppSettings["WebApplicationBaseUrl"]
+            };
+        }
 
         [HttpPost]
         public bool Login([FromBody] LoginModel model)
         {
-            var body = HttpContext.Current.Request.Body();
+            // var body = HttpContext.Current.Request.Body();
             var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
             if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
             {
@@ -44,18 +58,10 @@ namespace AppReadyGo.API.Controllers
             return true;
         }
 
-
-        // TODO: Yura: We do not need the last parameter, you will not call for the method if user did not accept terms and conditions.
-        // PM : did you remove the last paramameter?
-        // TODO: Yura: Do you need methods that will return all countries and applic aion types (interests) that exists in system?
-        // PM : we need it bt not now, lets move on and work only with 10-12 countries right now
-        // TODO: Yura: I think we also need method to update the details
-        // PM : agree 
         [HttpPost]
-        public bool Register([FromBody] RegisterModel model)
+        public bool Register([FromBody] UserModel model)
         {
-            // For the test proposes, retun body of current request
-            var body = HttpContext.Current.Request.Body();
+            // var body = HttpContext.Current.Request.Body();
             if (string.IsNullOrEmpty(model.Email))
             {
                 return false;
@@ -64,21 +70,44 @@ namespace AppReadyGo.API.Controllers
             {
                 return false;
             }
-            /*
+
             var result = ObjectContainer.Instance.Dispatch(new CreateAPIMemberCommand(model.Email, model.Password, model.FirstName, model.LastName, model.Gender, model.AgeRange, model.ContryId, model.Zip, model.Interests));
 
             if (!result.Validation.Any())
             {
                 // TODO: Yura: do we need the activation email process. Are we sure that the email exists?
                 // PM : no we dont need it. user will see his email on the "Account" page nad all the money will be pransfered to this email
+                // Y: what will happen in case he set up wrong email?
                 //new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
                 return true;
             }
             else
             {
                 return false;
-            }*/
-            return true;
+            }
+        }
+
+        /// <summary>
+        /// Update user info
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <param name="pass"></param>
+        /// <param name="gender"></param>
+        /// <param name="ageRange"></param>
+        /// <param name="contryId"></param>
+        /// <param name="zip"></param>
+        /// <param name="interest"></param>
+        [HttpPost]
+        public void UpdateUser([FromBody] UserModel model)
+        {
+
+            var result = ObjectContainer.Instance.Dispatch(new UpdateAPIMemberCommand(model.Id.Value, model.Email, model.Password, model.FirstName, model.LastName, model.Gender, model.AgeRange, model.ContryId, model.Zip, model.Interests));
+
+            if (!result.Validation.Any())
+            {
+            }
         }
 
 
@@ -88,14 +117,22 @@ namespace AppReadyGo.API.Controllers
         /// <param name="email"></param>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<Application> GetApps(string email)
+        public ApplicationModel[] GetApps(string email)
         {
             var applications = ObjectContainer.Instance.RunQuery(new GetApplicationsForUserQuery(email));
-            return null;
+            return applications.Select(a => new ApplicationModel 
+            { 
+                Id = a.Id, 
+                Name = a.Name,
+                Description = a.Description,
+                HasIcon = a.HasIcon
+            })
+            .ToArray();
         }
 
         // Yura: What is the method? Does the method return package? I need explanation about ranges.
         //PM : Ranges allow you to download a big app package, this method is "Download App"
+        // Yura: lets provide appid or something else, but not filename.
         [HttpGet]
         public HttpResponseMessage GetApp([FromUri]string filename)
         {
@@ -182,6 +219,11 @@ namespace AppReadyGo.API.Controllers
                 HttpResponseMessage response = new HttpResponseMessage();
                 response.StatusCode = fullContent ? HttpStatusCode.OK : HttpStatusCode.PartialContent;
                 response.Content = new StreamContent(responseStream);
+                // Return filename
+                //response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                //{
+                //    FileName = "foo.txt"
+                //};
                 return response;
             }
             catch (IOException)
@@ -192,31 +234,14 @@ namespace AppReadyGo.API.Controllers
 
         // TODO: Yura: What does it mean?
         // PM : it means User (tester) has completed a task (used an app, reviewed it or something else)
+        // Yura: Could you please explain me more about the functionality, we have to create a database and other functionality?
         /// <summary>
         /// TASK comple confirmation 
         /// </summary>
         /// <param name="email"></param>
         /// <param name="task"></param>
         [HttpPost]
-        public void TaskConfirm(string email, int task)
-        { 
-            
-        }
-
-        /// <summary>
-        /// Update user info
-        /// </summary>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="email"></param>
-        /// <param name="pass"></param>
-        /// <param name="gender"></param>
-        /// <param name="ageRange"></param>
-        /// <param name="contryId"></param>
-        /// <param name="zip"></param>
-        /// <param name="interest"></param>
-        [HttpPost]
-        public void UserInfoUpdateRegister(string firstName, string lastName, string email, string pass, Gender gender, AgeRange ageRange, int contryId, string zip, int[] interest)
+        public void TaskConfirm([FromBody] TaskModel model)
         { 
             
         }

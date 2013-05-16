@@ -114,6 +114,10 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\Users\AcceptTermsAndConditionsCommand.cs" />
     <Compile Include="Commands\Users\ActivateUserCommand.cs" />
+    <Compile Include="Commands\Users\CreateStaffCommand.cs" />
+    <Compile Include="Commands\Users\CreateMemberCommand.cs" />
+    <Compile Include="Commands\Users\CreateAPIMemberCommand.cs" />
+    <Compile Include="Commands\Users\UpdateAPIMemberCommand.cs" />
     <Compile Include="Commands\Users\CreateUserCommand.cs" />
     <Compile Include="Commands\Users\DeactivateUserCommand.cs" />
     <Compile Include="Commands\Users\GrantSpecialAccessCommand.cs" />
@@ -122,6 +126,7 @@
     <Compile Include="Commands\Users\ResetPasswordCommand.cs" />
     <Compile Include="Commands\Users\UnsubscribeCommand.cs" />
     <Compile Include="Commands\Users\UpdateLastAccessCommand.cs" />
+    <Compile Include="Commands\Users\UpdateUserCommand.cs" />
     <Compile Include="Commands\ValidationResult.cs" />
     <Compile Include="Encryption.cs" />
     <Compile Include="EncryptionSettings.cs" />

@@ -220,10 +220,10 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\ApplicationResourcesController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\CustomExceptions.cs" />
-    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

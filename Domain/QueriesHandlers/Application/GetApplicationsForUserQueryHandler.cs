@@ -20,7 +20,9 @@ namespace AppReadyGo.Domain.Queries
                     .Select(a => new APIApplicationResult
                     {
                         Id = a.Id,
-                        Name = a.Name
+                        Name = a.Name,
+                        Description = a.Description,
+                        HasIcon = a.IconExt != null
                     })
                     .ToArray();
         }

@@ -13,19 +13,19 @@ namespace AppReadyGo.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                "Thumbnails",
-                "Thumbnails/{filename}",
-                new { controller = "Files", action = "Thumbnails" },
-                new[] { "AppReadyGo.Controllers" } // Namespaces
-            );
+            //routes.MapRoute(
+            //    "Thumbnails",
+            //    "Thumbnails/{filename}",
+            //    new { controller = "Files", action = "Thumbnails" },
+            //    new[] { "AppReadyGo.Controllers" } // Namespaces
+            //);
 
-            routes.MapRoute(
-                "AjaxData",
-                "Data/{action}/",
-                new { controller = "Data" },
-                new[] { "AppReadyGo.Controllers" } // Namespaces
-            );
+            //routes.MapRoute(
+            //    "AjaxData",
+            //    "Data/{action}/",
+            //    new { controller = "Data" },
+            //    new[] { "AppReadyGo.Controllers" } // Namespaces
+            //);
 
             routes.MapRoute(
                 "Home",
@@ -41,12 +41,12 @@ namespace AppReadyGo.Web
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
-            routes.MapRoute(
-                "Admin_elmah",
-                "Admin/Elmah/{query}",
-                new { action = "Elmah", controller = "Admin", query = UrlParameter.Optional },
-                new[] { "AppReadyGo.Controllers" } // Namespaces
-            );
+            //routes.MapRoute(
+            //    "Admin_elmah",
+            //    "Admin/Elmah/{query}",
+            //    new { action = "Elmah", controller = "Admin", query = UrlParameter.Optional },
+            //    new[] { "AppReadyGo.Controllers" } // Namespaces
+            //);
 
             routes.MapRoute(
                "Admin_edit",
@@ -80,6 +80,14 @@ namespace AppReadyGo.Web
                 "ApplicationIndex",
                 "Application",
                 new { controller = "Application", action = "Index" },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
+            // Appication resources
+            routes.MapRoute(
+                "Application Resources",
+                "Application/{appId}/{action}/{id}",
+                new { controller = "ApplicationResources", action = "Icon", id = UrlParameter.Optional },
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
@@ -118,18 +126,18 @@ namespace AppReadyGo.Web
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
-            routes.MapRoute(
-                "Portfolio",
-                "Portfolio/{action}/{id}",
-                new { controller = "Portfolio", action = "Index", id = UrlParameter.Optional },
-                new[] { "AppReadyGo.Controllers" } // Namespaces
-            );
+            //routes.MapRoute(
+            //    "Portfolio",
+            //    "Portfolio/{action}/{id}",
+            //    new { controller = "Portfolio", action = "Index", id = UrlParameter.Optional },
+            //    new[] { "AppReadyGo.Controllers" } // Namespaces
+            //);
 
-            routes.MapRoute(
-                "JavaScript",
-                "Analytics/{filename}.js",
-                new { controller = "Files", action = "Analytics" }
-            );
+            //routes.MapRoute(
+            //    "JavaScript",
+            //    "Analytics/{filename}.js",
+            //    new { controller = "Files", action = "Analytics" }
+            //);
 
             routes.MapRoute(
                 "AnalyticsData",
