@@ -77,16 +77,16 @@ namespace AppReadyGo.Web
             );
 
             routes.MapRoute(
-                "ApplicationIndex",
-                "Application",
-                new { controller = "Application", action = "Index" },
+                "Screen controller",
+                "Application/{appId}/screen/{action}/{id}/{file}",
+                new { controller = "Screen", action = "Index", id = UrlParameter.Optional, file = UrlParameter.Optional },
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
-                "Screen controller",
-                "Application/{appId}/screen/{action}/{id}/{file}",
-                new { controller = "Screen", action = "Index", id = UrlParameter.Optional, file = UrlParameter.Optional },
+                "Application controller",
+                "Application/{action}/{id}",
+                new { controller = "Application", action = "Index", id = UrlParameter.Optional },
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 

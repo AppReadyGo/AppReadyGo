@@ -20,7 +20,7 @@ namespace AppReadyGo.Domain.Queries.Application
                         .Select(a => new ScreensDataResult
                         {
                             ApplicationId = a.Id,
-                            ApplicationDescription = a.Description
+                            ApplicationName = a.Name
                         })
                         .Single();
 
