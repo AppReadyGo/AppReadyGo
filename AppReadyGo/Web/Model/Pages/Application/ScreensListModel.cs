@@ -8,7 +8,7 @@ namespace AppReadyGo.Model.Pages.Application
     {
         public int ApplicationId { get; set; }
 
-        public string ApplicationDescription { get; set; }
+        public string ApplicationName { get; set; }
 
         public IEnumerable<ScreenItemModel> Screens { get; set; }
 

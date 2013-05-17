@@ -65,7 +65,7 @@ namespace AppReadyGo.Web.Controllers
                 HeightOrder = orderBy == ScreensQuery.OrderByColumn.Height && asc ? "desc" : "asc",
 
                 ApplicationId = data.ApplicationId,
-                ApplicationDescription = data.ApplicationDescription,
+                ApplicationName = data.ApplicationName,
                 Screens = data.Screens.Select((s, i) => new ScreenItemModel
                 {
                     Id = s.Id,
@@ -146,13 +146,15 @@ namespace AppReadyGo.Web.Controllers
             }
             else
             {
-                var model = new ScreenModel
+                var invalidChars = System.IO.Path.GetInvalidFileNameChars();
+                var model = new EditScreenModel
                 {
                     Id = data.Id,
                     Path = data.Path,
                     Width = data.Width,
                     Height = data.Height,
                     FileExtention = data.FileExtention,
+                    FileName = new string(data.Path.Where(m => !invalidChars.Contains(m)).ToArray<char>()) + data.FileExtention,
                     ApplicationId = data.ApplicationId
                 };
                 return PrepareAction(model, data);

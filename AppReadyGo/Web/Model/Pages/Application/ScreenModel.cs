@@ -37,4 +37,9 @@ namespace AppReadyGo.Model.Pages.Application
         {
         }
     }
+
+    public class EditScreenModel : ScreenModel
+    {
+        public string FileName { get; set; }
+    }
 }

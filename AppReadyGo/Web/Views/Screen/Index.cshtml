@@ -4,13 +4,15 @@
 @{
     Layout = "~/Views/Shared/_AfterLogin.cshtml";
 }
-@section title { @Model.ApplicationDescription - Screens }
+@section title { @Model.ApplicationName - Screens }
 @section header 
 { 
-    <script src="@Url.Content("~/Scripts/table.js")" type="text/javascript"></script>
-    <link href="@Url.Content("~/Content/application.screens.css")" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/ThridParty/fancyBox-v2.1.4/jquery.fancybox.css")" type="text/css" media="screen" />
     <script type="text/javascript" src="@Url.Content("~/ThridParty/fancyBox-v2.1.4/jquery.fancybox.pack.js")"></script>
+    
+    
+    <script src="@Url.Content("~/Scripts/table.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/application.screens.css")" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
          $(function () {
@@ -24,7 +26,7 @@
 			<div class="inner">
                 <ul>
 		           <li><a href="/Application"><h4>Applications</h4></a></li>
-		           <li><h4>@Model.ApplicationDescription - Screens</h4></li>
+		           <li><h4>@Model.ApplicationName - Screens</h4></li>
 		        </ul>
 			</div>
 		</div>
