@@ -24,9 +24,13 @@ namespace AppReadyGo.Domain.CommandHandlers
         }
         public bool IsEmailExists(string email, int? userId)
         {
-            return this.session.Query<User>()
-                            .Where(u => u.Email.ToLower() == email.ToLower() && (!userId.HasValue || userId.Value != u.Id))
-                            .Any();
+            var query = this.session.Query<User>()
+                            .Where(u => u.Email.ToLower() == email.ToLower());
+            if (userId.HasValue)
+            {
+                query = query.Where(u => userId.Value != u.Id);
+            }
+            return query.Any();
         }
 
         public bool IsCorrectEmail(string email)
