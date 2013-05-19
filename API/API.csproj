@@ -251,12 +251,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Mails\System.cshtml" />
+    <Content Include="Views\Shared\_Mail.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Common\Mails\" />
+    <Folder Include="Models\Emails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -269,6 +273,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{6696bbd1-9b7a-44f9-ab0e-be264402e5cc}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web.Common\Web.Common.csproj">
+      <Project>{656d43be-dac7-4ad7-b3a5-f1d34c8a2d1e}</Project>
+      <Name>Web.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

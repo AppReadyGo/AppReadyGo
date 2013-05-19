@@ -13,10 +13,11 @@ namespace AppReadyGo.API
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{action}/{key}",
+                defaults: new { controller = "Home", action = "Index", key = UrlParameter.Optional }
             );
         }
     }

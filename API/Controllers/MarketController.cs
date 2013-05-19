@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AppReadyGo.API.Filters;
+using AppReadyGo.API.Models.Market;
+using AppReadyGo.Common;
+using AppReadyGo.Core;
+using AppReadyGo.Core.Commands.Application;
+using AppReadyGo.Core.Commands.Users;
+using AppReadyGo.Core.Logger;
+using AppReadyGo.Core.Queries.Application;
+using AppReadyGo.Core.Queries.Users;
+using AppReadyGo.Web.Common.Mails;
+using System;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
-using AppReadyGo.API.Models;
-using AppReadyGo.Common;
-using AppReadyGo.Core.Commands.Users;
-using AppReadyGo.Core.Entities;
-using AppReadyGo.Core.Queries.Users;
-using AppReadyGo.Core;
-using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.Commands.Application;
-using AppReadyGo.API.Models.Market;
-using System.Configuration;
-using AppReadyGo.Core.Logger;
-using System.Reflection;
-using GoogleAnalyticsDotNet.Common.Data;
-using GoogleAnalyticsDotNet.Common.Helpers;
-using GoogleAnalyticsDotNet.Common;
-using AppReadyGo.API.Filters;
 
 namespace AppReadyGo.API.Controllers
 {
@@ -75,10 +70,7 @@ namespace AppReadyGo.API.Controllers
 
             if (!result.Validation.Any())
             {
-                // TODO: Yura: do we need the activation email process. Are we sure that the email exists?
-                // PM : no we dont need it. user will see his email on the "Account" page nad all the money will be pransfered to this email
-                // Y: what will happen in case he set up wrong email?
-                //new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
+                new MailGenerator().Send(new ActivationEmail(model.Email, "/Activate/"));
                 return true;
             }
             else

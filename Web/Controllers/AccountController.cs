@@ -9,6 +9,8 @@ using AppReadyGo.Model;
 using AppReadyGo.Model.Master;
 using AppReadyGo.Model.Pages.Account;
 using AppReadyGo.Models.Account;
+using AppReadyGo.Web.Common;
+using AppReadyGo.Web.Common.Mails;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -127,7 +129,7 @@ namespace AppReadyGo.Controllers
 
                 if (!result.Validation.Any())
                 {
-                    new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
+                    new MailGenerator().Send(new WebActivationEmail(model.Email));
                     return Redirect("~/p/activation-email-sent");
                 }
                 else
@@ -181,7 +183,7 @@ namespace AppReadyGo.Controllers
                 var userDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
                 if (userDetails != null)
                 {
-                    new MailGenerator(this.ControllerContext).Send(new ForgotPasswordMail(model.Email));
+                    new MailGenerator().Send(new ForgotPasswordMail(model.Email));
                     return Redirect("~/p/forgot-password-email-sent"); // Redirect to content page
                 }
                 else

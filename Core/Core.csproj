@@ -128,6 +128,7 @@
     <Compile Include="Commands\Users\UpdateLastAccessCommand.cs" />
     <Compile Include="Commands\Users\UpdateUserCommand.cs" />
     <Compile Include="Commands\ValidationResult.cs" />
+    <Compile Include="EmailSettings.cs" />
     <Compile Include="Encryption.cs" />
     <Compile Include="EncryptionSettings.cs" />
     <Compile Include="Entities\AgeRange.cs" />
@@ -156,7 +157,6 @@
     <Compile Include="Interfaces\IStoreServices.cs" />
     <Compile Include="IObjectContainer.cs" />
     <Compile Include="IValidationContext.cs" />
-    <Compile Include="EmailSettings.cs" />
     <Compile Include="Messenger.cs" />
     <Compile Include="ObjectSerializator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AnalyticsClientTest.cs" />
     <Compile Include="Controllers\MarketClientTest.cs" />
+    <Compile Include="Controllers\MailTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +125,10 @@
     <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{6696bbd1-9b7a-44f9-ab0e-be264402e5cc}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Web.Common\Web.Common.csproj">
+      <Project>{656d43be-dac7-4ad7-b3a5-f1d34c8a2d1e}</Project>
+      <Name>Web.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

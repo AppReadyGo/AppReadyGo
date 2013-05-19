@@ -2,7 +2,7 @@
 using AppReadyGo.Core.QueryResults.Content;
 using System.Collections.Generic;
 
-namespace AppReadyGo.Common.Mails
+namespace AppReadyGo.Web.Common.Mails
 {
     public abstract class Email
     {
@@ -29,18 +29,5 @@ namespace AppReadyGo.Common.Mails
             this.Bcc = bcc;
         }
 
-    }
-
-    public abstract class SystemEmail : Email
-    {
-        public SystemEmail()
-            : base("~/Views/Mails/System.aspx")
-        {
-        }
-
-        protected MailResult GetMailContent()
-        {
-            return ObjectContainer.Instance.RunQuery(new GetSystemMailQuery(string.Format("mails/{0}", this.GetType().Name).ToLower()));
-        }
     }
 }

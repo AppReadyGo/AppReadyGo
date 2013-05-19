@@ -4,6 +4,8 @@ using AppReadyGo.Core;
 using AppReadyGo.Core.Commands;
 using AppReadyGo.Core.Commands.Users;
 using AppReadyGo.Models.Account;
+using AppReadyGo.Web.Common;
+using AppReadyGo.Web.Common.Mails;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -26,7 +28,7 @@ namespace AppReadyGo.Areas.m.Controllers
 
                 if (!result.Validation.Any())
                 {
-                    new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
+                    new MailGenerator().Send(new WebActivationEmail(model.Email));
                     return Redirect("/m/activation-email-sent");
                 }
                 else
