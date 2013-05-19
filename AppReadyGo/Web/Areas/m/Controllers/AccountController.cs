@@ -28,7 +28,7 @@ namespace AppReadyGo.Areas.m.Controllers
 
                 if (!result.Validation.Any())
                 {
-                    new MailGenerator().Send(new WebActivationEmail(model.Email));
+                    new WebActivationEmail(model.Email).Send();
                     return Redirect("/m/activation-email-sent");
                 }
                 else

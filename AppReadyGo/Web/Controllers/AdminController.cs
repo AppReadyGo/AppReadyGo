@@ -184,7 +184,7 @@ namespace AppReadyGo.Controllers
             //var result = ObjectContainer.Instance.Dispatch(new ResendEmailCommand(id));
             try
             {
-                new MailGenerator().Send(new WebActivationEmail(email));
+                new WebActivationEmail(email).Send();
             }
             finally
             {
@@ -210,7 +210,7 @@ namespace AppReadyGo.Controllers
             //var result = ObjectContainer.Instance.Dispatch(new ResendEmailCommand(id));
             try
             {
-                new MailGenerator().Send(new SpecialAccessEmail(email));
+                new SpecialAccessEmail(email).Send();
             }
             finally
             {
