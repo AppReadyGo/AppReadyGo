@@ -699,7 +699,6 @@ INSERT INTO [usr].[StaffRoles](ID, Name)
 VALUES(1, 'Administrator');
 GO
 
-
 --======================= Init database ===========================--
 GO
 INSERT INTO [usr].[Memberships](ID, Name)

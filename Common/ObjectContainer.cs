@@ -31,8 +31,8 @@ namespace AppReadyGo.Common
         private readonly WindsorContainer container = new WindsorContainer();
         private IRepository repository;
 
-        private ISessionFactory sessionFactory;
-        private NHibernate.Cfg.Configuration configuration;
+        private NHibernateHelper nhibernateHelper;
+        //private NHibernate.Cfg.Configuration configuration;
 
         public static IObjectContainer Instance
         {
@@ -64,7 +64,8 @@ namespace AppReadyGo.Common
         private ObjectContainer()
         {
             var dbSettings = (DatabaseSettings)ConfigurationManager.GetSection("dataConfiguration");
-            this.sessionFactory = BuildSessionFactory(typeof(NHibernateHelper), ConfigurationManager.ConnectionStrings[dbSettings.DefaultDatabase].ToString());
+            
+            this.nhibernateHelper = new NHibernateHelper(ConfigurationManager.ConnectionStrings[dbSettings.DefaultDatabase].ToString(), SchemaAutoAction.Validate);
 
             bool isWebApp = HttpContext.Current != null;
 
@@ -135,47 +136,7 @@ namespace AppReadyGo.Common
 
         private ISession OpenSession()
         {
-            return sessionFactory.OpenSession();
-        }
-
-        private ISessionFactory BuildSessionFactory(Type type, string connectionString)
-        {
-            var mapper = new ModelMapper();
-
-            mapper.AddMappings(type.Assembly.GetTypes());
-
-            //mapper.AddMappings(typeof(OrganisationMapping).Assembly.GetTypes());
-
-            var cfg = new NHibernate.Cfg.Configuration();
-
-            cfg.DataBaseIntegration(c =>
-            {
-                c.ConnectionString = connectionString;
-                c.Driver<SqlClientDriver>();
-                c.Dialect<MsSql2008Dialect>();
-
-#if DEBUG
-                c.LogSqlInConsole = true;
-                c.LogFormattedSql = true;
-                //c.SchemaAction = SchemaAutoAction.Create;
-                c.SchemaAction = SchemaAutoAction.Validate;
-#else
-                c.SchemaAction = SchemaAutoAction.Validate;
-#endif
-                c.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
-
-            });
-
-            cfg.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
-
-            SchemaMetadataUpdater.QuoteTableAndColumns(cfg);
-
-            //var cmpl = mapper.CompileMappingFor(new List<Type>() { typeof(Application), typeof(Role), typeof(User) });
-            //var cmpl = mapper.CompileMappingFor(new List<Type>() { typeof(Address), typeof(Organisation), typeof(OrganisationLicences), typeof(OrganisationJoined), typeof(Country), typeof(OrganisationType) });
-            //var str = Serialize(cmpl);
-            //Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception(str));
-
-            return cfg.BuildSessionFactory();
+            return nhibernateHelper.OpenSession();
         }
 
         public TResult RunQuery<TResult>(IQuery<TResult> query)
@@ -200,7 +161,7 @@ namespace AppReadyGo.Common
             var obj = container.Resolve(handlerTypeBluprint.MakeGenericType(typeArgs));
             MethodInfo method = obj.GetType().GetMethod("Execute");
             var commandResult = new CommandResult<TResult>();
-            using (ISession session = sessionFactory.OpenSession())
+            using (ISession session = nhibernateHelper.OpenSession())
             {
                 using (ITransaction dbTrans = session.BeginTransaction())
                 {

@@ -22,7 +22,7 @@ namespace AppReadyGo.Domain.CommandHandlers
         {
             this.session = session;
         }
-        public bool IsEmailExists(string email, int? userId)
+        public bool IsEmailExists(string email, int? userId = null)
         {
             var query = this.session.Query<User>()
                             .Where(u => u.Email.ToLower() == email.ToLower());

@@ -16,31 +16,26 @@ namespace AppReadyGo.Domain
 {
     public sealed class NHibernateHelper
     {
-        private static ISessionFactory _sessionFactory;
-        private static NHibernate.Cfg.Configuration _configuration;
+        private ISessionFactory _sessionFactory;
 
-        public static string NHibernateSQL { get; set; }
+        public static string NHibernateSQL { get; internal set; }
 
-        private static ISessionFactory SessionFactory
+        public NHibernateHelper(string connectionString, SchemaAutoAction schemaAutoAction)
         {
-            get
-            {
-                if (_sessionFactory == null)
-                {
-
-                    DatabaseSettings dbSettings = (DatabaseSettings)ConfigurationManager.GetSection("dataConfiguration");
-                    _sessionFactory = BuildSessionFactory(typeof(NHibernateHelper), ConfigurationManager.ConnectionStrings[dbSettings.DefaultDatabase].ToString());
-                }
-                return _sessionFactory;
-            }
+            Init(connectionString, schemaAutoAction);
         }
 
-        public static ISession OpenSession()
+        private void Init(string connectionString, SchemaAutoAction schemaAutoAction)
         {
-            return SessionFactory.OpenSession();
+            _sessionFactory = BuildSessionFactory(typeof(NHibernateHelper), connectionString, schemaAutoAction);
         }
 
-        private static ISessionFactory BuildSessionFactory(Type type, string connectionString)
+        public ISession OpenSession()
+        {
+            return _sessionFactory.OpenSession();
+        }
+
+        private static ISessionFactory BuildSessionFactory(Type type, string connectionString, SchemaAutoAction schemaAutoAction)
         {
             var mapper = new ModelMapper();
 
@@ -56,13 +51,10 @@ namespace AppReadyGo.Domain
                 c.Driver<SqlClientDriver>();
                 c.Dialect<MsSql2008Dialect>();
 
+                c.SchemaAction = schemaAutoAction;
 #if DEBUG
                 c.LogSqlInConsole = true;
                 c.LogFormattedSql = true;
-                //c.SchemaAction = SchemaAutoAction.Create;
-                c.SchemaAction = SchemaAutoAction.Validate;
-#else
-                c.SchemaAction = SchemaAutoAction.Validate;
 #endif
                 c.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
 
