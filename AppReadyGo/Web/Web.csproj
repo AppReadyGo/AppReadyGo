@@ -212,9 +212,7 @@
     <Compile Include="Common\CSSFilter.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\Extentions.cs" />
-    <Compile Include="Common\MailGenerator.cs" />
     <Compile Include="Common\Mails\ActivationEmail.cs" />
-    <Compile Include="Common\Mails\Email.cs" />
     <Compile Include="Common\Mails\ForgotPasswordMail.cs" />
     <Compile Include="Common\Mails\PromotionEmail.cs" />
     <Compile Include="Common\Mails\SpecialAccessEmail.cs" />
@@ -269,9 +267,7 @@
     <Compile Include="Model\AdminModels.cs" />
     <Compile Include="Model\Filter\DateModel.cs" />
     <Compile Include="Model\Filter\FilterModel.cs" />
-    <Compile Include="Model\Mails\MailMasterModel.cs" />
     <Compile Include="Model\Mails\PromotionEmailModel.cs" />
-    <Compile Include="Model\Mails\SystemEmailModel.cs" />
     <Compile Include="Model\MasterViewModelWrapper.cs" />
     <Compile Include="Model\Master\AfterLoginMasterModel.cs" />
     <Compile Include="Model\Master\AnalyticsMasterModel.cs" />
@@ -674,8 +670,8 @@
     <Content Include="Views\Home\ComingSoon.aspx" />
     <Content Include="Views\Home\Mails\Basic.aspx" />
     <None Include="Views\Home\PlayGround.cshtml" />
-    <Content Include="Views\Mails\Promotion.aspx" />
-    <Content Include="Views\Mails\System.aspx" />
+    <None Include="Views\Mails\Promotion.cshtml" />
+    <None Include="Views\Mails\System.cshtml" />
     <Content Include="Views\Portfolio\Edit.aspx" />
     <Content Include="Views\Portfolio\Form.ascx" />
     <Content Include="Views\Portfolio\New.aspx" />
@@ -723,7 +719,7 @@
     <Content Include="Views\Content\PublicPageContent.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\AfterLogin.Master" />
-    <Content Include="Views\Shared\Mail.Master" />
+    <None Include="Views\Shared\_Mail.cshtml" />
     <Content Include="Views\Shared\Main.Master" />
     <Content Include="Views\Shared\_AfterLogin.cshtml" />
     <Content Include="Views\Shared\_AfterLoginLeftMenu.cshtml" />
@@ -752,6 +748,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{6696bbd1-9b7a-44f9-ab0e-be264402e5cc}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web.Common\Web.Common.csproj">
+      <Project>{656d43be-dac7-4ad7-b3a5-f1d34c8a2d1e}</Project>
+      <Name>Web.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

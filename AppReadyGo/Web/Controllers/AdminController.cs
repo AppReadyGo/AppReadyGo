@@ -18,6 +18,8 @@ using AppReadyGo.Common.Mails;
 using AppReadyGo.Web.Model.Pages.Admin;
 using AppReadyGo.Web.Controllers;
 using AppReadyGo.Core.Queries.Content;
+using AppReadyGo.Web.Common;
+using AppReadyGo.Web.Common.Mails;
 
 namespace AppReadyGo.Controllers
 {
@@ -182,7 +184,7 @@ namespace AppReadyGo.Controllers
             //var result = ObjectContainer.Instance.Dispatch(new ResendEmailCommand(id));
             try
             {
-                new MailGenerator(this.ControllerContext).Send(new ActivationEmail(email));
+                new MailGenerator().Send(new WebActivationEmail(email));
             }
             finally
             {
@@ -208,7 +210,7 @@ namespace AppReadyGo.Controllers
             //var result = ObjectContainer.Instance.Dispatch(new ResendEmailCommand(id));
             try
             {
-                new MailGenerator(this.ControllerContext).Send(new SpecialAccessEmail(email));
+                new MailGenerator().Send(new SpecialAccessEmail(email));
             }
             finally
             {

@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "Tests\Core.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Tests", "Tests\Domain.Tests\Domain.Tests.csproj", "{EDBDD1F8-63C0-43A2-BB48-8A32688CE92A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Common", "Web.Common\Web.Common.csproj", "{656D43BE-DAC7-4AD7-B3A5-F1D34C8A2D1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,12 @@ Global
 		{EDBDD1F8-63C0-43A2-BB48-8A32688CE92A}.QA|Any CPU.Build.0 = Release|Any CPU
 		{EDBDD1F8-63C0-43A2-BB48-8A32688CE92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDBDD1F8-63C0-43A2-BB48-8A32688CE92A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{656D43BE-DAC7-4AD7-B3A5-F1D34C8A2D1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{656D43BE-DAC7-4AD7-B3A5-F1D34C8A2D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{656D43BE-DAC7-4AD7-B3A5-F1D34C8A2D1E}.QA|Any CPU.ActiveCfg = Release|Any CPU
+		{656D43BE-DAC7-4AD7-B3A5-F1D34C8A2D1E}.QA|Any CPU.Build.0 = Release|Any CPU
+		{656D43BE-DAC7-4AD7-B3A5-F1D34C8A2D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{656D43BE-DAC7-4AD7-B3A5-F1D34C8A2D1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

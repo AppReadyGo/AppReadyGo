@@ -2,6 +2,8 @@
 using System.Web;
 using AppReadyGo.Core;
 using AppReadyGo.Model.Mails;
+using AppReadyGo.Web.Common;
+using AppReadyGo.Web.Common.Mails;
 
 namespace AppReadyGo.Common.Mails
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace AppReadyGo.Model.Mails
+namespace AppReadyGo.Web.Common.Mails
 {
     public class SystemEmailModel : MailMasterModel
     {
@@ -17,5 +17,4 @@ namespace AppReadyGo.Model.Mails
         {
         }
     }
-
 }

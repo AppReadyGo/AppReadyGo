@@ -1,5 +1,7 @@
 ﻿using AppReadyGo.Core;
 using AppReadyGo.Model.Mails;
+using AppReadyGo.Web.Common;
+using AppReadyGo.Web.Common.Mails;
 using System.Web;
 
 namespace AppReadyGo.Common.Mails

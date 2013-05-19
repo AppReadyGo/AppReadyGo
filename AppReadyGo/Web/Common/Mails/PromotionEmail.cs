@@ -4,6 +4,8 @@ using AppReadyGo.Model.Mails;
 using AppReadyGo.Core.Queries.Users;
 using AppReadyGo.Core.QueryResults.Users;
 using AppReadyGo.Core.Queries.Content;
+using AppReadyGo.Web.Common;
+using AppReadyGo.Web.Common.Mails;
 
 namespace AppReadyGo.Common.Mails
 {
@@ -15,7 +17,7 @@ namespace AppReadyGo.Common.Mails
         }
 
         public PromotionEmail(string emailKey, UserDetailsResult userDetails, bool isEmailProcess = true)
-            : base("~/Views/Mails/Promotion.aspx")
+            : base("~/Views/Mails/Promotion.cshtml")
         {
             this.To = new string[] { userDetails.Email };
             string contentPath = string.Format("mails/{0}", emailKey);
