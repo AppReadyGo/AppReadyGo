@@ -129,7 +129,7 @@ namespace AppReadyGo.Controllers
 
                 if (!result.Validation.Any())
                 {
-                    new MailGenerator().Send(new WebActivationEmail(model.Email));
+                    new WebActivationEmail(model.Email).Send();
                     return Redirect("~/p/activation-email-sent");
                 }
                 else
@@ -183,7 +183,7 @@ namespace AppReadyGo.Controllers
                 var userDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
                 if (userDetails != null)
                 {
-                    new MailGenerator().Send(new ForgotPasswordMail(model.Email));
+                    new ForgotPasswordMail(model.Email).Send();
                     return Redirect("~/p/forgot-password-email-sent"); // Redirect to content page
                 }
                 else

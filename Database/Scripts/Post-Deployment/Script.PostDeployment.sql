@@ -485,9 +485,10 @@ GO
 SET IDENTITY_INSERT [cont].[Mails] ON
 
 INSERT INTO [cont].[Mails] ([ID], [IsSystem], [ThemeID], [Url])
-VALUES (1, 1, 1, 'mails/activationemail'),
-                (2, 1, 1, 'mails/forgotpasswordmail'),
-                (4, 1, 1, 'mails/specialaccessemail');
+VALUES (1, 1, 1, 'mails/webactivationemail'),
+       (2, 1, 1, 'mails/forgotpasswordmail'),
+       (4, 1, 1, 'mails/specialaccessemail'),
+	   (5, 1, 1, 'mails/apiactivationemail');
 
 SET IDENTITY_INSERT [cont].[Mails] OFF
 
@@ -506,7 +507,9 @@ This version of Fingerprint is not a final product. Rather, it is a tool that wi
 <p style="margin-bottom:16px">We appreciate your help and feedback for improving our service.</p>
 <p style="margin-bottom:16px"><em>The skipper</em></p>
 <p style="margin-bottom:16px">http://finger.mobillify.com</p>
-');
+'),
+(5, 0, 'subject', 'Please activate your account'),
+(5, 1, 'body', 'Please activate your account by the link: {activation_link}');
 
 GO
 

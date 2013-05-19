@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AppReadyGo.Web.Common.Mails;
 using AppReadyGo.Common;
+using AppReadyGo.API.Common.Mails;
 
 namespace AppReadyGo.API.Tests.Controllers
 {
@@ -12,7 +13,7 @@ namespace AppReadyGo.API.Tests.Controllers
         public void ActivationEmailTest()
         {
             ObjectContainer.Instance.GetType();
-            new MailGenerator().Send(new ActivationEmail("ypanshin@gmail.com", "/Activate/", "http://api.qa.appreadygo.com"));
+            new APIActivationEmail("ypanshin@gmail.com", "http://api.qa.appreadygo.com", @"C:\Projects\rivendell123\AppReadyGo\API\Views\Mails\").Send();
         }
     }
 }

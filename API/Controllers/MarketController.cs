@@ -18,6 +18,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Web;
 using System.Web.Http;
+using AppReadyGo.API.Common.Mails;
 
 namespace AppReadyGo.API.Controllers
 {
@@ -70,7 +71,7 @@ namespace AppReadyGo.API.Controllers
 
             if (!result.Validation.Any())
             {
-                new MailGenerator().Send(new ActivationEmail(model.Email, "/Activate/"));
+                new APIActivationEmail(model.Email).Send();
                 return true;
             }
             else

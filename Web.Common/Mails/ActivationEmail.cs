@@ -6,14 +6,21 @@ using AppReadyGo.Web.Common.Mails;
 
 namespace AppReadyGo.Web.Common.Mails
 {
-    public class ActivationEmail : SystemEmail
+    public abstract class ActivationEmail : SystemEmail
     {
         public ActivationEmail(string email, string activationPageUrl)
-            : this(email, activationPageUrl, string.Format("{0}://{1}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority))
+            : base()
         {
+            Init(email, activationPageUrl, string.Format("{0}://{1}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority));
         }
 
-        public ActivationEmail(string email, string activationPageUrl, string siteRootUrl)
+        public ActivationEmail(string email, string activationPageUrl, string siteRootUrl, string templateRootPath)
+            : base(templateRootPath)
+        {
+            Init(email, activationPageUrl, siteRootUrl);
+        }
+
+        private void Init(string email, string activationPageUrl, string siteRootUrl)
         {
             this.To = new string[] { email };
             var mailContent = GetMailContent();

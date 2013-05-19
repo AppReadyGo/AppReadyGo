@@ -212,7 +212,7 @@
     <Compile Include="Common\CSSFilter.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\Extentions.cs" />
-    <Compile Include="Common\Mails\ActivationEmail.cs" />
+    <Compile Include="Common\Mails\WebActivationEmail.cs" />
     <Compile Include="Common\Mails\ForgotPasswordMail.cs" />
     <Compile Include="Common\Mails\PromotionEmail.cs" />
     <Compile Include="Common\Mails\SpecialAccessEmail.cs" />
