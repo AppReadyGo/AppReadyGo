@@ -34,7 +34,7 @@ namespace AppReadyGo.Domain.Mapping.Users
 
             ManyToOne(p => p.Country, map =>
             {
-                map.NotNullable(true);
+                map.NotNullable(false);
                 map.Column("CountryID");
                 map.Cascade(Cascade.All);
             });
