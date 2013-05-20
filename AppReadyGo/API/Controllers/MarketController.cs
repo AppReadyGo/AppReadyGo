@@ -37,21 +37,21 @@ namespace AppReadyGo.API.Controllers
         }
 
         [HttpPost]
-        public bool Login([FromBody] LoginModel model)
+        public UserResultModel Login([FromBody] LoginModel model)
         {
             // var body = HttpContext.Current.Request.Body();
             var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
             if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
             {
                 // "The user name or password provided is incorrect."
-                return false;
+                return new UserResultModel { Code = UserResultModel.Result.WrongUserNamePassword };
             }
             else if (!securedDetails.Activated)
             {
                 // "You account is not activated, please use the link from activation email to activate your account."
-                return false;
+                return new UserResultModel { Code = UserResultModel.Result.NotActivated };
             }
-            return true;
+            return  new UserResultModel { Id = securedDetails.Id, Code = UserResultModel.Result.Successful };
         }
 
         [HttpPost]

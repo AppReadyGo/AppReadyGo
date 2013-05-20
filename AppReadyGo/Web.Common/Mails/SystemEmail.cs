@@ -8,12 +8,12 @@ namespace AppReadyGo.Web.Common.Mails
     public abstract class SystemEmail : Email
     {
         public SystemEmail(string templateRootPath)
-            : base(templateRootPath, "System.cshtml")
+            : base(templateRootPath, "~/Views/Mails/System.cshtml")
         {
         }
 
         public SystemEmail()
-            : this("~/Views/Mails/")
+            : this(null)
         {
         }
 
