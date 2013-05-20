@@ -142,6 +142,7 @@
     <Compile Include="Models\Analytics\SessionInfo.cs" />
     <Compile Include="Models\Analytics\SystemInfo.cs" />
     <Compile Include="Models\Analytics\Package.cs" />
+    <Compile Include="Models\Market\LoginResultModel.cs" />
     <Compile Include="Models\Market\PaggingModel.cs" />
     <Compile Include="Models\Market\RegisterModel.cs" />
     <Compile Include="Models\Market\LoginModel.cs" />
