@@ -13,7 +13,8 @@ namespace AppReadyGo.API.Tests.Controllers
         public void ActivationEmailTest()
         {
             ObjectContainer.Instance.GetType();
-            new APIActivationEmail("ypanshin@gmail.com", "http://api.qa.appreadygo.com", @"C:\Projects\rivendell123\AppReadyGo\API\Views\Mails\").Send();
+            var path = AppDomain.CurrentDomain.BaseDirectory + @"\..\..\..\..\API\";
+            new APIActivationEmail("ypanshin@gmail.com", "http://api.qa.appreadygo.com", path).Send();
         }
     }
 }
