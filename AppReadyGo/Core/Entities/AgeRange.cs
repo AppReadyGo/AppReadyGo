@@ -8,7 +8,8 @@ namespace AppReadyGo.Core.Entities
 {
     public enum AgeRange : short
     {
-        Under12 = 1,
+        None = 1,
+        Under12,
         Range12_17,
         Range18_24,
         Range25_34,
