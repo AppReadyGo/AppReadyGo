@@ -39,6 +39,14 @@ namespace AppReadyGo.API.Controllers
         [HttpPost]
         public UserResultModel Login([FromBody] LoginModel model)
         {
+
+            if (model == null
+                || String.IsNullOrWhiteSpace(model.Email)
+                || String.IsNullOrWhiteSpace(model.Password))
+            {
+                return new UserResultModel { Code = UserResultModel.Result.WrongUserNamePassword };
+            }
+
             // var body = HttpContext.Current.Request.Body();
             var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
             if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
