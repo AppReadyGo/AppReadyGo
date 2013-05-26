@@ -10,14 +10,14 @@ namespace AppReadyGo.Domain.Model.Users
 {
     public class ApiMember : User
     {
-        private Iesi.Collections.Generic.ISet<DownloadedApplication> downloadedApplications = null;
+        private Iesi.Collections.Generic.ISet<APIMemberApplication> downloadedApplications = null;
         private Iesi.Collections.Generic.ISet<ApplicationType> applicationTypes = null;
 
         public virtual Gender? Gender { get; protected set; }
         public virtual AgeRange? AgeRange { get; protected set; }
         public virtual Country Country { get; protected set; }
 
-        public virtual IEnumerable<DownloadedApplication> DownloadedApplications
+        public virtual IEnumerable<APIMemberApplication> DownloadedApplications
         {
             get { return this.downloadedApplications; }
         }
@@ -34,14 +34,14 @@ namespace AppReadyGo.Domain.Model.Users
 
         public ApiMember()
         {
-            this.downloadedApplications = new HashedSet<DownloadedApplication>();
+            this.downloadedApplications = new HashedSet<APIMemberApplication>();
             this.applicationTypes = new HashedSet<ApplicationType>();
         }
 
         public ApiMember(string email, string password, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string Zip, ApplicationType[] appTypes)
             : base(email, password)
         {
-            this.downloadedApplications = new HashedSet<DownloadedApplication>();
+            this.downloadedApplications = new HashedSet<APIMemberApplication>();
             this.applicationTypes = new HashedSet<ApplicationType>();
             
             this.FirstName = firstName;
@@ -60,7 +60,7 @@ namespace AppReadyGo.Domain.Model.Users
         {
             if (!this.downloadedApplications.Any(a => a.Application == application))
             {
-                this.downloadedApplications.Add(new DownloadedApplication(application, this));
+                this.downloadedApplications.Add(new APIMemberApplication(application, this));
             }
         }
 
@@ -76,6 +76,24 @@ namespace AppReadyGo.Domain.Model.Users
             this.Zip = Zip;
             this.applicationTypes.Clear();
             this.applicationTypes.AddAll(appTypes);
+        }
+
+        public void UserApplicationWasUsed(Application application)
+        {
+            var app = this.downloadedApplications.FirstOrDefault(a => a.Application == application);
+            if (app != null)
+            {
+                app.ApplicationWasUsed();
+            }
+        }
+
+        public void UpdateApplicationReview(Application application, string review)
+        {
+            var app = this.downloadedApplications.FirstOrDefault(a => a.Application == application);
+            if (app != null)
+            {
+                app.UpdateReview(review);
+            }
         }
     }
 }

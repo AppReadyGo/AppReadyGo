@@ -7,10 +7,13 @@ namespace AppReadyGo.API.Models.Market
 {
     public class TaskModel
     {
-        public string Email { get; set; }
-
-        public int TaskId { get; set; }
+        public int UserId { get; set; }
 
         public int AppId { get; set; }
+    }
+
+    public class ReviewModel : TaskModel
+    {
+        public string Review { get; set; }
     }
 }
