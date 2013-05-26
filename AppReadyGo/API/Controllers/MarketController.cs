@@ -19,6 +19,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using AppReadyGo.API.Common.Mails;
+using AppReadyGo.Core.Commands.API;
 
 namespace AppReadyGo.API.Controllers
 {
@@ -145,8 +146,8 @@ namespace AppReadyGo.API.Controllers
         {
             //TODO: Add method to update downloaded count.
             int appId = 0;
-            string email = string.Empty;
-            var result = ObjectContainer.Instance.Dispatch(new ApplicationDownloadedCommand(email, appId));
+            int userId = 0;
+            var result = ObjectContainer.Instance.Dispatch(new ApplicationDownloadedCommand(userId, appId));
             
             string path = HttpContext.Current.Server.MapPath("~/" + filename);
             if (!File.Exists(path))
@@ -247,13 +248,23 @@ namespace AppReadyGo.API.Controllers
         /// </summary>
         /// <param name="email"></param>
         /// <param name="task"></param>
-        [HttpPost]
-        public void TaskConfirm([FromBody] TaskModel model)
-        { 
+        //[HttpPost]
+        //public void TaskConfirm([FromBody] TaskModel model)
+        //{ 
             
+        //}
+
+        [HttpPost]
+        public void Used([FromBody] TaskModel model)
+        {
+            ObjectContainer.Instance.Dispatch(new ApplicationUsedCommand(model.UserId, model.AppId));
         }
 
-
+        [HttpPost]
+        public void UpdateReview([FromBody] ReviewModel model)
+        {
+            ObjectContainer.Instance.Dispatch(new ApplicationUpdateReviewCommand(model.UserId, model.AppId, model.Review));
+        }
     }
 
     public static class Ext

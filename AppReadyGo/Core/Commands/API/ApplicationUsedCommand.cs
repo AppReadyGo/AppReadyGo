@@ -4,26 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppReadyGo.Core.Commands.Application
+namespace AppReadyGo.Core.Commands.API
 {
-    public class ApplicationDownloadedCommand : ICommand<int>
+    public class ApplicationUsedCommand : ICommand<int>
     {
-        public string Email { get; protected set; }
+        public int MemberId { get; protected set; }
 
         public int ApplicationId { get; protected set; }
 
-        public ApplicationDownloadedCommand(string email, int ApplicationId)
+        public ApplicationUsedCommand(int userId, int ApplicationId)
         {
-            this.Email = email;
+            this.MemberId = userId;
             this.ApplicationId = ApplicationId;
         }
 
         public IEnumerable<ValidationResult> Validate(IValidationContext validation)
         {
-            if (string.IsNullOrEmpty(this.Email))
-            {
-                yield return new ValidationResult(ErrorCode.WrongParameter, "Command must have Email parameter.");
-            }
+            yield break;
         }
 
         public IEnumerable<ValidationResult> ValidatePermissions(ISecurityContext security)

@@ -80,9 +80,11 @@
   <ItemGroup>
     <Compile Include="CommandHandlers\Admin\ClearLogCommandHandler.cs" />
     <Compile Include="CommandHandlers\API\AddPackageCommandHandler.cs" />
+    <Compile Include="CommandHandlers\API\ApplicationUsedCommandHandler.cs" />
+    <Compile Include="CommandHandlers\API\ApplicationUpdateReviewCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\AddScreenCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\AddScreenshotCommandHandler.cs" />
-    <Compile Include="CommandHandlers\Application\ApplicationDownloadedCommandHandler.cs" />
+    <Compile Include="CommandHandlers\API\ApplicationDownloadedCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UpdateApplicationIconCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UnPublishCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\CreateApplicationCommandHandler.cs" />
@@ -161,7 +163,7 @@
     <Compile Include="Model\Content\Mail.cs" />
     <Compile Include="Model\Content\Page.cs" />
     <Compile Include="Model\Content\Theme.cs" />
-    <Compile Include="Model\DownloadedApplication.cs" />
+    <Compile Include="Model\APIMemberApplication.cs" />
     <Compile Include="Model\Country.cs" />
     <Compile Include="Model\Events\ClickEvent.cs" />
     <Compile Include="Model\Events\IEvent.cs" />

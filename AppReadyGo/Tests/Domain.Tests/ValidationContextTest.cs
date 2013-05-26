@@ -15,7 +15,7 @@ namespace Domain.Tests
         [TestInitialize()]
         public void TestInitialize()
         {
-            this.database = new Database("QA", "arg_unittests");
+            this.database = new Database(@"WIN-O968SJ7A1UU\SQLEXPRESS", "arg_unittests");
         }
 
         [TestCleanup()]
@@ -27,7 +27,7 @@ namespace Domain.Tests
         [TestMethod]
         public void IsEmailExistsForNewUser()
         {
-            int userId = CreateUser();
+            int userId = new UserTests().CreateMember().Id;
             using (ISession session = database.OpenSession())
             {
                 var validation = new ValidationContext(session);
@@ -39,28 +39,14 @@ namespace Domain.Tests
         [TestMethod]
         public void IsEmailExistsForExistsUser()
         {
-            int userId = CreateUser("test1@test.com");
-            userId = CreateUser();
+            int userId = new UserTests().CreateMember("test1@test.com").Id;
+            userId = new UserTests().CreateMember().Id;
             using (ISession session = database.OpenSession())
             {
                 var validation = new ValidationContext(session);
                 Assert.IsFalse(validation.IsEmailExists("test@test.com", userId));
                 Assert.IsTrue(validation.IsEmailExists("test1@test.com", userId));
             }
-        }
-
-        public int CreateUser(string email = "test@test.com")
-        {
-            var user = new Member(email, "12345");
-            using (ISession session = database.OpenSession())
-            {
-                using (ITransaction dbTrans = session.BeginTransaction())
-                {
-                    session.Save(user);
-                    dbTrans.Commit();
-                }
-            }
-            return user.Id;
         }
     }
 }

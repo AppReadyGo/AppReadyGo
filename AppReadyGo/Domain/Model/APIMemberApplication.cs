@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AppReadyGo.Domain.Model
 {
-    public class DownloadedApplication
+    public class APIMemberApplication
     {
         public virtual int Id { get; protected set; }
 
@@ -14,14 +14,28 @@ namespace AppReadyGo.Domain.Model
 
         public virtual ApiMember User { get; protected set; }
 
-        public DownloadedApplication()
+        public virtual bool Used { get; protected set; }
+
+        public virtual string Review { get; protected set; }
+
+        public APIMemberApplication()
         {
         }
 
-        public DownloadedApplication(Application application, ApiMember user)
+        public APIMemberApplication(Application application, ApiMember user)
         {
             this.Application = application;
             this.User = user;
+        }
+
+        public virtual void ApplicationWasUsed()
+        {
+            this.Used = true;
+        }
+
+        public virtual void UpdateReview(string review)
+        {
+            this.Review = review;
         }
     }
 }

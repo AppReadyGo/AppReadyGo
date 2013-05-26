@@ -90,9 +90,11 @@
     <Compile Include="ApplicationLogging.cs" />
     <Compile Include="Commands\Admin\ClearLogCommand.cs" />
     <Compile Include="Commands\API\AddPackageCommand.cs" />
+    <Compile Include="Commands\API\ApplicationUsedCommand.cs" />
+    <Compile Include="Commands\API\ApplicationUpdateReviewCommand.cs" />
     <Compile Include="Commands\Application\AddScreenCommand.cs" />
     <Compile Include="Commands\Application\AddScreenshotCommand.cs" />
-    <Compile Include="Commands\Application\ApplicationDownloadedCommand.cs" />
+    <Compile Include="Commands\API\ApplicationDownloadedCommand.cs" />
     <Compile Include="Commands\Application\UpdateApplicationIconCommand.cs" />
     <Compile Include="Commands\Application\UnPublishCommand.cs" />
     <Compile Include="Commands\Application\CreateApplicationCommand.cs" />
