@@ -17,7 +17,7 @@ namespace Domain.Tests
         [TestInitialize()]
         public void TestInitialize()
         {
-            this.database = new Database(@"WIN-O968SJ7A1UU\SQLEXPRESS", "arg_unittests");
+            this.database = new Database(@"QA", "arg_unittests");
         }
 
         [TestCleanup()]
@@ -29,9 +29,9 @@ namespace Domain.Tests
         [TestMethod]
         public void ApplicationDownloadedCommand()
         {
-            var member = new UserTests().CreateMember();
-            var apiMember = new UserTests().CreateAPIMember();
-            var app = new ApplicationTests().CreateApplication(member);
+            var member = UserTests.CreateMember(this.database);
+            var apiMember = UserTests.CreateAPIMember(this.database);
+            var app = ApplicationTests.CreateApplication(this.database, member);
             using (ISession session = database.OpenSession())
             {
                 using (ITransaction dbTrans = session.BeginTransaction())
@@ -39,17 +39,18 @@ namespace Domain.Tests
                     new ApplicationDownloadedCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationUsedCommand(apiMember.Id, app.Id));
                     dbTrans.Commit();
                 }
+                apiMember = session.Get<ApiMember>(apiMember.Id);
+                Assert.AreEqual(1, apiMember.Applications.Count());
             }
-            Assert.AreEqual(1, apiMember.DownloadedApplications.Count());
         }
 
         [TestMethod]
         public void ApplicationUsedCommand()
         {
-            var member = new UserTests().CreateMember();
-            var apiMember = new UserTests().CreateAPIMember();
-            var app = new ApplicationTests().CreateApplication(member);
-            apiMember.DownloadApplication(app);
+            var member = UserTests.CreateMember(this.database);
+            var apiMember = UserTests.CreateAPIMember(this.database);
+            var app = ApplicationTests.CreateApplication(this.database, member);
+            DownloadApplication(this.database, apiMember.Id, app.Id);
             using (ISession session = database.OpenSession())
             {
                 using (ITransaction dbTrans = session.BeginTransaction())
@@ -57,17 +58,18 @@ namespace Domain.Tests
                     new ApplicationUsedCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationUsedCommand(apiMember.Id, app.Id));
                     dbTrans.Commit();
                 }
+                apiMember = session.Get<ApiMember>(apiMember.Id);
+                Assert.IsTrue(apiMember.Applications.First().Used);
             }
-            Assert.IsTrue(apiMember.DownloadedApplications.First().Used);
         }
 
         [TestMethod]
         public void ApplicationUpdateReviewCommand()
         {
-            var member = new UserTests().CreateMember();
-            var apiMember = new UserTests().CreateAPIMember();
-            var app = new ApplicationTests().CreateApplication(member);
-            apiMember.DownloadApplication(app);
+            var member = UserTests.CreateMember(this.database);
+            var apiMember = UserTests.CreateAPIMember(this.database);
+            var app = ApplicationTests.CreateApplication(this.database, member);
+            DownloadApplication(this.database, apiMember.Id, app.Id);
             using (ISession session = database.OpenSession())
             {
                 using (ITransaction dbTrans = session.BeginTransaction())
@@ -75,8 +77,21 @@ namespace Domain.Tests
                     new ApplicationUpdateReviewCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationUpdateReviewCommand(apiMember.Id, app.Id, "Some review"));
                     dbTrans.Commit();
                 }
+                apiMember = session.Get<ApiMember>(apiMember.Id);
+                Assert.AreEqual("Some review", apiMember.Applications.First().Review);
             }
-            Assert.AreEqual("Some review", apiMember.DownloadedApplications.First().Review);
+        }
+
+        internal static void DownloadApplication(Database database, int memberId, int appId)
+        {
+            using (ISession session = database.OpenSession())
+            {
+                using (ITransaction dbTrans = session.BeginTransaction())
+                {
+                    new ApplicationDownloadedCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationUsedCommand(memberId, appId));
+                    dbTrans.Commit();
+                }
+            }
         }
     }
 }
