@@ -7,7 +7,7 @@
 @section title { @RenderSection("title") }
 @section header 
 { 
-   <link href="@Html.Content("~/Content/after.login.master.css")" rel="stylesheet" type="text/css" />
+    <link href="@Html.Content("~/Content/admin.css")" rel="stylesheet" type="text/css" />
    @RenderSection("header")
 }
 
@@ -20,7 +20,6 @@
         <li class="@Model.GetMenuItemClass(AdminMasterModel.MenuItem.ApiMembers)"><span></span><a href="/Admin/ApiMembers">Api Members</a></li>
         <li class="@Model.GetMenuItemClass(AdminMasterModel.MenuItem.ContentManager)"><span></span><a href="/Admin/ContentManager">Content Manager</a></li>
     </ul>
-
 }
 
 @RenderSection("topMenu")

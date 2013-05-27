@@ -16,8 +16,8 @@ namespace AppReadyGo.Domain.Queries.Admin
         {
             var res = new AllStaffResult();
 
-            var usersQuery = session.Query<User>()
-                        .Where(u => u.Type == UserType.Staff);
+            var usersQuery = session.Query<Staff>();
+
             if (!string.IsNullOrEmpty(query.SearchStr))
             {
                 var str = query.SearchStr.ToLower();

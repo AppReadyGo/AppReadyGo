@@ -89,19 +89,16 @@ namespace AppReadyGo.Controllers
 
             var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
             var model = new StaffPagingModel() 
-            { 
-                Paging = new PagingModel
-                {
-                    IsOnePage = data.TotalPages == 1,
-                    Count = data.Count,
-                    PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
-                    NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
-                    TotalPages = data.TotalPages,
-                    CurPage = data.CurPage,
-                    UrlPart = string.Concat(searchStrUrlPart, string.IsNullOrEmpty(orderby) ? string.Empty : string.Concat("&orderby=", orderby), string.IsNullOrEmpty(order) ? string.Empty : string.Concat("&order=", order)),
-                    SearchStrUrlPart = searchStrUrlPart,
-                    SearchStr = srch
-                },
+            {
+                IsOnePage = data.TotalPages == 1,
+                Count = data.Count,
+                PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
+                NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
+                TotalPages = data.TotalPages,
+                CurPage = data.CurPage,
+                UrlPart = string.Concat(searchStrUrlPart, string.IsNullOrEmpty(orderby) ? string.Empty : string.Concat("&orderby=", orderby), string.IsNullOrEmpty(order) ? string.Empty : string.Concat("&order=", order)),
+                SearchStrUrlPart = searchStrUrlPart,
+                SearchStr = srch,
                 EmailOrder = orderBy == GetAllStaffQuery.OrderByColumn.Email && asc ? "desc" : "asc",
                 NameOrder = orderBy == GetAllStaffQuery.OrderByColumn.Name && asc ? "desc" : "asc",
                 Users = data.Users.Select((u, i) => new StaffDetailsModel
@@ -128,21 +125,55 @@ namespace AppReadyGo.Controllers
             var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
             var model = new MembersPagingModel
             {
-                Paging = new PagingModel
-                {
-                    IsOnePage = data.TotalPages == 1,
-                    Count = data.Count,
-                    PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
-                    NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
-                    TotalPages = data.TotalPages,
-                    CurPage = data.CurPage,
-                    UrlPart = string.Concat(searchStrUrlPart, string.IsNullOrEmpty(orderby) ? string.Empty : string.Concat("&orderby=", orderby), string.IsNullOrEmpty(order) ? string.Empty : string.Concat("&order=", order)),
-                    SearchStrUrlPart = searchStrUrlPart,
-                    SearchStr = srch
-                },
+                IsOnePage = data.TotalPages == 1,
+                Count = data.Count,
+                PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
+                NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
+                TotalPages = data.TotalPages,
+                CurPage = data.CurPage,
+                UrlPart = string.Concat(searchStrUrlPart, string.IsNullOrEmpty(orderby) ? string.Empty : string.Concat("&orderby=", orderby), string.IsNullOrEmpty(order) ? string.Empty : string.Concat("&order=", order)),
+                SearchStrUrlPart = searchStrUrlPart,
+                SearchStr = srch,
                 EmailOrder = orderBy == GetAllMembersQuery.OrderByColumn.Email && asc ? "desc" : "asc",
                 NameOrder = orderBy == GetAllMembersQuery.OrderByColumn.Name && asc ? "desc" : "asc",
                 CreateDateOrder = orderBy == GetAllMembersQuery.OrderByColumn.CreateDate && asc ? "desc" : "asc",
+                Users = data.Users.Select((u, i) => new MemberDetailsModel
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    Name = string.IsNullOrEmpty(u.FirstName + u.LastName) ? string.Empty : string.Concat(u.FirstName, " ", u.LastName),
+                    Activated = u.Activated,
+                    SpecialAccess = u.SpecialAccess,
+                    Index = i,
+                    IsAlternative = i % 2 != 0,
+                    LastAccess = u.LastAccessDate.HasValue ? u.LastAccessDate.Value.ToString("dd MMM yyyy") : string.Empty,
+                    Registred = u.CreateDate.ToString("dd MMM yyyy")
+                }).ToArray()
+            };
+            return View(model);
+        }
+
+        public ActionResult ApiMembers(string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")
+        {
+            var orderBy = string.IsNullOrEmpty(orderby) ? GetAllApiMembersQuery.OrderByColumn.CreateDate : (GetAllApiMembersQuery.OrderByColumn)Enum.Parse(typeof(GetAllApiMembersQuery.OrderByColumn), orderby, true);
+            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == GetAllApiMembersQuery.OrderByColumn.CreateDate) ? false : true) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
+            var data = ObjectContainer.Instance.RunQuery(new GetAllApiMembersQuery(srch, orderBy, asc, cp, 15));
+
+            var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
+            var model = new ApiMembersPagingModel
+            {
+                IsOnePage = data.TotalPages == 1,
+                Count = data.Count,
+                PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
+                NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
+                TotalPages = data.TotalPages,
+                CurPage = data.CurPage,
+                UrlPart = string.Concat(searchStrUrlPart, string.IsNullOrEmpty(orderby) ? string.Empty : string.Concat("&orderby=", orderby), string.IsNullOrEmpty(order) ? string.Empty : string.Concat("&order=", order)),
+                SearchStrUrlPart = searchStrUrlPart,
+                SearchStr = srch,
+                EmailOrder = orderBy == GetAllApiMembersQuery.OrderByColumn.Email && asc ? "desc" : "asc",
+                NameOrder = orderBy == GetAllApiMembersQuery.OrderByColumn.Name && asc ? "desc" : "asc",
+                CreateDateOrder = orderBy == GetAllApiMembersQuery.OrderByColumn.CreateDate && asc ? "desc" : "asc",
                 Users = data.Users.Select((u, i) => new MemberDetailsModel
                 {
                     Id = u.Id,
