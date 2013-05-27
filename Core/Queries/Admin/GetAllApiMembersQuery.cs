@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using AppReadyGo.Core.QueryResults.Users;
+
+namespace AppReadyGo.Core.Queries.Admin
+{
+    public class GetAllApiMembersQuery : IQuery<AllMembersResult>
+    {
+        public int CurPage { get; set; }
+
+        public int PageSize { get; set; }
+
+        public string SearchStr { get; set; }
+
+        public bool ASC { get; set; }
+
+        public OrderByColumn OrderBy { get; set; }
+
+        public GetAllApiMembersQuery(string searchStr, OrderByColumn orderBy, bool asc, int curPage, int pageSize)
+        {
+            this.ASC = asc;
+            this.CurPage = curPage;
+            this.PageSize = pageSize;
+            this.SearchStr = searchStr;
+            this.OrderBy = orderBy;
+        }
+
+        public enum OrderByColumn
+        {
+            Email,
+            Name,
+            CreateDate
+        }
+    }
+}

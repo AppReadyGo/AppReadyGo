@@ -650,9 +650,9 @@ The terms and conditions contained in this Agreement that by their sense and con
 </p>'),
 (2, 1, 'slideshow', '
 <img src="/content/images/screens.png" />
-    <h2>
+    <h1>
         Appstore where you meet your target audience        
-    </h2>
+    </h1>
     <a href="/account/register" class="button yellow btn-getstarted">Publish Now</a>'),
 (2, 1, 'content', '
     <article id="features">

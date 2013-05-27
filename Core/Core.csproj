@@ -165,6 +165,7 @@
     <Compile Include="Queries\Admin\AllMembersResult.cs" />
     <Compile Include="Queries\Admin\AllStaffResult.cs" />
     <Compile Include="Queries\Admin\AllKeysResult.cs" />
+    <Compile Include="Queries\Admin\GetAllApiMembersQuery.cs" />
     <Compile Include="Queries\Admin\GetAllMembersQuery.cs" />
     <Compile Include="Queries\Admin\GetAllStaffQuery.cs" />
     <Compile Include="QueryResults\Admin\GetAllKeyItemsQueryResult.cs" />

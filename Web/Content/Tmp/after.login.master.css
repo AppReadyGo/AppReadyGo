@@ -23,29 +23,6 @@
 .main-content{padding:20px;min-height:500px;}
 .main-content h3.title{margin-top:0;font-size:17px;}
 
-.left-panel{border-right:1px solid #d9d9d9;width:250px;float:left;}
-.left-panel .footer{color:#333;font-size:11px;}
-.left-panel .footer a{color:#3e5163;text-decoration:none;}
-.left-panel .footer a:hover{text-decoration:underline;}
-.left-panel ul{margin:0;padding:0;}
-.left-panel li{list-style-type:none;}
-.left-panel .left-menu{margin-bottom:150px;}
-.left-panel .left-menu ul{margin-right:10px;}
-.left-panel .left-menu ul li{border-bottom:1px solid #E8E8E8;}
-.left-panel .left-menu ul li:first-child{border-bottom:1px solid #fff;}
-.left-panel .left-menu ul li a{text-decoration:none;display: block;height: 30px;cursor:pointer;
-								line-height: 29px;outline: 0 none;padding: 0 19px 0 34px;position: relative;
-								color:#000;}
-.left-panel .left-menu ul li span{display:block;background:url("template/images/marker.gif") no-repeat scroll left 4px transparent;
-                                  float:right;width:10px;height:10px;margin-top:10px;}
-.left-panel .left-menu ul li a:hover{color: #82B704;}
-.left-panel .left-menu ul li.active a{background-color: #e4e4e4; border-radius: 3px 3px 3px 3px;color: #82B704;}
-.left-panel .left-menu ul li.active span{background:none;}
-.left-panel .left-menu ul li.disabled a{color: #E8E8E8;cursor:default;}
-.left-panel .left-menu ul li.disabled a:hover{color: #E8E8E8;}
-.left-panel .left-menu ul li.disabled span{background-position:-327px -126px;}
-
-.right-panel{padding-left:260px;}
 
 a{text-decoration:none;}
 input.button,a.button{min-width: 0; padding:5px 8px;-moz-border-bottom-colors: none;

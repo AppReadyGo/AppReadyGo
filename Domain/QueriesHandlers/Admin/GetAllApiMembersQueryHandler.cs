@@ -14,13 +14,13 @@ using AppReadyGo.Domain.QueriesHandlers.Admin;
 
 namespace AppReadyGo.Domain.Queries.Admin
 {
-    public class GetAllMembersQueryHandler : IQueryHandler<GetAllMembersQuery, AllMembersResult>
+    public class GetAllApiMembersQueryHandler : IQueryHandler<GetAllApiMembersQuery, AllMembersResult>
     {
-        public AllMembersResult Run(ISession session, GetAllMembersQuery query)
+        public AllMembersResult Run(ISession session, GetAllApiMembersQuery query)
         {
             var res = new AllMembersResult();
 
-            var usersQuery = session.Query<Member>();
+            var usersQuery = session.Query<ApiMember>();
 
             if (!string.IsNullOrEmpty(query.SearchStr))
             {
@@ -46,15 +46,15 @@ namespace AppReadyGo.Domain.Queries.Admin
                 LastAccessDate = u.LastAccessDate
             });
 
-            if (query.OrderBy == GetAllMembersQuery.OrderByColumn.Email)
+            if (query.OrderBy == GetAllApiMembersQuery.OrderByColumn.Email)
             {
                 users = query.ASC ? users.OrderBy(u => u.Email) : users.OrderByDescending(u => u.Email);
             }
-            else if (query.OrderBy == GetAllMembersQuery.OrderByColumn.Name)
+            else if (query.OrderBy == GetAllApiMembersQuery.OrderByColumn.Name)
             {
                 users = query.ASC ? users.OrderBy(u => u.LastName + " " + u.FirstName) : users.OrderByDescending(u => u.Email);
             }
-            else if (query.OrderBy == GetAllMembersQuery.OrderByColumn.CreateDate)
+            else if (query.OrderBy == GetAllApiMembersQuery.OrderByColumn.CreateDate)
             {
                 users = query.ASC ? users.OrderBy(u => u.CreateDate) : users.OrderByDescending(u => u.CreateDate);
             }
