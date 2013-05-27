@@ -25,7 +25,7 @@ namespace Domain.Tests
             this.database.Clear();
         }
 
-        public Application CreateApplication(Member member, string name = "Some name")
+        internal static Application CreateApplication(Database database, Member member, string name = "Some name")
         {
             var appType = new ApplicationType("Some type");
             var app = new Application(member, name, "Some description", appType, null);

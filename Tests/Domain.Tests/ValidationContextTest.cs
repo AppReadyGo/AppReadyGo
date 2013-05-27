@@ -15,7 +15,7 @@ namespace Domain.Tests
         [TestInitialize()]
         public void TestInitialize()
         {
-            this.database = new Database(@"WIN-O968SJ7A1UU\SQLEXPRESS", "arg_unittests");
+            this.database = new Database(@"QA", "arg_unittests");
         }
 
         [TestCleanup()]
@@ -27,7 +27,7 @@ namespace Domain.Tests
         [TestMethod]
         public void IsEmailExistsForNewUser()
         {
-            int userId = new UserTests().CreateMember().Id;
+            int userId = UserTests.CreateMember(database).Id;
             using (ISession session = database.OpenSession())
             {
                 var validation = new ValidationContext(session);
@@ -39,8 +39,8 @@ namespace Domain.Tests
         [TestMethod]
         public void IsEmailExistsForExistsUser()
         {
-            int userId = new UserTests().CreateMember("test1@test.com").Id;
-            userId = new UserTests().CreateMember().Id;
+            int userId = UserTests.CreateMember(database, "test1@test.com").Id;
+            userId = UserTests.CreateMember(database).Id;
             using (ISession session = database.OpenSession())
             {
                 var validation = new ValidationContext(session);

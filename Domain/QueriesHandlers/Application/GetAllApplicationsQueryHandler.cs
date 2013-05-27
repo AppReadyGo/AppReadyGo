@@ -126,7 +126,7 @@ namespace AppReadyGo.Domain.Queries.Application
                         .ToArray();
 
             var appDownloaded = session.Query<ApiMember>()
-                        .SelectMany(u => u.DownloadedApplications)
+                        .SelectMany(u => u.Applications)
                         .Where(a => appIds.Contains(a.Id))
                         .Select(a => a.Id)
                         .GroupBy(id => id)

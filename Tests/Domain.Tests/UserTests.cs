@@ -24,7 +24,7 @@ namespace Domain.Tests
             this.database.Clear();
         }
 
-        public Member CreateMember(string email = "member@test.com")
+        internal static Member CreateMember(Database database, string email = "member@test.com")
         {
             var user = new Member(email, "12345");
             using (ISession session = database.OpenSession())
@@ -38,7 +38,7 @@ namespace Domain.Tests
             return user;
         }
 
-        public ApiMember CreateAPIMember(string email = "APIMember@test.com")
+        internal static ApiMember CreateAPIMember(Database database, string email = "APIMember@test.com")
         {
             var user = new ApiMember(email, "12345", "Some name", "some name", null, null, null, null, new AppReadyGo.Domain.Model.ApplicationType[0]);
             using (ISession session = database.OpenSession())
