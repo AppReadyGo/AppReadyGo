@@ -31,7 +31,8 @@ namespace AppReadyGo.Domain.Queries
                                 Id = a.Id,
                                 Name = a.Name,
                                 Description = a.Description,
-                                HasIcon = a.IconExt != null
+                                HasIcon = a.IconExt != null,
+                                Url = a.MarketUrl
                         })
                         .Skip(skip)
                         .Take(query.PageSize)

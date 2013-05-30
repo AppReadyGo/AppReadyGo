@@ -44,6 +44,9 @@ namespace AppReadyGo.Domain.Model
         /// this member holds User 
         /// </summary>
         public virtual User User { get; protected set; }
+
+        public virtual string MarketUrl { get; set; }
+
         /// <summary>
         /// holds application screens list 
         /// </summary>

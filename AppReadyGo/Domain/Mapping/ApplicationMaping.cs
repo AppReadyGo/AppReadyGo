@@ -24,6 +24,10 @@ namespace AppReadyGo.Domain.Mapping
             {
                 map.Length(500);
             });
+            Property(x => x.MarketUrl, map =>
+            {
+                map.Length(500);
+            });
             ManyToOne(p => p.Type, map =>
             {
                 map.Column("Type");
