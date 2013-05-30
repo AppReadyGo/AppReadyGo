@@ -24,6 +24,8 @@ DELETE [usr].[StaffRoles]
 GO
 DELETE [dbo].[ApplicationTypes]
 GO
+DELETE [usr].[Memberships]
+GO
 
 INSERT INTO [cont].[Themes] ([ID], [Name], [Url], [TYPE])
 VALUES (1, 'System Email', 'Mails\System.aspx', 1),

@@ -64,16 +64,16 @@ namespace AppReadyGo.API.Controllers
         }
 
         [HttpPost]
-        public bool Register([FromBody] UserModel model)
+        public RegisterResultModel Register([FromBody] UserModel model)
         {
             // var body = HttpContext.Current.Request.Body();
             if (string.IsNullOrEmpty(model.Email))
             {
-                return false;
+                return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.MissingData } ;
             }
             if (string.IsNullOrEmpty(model.Password))
             {
-                return false;
+                return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.MissingData } ;
             }
 
             var result = ObjectContainer.Instance.Dispatch(new CreateAPIMemberCommand(model.Email, model.Password, model.FirstName, model.LastName, model.Gender, model.AgeRange, model.ContryId, model.Zip, model.Interests));
@@ -81,11 +81,14 @@ namespace AppReadyGo.API.Controllers
             if (!result.Validation.Any())
             {
                 new APIActivationEmail(model.Email).Send();
-                return true;
+                return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.Successful } ;
             }
             else
             {
-                return false;
+                if (result.Validation.Any(v => v.ErrorCode == ErrorCode.EmailExists))
+                    return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.UserAlreadyRegistered };
+                else
+                    return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.MissingData };
             }
         }
 
