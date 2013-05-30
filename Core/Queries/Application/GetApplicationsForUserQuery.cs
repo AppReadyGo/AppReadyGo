@@ -9,13 +9,13 @@ namespace AppReadyGo.Core.Queries.Application
 {
     public class GetApplicationsForUserQuery : IQuery<PagingResult<APIApplicationResult>>
     {
-        public string Email { get; private set; }
+        public int UserId { get; private set; }
         public int CurPage { get; private set; }
         public int PageSize { get; private set; }
 
-        public GetApplicationsForUserQuery(string email, int curPage, int pageSize)
+        public GetApplicationsForUserQuery(int userId, int curPage, int pageSize)
         {
-            this.Email = email;
+            this.UserId = userId;
             this.CurPage = curPage;
             this.PageSize = pageSize;
         }

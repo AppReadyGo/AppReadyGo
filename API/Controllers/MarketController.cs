@@ -119,9 +119,9 @@ namespace AppReadyGo.API.Controllers
         /// <param name="email"></param>
         /// <returns></returns>
         [HttpGet]
-        public PaggingModel<ApplicationModel> GetApps(string email, int curPage, int pageSize)
+        public PaggingModel<ApplicationModel> GetApps(int userId, int curPage, int pageSize)
         {
-            var res = ObjectContainer.Instance.RunQuery(new GetApplicationsForUserQuery(email, curPage, pageSize));
+            var res = ObjectContainer.Instance.RunQuery(new GetApplicationsForUserQuery(userId, curPage, pageSize));
             return new PaggingModel<ApplicationModel>
             {
                 Collection = res.Collection.Select(a => new ApplicationModel
@@ -138,17 +138,12 @@ namespace AppReadyGo.API.Controllers
             };
         }
 
-        // Yura: What is the method? Does the method return package? I need explanation about ranges.
-        //PM : Ranges allow you to download a big app package, this method is "Download App"
-        // Yura: lets provide appid or something else, but not filename.
         [HttpGet]
-        public HttpResponseMessage GetApp([FromUri]string filename)
+        public HttpResponseMessage GetApp(int userId, int appId)
         {
-            //TODO: Add method to update downloaded count.
-            int appId = 0;
-            int userId = 0;
             var result = ObjectContainer.Instance.Dispatch(new ApplicationDownloadedCommand(userId, appId));
-            
+
+            string filename = string.Empty;
             string path = HttpContext.Current.Server.MapPath("~/" + filename);
             if (!File.Exists(path))
             {
@@ -240,9 +235,6 @@ namespace AppReadyGo.API.Controllers
             }
         }
 
-        // TODO: Yura: What does it mean?
-        // PM : it means User (tester) has completed a task (used an app, reviewed it or something else)
-        // Yura: Could you please explain me more about the functionality, we have to create a database and other functionality?
         /// <summary>
         /// TASK comple confirmation 
         /// </summary>
