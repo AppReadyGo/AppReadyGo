@@ -5,7 +5,8 @@
     [CreateDate]	DATETIME		NOT NULL,
     [Type]			INT				NOT NULL,
     [UserID]		INT				NOT NULL,
-	[IconExt]		NVARCHAR (5)	NULL
+	[IconExt]		NVARCHAR (5)	NULL, 
+    [MarketUrl]		NVARCHAR(500) NULL
 );
 GO;
 

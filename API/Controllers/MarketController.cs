@@ -129,7 +129,8 @@ namespace AppReadyGo.API.Controllers
                     Id = a.Id,
                     Name = a.Name,
                     Description = a.Description,
-                    HasIcon = a.HasIcon
+                    HasIcon = a.HasIcon,
+                    Url = a.Url
                 })
                 .ToArray(),
                 CurPage = res.CurPage,

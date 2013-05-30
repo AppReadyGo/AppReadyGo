@@ -13,9 +13,11 @@ namespace AppReadyGo.API.Models.Market
 
         public string Name { get; set; }
 
-        public string Uri { get; set; }// Y: What is it? If it is link to package, we don't need, you have send id off application to get the package: http://appreadygo.com/application/{id}/package
+        //Url to application in market
+        public string Url { get; set; }
 
-        public string IconUri { get; set; }// Y: This url you can generate in android application by appid and static url: http://appreadygo.com/application/{id}/icon
+        //public string IconUri { get; set; }// Y: This url you can generate in android application by appid and static url: http://appreadygo.com/application/{id}/icon
+        // http://appreadygo.com/application/{id}/package
         
         public bool HasIcon { get; set; }// Y: in case the app does not have any icon, you have to show some icon instead.
 

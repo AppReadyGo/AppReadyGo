@@ -11,5 +11,7 @@ namespace AppReadyGo.Core.QueryResults.Application
         public string Description { get; set; }
 
         public bool HasIcon { get; set; }
+
+        public string Url { get; set; }
     }
 }
