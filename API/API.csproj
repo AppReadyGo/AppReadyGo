@@ -15,7 +15,7 @@
     <AssemblyName>AppReadyGo.API</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -146,6 +146,7 @@
     <Compile Include="Models\Market\PaggingModel.cs" />
     <Compile Include="Models\Market\RegisterModel.cs" />
     <Compile Include="Models\Market\LoginModel.cs" />
+    <Compile Include="Models\Market\RegisterResultModel.cs" />
     <Compile Include="Models\Market\SettingsModel.cs" />
     <Compile Include="Models\Market\TaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -308,7 +309,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>16989</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63321/</IISUrl>
+           <IISUrl>http://localhost:63321/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
