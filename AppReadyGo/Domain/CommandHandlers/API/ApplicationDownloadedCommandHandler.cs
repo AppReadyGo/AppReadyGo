@@ -11,9 +11,9 @@ using AppReadyGo.Core.Commands.API;
 
 namespace AppReadyGo.Domain.CommandHandlers.API
 {
-    public class ApplicationDownloadedCommandHandler : ICommandHandler<ApplicationUsedCommand, int>
+    public class ApplicationDownloadedCommandHandler : ICommandHandler<ApplicationDownloadedCommand, int>
     {
-        public int Execute(ISession session, ApplicationUsedCommand cmd)
+        public int Execute(ISession session, ApplicationDownloadedCommand cmd)
         {
             var application = session.Get<Model.Application>(cmd.ApplicationId);
             var user = session.Get<ApiMember>(cmd.MemberId);

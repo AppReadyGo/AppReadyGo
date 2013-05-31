@@ -17,7 +17,6 @@ namespace AppReadyGo.API.Models.Market
         public string Url { get; set; }
 
         //public string IconUri { get; set; }// Y: This url you can generate in android application by appid and static url: http://appreadygo.com/application/{id}/icon
-        // http://appreadygo.com/application/{id}/package
         
         public bool HasIcon { get; set; }// Y: in case the app does not have any icon, you have to show some icon instead.
 

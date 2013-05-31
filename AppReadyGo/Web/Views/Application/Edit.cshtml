@@ -93,9 +93,16 @@
                     <label>Screen shot 5</label><br> 
                     <input type="file" name="screen_file_5" />
                 </p>
+                <h3>Package</h3>
                 <p>
-                    <label>Package</label><br> 
+                    <label>APK</label>
+                    @if (Model.Package != null)
+                    {
+                        <span>&nbsp;&nbsp;&nbsp;</span><a href="@Model.Package.Url">@Model.Package.FileName</a>
+                    }
+                    <br> 
                     <input type="file" name="package_file" />
+                    @Html.ValidationMessage("Package", new { @class = "error" })
                 </p>
                 <p class="actions">
                     @Html.ValidationMessage("error", new { @class = "error" })

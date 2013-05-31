@@ -60,6 +60,8 @@ namespace AppReadyGo.Domain.Model
 
         public virtual string IconExt { get; protected set; }
 
+        public virtual string PackageFileName { get; set; }
+
         public Application()
         {
             this.screens = new HashedSet<Screen>();
@@ -123,6 +125,11 @@ namespace AppReadyGo.Domain.Model
         public virtual void AddPageView(PageView pageView)
         {
             this.pageViews.Add(pageView);
+        }
+
+        public virtual void UpdatePackage(string fileName)
+        {
+            this.PackageFileName = fileName;
         }
     }
 }

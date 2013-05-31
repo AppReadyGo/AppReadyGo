@@ -20,7 +20,9 @@ namespace AppReadyGo.Domain.Queries.Application
                         Id = a.Id,
                         Name = a.Name,
                         Description = a.Description,
-                        Type = new System.Tuple<int,string>(a.Type.Id, a.Type.Name)
+                        Type = new System.Tuple<int,string>(a.Type.Id, a.Type.Name),
+                        IconExt = a.IconExt,
+                        PackageFileName = a.PackageFileName
                     })
                     .SingleOrDefault();
         }

@@ -6,7 +6,8 @@
     [Type]			INT				NOT NULL,
     [UserID]		INT				NOT NULL,
 	[IconExt]		NVARCHAR (5)	NULL, 
-    [MarketUrl]		NVARCHAR(500) NULL
+    [MarketUrl]		NVARCHAR(500) NULL, 
+    [PackageFileName] NVARCHAR(100) NULL
 );
 GO;
 

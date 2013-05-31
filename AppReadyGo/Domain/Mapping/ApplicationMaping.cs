@@ -28,6 +28,10 @@ namespace AppReadyGo.Domain.Mapping
             {
                 map.Length(500);
             });
+            Property(x => x.PackageFileName, map =>
+            {
+                map.Length(100);
+            });
             ManyToOne(p => p.Type, map =>
             {
                 map.Column("Type");

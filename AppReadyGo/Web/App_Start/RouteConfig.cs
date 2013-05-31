@@ -77,6 +77,13 @@ namespace AppReadyGo.Web
             );
 
             routes.MapRoute(
+                "User Packages",
+                "Application/{appId}/Package",
+                new { controller = "Files", action = "UserPackage" },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
                 "Screen controller",
                 "Application/{appId}/screen/{action}/{id}/{file}",
                 new { controller = "Screen", action = "Index", id = UrlParameter.Optional, file = UrlParameter.Optional },
