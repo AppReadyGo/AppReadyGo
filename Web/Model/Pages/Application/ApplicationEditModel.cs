@@ -13,5 +13,14 @@ namespace AppReadyGo.Model.Pages.Application
         public IEnumerable<string> ScreensPathes { get; set; }
 
         public IEnumerable<PublishDetailsResult> Publishes { get; set; }
+
+        public PackageModel Package { get; set; }
+
+        public class PackageModel
+        {
+            public string FileName { get; set; }
+
+            public string Url { get; set; }
+        }
     }
 }

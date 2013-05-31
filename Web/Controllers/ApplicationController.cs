@@ -24,6 +24,7 @@ namespace AppReadyGo.Controllers
     public class ApplicationController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly string[] packageExtentions = new string[] { ".jar", ".apk" };
 
         public ActionResult Index(string srch = "", int scol = 1, int cp = 1)
         {
@@ -92,13 +93,27 @@ namespace AppReadyGo.Controllers
         public ActionResult New()
         {
             var appTypes = ObjectContainer.Instance.RunQuery(new GetApplicationTypesQuery());
-            var types = appTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() });
+            var types = appTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() }).OrderBy(x => x.Text);
             return View(new ApplicationModel { Types = types });
         }
 
         [HttpPost]
         public ActionResult New(ApplicationModel model)
         {
+            var packageFile = Request.Files["package_file"];
+            if (packageFile.ContentLength > 0)
+            {
+                var ext = Path.GetExtension(packageFile.FileName);
+                if (!packageExtentions.Contains(ext))
+                {
+                    ModelState.AddModelError("Package", "The package file is wrong format.");
+                }
+                else if (packageFile.ContentLength > 52428800/*50MB*/)
+                {
+                    ModelState.AddModelError("Package", "The package file is too big, the maximum package size is 50MB.");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 string iconExt = Request.Files.AllKeys.Contains("icon_file") ? Path.GetExtension(Request.Files[0].FileName) : null;
@@ -122,6 +137,7 @@ namespace AppReadyGo.Controllers
                     foreach (var key in keys)
                     {
                         var ext = Path.GetExtension(Request.Files[key].FileName);
+                        // TODO: merge the command to one with create application
                         var sres = ObjectContainer.Instance.Dispatch(new AddScreenshotCommand(result.Result, ext));
                         var path = Path.Combine(Server.MapPath("~/Restricted/Screenshots/"), sres.Result + ext);
                         if (!sres.Validation.Any())
@@ -129,6 +145,14 @@ namespace AppReadyGo.Controllers
                             log.WriteInformation("Save file: {0}", path);
                             Request.Files[key].SaveAs(path);
                         }
+                    }
+
+                    if (packageFile.ContentLength > 0)
+                    {
+                        // TODO: merge the command to one with create application
+                        ObjectContainer.Instance.Dispatch(new UpdatePackageCommand(result.Result, packageFile.FileName));
+                        var path = Path.Combine(Server.MapPath("~/Restricted/UserPackages/"), result.Result.ToString());
+                        packageFile.SaveAs(path);
                     }
                 }
 
@@ -154,7 +178,8 @@ namespace AppReadyGo.Controllers
                 Type = res.ApplicationDetails.Type.Item1,
                 Types = res.ApplicationTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() }),
                 IconPath = string.IsNullOrEmpty(res.ApplicationDetails.IconExt) ? "/content/images/no_icon.png" : string.Format("/Restricted/Icons/{0}{1}", res.ApplicationDetails.Id, res.ApplicationDetails.IconExt),
-                ScreensPathes = res.Screenshots.Select(s => string.Format("/Restricted/Screenshots/{0}{1}", s.Item1, s.Item2))
+                ScreensPathes = res.Screenshots.Select(s => string.Format("/Restricted/Screenshots/{0}{1}", s.Item1, s.Item2)),
+                Package = res.ApplicationDetails.PackageFileName != null ? new ApplicationEditModel.PackageModel { Url = string.Format("/application/{0}/package", id), FileName = res.ApplicationDetails.PackageFileName } : null
             };
 
             return View(model);
@@ -163,6 +188,20 @@ namespace AppReadyGo.Controllers
         [HttpPost]
         public ActionResult Edit(ApplicationModel model)
         {
+            var packageFile = Request.Files["package_file"];
+            if (packageFile.ContentLength > 0)
+            {
+                var ext = Path.GetExtension(packageFile.FileName);
+                if (!packageExtentions.Contains(ext))
+                {
+                    ModelState.AddModelError("Package", "The package file is wrong format.");
+                }
+                else if (packageFile.ContentLength > 52428800/*50MB*/)
+                {
+                    ModelState.AddModelError("Package", "The package file is too big, the maximum package size is 50MB.");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 var result = ObjectContainer.Instance.Dispatch(new UpdateApplicationCommand(model.Id, model.Name, model.Description, model.Type));
@@ -202,6 +241,14 @@ namespace AppReadyGo.Controllers
                             log.WriteInformation("Save file: {0}", path);
                             Request.Files[key].SaveAs(path);
                         }
+                    }
+
+                    if (packageFile.ContentLength > 0)
+                    {
+                        // TODO: merge the command to one with create application
+                        ObjectContainer.Instance.Dispatch(new UpdatePackageCommand(result.Result, packageFile.FileName));
+                        var path = Path.Combine(Server.MapPath("~/Restricted/UserPackages/"), result.Result.ToString());
+                        packageFile.SaveAs(path);
                     }
                 }
                 return RedirectToAction("");
@@ -304,7 +351,7 @@ namespace AppReadyGo.Controllers
             return RedirectToAction("Publishes", new { id = appId.Result });
         }
 
-        public static IEnumerable<T> GetList<T>()
+        private IEnumerable<T> GetList<T>()
         {
             return Enum.GetValues(typeof(T)).Cast<T>();
         }

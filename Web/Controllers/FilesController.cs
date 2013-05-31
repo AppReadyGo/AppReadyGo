@@ -13,12 +13,31 @@ using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using AppReadyGo.Core.Logger;
 using AppReadyGo.Core.Entities;
+using AppReadyGo.Core.Queries.Application;
 
 namespace AppReadyGo.Controllers
 {
     public class FilesController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
+        // http://appreadygo.com/application/{id}/icon
+        // http://appreadygo.com/application/{id}/package
+        public FileResult UserPackage(int appId)
+        {
+            var appInfo = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(appId));
+            string packagePath = Server.MapPath(string.Format("~/Restricted/UserPackages/{0}", appId));
+
+            if (System.IO.File.Exists(packagePath))
+            {
+                var contentType = Path.GetExtension(appInfo.PackageFileName) == ".jar" ? "application/java-archive" : "application/octet-stream";
+                return base.File(packagePath, contentType, appInfo.PackageFileName);
+            }
+            else
+            {
+                throw new HttpException(404, "Not found");
+            }
+        }
 
         public FileResult Analytics(string filename)
         {

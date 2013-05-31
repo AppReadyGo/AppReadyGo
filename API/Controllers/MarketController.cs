@@ -145,11 +145,17 @@ namespace AppReadyGo.API.Controllers
         [HttpGet]
         public HttpResponseMessage GetApp(int userId, int appId)
         {
-            var result = ObjectContainer.Instance.Dispatch(new ApplicationDownloadedCommand(userId, appId));
+            var appInfo = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(appId));
+            var webPath = ConfigurationManager.AppSettings["WebApplicationPath"];
+            if (webPath.Contains("~/"))
+            {
+                webPath = webPath.Remove(0, 2).Replace("/", "\\");
+                webPath = Path.Combine(HttpContext.Current.Server.MapPath("~/"), webPath);
+            }
+            var userPackagePath = string.Format("Restricted\\UserPackages\\{0}", appId);
+            string packagePath = Path.Combine(webPath, userPackagePath);
 
-            string filename = string.Empty;
-            string path = HttpContext.Current.Server.MapPath("~/" + filename);
-            if (!File.Exists(path))
+            if (!System.IO.File.Exists(packagePath))
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
@@ -157,7 +163,7 @@ namespace AppReadyGo.API.Controllers
             try
             {
                 MemoryStream responseStream = new MemoryStream();
-                Stream fileStream = File.Open(path, FileMode.Open);
+                Stream fileStream = File.Open(packagePath, FileMode.Open);
                 bool fullContent = true;
                 if (this.Request.Headers.Range != null)
                 {
@@ -226,11 +232,14 @@ namespace AppReadyGo.API.Controllers
                 HttpResponseMessage response = new HttpResponseMessage();
                 response.StatusCode = fullContent ? HttpStatusCode.OK : HttpStatusCode.PartialContent;
                 response.Content = new StreamContent(responseStream);
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue(Path.GetExtension(appInfo.PackageFileName) == ".jar" ? "application/java-archive" : "application/octet-stream");
                 // Return filename
-                //response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                //{
-                //    FileName = "foo.txt"
-                //};
+                response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = appInfo.PackageFileName
+                };
+
+                ObjectContainer.Instance.Dispatch(new ApplicationDownloadedCommand(userId, appId));
                 return response;
             }
             catch (IOException)

@@ -102,6 +102,7 @@
     <Compile Include="Commands\Application\RemoveScreenCommand.cs" />
     <Compile Include="Commands\Application\PublishCommand.cs" />
     <Compile Include="Commands\Application\UpdateApplicationCommand.cs" />
+    <Compile Include="Commands\Application\UpdatePackageCommand.cs" />
     <Compile Include="Commands\Application\UpdateScreenCommand.cs" />
     <Compile Include="Commands\Content\CreateContentItemCommand.cs" />
     <Compile Include="Commands\Content\CreateMailCommand.cs" />

@@ -36,7 +36,7 @@ namespace Domain.Tests
             {
                 using (ITransaction dbTrans = session.BeginTransaction())
                 {
-                    new ApplicationDownloadedCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationUsedCommand(apiMember.Id, app.Id));
+                    new ApplicationDownloadedCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationDownloadedCommand(apiMember.Id, app.Id));
                     dbTrans.Commit();
                 }
                 apiMember = session.Get<ApiMember>(apiMember.Id);
@@ -88,7 +88,7 @@ namespace Domain.Tests
             {
                 using (ITransaction dbTrans = session.BeginTransaction())
                 {
-                    new ApplicationDownloadedCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationUsedCommand(memberId, appId));
+                    new ApplicationDownloadedCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationDownloadedCommand(memberId, appId));
                     dbTrans.Commit();
                 }
             }

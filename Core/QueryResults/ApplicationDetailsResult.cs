@@ -14,5 +14,7 @@ namespace AppReadyGo.Core.QueryResults
         public Tuple<int, string> Type { get; set; }
 
         public string IconExt { get; set; }
+
+        public string PackageFileName { get; set; }
     }
 }
