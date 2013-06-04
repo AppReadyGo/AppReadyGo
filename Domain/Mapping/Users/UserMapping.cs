@@ -28,6 +28,7 @@ namespace AppReadyGo.Domain.Mapping.Users
             Property(x => x.SpecialAccess, map => { map.NotNullable(true); });
             Property(x => x.AcceptedTermsAndConditions, map => { map.NotNullable(true); });
             Property(x => x.Membership, map => { map.NotNullable(true); map.Column("MembershipID"); });
-         }
+            Property(x => x.ThirdParty, map => { map.NotNullable(true); });
+        }
     }
 }

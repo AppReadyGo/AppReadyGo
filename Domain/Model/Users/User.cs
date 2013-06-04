@@ -23,6 +23,7 @@ namespace AppReadyGo.Domain.Model.Users
         public virtual bool AcceptedTermsAndConditions { get; protected set; }
         public virtual Membership Membership { get; protected set; }
         public virtual string Zip { get; protected set; }
+        public virtual bool ThirdParty { get; protected set; }
 
         public virtual UserType Type
         {
@@ -34,6 +35,7 @@ namespace AppReadyGo.Domain.Model.Users
             this.CreateDate = DateTime.UtcNow;
             this.Membership = Membership.Basic;
             this.PasswordSalt = Encryption.GenerateSalt();
+            this.ThirdParty = false;
         }
 
         public User(string email, string password)
@@ -41,6 +43,14 @@ namespace AppReadyGo.Domain.Model.Users
         {
             this.Email = email;
             this.Password = Encryption.SaltedHash(password, this.PasswordSalt);
+            this.ThirdParty = false;
+        }
+
+        public User(string email)
+            : this()
+        {
+            this.Email = email;
+            this.ThirdParty = true;
         }
 
         public virtual void ChangePassword(string password)

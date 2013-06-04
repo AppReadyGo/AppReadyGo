@@ -12,16 +12,19 @@ using System.IO;
 namespace AppReadyGo.API.Models.Market
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class UserModel
+    public class UserModel : ThirdPartyUserModel
+    {
+        [JsonProperty(PropertyName = "pass", Required = Required.Always)]
+        public string Password { get; set; }
+    }
+
+    public class ThirdPartyUserModel
     {
         [JsonProperty(PropertyName = "id", Required = Required.Default)]
         public int? Id { get; set; }
 
         [JsonProperty(PropertyName = "email", Required = Required.Always)]
         public string Email { get; set; }
-
-        [JsonProperty(PropertyName = "pass", Required = Required.Always)]
-        public string Password { get; set; }
 
         [JsonProperty(PropertyName = "firstname")]
         public string FirstName { get; set; }

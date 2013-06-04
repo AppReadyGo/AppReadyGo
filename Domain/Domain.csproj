@@ -102,6 +102,7 @@
     <Compile Include="CommandHandlers\StoredProcedureCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\AcceptTermsAndConditionsCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\ActivateUserCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\CreateThirdPartyAPIMemberCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\UpdateAPIMemberCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\CreateStaffCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\CreateAPIMemberCommandHandler.cs" />
