@@ -117,6 +117,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\Users\AcceptTermsAndConditionsCommand.cs" />
     <Compile Include="Commands\Users\ActivateUserCommand.cs" />
+    <Compile Include="Commands\Users\CreateThirdPartyAPIMemberCommand.cs" />
     <Compile Include="Commands\Users\CreateStaffCommand.cs" />
     <Compile Include="Commands\Users\CreateMemberCommand.cs" />
     <Compile Include="Commands\Users\CreateAPIMemberCommand.cs" />

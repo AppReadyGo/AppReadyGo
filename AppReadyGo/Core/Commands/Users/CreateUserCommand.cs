@@ -10,10 +10,19 @@ namespace AppReadyGo.Core.Commands.Users
 
         public string Password { get; protected set; }
 
+        public bool ThirdParty { get; set; }
+
         protected CreateUserCommand(string email, string password)
         {
             this.Email = email;
             this.Password = password;
+            this.ThirdParty = false;
+        }
+
+        protected CreateUserCommand(string email)
+        {
+            this.Email = email;
+            this.ThirdParty = true;
         }
 
         public virtual IEnumerable<ValidationResult> ValidatePermissions(ISecurityContext security)
@@ -38,14 +47,17 @@ namespace AppReadyGo.Core.Commands.Users
                 yield return new ValidationResult(ErrorCode.EmailExists, "The email exists in the system.");
             }
 
-            if (string.IsNullOrEmpty(this.Password))
+            if (!this.ThirdParty)
             {
-                yield return new ValidationResult(ErrorCode.WrongPassword, "The command must have an Password parameter.");
-            }
+                if (string.IsNullOrEmpty(this.Password))
+                {
+                    yield return new ValidationResult(ErrorCode.WrongPassword, "The command must have an Password parameter.");
+                }
 
-            if (!validation.IsCorrectPassword(this.Password))
-            {
-                yield return new ValidationResult(ErrorCode.WrongPassword, "The password is wrong.");
+                if (!validation.IsCorrectPassword(this.Password))
+                {
+                    yield return new ValidationResult(ErrorCode.WrongPassword, "The password is wrong.");
+                }
             }
         }
     }

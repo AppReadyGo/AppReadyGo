@@ -64,6 +64,29 @@ namespace AppReadyGo.API.Controllers
         }
 
         [HttpPost]
+        public RegisterResultModel ThirdPartyRegister([FromBody] ThirdPartyUserModel model)
+        {
+            if (string.IsNullOrEmpty(model.Email))
+            {
+                return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.MissingData };
+            }
+
+            var result = ObjectContainer.Instance.Dispatch(new CreateThirdPartyAPIMemberCommand(model.Email, model.FirstName, model.LastName, model.Gender, model.AgeRange, model.ContryId, model.Zip, model.Interests));
+
+            if (!result.Validation.Any())
+            {
+                return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.Successful };
+            }
+            else
+            {
+                if (result.Validation.Any(v => v.ErrorCode == ErrorCode.EmailExists))
+                    return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.UserAlreadyRegistered };
+                else
+                    return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.MissingData };
+            }
+        }
+
+        [HttpPost]
         public RegisterResultModel Register([FromBody] UserModel model)
         {
             // var body = HttpContext.Current.Request.Body();
