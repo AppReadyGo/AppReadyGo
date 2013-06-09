@@ -38,6 +38,22 @@ namespace AppReadyGo.Domain.Queries
                         .Take(query.PageSize)
                         .ToArray();
 
+            var appIds = res.Collection.Select(a => a.Id).ToArray();
+
+            var screenshots = session.Query<AppReadyGo.Domain.Model.Screenshot>()
+                                        .Where(s => appIds.Contains(s.Application.Id))
+                                        .Select(s => new 
+                                        { 
+                                            AppId = s.Application.Id, 
+                                            Id = s.Id, 
+                                            Ext = s.FileExtension 
+                                        })
+                                        .ToArray();
+            foreach( var app in res.Collection)
+            {
+                app.Screenshots = screenshots.Where(s => s.AppId == app.Id).ToDictionary(k => k.Id, v => v.Ext);
+            }
+                                        
             return res;
         }
     }

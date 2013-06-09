@@ -13,5 +13,7 @@ namespace AppReadyGo.Core.QueryResults.Application
         public bool HasIcon { get; set; }
 
         public string Url { get; set; }
+
+        public Dictionary<int, string> Screenshots { get; set; }
     }
 }
