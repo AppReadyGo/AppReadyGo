@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AppReadyGo.Core.Entities;
 
 namespace AppReadyGo.Core.QueryResults
@@ -16,5 +17,7 @@ namespace AppReadyGo.Core.QueryResults
         public string IconExt { get; set; }
 
         public string PackageFileName { get; set; }
+
+        public Dictionary<int, string> Screenshots { get; set; }
     }
 }
