@@ -23,5 +23,7 @@ namespace AppReadyGo.API.Models.Market
         public string ShortDescription { get; set; }// Y: What is it? we have just a description.
 
         public string Description { get; set; }
+
+        public int[] Screenshots { get; set; }
     }
 }

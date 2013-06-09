@@ -76,12 +76,12 @@ namespace AppReadyGo.Web
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
-            routes.MapRoute(
-                "User Packages",
-                "Application/{appId}/Package",
-                new { controller = "Files", action = "UserPackage" },
-                new[] { "AppReadyGo.Controllers" } // Namespaces
-            );
+            //routes.MapRoute(
+            //    "User Packages",
+            //    "Application/{appId}/Package",
+            //    new { controller = "Files", action = "UserPackage" },
+            //    new[] { "AppReadyGo.Controllers" } // Namespaces
+            //);
 
             routes.MapRoute(
                 "Screen controller",

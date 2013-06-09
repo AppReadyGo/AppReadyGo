@@ -21,23 +21,22 @@ namespace AppReadyGo.Controllers
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
-        // http://appreadygo.com/application/{id}/icon
-        // http://appreadygo.com/application/{id}/package
-        public FileResult UserPackage(int appId)
-        {
-            var appInfo = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(appId));
-            string packagePath = Server.MapPath(string.Format("~/Restricted/UserPackages/{0}", appId));
+        //// http://appreadygo.com/application/{id}/package
+        //public FileResult UserPackage(int appId)
+        //{
+        //    var appInfo = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(appId));
+        //    string packagePath = Server.MapPath(string.Format("~/Restricted/UserPackages/{0}", appId));
 
-            if (System.IO.File.Exists(packagePath))
-            {
-                var contentType = Path.GetExtension(appInfo.PackageFileName) == ".jar" ? "application/java-archive" : "application/octet-stream";
-                return base.File(packagePath, contentType, appInfo.PackageFileName);
-            }
-            else
-            {
-                throw new HttpException(404, "Not found");
-            }
-        }
+        //    if (System.IO.File.Exists(packagePath))
+        //    {
+        //        var contentType = Path.GetExtension(appInfo.PackageFileName) == ".jar" ? "application/java-archive" : "application/octet-stream";
+        //        return base.File(packagePath, contentType, appInfo.PackageFileName);
+        //    }
+        //    else
+        //    {
+        //        throw new HttpException(404, "Not found");
+        //    }
+        //}
 
         public FileResult Analytics(string filename)
         {
