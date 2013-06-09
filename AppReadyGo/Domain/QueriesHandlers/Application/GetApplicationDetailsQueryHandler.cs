@@ -13,7 +13,7 @@ namespace AppReadyGo.Domain.Queries.Application
     {
         public ApplicationDetailsResult Run(ISession session, GetApplicationDetailsQuery query)
         {
-            return session.Query<Model.Application>()
+            var app = session.Query<Model.Application>()
                     .Where(a => a.Id == query.Id)
                     .Select(a => new ApplicationDetailsResult
                     {
@@ -25,6 +25,16 @@ namespace AppReadyGo.Domain.Queries.Application
                         PackageFileName = a.PackageFileName
                     })
                     .SingleOrDefault();
+
+            if (app != null)
+            {
+                app.Screenshots = session.Query<Model.Screenshot>()
+                                        .Where(s => s.Application.Id == query.Id)
+                                        .Select(s => new { Id = s.Id, Ext = s.FileExtension })
+                                        .ToDictionary(k => k.Id, v => v.Ext);
+            }
+
+            return app;
         }
     }
 }

@@ -83,6 +83,14 @@ namespace AppReadyGo.Web
             //    new[] { "AppReadyGo.Controllers" } // Namespaces
             //);
 
+            // Appication resources
+            routes.MapRoute(
+                "Application Resources",
+                "Application/{appId}/{action}/{id}",
+                new { controller = "ApplicationResources", action = "Icon", id = UrlParameter.Optional },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
             routes.MapRoute(
                 "Screen controller",
                 "Application/{appId}/screen/{action}/{id}/{file}",
@@ -94,14 +102,6 @@ namespace AppReadyGo.Web
                 "Application controller",
                 "Application/{action}/{id}",
                 new { controller = "Application", action = "Index", id = UrlParameter.Optional },
-                new[] { "AppReadyGo.Controllers" } // Namespaces
-            );
-
-            // Appication resources
-            routes.MapRoute(
-                "Application Resources",
-                "Application/{appId}/{action}/{id}",
-                new { controller = "ApplicationResources", action = "Icon", id = UrlParameter.Optional },
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 

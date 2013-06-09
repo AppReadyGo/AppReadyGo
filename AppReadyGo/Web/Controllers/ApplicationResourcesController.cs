@@ -15,17 +15,17 @@ namespace AppReadyGo.Web.Controllers
         public FileContentResult Icon(int appId)
         {
             var appInfo = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(appId));
-            var dir = Server.MapPath(string.IsNullOrEmpty(appInfo.IconExt) ? "~/Content/Images/no_icon.png" : string.Format("~/Restricted/Icons/{0}{1}", appId, appInfo.IconExt));
-            if (System.IO.File.Exists(dir))
+            if (!string.IsNullOrEmpty(appInfo.IconExt))
             {
-                string contentType = string.Format("image/{0}", appInfo.IconExt.Substring(1));
+                var dir = Server.MapPath(string.Format("~/Restricted/Icons/{0}{1}", appId, appInfo.IconExt));
+                if (System.IO.File.Exists(dir))
+                {
+                    string contentType = string.Format("image/{0}", appInfo.IconExt.Substring(1));
 
-                return new FileContentResult(System.IO.File.ReadAllBytes(dir), contentType);
+                    return new FileContentResult(System.IO.File.ReadAllBytes(dir), contentType);
+                }
             }
-            else
-            {
-                throw new HttpException(404, "Not found");
-            }
+            throw new HttpException(404, "Not found");
         }
 
         // http://appreadygo.com/application/{appId}/package
@@ -48,15 +48,18 @@ namespace AppReadyGo.Web.Controllers
         // http://appreadygo.com/application/{appId}/screenshot/{id}
         public FileContentResult ScreenShot(int appId, int id)
         {
-            var dir = Server.MapPath("~/Content/Images/no_icon.png");
-            if (System.IO.File.Exists(dir))
+            var appInfo = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(appId));
+            if (appInfo.Screenshots.ContainsKey(id))
             {
-                return new FileContentResult(System.IO.File.ReadAllBytes(dir), "image/png"); ;
+                var dir = Server.MapPath(string.Format("~/Restricted/Screenshots/{0}{1}", appId, appInfo.Screenshots[id]));
+                if (System.IO.File.Exists(dir))
+                {
+                    string contentType = string.Format("image/{0}", appInfo.Screenshots[id].Substring(1));
+
+                    return new FileContentResult(System.IO.File.ReadAllBytes(dir), contentType);
+                }
             }
-            else
-            {
-                throw new HttpException(404, "Not found");
-            }
+            throw new HttpException(404, "Not found");
         }
     }
 }
