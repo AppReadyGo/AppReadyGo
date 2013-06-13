@@ -32,6 +32,11 @@ namespace AppReadyGo.Domain.Queries.Application
                                         .Where(s => s.Application.Id == query.Id)
                                         .Select(s => new { Id = s.Id, Ext = s.FileExtension })
                                         .ToDictionary(k => k.Id, v => v.Ext);
+
+                app.Screens = session.Query<Model.Screen>()
+                                        .Where(s => s.Application.Id == query.Id)
+                                        .Select(s => new { Id = s.Id, Ext = s.FileExtension })
+                                        .ToDictionary(k => k.Id, v => v.Ext);
             }
 
             return app;

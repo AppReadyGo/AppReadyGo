@@ -11,7 +11,7 @@ namespace AppReadyGo.Web.Controllers
 {
     public class ApplicationResourcesController : Controller
     {
-        // http://appreadygo.com/application/{appId}/icon
+        // http://appreadygo.com/application/{appId}/resource/icon
         public FileContentResult Icon(int appId)
         {
             var appInfo = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(appId));
@@ -28,7 +28,7 @@ namespace AppReadyGo.Web.Controllers
             throw new HttpException(404, "Not found");
         }
 
-        // http://appreadygo.com/application/{appId}/package
+        // http://appreadygo.com/application/{appId}/resource/package
         public FileResult Package(int appId)
         {
             var appInfo = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(appId));
@@ -45,16 +45,33 @@ namespace AppReadyGo.Web.Controllers
             }
         }
 
-        // http://appreadygo.com/application/{appId}/screenshot/{id}
+        // http://appreadygo.com/application/{appId}/resource/screenshot/{id}
         public FileContentResult ScreenShot(int appId, int id)
         {
             var appInfo = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(appId));
             if (appInfo.Screenshots.ContainsKey(id))
             {
-                var dir = Server.MapPath(string.Format("~/Restricted/Screenshots/{0}{1}", appId, appInfo.Screenshots[id]));
+                var dir = Server.MapPath(string.Format("~/Restricted/Screenshots/{0}{1}", id, appInfo.Screenshots[id]));
                 if (System.IO.File.Exists(dir))
                 {
                     string contentType = string.Format("image/{0}", appInfo.Screenshots[id].Substring(1));
+
+                    return new FileContentResult(System.IO.File.ReadAllBytes(dir), contentType);
+                }
+            }
+            throw new HttpException(404, "Not found");
+        }
+
+        // http://appreadygo.com/application/{appId}/resource/screen/{id}
+        public FileContentResult Screen(int appId, int id)
+        {
+            var appInfo = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(appId));
+            if (appInfo.Screens.ContainsKey(id))
+            {
+                var dir = Server.MapPath(string.Format("~/Restricted/Screens/{0}{1}", id, appInfo.Screens[id]));
+                if (System.IO.File.Exists(dir))
+                {
+                    string contentType = string.Format("image/{0}", appInfo.Screens[id].Substring(1));
 
                     return new FileContentResult(System.IO.File.ReadAllBytes(dir), contentType);
                 }

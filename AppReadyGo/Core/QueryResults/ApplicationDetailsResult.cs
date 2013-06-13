@@ -19,5 +19,7 @@ namespace AppReadyGo.Core.QueryResults
         public string PackageFileName { get; set; }
 
         public Dictionary<int, string> Screenshots { get; set; }
+
+        public Dictionary<int, string> Screens { get; set; }
     }
 }
