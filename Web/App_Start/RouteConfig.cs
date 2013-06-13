@@ -76,34 +76,34 @@ namespace AppReadyGo.Web
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
-            //routes.MapRoute(
-            //    "User Packages",
-            //    "Application/{appId}/Package",
-            //    new { controller = "Files", action = "UserPackage" },
-            //    new[] { "AppReadyGo.Controllers" } // Namespaces
-            //);
 
-            // Appication resources
-            routes.MapRoute(
-                "Application Resources",
-                "Application/{appId}/{action}/{id}",
-                new { controller = "ApplicationResources", action = "Icon", id = UrlParameter.Optional },
-                new[] { "AppReadyGo.Controllers" } // Namespaces
-            );
-
+            // Appication screens
+            // Example: /Application/3/screen/edit/1/some.png
             routes.MapRoute(
                 "Screen controller",
                 "Application/{appId}/screen/{action}/{id}/{file}",
                 new { controller = "Screen", action = "Index", id = UrlParameter.Optional, file = UrlParameter.Optional },
                 new[] { "AppReadyGo.Controllers" } // Namespaces
-            );
-
+            );  
+            
+            // Application controler
+            // Example: /Application/edit/3
             routes.MapRoute(
                 "Application controller",
                 "Application/{action}/{id}",
                 new { controller = "Application", action = "Index", id = UrlParameter.Optional },
                 new[] { "AppReadyGo.Controllers" } // Namespaces
+            );  
+            
+            // Appication resources
+            // Example: /Application/3/resource/icon
+            routes.MapRoute(
+                "Application Resources",
+                "Application/{appId}/resource/{action}/{id}",
+                new { controller = "ApplicationResources", action = "Icon", id = UrlParameter.Optional },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
             );
+
 
             //routes.MapRoute(
             //    "ApplicationScreen",
