@@ -179,6 +179,11 @@ namespace AppReadyGo.API.Controllers
             var userPackagePath = string.Format("Restricted\\UserPackages\\{0}", appId);
             string packagePath = Path.Combine(webPath, userPackagePath);
 
+            //var res = ObjectContainer.Instance.RunQuery(new GetAppForUserQuery(userId, appId));
+
+            string filename = string.Empty;
+            string path = HttpContext.Current.Server.MapPath("~/" + filename);
+
             if (!System.IO.File.Exists(packagePath))
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -195,7 +200,6 @@ namespace AppReadyGo.API.Controllers
 
                     // Currently we only support a single range.
                     RangeItemHeaderValue range = this.Request.Headers.Range.Ranges.First();
-
 
                     // From specified, so seek to the requested position.
                     if (range.From != null)
