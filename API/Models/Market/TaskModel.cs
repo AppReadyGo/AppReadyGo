@@ -16,4 +16,10 @@ namespace AppReadyGo.API.Models.Market
     {
         public string Review { get; set; }
     }
+
+    public class DownloadedModel : TaskModel
+    {
+        public bool Downloaded { get; set; }
+    }
+
 }
