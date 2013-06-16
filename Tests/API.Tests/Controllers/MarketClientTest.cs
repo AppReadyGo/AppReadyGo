@@ -17,7 +17,37 @@ namespace AppReadyGo.API.Tests.Controllers
     [TestClass]
     public class MarketClientTest
     {
+#if QA
+        static readonly Uri _baseAddress = new Uri("http://api.qa.appreadygo.com/market/");
+#elif DEBUG
         static readonly Uri _baseAddress = new Uri("http://localhost:63321/market/");
+#else
+        static readonly Uri _baseAddress = new Uri("http://api.appreadygo.com/market/");
+#endif
+
+
+        [TestMethod]
+        public void MarketGetSettingsByNetwork()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = _baseAddress;
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+            var response = client.GetAsync("getsettings").Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var res = response.Content.ReadAsStringAsync();
+                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
+            }
+            else
+            {
+                var res = response.Content.ReadAsStringAsync();
+                //Assert.IsTrue(res.Result);
+            }
+        }
 
         [TestMethod]
         public void MarketLoginByNetwork()
@@ -38,8 +68,8 @@ namespace AppReadyGo.API.Tests.Controllers
             }
             else
             {
-                var res = response.Content.ReadAsAsync<bool>();
-                Assert.IsTrue(res.Result);
+                var res = response.Content.ReadAsAsync<UserResultModel>().Result;
+                Assert.AreEqual(res.Code, UserResultModel.Result.WrongUserNamePassword);
             }
         }
 
@@ -52,12 +82,38 @@ namespace AppReadyGo.API.Tests.Controllers
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var data = new UserModel { ContryId = 1, Email = "test4@test.com", FirstName = "xxx", Password = "121" };
+            var data = new UserModel { ContryId = 1, Email = "ypanshin@gmail.com", FirstName = "xxx", Password = "121" };
 
-            var response = client.PostAsJsonAsync("register", data).Result;
+            var task = client.PostAsJsonAsync("register", data);
+            var response = task.Result;
             if (!response.IsSuccessStatusCode)
             {
                 var res = response.Content.ReadAsStringAsync();
+                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
+            }
+            else
+            {
+                var res = response.Content.ReadAsAsync<bool>();
+                Assert.IsTrue(res.Result);
+            }
+        }
+
+        [TestMethod]
+        public void MarketThirdPartyRegisterByNetwork()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = _baseAddress;
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var data = new ThirdPartyUserModel { ContryId = 1, Email = "ypanshin@gmail.com", FirstName = "xxx" };
+
+            var task = client.PostAsJsonAsync("thirdpartyregister", data);
+            var response = task.Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var res = response.Content.ReadAsStringAsync().Result;
                 Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
             }
             else
@@ -89,114 +145,5 @@ namespace AppReadyGo.API.Tests.Controllers
                 //Assert.IsTrue(res.Result);
             }
         }
-
-        //[TestMethod]
-        //public void AnalyticsSubmitPackage()
-        //{
-        //    ObjectContainer.Instance.GetType();
-        //    var data = CreatePackage();
-        //    var controller = new AnalyticsController();
-        //    var view = controller.SubmitPackage(data);
-        //    Assert.IsTrue(view);
-        //}
-
-        //[TestMethod]
-        //public void AnalyticsSubmitPackageByNetwork()
-        //{
-        //    HttpClient client = new HttpClient();
-        //    client.BaseAddress = _baseAddress;
-
-        //    // Add an Accept header for JSON format.
-        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-        //    var data = CreatePackage();
-
-        //    var response = client.PostAsJsonAsync("submitpackage", data).Result;
-        //    if (!response.IsSuccessStatusCode)
-        //    {
-        //        var res = response.Content.ReadAsStringAsync();
-        //        Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
-        //    }
-        //    else
-        //    {
-        //        var res = response.Content.ReadAsAsync<bool>();
-        //        Assert.IsTrue(res.Result);
-        //    }
-        //}
-
-        //private static FingerPrintData CreatePackage()
-        //{
-        //    var data = new FingerPrintData
-        //    {
-        //        Ip = "0.0.0.1",
-        //        Package = new Package
-        //        {
-        //            ClientKey = "123-123-0001",
-        //            ScreenHeight = 100,
-        //            ScreenWidth = 200,
-        //            SystemInfo = new SystemInfo
-        //            {
-        //            },
-        //            SessionsInfo = new SessionInfo[]
-        //            {
-        //                new SessionInfo
-        //                {
-        //                    ClientHeight = 100,
-        //                    ClientWidth = 200,
-        //                    PageUri = "home",
-        //                    TouchDetails = new TouchDetails[]
-        //                    {
-        //                        new TouchDetails
-        //                        {
-        //                            ClientX = 50,
-        //                            ClientY = 40,
-        //                            Date = DateTime.UtcNow.AddMinutes(-1),
-        //                            Orientation = 1
-        //                        },
-        //                        new TouchDetails
-        //                        {
-        //                            ClientX = 40,
-        //                            ClientY = 30,
-        //                            Date = DateTime.UtcNow.AddSeconds(-30),
-        //                            Orientation = 1
-        //                        }
-        //                    },
-        //                    ScrollDetails = new ScrollDetails[]
-        //                    {
-        //                        new ScrollDetails
-        //                        {
-        //                            // TODO: Yura: Why do we need all the data? lets take the data from first and last touch in touch details array
-        //                            CloseTouchData = new TouchDetails
-        //                            {
-        //                                ClientX = 40,
-        //                                ClientY = 30,
-        //                                Date = DateTime.UtcNow.AddSeconds(-30),
-        //                                Orientation = 1
-        //                            },
-        //                            StartTouchData = new TouchDetails
-        //                            {
-        //                                ClientX = 50,
-        //                                ClientY = 40,
-        //                                Date = DateTime.UtcNow.AddMinutes(-1),
-        //                                Orientation = 1
-        //                            }
-        //                        }
-        //                    },
-        //                    ViewAreaDetails = new ViewAreaDetails[]
-        //                    {
-        //                        new ViewAreaDetails
-        //                        {
-        //                             CoordX = 0,
-        //                             CoordY = 20,
-        //                             StartDate = DateTime.UtcNow.AddSeconds(-30),
-        //                             FinishDate = DateTime.UtcNow.AddSeconds(-25)
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    };
-        //    return data;
-        //}
     }
 }
