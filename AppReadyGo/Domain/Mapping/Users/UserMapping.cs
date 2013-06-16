@@ -17,8 +17,8 @@ namespace AppReadyGo.Domain.Mapping.Users
             Id(x => x.Id, map => { map.Column("ID"); map.Generator(Generators.Identity); });
             Property(x => x.Type, x => { x.NotNullable(true); x.Column("UserTypeID"); x.Access(Accessor.ReadOnly); x.Insert(false); x.Update(false); });
             Property(x => x.Email, map => { map.Length(50); map.NotNullable(true); });
-            Property(x => x.Password, map => { map.Length(50); map.NotNullable(true); });
-            Property(x => x.PasswordSalt, map => { map.Length(50); map.NotNullable(true); });
+            Property(x => x.Password, map => { map.Length(50); map.NotNullable(false); });
+            Property(x => x.PasswordSalt, map => { map.Length(50); map.NotNullable(false); });
             Property(x => x.CreateDate, map => { map.NotNullable(true); });
             Property(x => x.LastAccessDate, map => { });
             Property(x => x.Activated, map => { map.NotNullable(true); });
