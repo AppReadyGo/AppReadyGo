@@ -13,19 +13,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2013 15:31:30</publishTime>
     </File>
     <File Include="bin/AppReadyGo.API.dll">
-      <publishTime>06/16/2013 17:24:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Common.dll">
-      <publishTime>06/16/2013 17:24:21</publishTime>
+      <publishTime>06/17/2013 10:21:54</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Core.dll">
-      <publishTime>06/16/2013 10:34:06</publishTime>
+      <publishTime>06/17/2013 10:21:51</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Domain.dll">
-      <publishTime>06/16/2013 17:24:20</publishTime>
+      <publishTime>06/17/2013 10:21:52</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Web.Common.dll">
-      <publishTime>06/16/2013 17:24:22</publishTime>
+      <publishTime>06/17/2013 10:21:56</publishTime>
     </File>
     <File Include="bin/Castle.Core.dll">
       <publishTime>05/19/2013 11:14:29</publishTime>
@@ -48,20 +48,29 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Data.dll">
       <publishTime>04/25/2013 09:02:54</publishTime>
     </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll">
+      <publishTime>04/25/2013 09:48:36</publishTime>
+    </File>
     <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Logging.dll">
       <publishTime>04/25/2013 09:02:58</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.ServiceLocation.dll">
       <publishTime>04/25/2013 09:03:05</publishTime>
     </File>
+    <File Include="bin/Microsoft.Practices.Unity.Configuration.dll">
+      <publishTime>04/25/2013 09:02:53</publishTime>
+    </File>
     <File Include="bin/Microsoft.Practices.Unity.dll">
       <publishTime>04/25/2013 09:02:53</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.Interception.Configuration.dll">
+      <publishTime>04/25/2013 09:03:04</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.Unity.Interception.dll">
       <publishTime>04/25/2013 09:03:04</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>04/17/2013 15:31:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>04/17/2013 15:30:59</publishTime>
@@ -322,7 +331,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2013 15:30:38</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>04/17/2013 15:30:36</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Scripts/jquery-1.7.1.js">
       <publishTime>04/17/2013 15:30:38</publishTime>
@@ -388,7 +397,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2013 15:30:38</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/16/2013 17:28:06</publishTime>
+      <publishTime>06/17/2013 10:23:06</publishTime>
     </File>
   </ItemGroup>
 </Project>

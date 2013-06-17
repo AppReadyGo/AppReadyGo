@@ -41,12 +41,19 @@ namespace AppReadyGo.Domain.Model.Users
         public ApiMember(string email, string password, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string Zip, ApplicationType[] appTypes)
             : base(email, password)
         {
-            Init(firstName, lastName, gender, ageRange, country, Zip, appTypes);
-        }
+            this.applications = new HashedSet<APIMemberApplication>();
+            this.applicationTypes = new HashedSet<ApplicationType>();
 
-        private void Init(string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string Zip, ApplicationType[] appTypes)
-        {
-            Init(firstName, lastName, gender, ageRange, country, Zip, appTypes);
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Gender = gender;
+            this.AgeRange = ageRange;
+            this.Country = country;
+            this.Zip = Zip;
+            if (appTypes != null)
+            {
+                this.applicationTypes.AddAll(appTypes);
+            }
         }
 
         public ApiMember(string email, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string Zip, ApplicationType[] appTypes)
