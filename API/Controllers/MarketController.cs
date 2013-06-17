@@ -89,6 +89,8 @@ namespace AppReadyGo.API.Controllers
         [HttpPost]
         public RegisterResultModel Register([FromBody] UserModel model)
         {
+            log.WriteVerbose("--> Register");
+
             // var body = HttpContext.Current.Request.Body();
             if (string.IsNullOrEmpty(model.Email))
             {
@@ -99,7 +101,9 @@ namespace AppReadyGo.API.Controllers
                 return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.MissingData } ;
             }
 
+            log.WriteVerbose("Register: Dispatch CreateAPIMemberCommand command");
             var result = ObjectContainer.Instance.Dispatch(new CreateAPIMemberCommand(model.Email, model.Password, model.FirstName, model.LastName, model.Gender, model.AgeRange, model.ContryId, model.Zip, model.Interests));
+            log.WriteVerbose("Register: CreateAPIMemberCommand command results:{0}", string.Join("; ", result.Validation.Select(x => x.Message).ToArray()));
 
             if (!result.Validation.Any())
             {

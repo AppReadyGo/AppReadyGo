@@ -54,7 +54,8 @@ VALUES
 (14, 3, 'm/products'),
 (15, 3, 'm/planandpricing'),
 (16, 3, 'special-access-required'),
-(18, 3, 'm/activation-email-sent');
+(18, 3, 'm/activation-email-sent'),
+(19, 3, 'howitworks');
 
 SET IDENTITY_INSERT [cont].[Pages] OFF
 GO              
@@ -476,6 +477,13 @@ FingerPrint.finish(this);
 <h2>Activation email was sent</h2>
 <p>Please check your email.</p>
 <p>And use activation link in the email to activate your account.</p>
+</article>
+'),                
+(18, 0, 'title', 'How it Works'),
+(18, 1, 'content', '
+<article class="center borders">
+<h2>How it Works</h2>
+<p>Some content.</p>
 </article>
 ');
 

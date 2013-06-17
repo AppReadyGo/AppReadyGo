@@ -22,6 +22,7 @@ namespace AppReadyGo.Model.Master
         public enum MenuItem
         {
             Home,
+            HowItWorks,
             Tutorials,
             Products,
             PlanAndPricing,

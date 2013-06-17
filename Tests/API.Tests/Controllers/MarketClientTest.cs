@@ -88,15 +88,26 @@ namespace AppReadyGo.API.Tests.Controllers
             var response = task.Result;
             if (!response.IsSuccessStatusCode)
             {
-                var res = response.Content.ReadAsStringAsync();
-                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
+                var res = response.Content.ReadAsStringAsync().Result;
+                Assert.Fail(string.Format("{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, res));
             }
             else
             {
-                var res = response.Content.ReadAsAsync<bool>();
-                Assert.IsTrue(res.Result);
+                var res = response.Content.ReadAsAsync<RegisterResultModel>().Result;
+                Assert.IsTrue(res.Id.HasValue);
             }
         }
+
+        [TestMethod]
+        public void MarketRegister()
+        {
+            var data = new UserModel { ContryId = 1, Email = "ypanshin@gmail.com", FirstName = "xxx", Password = "121" };
+            var controller = new MarketController();
+            var model = controller.Register(data);
+            Assert.IsTrue(model.Id.HasValue);
+
+        }
+
 
         [TestMethod]
         public void MarketThirdPartyRegisterByNetwork()
@@ -114,12 +125,12 @@ namespace AppReadyGo.API.Tests.Controllers
             if (!response.IsSuccessStatusCode)
             {
                 var res = response.Content.ReadAsStringAsync().Result;
-                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
+                Assert.Fail(string.Format("{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, res));
             }
             else
             {
-                var res = response.Content.ReadAsAsync<bool>();
-                Assert.IsTrue(res.Result);
+                var res = response.Content.ReadAsAsync<RegisterResultModel>().Result;
+                Assert.IsTrue(res.Id.HasValue);
             }
         }
 
