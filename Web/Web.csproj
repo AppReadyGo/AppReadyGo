@@ -432,6 +432,7 @@
     <Content Include="Content\reset.css" />
     <Content Include="Content\Tmp\css\secure.change.password.css" />
     <Content Include="Content\Tmp\css\style.css" />
+    <Content Include="Content\Tmp\images\how-does-it-work.png" />
     <Content Include="Content\Tmp\images\1page-img.jpg" />
     <Content Include="Content\Tmp\images\2page-img.jpg" />
     <Content Include="Content\Tmp\images\4page-img.jpg" />
@@ -502,6 +503,9 @@
     <Content Include="Content\Tmp\shared\bredcrumbs.css" />
     <Content Include="Content\Tmp\shared\filter.css" />
     <Content Include="Content\Tmp\shared\Form.css" />
+    <Content Include="Content\Tmp\images\step-1.png" />
+    <Content Include="Content\Tmp\images\step-2.png" />
+    <Content Include="Content\Tmp\images\step-3.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Areas\m\Views\Web.config" />
@@ -676,7 +680,7 @@
     <Content Include="Views\Content\AuthenticatedPageContent.cshtml" />
     <Content Include="Views\Home\ComingSoon.aspx" />
     <Content Include="Views\Home\Mails\Basic.aspx" />
-    <None Include="Views\Home\PlayGround.cshtml" />
+    <Content Include="Views\Home\PlayGround.cshtml" />
     <None Include="Views\Mails\Promotion.cshtml" />
     <None Include="Views\Mails\System.cshtml" />
     <Content Include="Views\Portfolio\Edit.aspx" />
