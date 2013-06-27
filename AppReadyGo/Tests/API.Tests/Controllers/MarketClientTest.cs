@@ -58,7 +58,12 @@ namespace AppReadyGo.API.Tests.Controllers
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var data = new LoginModel { Email = "test@test.com", Password = "1234" };
+            var regdata = new UserModel { ContryId = 1, Email = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com", FirstName = "xxx", Password = "1234" };
+
+            var task = client.PostAsJsonAsync("register", regdata);
+
+
+            var data = new LoginModel { Email = regdata.Email, Password = regdata.Password };
 
             var response = client.PostAsJsonAsync("login", data).Result;
             if (!response.IsSuccessStatusCode)
@@ -69,7 +74,7 @@ namespace AppReadyGo.API.Tests.Controllers
             else
             {
                 var res = response.Content.ReadAsAsync<UserResultModel>().Result;
-                Assert.AreEqual(res.Code, UserResultModel.Result.WrongUserNamePassword);
+                Assert.AreEqual(res.Code, UserResultModel.Result.Successful);
             }
         }
 
@@ -82,7 +87,7 @@ namespace AppReadyGo.API.Tests.Controllers
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var data = new UserModel { ContryId = 1, Email = "ypanshin@gmail.com", FirstName = "xxx", Password = "121" };
+            var data = new UserModel { ContryId = 1, Email = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com", FirstName = "xxx", Password = "1234" };
 
             var task = client.PostAsJsonAsync("register", data);
             var response = task.Result;
@@ -101,7 +106,7 @@ namespace AppReadyGo.API.Tests.Controllers
         [TestMethod]
         public void MarketRegister()
         {
-            var data = new UserModel { ContryId = 1, Email = "ypanshin@gmail.com", FirstName = "xxx", Password = "121" };
+            var data = new UserModel { ContryId = 1, Email = "ypanshin+testapi" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com", FirstName = "xxx", Password = "121" };
             var controller = new MarketController();
             var model = controller.Register(data);
             Assert.IsTrue(model.Id.HasValue);
@@ -118,7 +123,7 @@ namespace AppReadyGo.API.Tests.Controllers
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var data = new ThirdPartyUserModel { ContryId = 1, Email = "ypanshin@gmail.com", FirstName = "xxx" };
+            var data = new ThirdPartyUserModel { ContryId = 1, Email = "ypanshin+testapi" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com", FirstName = "xxx" };
 
             var task = client.PostAsJsonAsync("thirdpartyregister", data);
             var response = task.Result;

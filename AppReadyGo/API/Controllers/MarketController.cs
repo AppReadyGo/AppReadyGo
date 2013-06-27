@@ -108,7 +108,7 @@ namespace AppReadyGo.API.Controllers
             if (!result.Validation.Any())
             {
                 new APIActivationEmail(model.Email).Send();
-                return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.Successful } ;
+                return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.Successful, Id = result.Result } ;
             }
             else
             {
