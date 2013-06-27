@@ -432,7 +432,6 @@
     <Content Include="Content\reset.css" />
     <Content Include="Content\Tmp\css\secure.change.password.css" />
     <Content Include="Content\Tmp\css\style.css" />
-    <Content Include="Content\Tmp\images\how-does-it-work.png" />
     <Content Include="Content\Tmp\images\1page-img.jpg" />
     <Content Include="Content\Tmp\images\2page-img.jpg" />
     <Content Include="Content\Tmp\images\4page-img.jpg" />
@@ -458,6 +457,7 @@
     <Content Include="Content\Tmp\images\header-box-left.gif" />
     <Content Include="Content\Tmp\images\header-box-right.gif" />
     <Content Include="Content\Tmp\images\header-box-tail.gif" />
+    <Content Include="Content\Tmp\images\how-does-it-work.png" />
     <Content Include="Content\Tmp\images\icon1.gif" />
     <Content Include="Content\Tmp\images\icon2.gif" />
     <Content Include="Content\Tmp\images\icon3.gif" />
@@ -681,8 +681,8 @@
     <Content Include="Views\Home\ComingSoon.aspx" />
     <Content Include="Views\Home\Mails\Basic.aspx" />
     <Content Include="Views\Home\PlayGround.cshtml" />
-    <None Include="Views\Mails\Promotion.cshtml" />
-    <None Include="Views\Mails\System.cshtml" />
+    <Content Include="Views\Mails\Promotion.cshtml" />
+    <Content Include="Views\Mails\System.cshtml" />
     <Content Include="Views\Portfolio\Edit.aspx" />
     <Content Include="Views\Portfolio\Form.ascx" />
     <Content Include="Views\Portfolio\New.aspx" />
@@ -730,7 +730,7 @@
     <Content Include="Views\Content\PublicPageContent.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\AfterLogin.Master" />
-    <None Include="Views\Shared\_Mail.cshtml" />
+    <Content Include="Views\Shared\_Mail.cshtml" />
     <Content Include="Views\Shared\Main.Master" />
     <Content Include="Views\Shared\_AfterLogin.cshtml" />
     <Content Include="Views\Shared\_AfterLoginLeftMenu.cshtml" />
