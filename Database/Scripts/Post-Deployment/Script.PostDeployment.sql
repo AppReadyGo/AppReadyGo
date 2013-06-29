@@ -55,7 +55,8 @@ VALUES
 (15, 3, 'm/planandpricing'),
 (16, 3, 'special-access-required'),
 (18, 3, 'm/activation-email-sent'),
-(19, 3, 'howitworks');
+(19, 3, 'howitworks'),
+(20, 3, 'api/account-activated');
 
 SET IDENTITY_INSERT [cont].[Pages] OFF
 GO              
@@ -479,11 +480,19 @@ FingerPrint.finish(this);
 <p>And use activation link in the email to activate your account.</p>
 </article>
 '),                
-(18, 0, 'title', 'How it Works'),
-(18, 1, 'content', '
+(19, 0, 'title', 'How it Works'),
+(19, 1, 'content', '
 <article class="center borders">
 <h2>How it Works</h2>
 <p>Some content.</p>
+</article>
+'),
+(20, 0, 'title', 'Your account was activated'),
+(20, 1, 'content', '
+<article class="center borders">
+	<h2>Your account was activated</h2>
+	<p>Account was activated.</p>
+	<p>You can use your user name and password to log in.</p>
 </article>
 ');
 

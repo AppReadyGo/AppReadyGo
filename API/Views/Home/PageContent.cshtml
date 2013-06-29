@@ -1,0 +1,13 @@
+﻿@model AppReadyGo.API.Models.ContentModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section title { @Model.Title }
+<section id="content">
+    <div class="content-wrapper">
+        @Html.Raw(Model.Content)
+    </div><!-- /.content-wrapper --> 
+    <p class="clear"></p>
+</section><!-- /#content --> 
+
+

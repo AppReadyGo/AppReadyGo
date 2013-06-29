@@ -10,9 +10,15 @@ namespace AppReadyGo.API
         public static void Register(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "{controller}/{action}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                name: "Market",
+                routeTemplate: "Market/{action}/{id}",
+                defaults: new { controller = "Market", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "Analytics",
+                routeTemplate: "Analytics/{action}/{id}",
+                defaults: new { controller = "Analytics", id = RouteParameter.Optional }
             );
         }
     }

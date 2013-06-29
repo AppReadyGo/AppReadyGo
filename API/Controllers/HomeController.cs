@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AppReadyGo.Core;
+using AppReadyGo.Core.Queries.Content;
+using AppReadyGo.API.Models;
 
 namespace AppReadyGo.API.Controllers
 {
@@ -31,6 +33,29 @@ namespace AppReadyGo.API.Controllers
             }
             ObjectContainer.Instance.Dispatch(new GrantSpecialAccessCommand(result.Result.Value, true));
             return Redirect("~/p/account-activated");
+        }
+
+        public ActionResult PageContent(string urlPart1, string urlPart2, string urlPart3)
+        {
+            string path = "api/" + urlPart1;
+            if (!string.IsNullOrEmpty(urlPart2))
+            {
+                path += "/" + urlPart2;
+            }
+            if (!string.IsNullOrEmpty(urlPart3))
+            {
+                path += "/" + urlPart3;
+            }
+
+            var page = ObjectContainer.Instance.RunQuery(new GetPageQuery(path.ToLower()));
+            if (page == null)
+            {
+                throw new Exception("Page not found");
+            }
+            else
+            {
+                return View("PageContent", new ContentModel() { Title = page.Title, Content = page.Content });
+            }
         }
     }
 }
