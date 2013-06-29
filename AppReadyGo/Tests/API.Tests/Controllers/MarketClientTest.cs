@@ -20,7 +20,7 @@ namespace AppReadyGo.API.Tests.Controllers
 #if QA
         static readonly Uri _baseAddress = new Uri("http://api.qa.appreadygo.com/market/");
 #elif DEBUG
-        static readonly Uri _baseAddress = new Uri("http://localhost:63321/market/");
+        static readonly Uri _baseAddress = new Uri("http://localhost:16989/market/");
 #else
         static readonly Uri _baseAddress = new Uri("http://api.appreadygo.com/market/");
 #endif
