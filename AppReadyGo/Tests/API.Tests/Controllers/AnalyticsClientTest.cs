@@ -73,78 +73,75 @@ namespace AppReadyGo.API.Tests.Controllers
             }
         }
 
-        private static FingerPrintData CreatePackage()
+        private static Package CreatePackage()
         {
-            var data = new FingerPrintData
+            var data = new Package
             {
-                Ip = "0.0.0.1",
-                Package = new Package
+                ClientKey = "123-123-0001",
+                ScreenHeight = 100,
+                ScreenWidth = 200,
+                SystemInfo = new SystemInfo
                 {
-                    ClientKey = "123-123-0001",
-                    ScreenHeight = 100,
-                    ScreenWidth = 200,
-                    SystemInfo = new SystemInfo
+                },
+                SessionsInfo = new SessionInfo[]
+                {
+                    new SessionInfo
                     {
-                    },
-                    SessionsInfo = new SessionInfo[]
-                    {
-                        new SessionInfo
+                        ClientHeight = 100,
+                        ClientWidth = 200,
+                        PageUri = "home",
+                        TouchDetails = new TouchDetails[]
                         {
-                            ClientHeight = 100,
-                            ClientWidth = 200,
-                            PageUri = "home",
-                            TouchDetails = new TouchDetails[]
+                            new TouchDetails
                             {
-                                new TouchDetails
-                                {
-                                    ClientX = 50,
-                                    ClientY = 40,
-                                    Date = DateTime.UtcNow.AddMinutes(-1),
-                                    Orientation = 1
-                                },
-                                new TouchDetails
+                                ClientX = 50,
+                                ClientY = 40,
+                                Date = DateTime.UtcNow.AddMinutes(-1),
+                                Orientation = 1
+                            },
+                            new TouchDetails
+                            {
+                                ClientX = 40,
+                                ClientY = 30,
+                                Date = DateTime.UtcNow.AddSeconds(-30),
+                                Orientation = 1
+                            }
+                        },
+                        ScrollDetails = new ScrollDetails[]
+                        {
+                            new ScrollDetails
+                            {
+                                // TODO: Yura: Why do we need all the data? lets take the data from first and last touch in touch details array
+                                CloseTouchData = new TouchDetails
                                 {
                                     ClientX = 40,
                                     ClientY = 30,
                                     Date = DateTime.UtcNow.AddSeconds(-30),
                                     Orientation = 1
-                                }
-                            },
-                            ScrollDetails = new ScrollDetails[]
-                            {
-                                new ScrollDetails
+                                },
+                                StartTouchData = new TouchDetails
                                 {
-                                    // TODO: Yura: Why do we need all the data? lets take the data from first and last touch in touch details array
-                                    CloseTouchData = new TouchDetails
-                                    {
-                                        ClientX = 40,
-                                        ClientY = 30,
-                                        Date = DateTime.UtcNow.AddSeconds(-30),
-                                        Orientation = 1
-                                    },
-                                    StartTouchData = new TouchDetails
-                                    {
-                                        ClientX = 50,
-                                        ClientY = 40,
-                                        Date = DateTime.UtcNow.AddMinutes(-1),
-                                        Orientation = 1
-                                    }
+                                    ClientX = 50,
+                                    ClientY = 40,
+                                    Date = DateTime.UtcNow.AddMinutes(-1),
+                                    Orientation = 1
                                 }
-                            },
-                            ViewAreaDetails = new ViewAreaDetails[]
+                            }
+                        },
+                        ViewAreaDetails = new ViewAreaDetails[]
+                        {
+                            new ViewAreaDetails
                             {
-                                new ViewAreaDetails
-                                {
-                                     CoordX = 0,
-                                     CoordY = 20,
-                                     StartDate = DateTime.UtcNow.AddSeconds(-30),
-                                     FinishDate = DateTime.UtcNow.AddSeconds(-25)
-                                }
+                                    CoordX = 0,
+                                    CoordY = 20,
+                                    StartDate = DateTime.UtcNow.AddSeconds(-30),
+                                    FinishDate = DateTime.UtcNow.AddSeconds(-25)
                             }
                         }
                     }
                 }
             };
+            
             return data;
         }
     }

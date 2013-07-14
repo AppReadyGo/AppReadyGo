@@ -40,20 +40,20 @@ namespace AppReadyGo.API.Controllers
         }
 
         [HttpPost]
-        public bool SubmitPackage([FromBody] FingerPrintData data)
+        public bool SubmitPackage([FromBody] Package data)
         {
             try
             {
-                if (data == null || data.Package == null)
+                if (data == null)
                 {
                     log.WriteError("Error to submit package the parameter is null");
                     return false;
                 }
 
                 int appId = 0;
-                if (string.IsNullOrEmpty(data.Package.ClientKey) || data.Package.ClientKey.Length < 5 || !int.TryParse(data.Package.ClientKey.Split(new char[] { '-' })[2], out appId))
+                if (string.IsNullOrEmpty(data.ClientKey) || data.ClientKey.Length < 5 || !int.TryParse(data.ClientKey.Split(new char[] { '-' })[2], out appId))
                 {
-                    log.WriteError("Error to submit package the ClientKey:{0} is wrong", data.Package.ClientKey);
+                    log.WriteError("Error to submit package the ClientKey:{0} is wrong", data.ClientKey);
                     return false;
                 }
 
@@ -64,14 +64,14 @@ namespace AppReadyGo.API.Controllers
                 var res = ObjectContainer.Instance.Dispatch(new AddPackageCommand(
                     appId,
                     location,
-                    data.Package.SystemInfo.RealVersionName,
+                    data.SystemInfo.RealVersionName,
                     null,
-                    data.Package.ScreenWidth,
-                    data.Package.ScreenHeight,
+                    data.ScreenWidth,
+                    data.ScreenHeight,
                     new AppReadyGo.Core.Entities.SystemInfo
                     {
                     },
-                    data.Package.SessionsInfo.Select(s => new AddPackageCommand.Session
+                    data.SessionsInfo.Select(s => new AddPackageCommand.Session
                     {
                         ClientHeight = s.ClientHeight,
                         ClientWidth = s.ClientWidth,
@@ -117,7 +117,7 @@ namespace AppReadyGo.API.Controllers
 
                 if (res.Validation.Any())
                 {
-                    log.WriteError("Error to submit package for application:{0}, with errors:{1}", data.Package.ClientKey, string.Join(", ", res.Validation.Select(x => string.Format("Error:{0} - {1}", x.ErrorCode, x.Message))));
+                    log.WriteError("Error to submit package for application:{0}, with errors:{1}", data.ClientKey, string.Join(", ", res.Validation.Select(x => string.Format("Error:{0} - {1}", x.ErrorCode, x.Message))));
                     return false;
                 }
                 else
@@ -127,7 +127,7 @@ namespace AppReadyGo.API.Controllers
             }
             catch (Exception ex)
             {
-                log.WriteError(ex, "Error to submit package for application:{0}", data.Package.ClientKey);
+                log.WriteError(ex, "Error to submit package for application:{0}", data.ClientKey);
                 return false;
             }
         }
