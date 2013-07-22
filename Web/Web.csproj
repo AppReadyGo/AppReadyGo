@@ -515,6 +515,10 @@
     <Content Include="Images\Feature_EyeTrack.jpg" />
     <Content Include="Images\Feature_PlayBack.jpg" />
     <Content Include="Images\Feature_TouchMap.jpg" />
+    <Content Include="Images\icon_upload.png" />
+    <Content Include="Images\icon_publish.png" />
+    <Content Include="Images\icon_analytics.png" />
+    <Content Include="Images\icon_compare.png" />
     <Content Include="Images\PlayBack.jpg" />
     <Content Include="Images\TouchMap.jpg" />
     <Content Include="Restricted\Packages\fingerprint-1.0.properties" />
