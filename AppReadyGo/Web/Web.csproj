@@ -457,7 +457,6 @@
     <Content Include="Content\Tmp\images\header-box-left.gif" />
     <Content Include="Content\Tmp\images\header-box-right.gif" />
     <Content Include="Content\Tmp\images\header-box-tail.gif" />
-    <Content Include="Content\Tmp\images\how-does-it-work.png" />
     <Content Include="Content\Tmp\images\icon1.gif" />
     <Content Include="Content\Tmp\images\icon2.gif" />
     <Content Include="Content\Tmp\images\icon3.gif" />
@@ -515,6 +514,7 @@
     <Content Include="Images\Feature_EyeTrack.jpg" />
     <Content Include="Images\Feature_PlayBack.jpg" />
     <Content Include="Images\Feature_TouchMap.jpg" />
+    <Content Include="Images\how_does_it_work.png" />
     <Content Include="Images\icon_upload.png" />
     <Content Include="Images\icon_publish.png" />
     <Content Include="Images\icon_analytics.png" />

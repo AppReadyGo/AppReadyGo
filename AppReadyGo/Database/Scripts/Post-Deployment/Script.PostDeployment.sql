@@ -100,36 +100,118 @@ VALUES
 (8, 1, 'content', '<article class="center" style="margin:50px;"><h2>Unsubscrubed successful</h2></article>'),
 (9, 0, 'title', 'Features'),
 (9, 1, 'content', '
-<div id="page_features">
-<article>
-    <img alt="Touch map preview" src="/Images/Feature_TouchMap.jpg" />
-    <h3>Touch map:</h3>
-    <p>TouchMap shows touches (by means of hot or cold  spots)  in any area of an application. Developer can see where exactly people touch.<br/>
-    - Improve designs to increase visitor interaction.<br/>
-    - Make you your application more interesting by placing important features at the “right” places.</p>
-    <p class="clear"></p>
+<style>
+    .featurette {
+        padding-top: 0;
+        overflow: hidden;
+        margin: 60px 0 60px 0;
+        height: 280px;
+        font-family: "Open Sans",Helvetica,Arial,sans-serif;
+        color: #838383;
+    }
+    .featurette img {
+        margin-right: 40px;
+        margin-top: 0;
+        width: auto	9;
+        height: auto;
+        max-width: 100%;
+        vertical-align: middle;
+        border: 0;
+        -ms-interpolation-mode: bicubic;
+    }
+    .featurette h2 {
+        padding-top: 10px;
+        font-size: 22px;
+        color: #333;
+        text-transform: none;
+        font-family: ''Open Sans'',''Lucida Sans Unicode'',''Lucida Grande'',sans-serif;
+        letter-spacing: -0.033333em;
+        line-height: 120%;
+        margin: 0 0 30px;
+        font-weight: 300;
+    }
+    .featurette .muted-italic {
+        color: #999;
+        font-style: italic;
+    }
+    .featurette p {
+        font-family: ''Open Sans'',''Lucida Sans Unicode'',''Lucida Grande'',sans-serif;
+        letter-spacing: -0.033333em;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 24px;
+        margin: 0 0 10px;
+    }
+    .featurette em {
+        font-style: italic;
+    }
+    .featurette-divider {
+        margin: 40px 0;
+        display: none!important;
+        border: 0;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #fff;
+    }
+    .pull-right {
+        float: right;
+    } 
+    .pull-left {
+        float: left;
+    }
+    #featurette .sign-up {
+		text-align: center;
+        clear:both;
+        margin: 0 auto;
+    }
+    #featurette .sign-up p
+    {
+        margin:28px 15px;
+        line-height: 1.5em;
+    }
+
+    .featurette img{padding:10px;background-color:white;border:1px solid #838383;}
+</style>
+<article id="featurette"><br><br><br>
+     <!-- featurettes start -->
+      <div class="featurette">
+        <img class="featurette-image pull-left" src="/Images/Feature_TouchMap.jpg" alt="Invoice templates" />
+        <h2>Touch map, <span class="muted-italic">see the touches</span></h2>
+        <p>TouchMap shows touches (by means of hot or cold spots) in any area of an application. Developer can see where exactly people touch.<br />
+            - Improve designs to increase visitor interaction.<br />
+            - Make you your application more interesting by placing important features at the “right” places.</p>
+      </div>
+
+      <hr class="featurette-divider visible-phone">
+
+      <div class="featurette">
+        <img class="featurette-image pull-right" src="/Images/Feature_EyeTrack.jpg" alt="Unlimited invoicing software">
+        <h2>Eye Track, <span class="muted-italic">check the scrolls</span></h2>
+        <p>EyeTrack shows the amount of time application users spend on each part of the content. Scrolls on your content are meticulously tracked, giving you a precise understanding of what attracts users. These allows to make adjutments that will have users reading more content.<br />
+- Know how much of your content is scrolled by visitors.<br />
+- Decide which pages to shorten or lengthen.<br />
+- Identify boring content that is usually skipped.</p>
+      </div>
+
+      <hr class="featurette-divider visible-phone">
+
+      <div class="featurette">
+        <img class="featurette-image pull-left" src="/Images/Feature_PlayBack.jpg" alt="Accept credit cards">
+        <h2>Play Back, <span class="muted-italic">get flow</span></h2>
+        <p>PlayBack gives you feed back on how users find specific application features. That information helps you understand what users need , allowing you to make your applications easier to use.<br />
+- See what users do with your app.<br />
+- Fix the UI to make it easier for customers to comprehend.<br />
+- Make your application more intuitive</p>
+      </div>
+
+      <hr class="featurette-divider visible-phone">
+      <!-- featurettes end -->
+      <div class="sign-up">
+		<p>
+            Sign up today and test your apps better.<br>	*Flexible pay as you go plan.<br />
+		    <a href="/account/register" class="button green big">Get started now »</a>
+		</p>
+	</div>
 </article>
-<article>
-    <img alt="Touch map preview" src="/Images/Feature_EyeTrack.jpg" />
-    <h3>Eye Track:</h3>
-    <p>EyeTrack shows the amount of time application users spend on each part of the content. Scrolls on your content are meticulously tracked, giving you a precise understanding of what attracts users. 
-    These allows to make adjutments that will have users reading more content.<br/>
-    - Know how much of your content is scrolled by visitors.<br/>
-    - Decide which pages to shorten or lengthen.<br/>
-    - Identify boring content that is usually skipped.</p>
-    <p class="clear"></p>
-</article>
-<article>
-    <img alt="Touch map preview" src="/Images/Feature_PlayBack.jpg" />
-    <h3>Play Back:</h3>
-    <p>PlayBack gives you feed back on how users find specific application features. That information helps you understand what users need , allowing you to make your applications easier to use.<br/>
-    - See what users do with your app.<br/>
-    - Fix the UI to make it easier for customers to comprehend.<br/>
-    - Make your application more intuitive</p>
-    <p class="clear"></p>
-</article>
-<p class="get-started">Are you ready to try Mobillify? &nbsp; <a href="/p/GetStarted" class="button green big">Get Started</a> </p>
-</div>
 '),
 (10, 0, 'title', 'Plan And Pricing'),
 (10, 1, 'content', '
@@ -480,11 +562,97 @@ FingerPrint.finish(this);
 <p>And use activation link in the email to activate your account.</p>
 </article>
 '),                
-(19, 0, 'title', 'How it Works'),
+(19, 0, 'title', 'How Does it Works'),
 (19, 1, 'content', '
-<article class="center borders">
-<h2>How it Works</h2>
-<p>Some content.</p>
+<style type="text/css">
+    article#how_it_works
+    {
+        text-align:center;
+    }
+    article#how_it_works h2
+    {
+        padding-bottom: 2em;
+        margin-bottom: 1.5em;
+    }
+    article#how_it_works ol
+    {
+        padding-bottom: 2em;
+        margin-bottom: 1.5em;
+        list-style: none;
+    }
+    article#how_it_works ol li.upload {
+        background-image: url(/images/icon_upload.png);
+    }   
+    article#how_it_works ol li.publish {
+        background-image: url(/images/icon_publish.png);
+    }    
+    article#how_it_works ol li.analytics {
+        background-image: url(/images/icon_analytics.png);
+    }
+    article#how_it_works ol li.compare {
+        background-image: url(/images/icon_compare.png);
+    }
+    article#how_it_works ol li {
+        float: left;
+        width: 19%;
+        padding-top: 6em;
+        margin-right: 8%;
+        text-align: center;
+        background: no-repeat center top;
+        background-size: auto 5em;
+        margin-bottom: 45px;
+    }
+    article#how_it_works ol li.last
+    {
+        margin-right: 0;
+    }
+    article#how_it_works ol h3 {
+        font-size: 1em;
+        font-weight: bold;
+        color: #575757;
+        margin-bottom: 0.4em;
+        text-transform:uppercase;
+    }
+    article#how_it_works .sign-up {
+        clear:both;
+        margin: 0 auto;
+    }
+    article#how_it_works .sign-up p
+    {
+        margin:28px 15px;
+        line-height: 1.5em;
+    }
+</style>
+<article id="how_it_works"> <br><br><br>
+	<h2><img src="/images/how_does_it_work.png" alt="How does it work?"></h2>
+	<ol>
+		<li class="upload">
+			<h3>1. Load Your APK</h3>
+			<p>Upload an app version to our store</p>
+		</li>
+
+		<li class="publish">
+			<h3>2. Choose your target audience</h3>
+			<p>Receive real time visual analytics and real user feedback. From your target audience. Get score for your app! </p>
+		</li>
+
+		<li class="analytics">
+			<h3>2. Choose your target audience</h3>
+			<p>Receive real time visual analytics and real user feedback. From your target audience. Get score for your app! </p>
+		</li>
+
+		<li class="compare last">
+			<h3>3. Compare results</h3>
+			<p>Perfect / Achieve Top Score & Get Confident  / Publish on real market / Enjoy Success!</p>
+		</li>
+	</ol>
+
+	<div class="sign-up">
+		<p>
+            Sign up today and test your apps better.<br>	*Flexible pay as you go plan.<br />
+		    <a href="/account/register" class="button green big">Get started now »</a>
+		</p>
+	</div>
 </article>
 '),
 (20, 0, 'title', 'Your account was activated'),
