@@ -65,7 +65,7 @@ namespace AppReadyGo.API.Models.Analytics
         /// <summary>
         /// vwa
         /// </summary>
-        [DataMember(Name="vwa")]
+        [JsonProperty(PropertyName = "vwa")]
         public ViewAreaDetails[] ViewAreaDetails { get; set; }
     }
 }

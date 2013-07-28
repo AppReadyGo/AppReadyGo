@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using AppReadyGo.Web.Model.Shared;
 
 namespace AppReadyGo.Model.Filter
 {
@@ -39,6 +40,8 @@ namespace AppReadyGo.Model.Filter
 
         public int? ScreenId { get; set; }
         public IEnumerable<string> Pathes { get; set; }
+
+        public TesterWidgetModel TesterWidget { get; set; }
     
         public FilterModel(FilterParametersModel filter, FilterDataResult filterDataResult, bool isSingleMode, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, string placeHolderHTML = null)
         {
@@ -89,6 +92,11 @@ namespace AppReadyGo.Model.Filter
 
             this.SelectListScreenSizes = sizes;
             this.SelectListPathes = pathes;
+
+            this.TesterWidget = new TesterWidgetModel{
+                Count = filterDataResult.ApiMemberApplications.Count(),
+                LastTesters = filterDataResult.ApiMemberApplications.Select(a => "/content/images/no_image_60x60.png")
+            };
        }
 
         public string GetUrlPart(string path = null)

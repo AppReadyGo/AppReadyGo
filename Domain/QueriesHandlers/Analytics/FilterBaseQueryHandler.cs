@@ -7,6 +7,8 @@ using AppReadyGo.Domain.Model;
 using NHibernate;
 using NHibernate.Linq;
 using AppReadyGo.Core.Queries.Analytics;
+using AppReadyGo.Domain.Model.Users;
+using AppReadyGo.Core.QueryResults.Analytics;
 
 namespace AppReadyGo.Domain.Queries.Analytics
 {
@@ -58,85 +60,92 @@ namespace AppReadyGo.Domain.Queries.Analytics
                                         .ToArray();
             }
 
+            filterData.SelectedApplicationId = query.ApplicationId;
+            ExtendedApplicationResult app = filterData.Applications.Single(a => a.Id == filterData.SelectedApplicationId);
+
             if (query != null)
             {
-                filterData.SelectedApplicationId = query.ApplicationId;
                 filterData.SelectedPath = query.Path;
                 filterData.SelectedScreenSize = query.ScreenSize;
 
-                ExtendedApplicationResult app = filterData.Applications.Single(a => a.Id == filterData.SelectedApplicationId);
-
-                if (app != null)
+                if (string.IsNullOrEmpty(filterData.SelectedPath) && app.Pathes.Any())
                 {
-                    filterData.SelectedApplicationId = app.Id;
+                    filterData.SelectedPath = app.Pathes.First();
+                }
+                if (!filterData.SelectedScreenSize.HasValue && app.ScreenSizes.Any())
+                {
+                    filterData.SelectedScreenSize = app.ScreenSizes.First();
+                }
 
-                    if (string.IsNullOrEmpty(filterData.SelectedPath) && app.Pathes.Any())
+                if (!string.IsNullOrEmpty(filterData.SelectedPath) && filterData.SelectedScreenSize.HasValue)
+                {
+                    filterData.ScreenData = new FilterDataResult.Screen();
+
+                    var screen = session.Query<Screen>()
+                                        .Where(s => s.Application.Id == filterData.SelectedApplicationId &&
+                                                    s.Path.ToLower() == filterData.SelectedPath.ToLower() &&
+                                                    s.Width == filterData.SelectedScreenSize.Value.Width &&
+                                                    s.Height == filterData.SelectedScreenSize.Value.Height)
+                                        .Select(s => new { Id = s.Id, FileExtention = s.FileExtension })
+                                        .FirstOrDefault();
+                    if (screen != null)
                     {
-                        filterData.SelectedPath = app.Pathes.First();
-                    }
-                    if (!filterData.SelectedScreenSize.HasValue && app.ScreenSizes.Any())
-                    {
-                        filterData.SelectedScreenSize = app.ScreenSizes.First();
+                        filterData.ScreenData.Id = screen.Id;
+                        filterData.ScreenData.FileExtention = screen.FileExtention;
                     }
 
-                    if (!string.IsNullOrEmpty(filterData.SelectedPath) && filterData.SelectedScreenSize.HasValue)
-                    {
-                        filterData.ScreenData = new FilterDataResult.Screen();
+                    filterData.ScreenData.ClicksAmount = session.Query<Click>()
+                                                        .Where(s => s.PageView.Application.Id == filterData.SelectedApplicationId &&
+                                                                    s.PageView.Path.ToLower() == filterData.SelectedPath.ToLower() &&
+                                                                    s.PageView.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
+                                                                    s.PageView.ScreenHeight == filterData.SelectedScreenSize.Value.Height &&
+                                                                    s.PageView.Date >= query.From && s.PageView.Date <= query.To)
+                                                        .Count();
 
-                        var screen = session.Query<Screen>()
-                                            .Where(s => s.Application.Id == filterData.SelectedApplicationId &&
-                                                        s.Path.ToLower() == filterData.SelectedPath.ToLower() &&
-                                                        s.Width == filterData.SelectedScreenSize.Value.Width &&
-                                                        s.Height == filterData.SelectedScreenSize.Value.Height)
-                                            .Select(s => new { Id = s.Id, FileExtention = s.FileExtension })
-                                            .FirstOrDefault();
-                        if (screen != null)
-                        {
-                            filterData.ScreenData.Id = screen.Id;
-                            filterData.ScreenData.FileExtention = screen.FileExtention;
-                        }
+                    filterData.ScreenData.HasClicks = session.Query<Click>()
+                                                        .Where(s => s.PageView.Application.Id == filterData.SelectedApplicationId &&
+                                                                    s.PageView.Path.ToLower() == filterData.SelectedPath.ToLower() &&
+                                                                    s.PageView.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
+                                                                    s.PageView.ScreenHeight == filterData.SelectedScreenSize.Value.Height)
+                                                        .Any();
 
-                        filterData.ScreenData.ClicksAmount = session.Query<Click>()
-                                                            .Where(s => s.PageView.Application.Id == filterData.SelectedApplicationId &&
-                                                                        s.PageView.Path.ToLower() == filterData.SelectedPath.ToLower() &&
-                                                                        s.PageView.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
-                                                                        s.PageView.ScreenHeight == filterData.SelectedScreenSize.Value.Height &&
-                                                                        s.PageView.Date >= query.From && s.PageView.Date <= query.To)
-                                                            .Count();
+                    filterData.ScreenData.ScrollsAmount = session.Query<Scroll>()
+                                                        .Where(s => s.PageView.Application.Id == filterData.SelectedApplicationId &&
+                                                                    s.PageView.Path.ToLower() == filterData.SelectedPath.ToLower() &&
+                                                                    s.PageView.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
+                                                                    s.PageView.ScreenHeight == filterData.SelectedScreenSize.Value.Height &&
+                                                                    s.PageView.Date >= query.From && s.PageView.Date <= query.To)
+                                                        .Count();
 
-                        filterData.ScreenData.HasClicks = session.Query<Click>()
-                                                            .Where(s => s.PageView.Application.Id == filterData.SelectedApplicationId &&
-                                                                        s.PageView.Path.ToLower() == filterData.SelectedPath.ToLower() &&
-                                                                        s.PageView.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
-                                                                        s.PageView.ScreenHeight == filterData.SelectedScreenSize.Value.Height)
-                                                            .Any();
+                    filterData.ScreenData.VisitsAmount = session.Query<PageView>()
+                                                        .Where(p => p.Application.Id == filterData.SelectedApplicationId &&
+                                                                    p.Path.ToLower() == filterData.SelectedPath.ToLower() &&
+                                                                    p.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
+                                                                    p.ScreenHeight == filterData.SelectedScreenSize.Value.Height &&
+                                                                    p.Date >= query.From && p.Date <= query.To)
+                                                        .Count();
 
-                        filterData.ScreenData.ScrollsAmount = session.Query<Scroll>()
-                                                            .Where(s => s.PageView.Application.Id == filterData.SelectedApplicationId &&
-                                                                        s.PageView.Path.ToLower() == filterData.SelectedPath.ToLower() &&
-                                                                        s.PageView.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
-                                                                        s.PageView.ScreenHeight == filterData.SelectedScreenSize.Value.Height &&
-                                                                        s.PageView.Date >= query.From && s.PageView.Date <= query.To)
-                                                            .Count();
-
-                        filterData.ScreenData.VisitsAmount = session.Query<PageView>()
-                                                            .Where(p => p.Application.Id == filterData.SelectedApplicationId &&
-                                                                        p.Path.ToLower() == filterData.SelectedPath.ToLower() &&
-                                                                        p.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
-                                                                        p.ScreenHeight == filterData.SelectedScreenSize.Value.Height &&
-                                                                        p.Date >= query.From && p.Date <= query.To)
-                                                            .Count();
-
-                        filterData.ScreenData.HasScrolls = session.Query<Scroll>()
-                                                            .Where(s => s.PageView.Application.Id == filterData.SelectedApplicationId &&
-                                                                        s.PageView.Path.ToLower() == filterData.SelectedPath.ToLower() &&
-                                                                        s.PageView.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
-                                                                        s.PageView.ScreenHeight == filterData.SelectedScreenSize.Value.Height)
-                                                            .Any();
-
-                    }
+                    filterData.ScreenData.HasScrolls = session.Query<Scroll>()
+                                                        .Where(s => s.PageView.Application.Id == filterData.SelectedApplicationId &&
+                                                                    s.PageView.Path.ToLower() == filterData.SelectedPath.ToLower() &&
+                                                                    s.PageView.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
+                                                                    s.PageView.ScreenHeight == filterData.SelectedScreenSize.Value.Height)
+                                                        .Any();
                 }
             }
+
+            filterData.ApiMemberApplications = session.Query<ApiMember>()
+                            .SelectMany(u => u.Applications)
+                            .Where(a => a.Used && a.Application.Id == filterData.SelectedApplicationId)
+                            .Select(a => new ApiMemberApplicationResult{
+                                UserId = a.User.Id,
+                                Email = a.User.Email,
+                                FirstName = a.User.FirstName,
+                                LastName = a.User.LastName,
+                                Review = a.Review,
+                                Type = a.User.Type
+                            })
+                            .ToArray();
 
             return filterData;
         }

@@ -55,6 +55,12 @@
             }
             <li><strong>Application:</strong></li>
             <li class="stricted-width">@Model.ApplicationName</li>
+            @if(Model.TesterWidget != null)
+            {
+                <li class="stricted-width">
+                    @Html.Partial("TestersWidget", Model.TesterWidget)
+                </li>
+            }
         </ul>
     </div>
     <div class="advanced_filter" id="advanced_filter">

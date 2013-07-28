@@ -627,22 +627,22 @@ FingerPrint.finish(this);
 	<h2><img src="/images/how_does_it_work.png" alt="How does it work?"></h2>
 	<ol>
 		<li class="upload">
-			<h3>1. Load Your APK</h3>
+			<h3>1. Upload version</h3>
 			<p>Upload an app version to our store.</p>
 		</li>
 
 		<li class="publish">
-			<h3>2. Choose your target audience</h3>
+			<h3>2. Chose users</h3>
 			<p>Receive real time visual analytics and real user feedback. From your target audience. Get score for your app! </p>
 		</li>
 
 		<li class="analytics">
-			<h3>2. Choose your target audience</h3>
+			<h3>2. Improve</h3>
 			<p>Perfect / Achieve Top Score & Get Confident.</p>
 		</li>
 
 		<li class="compare last">
-			<h3>3. Compare results</h3>
+			<h3>3. Get score & publish (release)</h3>
 			<p>Publish on real market / Enjoy Success!</p>
 		</li>
 	</ol>

@@ -313,6 +313,7 @@
     <Compile Include="Model\Pages\ViewModel.cs" />
     <Compile Include="Model\PagingModel.cs" />
     <Compile Include="Model\ScreenDetailsModel.cs" />
+    <Compile Include="Model\Shared\TesterWidgetModel.cs" />
     <Compile Include="Model\ViewModelWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -346,6 +347,7 @@
     <Content Include="Content\Images\notice_nobody_used.png" />
     <Content Include="Content\Images\notice_no_screen_shot.png" />
     <Content Include="Content\Images\no_icon.png" />
+    <Content Include="Content\Images\no_image_60x60.png" />
     <Content Include="Content\Images\playback_grey.png" />
     <Content Include="Content\Images\screens.png" />
     <Content Include="Content\Images\small-header-box-left.png" />
@@ -741,6 +743,7 @@
     <Content Include="Views\Shared\_Analytics.cshtml" />
     <Content Include="Views\Shared\_BeforeLogin.cshtml" />
     <Content Include="Views\Shared\_Main.cshtml" />
+    <Content Include="Views\Shared\TestersWidget.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

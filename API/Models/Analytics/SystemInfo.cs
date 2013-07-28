@@ -62,6 +62,6 @@ namespace AppReadyGo.API.Models.Analytics
         public string RealVersionName { get; set; }
 
         [JsonProperty(PropertyName = "sdki")]
-        public string SdkIdentName { get; set; }     
+        public int SdkIdentName { get; set; }     
     }
 }
