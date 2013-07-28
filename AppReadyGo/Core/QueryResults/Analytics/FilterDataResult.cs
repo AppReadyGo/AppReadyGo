@@ -20,6 +20,8 @@ namespace AppReadyGo.Core.QueryResults.Analytics.QueryResults
         public string SelectedPath { get; set; }
         public Size? SelectedScreenSize { get; set; }
 
+        public IEnumerable<ApiMemberApplicationResult> ApiMemberApplications { get; set; }
+
         public class Screen
         {
             public int? Id { get; set; }

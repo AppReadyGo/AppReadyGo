@@ -214,6 +214,7 @@
     <Compile Include="QueryResults\Admin\StaffFullDetailsResult.cs" />
     <Compile Include="QueryResults\Admin\UserFullDetailsResult.cs" />
     <Compile Include="QueryResults\Analytics\ABCompareViewDataResult.cs" />
+    <Compile Include="QueryResults\Analytics\ApiMemberApplicationResult.cs" />
     <Compile Include="QueryResults\Analytics\ClickHeatMapDataResult.cs" />
     <Compile Include="QueryResults\Analytics\ClickHeatMapItemResult.cs" />
     <Compile Include="QueryResults\Analytics\ContentOverviewResult.cs" />

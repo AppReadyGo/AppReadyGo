@@ -24,7 +24,7 @@ namespace AppReadyGo.Domain.Queries.Analytics
 
         public DashboardViewDataResult Run(ISession session, DashboardViewDataQuery query)
         {
-            var res = GetResult<DashboardViewDataResult>(session, securityContext.CurrentUser.Id);
+            var res = GetResult<DashboardViewDataResult>(session, securityContext.CurrentUser.Id, query);
             var dataQuery = session.Query<PageView>()
                                 .Where(pv => pv.Application.Id == query.ApplicationId && 
                                                 pv.Date >= query.From && 

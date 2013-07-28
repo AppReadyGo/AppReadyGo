@@ -1,0 +1,11 @@
+﻿@model AppReadyGo.Web.Model.Shared.TesterWidgetModel
+
+<div class="testers-widget">
+    <p>@Model.Count users tested the application</p>
+    <p>
+        @foreach (var item in Model.LastTesters)
+        {
+            <img src="@item" />
+        }
+    </p>
+</div>  

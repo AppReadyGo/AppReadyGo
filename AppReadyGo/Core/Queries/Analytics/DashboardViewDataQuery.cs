@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace AppReadyGo.Core.Queries.Analytics
 {
-    public class DashboardViewDataQuery : IQuery<DashboardViewDataResult>
+    public class DashboardViewDataQuery : IQuery<DashboardViewDataResult>, IFilterQuery
     {
         public DateTime From { get; private set; }
         public DateTime To { get; private set; }
