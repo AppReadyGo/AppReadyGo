@@ -174,33 +174,25 @@ VALUES
 <article id="featurette"><br><br><br>
      <!-- featurettes start -->
       <div class="featurette">
-        <img class="featurette-image pull-left" src="/Images/Feature_TouchMap.jpg" alt="Invoice templates" />
-        <h2>Touch map, <span class="muted-italic">see the touches</span></h2>
-        <p>TouchMap shows touches (by means of hot or cold spots) in any area of an application. Developer can see where exactly people touch.<br />
-            - Improve designs to increase visitor interaction.<br />
-            - Make you your application more interesting by placing important features at the “right” places.</p>
+        <img class="featurette-image pull-left" src="/Images/Feature_TouchMap.jpg"/>
+        <h2>FingerPrint</span></h2>
+        <p>Look over your users shoulders - Get visual report of user interaction with your app!</p>
       </div>
 
       <hr class="featurette-divider visible-phone">
 
       <div class="featurette">
-        <img class="featurette-image pull-right" src="/Images/Feature_EyeTrack.jpg" alt="Unlimited invoicing software">
-        <h2>Eye Track, <span class="muted-italic">check the scrolls</span></h2>
-        <p>EyeTrack shows the amount of time application users spend on each part of the content. Scrolls on your content are meticulously tracked, giving you a precise understanding of what attracts users. These allows to make adjutments that will have users reading more content.<br />
-- Know how much of your content is scrolled by visitors.<br />
-- Decide which pages to shorten or lengthen.<br />
-- Identify boring content that is usually skipped.</p>
+        <img class="featurette-image pull-right" src="/Images/Feature_EyeTrack.jpg">
+        <h2>Feedback</h2>
+        <p>Get smart with customized questionnaires filled be your users!</p>
       </div>
 
       <hr class="featurette-divider visible-phone">
 
       <div class="featurette">
-        <img class="featurette-image pull-left" src="/Images/Feature_PlayBack.jpg" alt="Accept credit cards">
-        <h2>Play Back, <span class="muted-italic">get flow</span></h2>
-        <p>PlayBack gives you feed back on how users find specific application features. That information helps you understand what users need , allowing you to make your applications easier to use.<br />
-- See what users do with your app.<br />
-- Fix the UI to make it easier for customers to comprehend.<br />
-- Make your application more intuitive</p>
+        <img class="featurette-image pull-left" src="/Images/Feature_PlayBack.jpg">
+        <h2>Score</h2>
+        <p>Predict your success on the real market - get high score to know you are ready!</p>
       </div>
 
       <hr class="featurette-divider visible-phone">
@@ -282,61 +274,19 @@ If your application is a great one, people will want to use it. </p>
 (14, 0, 'title', 'Products'),
 (14, 1, 'content', '
 <article class="col-1-3">
-    <h2>
-        TouchMap</h2>
-    <a href="/m/products/touch-map">
-        <img alt="" src="/Images/TouchMap.jpg" style="width: 270px;" /></a>
-    <p>
-        <strong>TouchMap</strong> is a unique technology which analyzes touches in any area
-        of your application. Links, images, text or empty spaces - see what’s being clicked
-        and what parts users ignore. Use this data in order to:</p>
-    <ul class="list2">
-        <li>Improve designs to increase visitor interaction</li>
-        <li>Improve your ROI (Return on Investment) by placing important content and banners
-            at the “right” places</li>
-        <li>See how page changes improve sales</li>
-    </ul>
-    <a href="/m/products/touch-map" class="link2"><span><span>Read more</span></span></a>
+    <h2>FingerPrint</h2>
+    <img alt="" src="/Images/TouchMap.jpg" style="width: 270px;" />
+    <p>Look over your users shoulders - Get visual report of user interaction with your app!</p>
 </article>
 <article class="col-2-3">
-    <h2>
-        EyeTrack</h2>
-    <a href="/m/products/eye-track">
-        <img alt="" src="/Images/EyeTrack.jpg" style="width: 270px;" /></a>
-    <p>
-        The<strong> EyeTrack</strong> technology will indicate for you how much time and
-        attention your application or website users spend per each part of the content.
-        You’ll know what they read and what they skip over. You’ll be able to fit your content
-        to match the interests of your visitors. Attract their attention to make them stay
-        on your app and make more sales.
-    </p>
-    <ul class="list2">
-        <li>Know your fold and how far visitors scroll your content</li>
-        <li>Decide which pages need to be shorten or lengthen</li>
-        <li>Rearrange your page layout to make the most of your content</li>
-        <li>Identify the boring content in your application that is usually skipped</li>
-        <li>Boost your advertisement revenues by placing ads on high traffic page areas.</li>
-    </ul>
-    <p>
-        EyeTrack is available for everyone with affordable rates.</p>
-    <a href="/m/products/eye-track" class="link2"><span><span>Read more</span></span></a>
+    <h2>Feedback</h2>
+    <img alt="" src="/Images/EyeTrack.jpg" style="width: 270px;" />
+    <p>Get smart with customized questionnaires filled be your users!</p>
 </article>
 <article class="col-3-3">
-    <h2>
-        PlayBack</h2>
-    <a href="/m/products/play-back">
-        <img alt="" src="/Images/PlayBack.jpg" style="width: 270px;" /></a>
-    <p>
-        Use <strong>PlayBack</strong> to make the most out of your applications. Improve
-        them using the data you collect for your users to have the best experience possible.
-        Play back and understand exactly how your customers use your application to know
-        how to improve it.</p>
-    <ul class="list2">
-        <li>Track the user experience of your application.</li>
-        <li>See what users do with your app.</li>
-        <li>Fix the UI so everything makes sense for your customers.</li>
-    </ul>
-    <a href="/m/products/play-back" class="link2"><span><span>Read more</span></span></a>
+    <h2>Score</h2>
+    <img alt="" src="/Images/PlayBack.jpg" style="width: 270px;" />
+    <p>Predict your success on the real market - get high score to know you are ready!</p>
 </article>
 <div style="clear:both;"></div>
 '),
