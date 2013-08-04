@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using AppReadyGo.Core;
 using AppReadyGo.Core.Queries.Admin;
+using AppReadyGo.Core.QueryResults.Admin;
 using AppReadyGo.Core.QueryResults.Users;
 using AppReadyGo.Domain.Model.Users;
 using NHibernate;

@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using AppReadyGo.Core.Queries.Content;
+using AppReadyGo.Core.QueryResults.Admin;
 using AppReadyGo.Domain.Model.Content;
 using NHibernate;
 using NHibernate.Linq;
-using AppReadyGo.Core.Queries.Admin;
 
 namespace AppReadyGo.Domain.Queries
 {

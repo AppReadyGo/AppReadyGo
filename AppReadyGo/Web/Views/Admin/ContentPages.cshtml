@@ -1,10 +1,70 @@
 ﻿@using AppReadyGo.Web.Model.Pages.Admin
-@model ContentPageModel
+@model ContentPagesModel
 @{
     Layout = "~/Views/Admin/_Content.cshtml";
 }
 @section title { Content Pages }
-<h3>Content Manager Settings</h3>
+<h3>Content Pages</h3>
+<div class="t-nav">
+    <div class="a-l search-box">
+		<input type="search" id="search-input" name="s" value="@Model.Paging.SearchStr" />
+        <a class="link2" onclick="javascript: document.location.href = '/Admin/ContentPages?cp=1&srch=' + escape($('#search-input').val());"><span><span>Search</span></span></a>
+	</div>
+	<div class='t-nav-pages @(Model.Paging.IsOnePage ? "one-page" : "")'>
+		<span class="d-num">@Model.Paging.Count items</span>
+		<span class='pagination-links'>
+			<a class='first-page @(Model.Paging.IsOnePage ? "disabled" : "")' title='Go to the first page' href='/Admin/ContentPages?cp=1@Model.View.UrlPart'>&laquo;</a>
+			<a class='prev-page @(Model.Paging.PreviousPage.HasValue ? "" : "disabled")' title='Go to the previous page' href='/Admin/ContentPages?cp=@(Model.Paging.PreviousPage.HasValue ? Model.Paging.PreviousPage.Value : 1)@Model.Paging.UrlPart'>&lsaquo;</a>
+			<span class="paging-input">
+				<input class='cur-p' title='Current page' type='text' name='paged' value='@Model.Paging.CurPage' size='1' /> of <span class='total-pages'>@Model.Paging.TotalPages</span>
+			</span>
+			<a class='next-page @(Model.Paging.NextPage.HasValue ? "" : "disabled")' title='Go to the next page' href='/Admin/ContentPages?cp=@(Model.Paging.NextPage.HasValue ? Model.Paging.NextPage.Value : Model.Paging.TotalPages)@Model.Paging.UrlPart'>&rsaquo;</a>
+			<a class='last-page @(Model.Paging.IsOnePage ? "disabled" : "")' title='Go to the last page' href='/Admin/ContentPages?cp=@Model.Paging.TotalPages@Model.Paging.UrlPart'>&raquo;</a>
+		</span>
+	</div>
+</div><!-- /table-head -->
+<table class="tbl fixed" cellspacing="0">
+	<thead>
+	<tr>
+		<th scope='col' id='id' class='manage-column column-id sortable'><a href="/Admin/ContentPages?cp=1&orderby=id&order=@(Model.IdOrder + Model.SearchStrUrlPart)"><span>Id</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' id='url' class='manage-column column-url sortable'><a href="/Admin/ContentPages?cp=1&orderby=url&order=@(Model.UrlOrder + Model.SearchStrUrlPart)"><span>Path</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' id='theme' class='manage-column column-theme sortable'><a href="/Admin/ContentPages?cp=1&orderby=theme&order=@(Model.ThemeOrder + Model.SearchStrUrlPart)"><span>Theme</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' id='count' class='manage-column column-count'>Count</th>
+		<th scope='col' class='manage-column column-action'></th>
+	</tr>
+	</thead>
+	<tfoot>
+	<tr>
+		<th scope='col' class='manage-column column-id sortable'><a href="/Admin/ContentPages?cp=1&orderby=id&order=@(Model.IdOrder + Model.SearchStrUrlPart)"><span>Id</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' class='manage-column column-url sortable'><a href="/Admin/ContentPages?cp=1&orderby=url&order=@(Model.UrlOrder + Model.SearchStrUrlPart)"><span>Path</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' class='manage-column column-theme sortable'><a href="/Admin/ContentPages?cp=1&orderby=theme&order=@(Model.ThemeOrder + Model.SearchStrUrlPart)"><span>Theme</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' class='manage-column column-count'>Count</th>
+		<th scope='col' class='manage-column column-action'></th>
+	</tr>
+	</tfoot>
+	<tbody id="the-list" class='list:user'>
+    @if (Model.Pages.Any())
+    {
+        foreach (var key in Model.Pages)
+        {	
+            <tr class="@(key.IsAlternative ? "" : "alternate")">
+		        <td class="column-id">@key.Id</td>
+		        <td class="column-url">@key.Url</td>
+		        <td class="column-theme">@key.Theme</td>
+		        <td class="column-url">@key.ItemsCount</td>
+		        <td class="column-action"><a href="/Admin/ContentItem/@key.Id?itemType=2">Items</a></td>
+	        </tr>
+        } 
+    }
+    else
+    {
+        <tr class="no-items"><td colspan="5" class="colspanchange">No matching pages were found.</td></tr>
+    }
+	</tbody>
+</table>
+
+
+
 
 
 

@@ -5,10 +5,10 @@ using System.Text;
 using AppReadyGo.Core.QueryResults;
 using AppReadyGo.Core.QueryResults.Users;
 
-namespace AppReadyGo.Core.Queries.Admin
+namespace AppReadyGo.Core.QueryResults.Admin
 {
-    public class AllKeysResult : PageingResult
+    public class AllStaffResult : PageingResult
     {
-        public IEnumerable<KeyDetailsResult> Keys { get; set; }
+        public IEnumerable<StaffFullDetailsResult> Users { get; set; }
     }
 }

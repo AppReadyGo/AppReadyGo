@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using AppReadyGo.Core.Queries.Admin;
-using AppReadyGo.Core.Results.Admin;
+using AppReadyGo.Core.QueryResults.Admin;
 using AppReadyGo.Domain.Model.Logs;
 using AppReadyGo.Domain.Queries;
 using NHibernate;
