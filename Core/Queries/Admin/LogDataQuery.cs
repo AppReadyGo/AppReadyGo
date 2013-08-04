@@ -1,6 +1,5 @@
 ﻿using System;
-using AppReadyGo.Core.Results;
-using AppReadyGo.Core.Results.Admin;
+using AppReadyGo.Core.QueryResults.Admin;
 
 namespace AppReadyGo.Core.Queries.Admin
 {

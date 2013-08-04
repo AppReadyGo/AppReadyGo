@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AppReadyGo.Core.QueryResults;
+﻿using System.Collections.Generic;
 using AppReadyGo.Core.QueryResults.Users;
 
-namespace AppReadyGo.Core.Queries.Admin
+namespace AppReadyGo.Core.QueryResults.Admin
 {
     public class AllMembersResult : PageingResult
     {

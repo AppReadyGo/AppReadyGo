@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AppReadyGo.Core.Queries
 {
-    public class IQuery<TResult>
+    public interface IQuery<TResult>
     {
     }
 }

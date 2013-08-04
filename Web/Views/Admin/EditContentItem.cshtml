@@ -1,9 +1,9 @@
-﻿@model AppReadyGo.Web.Model.Pages.Admin.ContentItemModel
+﻿@model AppReadyGo.Web.Model.Pages.Admin.ContentItemDetailsModel
 @{
     Layout = "~/Views/Admin/_Content.cshtml";
 }
 @section title { Content Items }
-<h3>Edit content item for @Model.KeyUrl and @Model.SubKey</h3>
+<h3>Edit content item for @Model.ParentUrl and @Model.SubKey</h3>
 @if (Model.IsHTML)
 {
     @Html.TextAreaFor(m => m.Value);

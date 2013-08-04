@@ -216,10 +216,12 @@
     <Compile Include="QueriesHandlers\Application\GetScreenDetailsQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetScreenEditDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\ScreensQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Content\GetItemQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllPageItemsQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Content\GetAllKeyItemsQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Content\GetAllKeysQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Content\GetAllMailsQuery.cs" />
-    <Compile Include="QueriesHandlers\Content\GetAllPagesQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllPagesQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Content\GetAllThemesQuery.cs" />
     <Compile Include="QueriesHandlers\Content\GetKeyQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Content\GetMailQuery.cs" />

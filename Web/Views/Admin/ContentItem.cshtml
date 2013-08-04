@@ -7,35 +7,35 @@
 <div class="t-nav">
     <div class="a-l search-box">
 		<input type="search" id="search-input" name="s" value="@Model.Paging.SearchStr" />
-        <a class="link2" onclick="javascript: document.location.href = '/Admin/ContentItem?id=@Model.KeyId&cp=1&srch=' + escape($('#search-input').val());"><span><span>Search</span></span></a>
+        <a class="link2" onclick="javascript: document.location.href = '/Admin/ContentItem?id=@Model.KeyId&itemType=@Model.ItemType&cp=1&srch=' + escape($('#search-input').val());"><span><span>Search</span></span></a>
 	</div>
 	<div class='t-nav-pages @(Model.Paging.IsOnePage ? "one-page" : "")'>
 		<span class="d-num">@Model.Paging.Count items</span>
 		<span class='pagination-links'>
-			<a class='first-page @(Model.Paging.IsOnePage ? "disabled" : "")' title='Go to the first page' href='/Admin/ContentItem?id=@Model.KeyId&cp=1@Model.View.UrlPart'>&laquo;</a>
-			<a class='prev-page @(Model.Paging.PreviousPage.HasValue ? "" : "disabled")' title='Go to the previous page' href='/Admin/ContentItem?id=@Model.KeyId&cp=@(Model.Paging.PreviousPage.HasValue ? Model.Paging.PreviousPage.Value : 1)@Model.Paging.UrlPart'>&lsaquo;</a>
+			<a class='first-page @(Model.Paging.IsOnePage ? "disabled" : "")' title='Go to the first page' href='/Admin/ContentItem?id=@Model.KeyId&itemType=@Model.ItemType&cp=1@Model.View.UrlPart'>&laquo;</a>
+			<a class='prev-page @(Model.Paging.PreviousPage.HasValue ? "" : "disabled")' title='Go to the previous page' href='/Admin/ContentItem?id=@Model.KeyId&itemType=@Model.ItemType&cp=@(Model.Paging.PreviousPage.HasValue ? Model.Paging.PreviousPage.Value : 1)@Model.Paging.UrlPart'>&lsaquo;</a>
 			<span class="paging-input">
 				<input class='cur-p' title='Current page' type='text' name='paged' value='@Model.Paging.CurPage %>' size='1' /> of <span class='total-pages'>@Model.Paging.TotalPages</span>
 			</span>
-			<a class='next-page @(Model.Paging.NextPage.HasValue ? "" : "disabled")' title='Go to the next page' href='/Admin/ContentItem?id=@Model.KeyId&cp=@(Model.Paging.NextPage.HasValue ? Model.Paging.NextPage.Value : Model.Paging.TotalPages)@Model.Paging.UrlPart'>&rsaquo;</a>
-			<a class='last-page @(Model.Paging.IsOnePage ? "disabled" : "")' title='Go to the last page' href='/Admin/ContentItem?id=@Model.KeyId&cp=@Model.Paging.TotalPages@Model.Paging.UrlPart'>&raquo;</a>
+			<a class='next-page @(Model.Paging.NextPage.HasValue ? "" : "disabled")' title='Go to the next page' href='/Admin/ContentItem?id=@Model.KeyId&itemType=@Model.ItemType&cp=@(Model.Paging.NextPage.HasValue ? Model.Paging.NextPage.Value : Model.Paging.TotalPages)@Model.Paging.UrlPart'>&rsaquo;</a>
+			<a class='last-page @(Model.Paging.IsOnePage ? "disabled" : "")' title='Go to the last page' href='/Admin/ContentItem?id=@Model.KeyId&itemType=@Model.ItemType&cp=@Model.Paging.TotalPages@Model.Paging.UrlPart'>&raquo;</a>
 		</span>
 	</div>
 </div><!-- /table-head -->
 <table class="tbl fixed" cellspacing="0">
 	<thead>
 	<tr>
-		<th scope='col' id='id' class='manage-column column-id sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&cp=1&orderby=id&order=@(Model.IdOrder + Model.SearchStrUrlPart)"><span>Id</span><span class="sorting-indicator"></span></a></th>
-		<th scope='col' id='subkey' class='manage-column column-subkey sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&cp=1&orderby=subkey&order=@(Model.SubKeyOrder + Model.SearchStrUrlPart)"><span>Key</span><span class="sorting-indicator"></span></a></th>
-		<th scope='col' id='ishtml' class='manage-column column-ishtml sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&cp=1&orderby=ishtml&order=@(Model.IsHtmlOrder + Model.SearchStrUrlPart)"><span>Is Html</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' id='id' class='manage-column column-id sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&itemType=@Model.ItemType&cp=1&orderby=id&order=@(Model.IdOrder + Model.SearchStrUrlPart)"><span>Id</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' id='subkey' class='manage-column column-subkey sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&itemType=@Model.ItemType&cp=1&orderby=subkey&order=@(Model.SubKeyOrder + Model.SearchStrUrlPart)"><span>Key</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' id='ishtml' class='manage-column column-ishtml sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&itemType=@Model.ItemType&cp=1&orderby=ishtml&order=@(Model.IsHtmlOrder + Model.SearchStrUrlPart)"><span>Is Html</span><span class="sorting-indicator"></span></a></th>
 		<th scope='col' class='manage-column column-action'></th>
 	</tr>
 	</thead>
 	<tfoot>
 	<tr>
-		<th scope='col' class='manage-column column-id sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&cp=1&orderby=id&order=@(Model.IdOrder + Model.SearchStrUrlPart)"><span>Id</span><span class="sorting-indicator"></span></a></th>
-		<th scope='col' class='manage-column column-subkey sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&cp=1&orderby=subkey&order=@(Model.SubKeyOrder + Model.SearchStrUrlPart)"><span>Key</span><span class="sorting-indicator"></span></a></th>
-		<th scope='col' class='manage-column column-ishtml sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&cp=1&orderby=ishtml&order=@(Model.IsHtmlOrder + Model.SearchStrUrlPart)"><span>Is Html</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' class='manage-column column-id sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&itemType=@Model.ItemType&cp=1&orderby=id&order=@(Model.IdOrder + Model.SearchStrUrlPart)"><span>Id</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' class='manage-column column-subkey sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&itemType=@Model.ItemType&cp=1&orderby=subkey&order=@(Model.SubKeyOrder + Model.SearchStrUrlPart)"><span>Key</span><span class="sorting-indicator"></span></a></th>
+		<th scope='col' class='manage-column column-ishtml sortable'><a href="/Admin/ContentItem?id=@Model.KeyId&itemType=@Model.ItemType&cp=1&orderby=ishtml&order=@(Model.IsHtmlOrder + Model.SearchStrUrlPart)"><span>Is Html</span><span class="sorting-indicator"></span></a></th>
 		<th scope='col' class='manage-column column-action'></th>
 	</tr>
 	</tfoot>

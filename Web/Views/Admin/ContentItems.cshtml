@@ -15,7 +15,7 @@
 			<a class='first-page @(Model.Paging.IsOnePage ? "disabled" : "")' title='Go to the first page' href='/Admin/ContentItems?cp=1@Model.View.UrlPart'>&laquo;</a>
 			<a class='prev-page @(Model.Paging.PreviousPage.HasValue ? "" : "disabled")' title='Go to the previous page' href='/Admin/ContentItems?cp=@(Model.Paging.PreviousPage.HasValue ? Model.Paging.PreviousPage.Value : 1)@Model.Paging.UrlPart'>&lsaquo;</a>
 			<span class="paging-input">
-				<input class='cur-p' title='Current page' type='text' name='paged' value='@Model.Paging.CurPage %>' size='1' /> of <span class='total-pages'>@Model.Paging.TotalPages</span>
+				<input class='cur-p' title='Current page' type='text' name='paged' value='@Model.Paging.CurPage' size='1' /> of <span class='total-pages'>@Model.Paging.TotalPages</span>
 			</span>
 			<a class='next-page @(Model.Paging.NextPage.HasValue ? "" : "disabled")' title='Go to the next page' href='/Admin/ContentItems?cp=@(Model.Paging.NextPage.HasValue ? Model.Paging.NextPage.Value : Model.Paging.TotalPages)@Model.Paging.UrlPart'>&rsaquo;</a>
 			<a class='last-page @(Model.Paging.IsOnePage ? "disabled" : "")' title='Go to the last page' href='/Admin/ContentItems?cp=@Model.Paging.TotalPages@Model.Paging.UrlPart'>&raquo;</a>
@@ -48,7 +48,7 @@
 		        <td class="column-id">@key.Id</td>
 		        <td class="column-url">@key.Url</td>
 		        <td class="column-url">@key.ItemsCount</td>
-		        <td class="column-action"><a href="/Admin/ContentItem/@key.Id">Items</a></td>
+		        <td class="column-action"><a href="/Admin/ContentItem/@key.Id?itemType=1">Items</a></td>
 	        </tr>
         } 
     }

@@ -9,9 +9,11 @@ namespace AppReadyGo.Web.Model.Pages.Admin
 {
     public class ContentItemModel : ContentMasterModel
     {
-        public object KeyId { get; set; }
+        public int KeyId { get; set; }
 
-        public object KeyUrl { get; set; }
+        public string KeyUrl { get; set; }
+
+        public int ItemType { get; set; }
 
         public string IdOrder { get; set; }
 

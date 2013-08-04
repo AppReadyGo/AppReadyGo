@@ -1,16 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AppReadyGo.Core.Queries;
-using AppReadyGo.Domain.Model.Content;
-using NHibernate;
-using NHibernate.Linq;
-using AppReadyGo.Core.Queries.Users;
+﻿using System.Linq;
+using AppReadyGo.Core.Queries.Admin;
+using AppReadyGo.Core.QueryResults.Admin;
 using AppReadyGo.Core.QueryResults.Users;
 using AppReadyGo.Domain.Model.Users;
-using AppReadyGo.Core.Queries.Admin;
-using AppReadyGo.Core;
-using NHibernate.Transform;
-using AppReadyGo.Domain.QueriesHandlers.Admin;
+using NHibernate;
+using NHibernate.Linq;
 
 namespace AppReadyGo.Domain.Queries.Admin
 {

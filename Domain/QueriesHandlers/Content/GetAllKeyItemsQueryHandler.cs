@@ -16,7 +16,7 @@ namespace AppReadyGo.Domain.Queries
         {
 
             var keyQuery = session.Query<Key>()
-                                .Where(k => k.Id == query.KeyId);
+                                .Where(k => k.Id == query.Id);
 
             var res = new GetAllKeyItemsQueryResult 
             {

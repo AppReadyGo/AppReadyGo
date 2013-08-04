@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AppReadyGo.Web.Model.Pages.Admin
 {
-    public class ContentPageModel : AdminMasterModel
+    public class ContentPageModel : ContentMasterModel
     {
         public int Id { get; set; }
 
@@ -23,7 +23,7 @@ namespace AppReadyGo.Web.Model.Pages.Admin
         public IEnumerable<SelectListItem> SubKeys { get; set; }
 
         public ContentPageModel()
-            : base(MenuItem.ContentManager)
+            : base(MenuItem.Pages)
         {
         }
    }
