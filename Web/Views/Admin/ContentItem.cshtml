@@ -3,7 +3,30 @@
     Layout = "~/Views/Admin/_Content.cshtml";
 }
 @section title { Content Items }
-<h3>Content items for @Model.KeyUrl</h3>
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+                   <li><a href="/Admin/ContentManager"><h4>Content manager</h4></a></li>
+                    @if(@Model.ItemType == 1)
+                    {
+		                <li><a href="/Admin/ContentItems"><h4>Keys</h4></a></li>
+                    }
+                    else if(@Model.ItemType == 2)
+                    {
+		                <li><a href="/Admin/ContentPages"><h4>Pages</h4></a></li>
+                    }
+                    else if(@Model.ItemType == 2)
+                    {
+		                <li><a href="/Admin/ContentMails"><h4>Mails</h4></a></li>
+                    }
+                   <li>items for "@Model.KeyUrl"</li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
 <div class="t-nav">
     <div class="a-l search-box">
 		<input type="search" id="search-input" name="s" value="@Model.Paging.SearchStr" />
@@ -48,7 +71,7 @@
 		        <td class="column-id">@item.Id</td>
 		        <td class="column-key">@item.SubKey</td>
 		        <td class="column-ishtml">@item.IsHtml</td>
-		        <td class="column-action"><a href="/Admin/EditContentItem/@item.Id">Edit</a></td>
+		        <td class="column-action"><a href="/Admin/EditContentItem/@item.Id?itemType=@Model.ItemType">Edit</a></td>
 	        </tr>
         } 
     }

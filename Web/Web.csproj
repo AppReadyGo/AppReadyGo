@@ -286,6 +286,7 @@
     <Compile Include="Model\Pages\Admin\ApiMembersPagingModel.cs" />
     <Compile Include="Model\Pages\Admin\ContentPagesModel.cs" />
     <Compile Include="Model\Pages\Admin\ContentItemDetailsModel.cs" />
+    <Compile Include="Model\Pages\Admin\ContentManagerModel.cs" />
     <Compile Include="Model\Pages\Admin\LogsModel.cs" />
     <Compile Include="Model\Pages\Admin\MemberDetailsModel.cs" />
     <Compile Include="Model\Pages\Admin\MembersPagingModel.cs" />

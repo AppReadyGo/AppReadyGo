@@ -4,7 +4,18 @@
     Layout = "~/Views/Admin/_Content.cshtml";
 }
 @section title { Content Pages }
-<h3>Content Pages</h3>
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+                   <li><a href="/Admin/ContentManager"><h4>Content manager</h4></a></li>
+                   <li>Pages content</li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
 <div class="t-nav">
     <div class="a-l search-box">
 		<input type="search" id="search-input" name="s" value="@Model.Paging.SearchStr" />
@@ -49,7 +60,7 @@
         {	
             <tr class="@(key.IsAlternative ? "" : "alternate")">
 		        <td class="column-id">@key.Id</td>
-		        <td class="column-url">@key.Url</td>
+		        <td class="column-url"><a href="/p/@key.Url" target="_blank">@key.Url</a></td>
 		        <td class="column-theme">@key.Theme</td>
 		        <td class="column-url">@key.ItemsCount</td>
 		        <td class="column-action"><a href="/Admin/ContentItem/@key.Id?itemType=2">Items</a></td>
