@@ -21,6 +21,7 @@ using AppReadyGo.Core.Queries.Content;
 using AppReadyGo.Web.Common;
 using AppReadyGo.Web.Common.Mails;
 using AppReadyGo.Core.QueryResults.Admin;
+using AppReadyGo.Core.Commands.Content;
 
 namespace AppReadyGo.Controllers
 {
@@ -292,13 +293,13 @@ namespace AppReadyGo.Controllers
 
         public ActionResult ContentManager()
         {
-            return View(new ContentMasterModel(ContentMasterModel.MenuItem.None));
+            return View(new ContentManagerModel());
         }
 
         public ActionResult ContentItems(string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")
         {
             var orderBy = string.IsNullOrEmpty(orderby) ? GetAllKeysQuery.OrderByColumn.Url : (GetAllKeysQuery.OrderByColumn)Enum.Parse(typeof(GetAllKeysQuery.OrderByColumn), orderby, true);
-            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == GetAllKeysQuery.OrderByColumn.Url) ? false : true) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
+            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == GetAllKeysQuery.OrderByColumn.Url) ? true : false) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
 
             var data = ObjectContainer.Instance.RunQuery(new GetAllKeysQuery(srch, orderBy, asc, cp, 15));
 
@@ -334,7 +335,7 @@ namespace AppReadyGo.Controllers
         public ActionResult ContentItem(int id, int itemType, string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")
         {
             var orderBy = string.IsNullOrEmpty(orderby) ? GetAllKeyItemsQuery.OrderByColumn.SubKey : (GetAllKeyItemsQuery.OrderByColumn)Enum.Parse(typeof(GetAllKeyItemsQuery.OrderByColumn), orderby, true);
-            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == GetAllKeyItemsQuery.OrderByColumn.SubKey) ? false : true) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
+            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == GetAllKeyItemsQuery.OrderByColumn.SubKey) ? true : false) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
 
             GetAllKeyItemsQueryResult data = null;
             if (itemType == 1)
@@ -379,7 +380,7 @@ namespace AppReadyGo.Controllers
             return View(model);
         }
 
-        public ActionResult EditContentItem(int id)
+        public ActionResult EditContentItem(int id, int itemType)
         {
             var data = ObjectContainer.Instance.RunQuery(new GetItemQuery(id));
 
@@ -390,20 +391,33 @@ namespace AppReadyGo.Controllers
                     SubKey = data.SubKey,
                     ParentId = data.ParentId,
                     ParentUrl = data.ParentUrl,
-                    Value = data.Value
+                    Value = data.Value,
+                    ItemType = itemType
                 });
         }
 
         [HttpPost]
-        public ActionResult EditContentItem(ContentItemModel model)
+        [ValidateInput(false)]
+        public ActionResult EditContentItem(ContentItemDetailsModel model, int itemType)
         {
-            return View(model);
+            var res = ObjectContainer.Instance.Dispatch(new UpdateItemCommand(model.Id, model.Value));
+            var data = ObjectContainer.Instance.RunQuery(new GetItemQuery(model.Id));
+            return View(new ContentItemDetailsModel
+            {
+                Id = data.Id,
+                IsHtml = data.IsHTML,
+                SubKey = data.SubKey,
+                ParentId = data.ParentId,
+                ParentUrl = data.ParentUrl,
+                Value = data.Value,
+                ItemType = itemType
+            });
         }
 
         public ActionResult ContentPages(string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")
         {
             var orderBy = string.IsNullOrEmpty(orderby) ? GetAllPagesQuery.OrderByColumn.Url : (GetAllPagesQuery.OrderByColumn)Enum.Parse(typeof(GetAllPagesQuery.OrderByColumn), orderby, true);
-            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == GetAllPagesQuery.OrderByColumn.Url) ? false : true) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
+            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == GetAllPagesQuery.OrderByColumn.Url) ? true : false) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
 
             var data = ObjectContainer.Instance.RunQuery(new GetAllPagesQuery(srch, orderBy, asc, cp, 15));
 

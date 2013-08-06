@@ -104,6 +104,7 @@
     <Compile Include="Commands\Application\UpdateApplicationCommand.cs" />
     <Compile Include="Commands\Application\UpdatePackageCommand.cs" />
     <Compile Include="Commands\Application\UpdateScreenCommand.cs" />
+    <Compile Include="Commands\Content\UpdateItemCommand.cs" />
     <Compile Include="Commands\Content\CreateContentItemCommand.cs" />
     <Compile Include="Commands\Content\CreateMailCommand.cs" />
     <Compile Include="Commands\Content\CreatePageCommand.cs" />

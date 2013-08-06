@@ -1,10 +1,25 @@
 ﻿@using AppReadyGo.Web.Model.Pages.Admin
-@model ContentMasterModel
+@model ContentManagerModel
 @{
     Layout = "~/Views/Admin/_Content.cshtml";
 }
 @section title { Content Manager }
-<h3>Content Manager Settings</h3>
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+                   <li>Content manager</li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
+<ul>
+    <li class="@Model.GetMenuItemClass(ContentMasterModel.MenuItem.Items)"><span></span><a href="/Admin/ContentItems">Items</a></li>
+    <li class="@Model.GetMenuItemClass(ContentMasterModel.MenuItem.Pages)"><span></span><a href="/Admin/ContentPages">Pages</a></li>
+    <li class="@Model.GetMenuItemClass(ContentMasterModel.MenuItem.Mails)"><span></span><a href="/Admin/ContentMails">Mails</a></li>
+</ul>
 
 
 

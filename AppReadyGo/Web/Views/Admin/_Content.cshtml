@@ -6,15 +6,11 @@
 @section title { @RenderSection("title") }
 @section header 
 {
-    <link href="@Url.Content("~/Content/admin.logs.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("header", false);
 }
 @section topMenu 
 { 
-    <ul>
-        <li class="@Model.GetMenuItemClass(ContentMasterModel.MenuItem.Items)"><span></span><a href="/Admin/ContentItems">Items</a></li>
-        <li class="@Model.GetMenuItemClass(ContentMasterModel.MenuItem.Pages)"><span></span><a href="/Admin/ContentPages">Pages</a></li>
-        <li class="@Model.GetMenuItemClass(ContentMasterModel.MenuItem.Mails)"><span></span><a href="/Admin/ContentMails">Mails</a></li>
-    </ul>
+
 }
 @RenderBody()
 

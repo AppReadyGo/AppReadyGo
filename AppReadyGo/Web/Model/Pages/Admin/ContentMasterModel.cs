@@ -26,7 +26,8 @@ namespace AppReadyGo.Web.Model.Pages.Admin
             Items,
             Pages,
             Mails,
-            None
+            None,
+            Manager
         }
     }
 }

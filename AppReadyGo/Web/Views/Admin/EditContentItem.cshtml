@@ -3,16 +3,59 @@
     Layout = "~/Views/Admin/_Content.cshtml";
 }
 @section title { Content Items }
-<h3>Edit content item for @Model.ParentUrl and @Model.SubKey</h3>
-@if (Model.IsHTML)
+@section header
 {
-    @Html.TextAreaFor(m => m.Value);
+   <script src="/Scripts/tinymce/tinymce.min.js"></script>
 }
-else
+<script>
+    tinymce.init({
+        selector: "textarea",
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    });
+</script>
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+                   <li><a href="/Admin/ContentManager"><h4>Content manager</h4></a></li>
+                    @if(@Model.ItemType == 1)
+                    {
+		                <li><a href="/Admin/ContentItems"><h4>Keys</h4></a></li>
+                    }
+                    else if(@Model.ItemType == 2)
+                    {
+		                <li><a href="/Admin/ContentPages"><h4>Pages</h4></a></li>
+                    }
+                    else if(@Model.ItemType == 2)
+                    {
+		                <li><a href="/Admin/ContentMails"><h4>Mails</h4></a></li>
+                    }
+		           <li><a href="/Admin/ContentItem/@Model.ParentId?itemType=@Model.ItemType"><h4>@Model.ParentUrl - items</h4></a></li>
+                   <li>Edit: "@Model.SubKey"</li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
+@using (Html.BeginForm()) 
 {
-    @Html.TextBoxFor(m => m.Value);
+    Html.HiddenFor(m => m.Id);
+    if (Model.IsHtml)
+    {
+        @Html.TextAreaFor(m => m.Value);
+    }
+    else
+    {
+        @Html.TextBoxFor(m => m.Value);
+    }
+    <div><input type="submit" value="Update" /></div>
 }
-<a href="#" class="link2" onClick="$(this).closest('form').submit();"><span><span>Update</span></span></a>
 
 
 

@@ -3,7 +3,18 @@
     Layout = "~/Views/Admin/_Content.cshtml";
 }
 @section title { Content Items }
-<h3>Content items manager</h3>
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+                   <li><a href="/Admin/ContentManager"><h4>Content manager</h4></a></li>
+                   <li>Keys content</li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
 <div class="t-nav">
     <div class="a-l search-box">
 		<input type="search" id="search-input" name="s" value="@Model.Paging.SearchStr" />
