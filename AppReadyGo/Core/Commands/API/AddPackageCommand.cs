@@ -52,6 +52,11 @@ namespace AppReadyGo.Core.Commands.API
             {
                 yield return new ValidationResult(ErrorCode.WrongParameter, "ScreenHeight must to be positive and greate than zero");
             }
+
+            if (!validation.IsApplicationExists(this.ApplicationId))
+            {
+                yield return new ValidationResult(ErrorCode.WrongParameter, string.Format("The application {0} does not exists in system", this.ApplicationId));
+            }
         }
 
         public IEnumerable<ValidationResult> ValidatePermissions(ISecurityContext security)

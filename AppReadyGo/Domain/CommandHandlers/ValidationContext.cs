@@ -40,9 +40,11 @@ namespace AppReadyGo.Domain.CommandHandlers
             return true;
         }
 
-        public bool IsExistsTag(string tag)
+        public bool IsApplicationExists(int appId)
         {
-            return false;
+            var query = this.session.Query<AppReadyGo.Domain.Model.Application>()
+                            .Where(a => a.Id == appId);
+            return query.Any();
         }
     }
 }

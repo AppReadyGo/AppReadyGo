@@ -13,6 +13,6 @@ namespace AppReadyGo.Core
 
         bool IsCorrectPassword(string password);
 
-        bool IsExistsTag(string tag);
+        bool IsApplicationExists(int appId);
     }
 }
