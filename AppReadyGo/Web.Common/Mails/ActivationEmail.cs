@@ -26,7 +26,7 @@ namespace AppReadyGo.Web.Common.Mails
             var mailContent = GetMailContent();
 
             string activationKey = string.Format("{0},{1}", DateTime.Now.AddDays(EmailSettings.Settings.LinksExpire.Activation), email).EncryptLow();
-            string activationLnk = string.Format("{0}{1}{2}", siteRootUrl, activationPageUrl, HttpUtility.UrlEncode(activationKey));
+            string activationLnk = string.Format("{0}{1}?key={2}", siteRootUrl, activationPageUrl, HttpUtility.UrlEncode(activationKey));
             string body = mailContent.Body.Replace("{activation_link}", activationLnk);
 
             this.Model = new SystemEmailModel(true)
