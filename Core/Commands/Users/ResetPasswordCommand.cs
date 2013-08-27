@@ -30,7 +30,7 @@ namespace AppReadyGo.Core.Commands.Users
 
             if (!validation.IsEmailExists(this.Email))
             {
-                yield return new ValidationResult(ErrorCode.EmailExists, "Wrong UserName");
+                yield return new ValidationResult(ErrorCode.EmailDoesNotExists, "Wrong UserName");
             }
 
             if (string.IsNullOrEmpty(this.Password))

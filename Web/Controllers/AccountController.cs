@@ -224,11 +224,18 @@ namespace AppReadyGo.Controllers
                 var result = ObjectContainer.Instance.Dispatch(new ResetPasswordCommand(email, model.NewPassword));
                 if (result.Validation.Any())
                 {
-                    ModelState.AddModelError("error", "Wrong password.");
-                }
-                else if (!result.Result.HasValue)
-                {
-                    throw new Exception("User not found.");
+                    if (result.Validation.Any(x => x.ErrorCode == ErrorCode.WrongPassword))
+                    {
+                        ModelState.AddModelError("error", "The password your enter is too weak.");
+                    }
+                    else if (result.Validation.Any(x => x.ErrorCode == ErrorCode.EmailDoesNotExists))
+                    {
+                        throw new Exception("User not found.");
+                    }
+                    else
+                    {
+                        throw new Exception("Error to reset password:{0}" + string.Join(", ", result.Validation.Select(x => x.ErrorCode.ToString())));
+                    }
                 }
                 else
                 {
