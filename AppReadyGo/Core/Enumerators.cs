@@ -48,6 +48,7 @@ namespace AppReadyGo.Core
         WrongEmail,
         WrongPassword,
         EmailExists,
+        EmailDoesNotExists,
         TagExists,
         WrongCollection,
         WrongParameter

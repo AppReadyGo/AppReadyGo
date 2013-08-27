@@ -8,6 +8,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web;
+using System;
 
 namespace AppReadyGo.Web
 {
@@ -38,5 +40,13 @@ namespace AppReadyGo.Web
             //// Initialize / install components in container
             //applicationWideWindsorContainer.Install(new WindsorInstaller());
        }
+
+        protected void Application_Error(object sender, System.EventArgs e)
+        {
+            var context = HttpContext.Current;
+            Exception ex = context.Server.GetLastError();
+
+            log.WriteError(ex, "Global exception");
+        }
     }
 }
