@@ -26,7 +26,14 @@ namespace AppReadyGo.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Application");
+                if (ObjectContainer.Instance.CurrentUserDetails.Type == UserType.Staff)
+                {
+                    return RedirectToAction("", "Admin");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Application");
+                }
             }
             else
             {

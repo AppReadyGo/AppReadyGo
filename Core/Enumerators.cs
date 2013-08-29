@@ -51,6 +51,7 @@ namespace AppReadyGo.Core
         EmailDoesNotExists,
         TagExists,
         WrongCollection,
-        WrongParameter
+        WrongParameter,
+        WrongDescription
     }
 }

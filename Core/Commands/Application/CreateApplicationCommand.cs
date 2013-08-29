@@ -20,9 +20,14 @@ namespace AppReadyGo.Core.Commands.Application
 
         public IEnumerable<ValidationResult> Validate(IValidationContext validation)
         {
-            if (string.IsNullOrEmpty(this.Name))
+            if (string.IsNullOrWhiteSpace(this.Name))
             {
                 yield return new ValidationResult(ErrorCode.WrongParameter, "Command must have Name parameter.");
+            }
+
+            if (!string.IsNullOrWhiteSpace(this.Description) && this.Description.Length > 500)
+            {
+                yield return new ValidationResult(ErrorCode.WrongDescription, "The description size is wrong.");
             }
         }
 

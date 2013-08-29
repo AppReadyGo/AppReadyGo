@@ -36,6 +36,7 @@ namespace AppReadyGo.Domain.Queries
                     Email = user.Email,
                     Password = user.Password,
                     PasswordSalt = user.PasswordSalt,
+                    Type = user.Type,
                     Activated = user.Activated,
                     SpecialAccess = user.SpecialAccess,
                     AcceptedTermsAndConditions = user.AcceptedTermsAndConditions,

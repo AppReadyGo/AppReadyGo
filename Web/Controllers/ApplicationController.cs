@@ -28,11 +28,6 @@ namespace AppReadyGo.Controllers
 
         public ActionResult Index(string srch = "", int scol = 1, int cp = 1)
         {
-            if (ObjectContainer.Instance.CurrentUserDetails.Type == UserType.Staff)
-            {
-                return RedirectToAction("", "Admin");
-            }
-
             var data = ObjectContainer.Instance.RunQuery(new GetAllApplicationsQuery(srch, cp, 15));
 
             if (!data.Applications.Any())
@@ -121,8 +116,15 @@ namespace AppReadyGo.Controllers
 
                 if (result.Validation.Any())
                 {
-                    log.WriteError("Error to add application to database", string.Join("; ", result.Validation.Select(v => string.Format("Code:{0}, Message: {1}", v.ErrorCode, v.Message)).ToArray()));
-                    return RedirectToAction("Error", "Home");
+                    if (result.Validation.Any(x => x.ErrorCode == ErrorCode.WrongDescription))
+                    {
+                        ModelState.AddModelError("Description", "The description is longer than 500 characters.");
+                    }
+                    else
+                    {
+                        log.WriteError("Error to add application to database", string.Join("; ", result.Validation.Select(v => string.Format("Code:{0}, Message: {1}", v.ErrorCode, v.Message)).ToArray()));
+                        return RedirectToAction("Error", "Home");
+                    }
                 }
                 else
                 {
@@ -154,17 +156,15 @@ namespace AppReadyGo.Controllers
                         var path = Path.Combine(Server.MapPath("~/Restricted/UserPackages/"), result.Result.ToString());
                         packageFile.SaveAs(path);
                     }
-                }
 
-                return RedirectToAction("");
+                    return RedirectToAction("");
+                }
             }
-            else
-            {
-                var appTypes = ObjectContainer.Instance.RunQuery(new GetApplicationTypesQuery());
-                var types = appTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() });
-                model.Types = types;
-                return View("New", model);
-            }
+
+            var appTypes = ObjectContainer.Instance.RunQuery(new GetApplicationTypesQuery());
+            var types = appTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() });
+            model.Types = types;
+            return View("New", model);
         }
 
         public ActionResult Edit(int id)

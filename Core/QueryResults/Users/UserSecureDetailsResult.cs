@@ -22,5 +22,7 @@ namespace AppReadyGo.Core.QueryResults.Users
         public IEnumerable<StaffRole> Roles { get; set; }
 
         public bool AcceptedTermsAndConditions { get; set; }
+
+        public UserType Type { get; set; }
     }
 }
