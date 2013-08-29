@@ -38,6 +38,10 @@ namespace AppReadyGo.Controllers
                 {
                     ModelState.AddModelError("error", "The user name or password provided is incorrect.");
                 }
+                else if (securedDetails.Type == UserType.ApiMember)
+                {
+                    ModelState.AddModelError("error", "Your account can be used to log in from mobile application.");
+                }
                 else if(!securedDetails.Activated)
                 {
                     ModelState.AddModelError("error", "You account is not activated, please use the link from activation email to activate your account.");
@@ -136,6 +140,7 @@ namespace AppReadyGo.Controllers
                 {
                     ModelState.AddModelError("error", ErrorCodeToString(result.Validation));
                 }
+                // TODO: Add error shows that the user is API Member
             }
 
             return this.View(model);
@@ -183,8 +188,15 @@ namespace AppReadyGo.Controllers
                 var userDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
                 if (userDetails != null)
                 {
-                    new ForgotPasswordMail(model.Email).Send();
-                    return Redirect("~/p/forgot-password-email-sent"); // Redirect to content page
+                    if (userDetails.Type == UserType.ApiMember)
+                    {
+                        ModelState.AddModelError("error", "Your account can be used just in mobile application.");
+                    }
+                    else
+                    {
+                        new ForgotPasswordMail(model.Email).Send();
+                        return Redirect("~/p/forgot-password-email-sent"); // Redirect to content page
+                    }
                 }
                 else
                 {
@@ -244,18 +256,19 @@ namespace AppReadyGo.Controllers
                     {
                         ObjectContainer.Instance.Dispatch(new ActivateUserCommand(email));
                     }
+                    
                     // Temprorary access just for special users
-                    if (!securedDetails.SpecialAccess && securedDetails.Roles == null)
-                    {
-                        return Redirect("~/p/special-access-required");
-                    }
-                    else
-                    {
+                    //if (!securedDetails.SpecialAccess && securedDetails.Roles == null)
+                    //{
+                    //    return Redirect("~/p/special-access-required");
+                    //}
+                    //else
+                    //{
                         // TODO: add terms and conditions
                         FormsAuthentication.SetAuthCookie(securedDetails.Id.ToString(), false);
 
                         return RedirectToAction("Index", "Home");
-                    }
+                    //}
                 }
             }
 
