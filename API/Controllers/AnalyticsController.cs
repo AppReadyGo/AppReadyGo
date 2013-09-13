@@ -51,7 +51,7 @@ namespace AppReadyGo.API.Controllers
                 }
 
                 int appId = 0;
-                if (string.IsNullOrEmpty(data.ClientKey) || data.ClientKey.Length < 5 || !int.TryParse(data.ClientKey.Split(new char[] { '-' })[2], out appId))
+                if (string.IsNullOrEmpty(data.ClientKey) || data.ClientKey.Length < 5 || !int.TryParse(data.ClientKey.Split(new char[] { '-' })[1], out appId))
                 {
                     log.WriteError("Error to submit package the ClientKey:{0} is wrong", data.ClientKey);
                     return false;
