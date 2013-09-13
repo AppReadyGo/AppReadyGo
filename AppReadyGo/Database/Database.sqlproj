@@ -136,6 +136,7 @@
     <Build Include="Schemas\dbo\Screenshots.table.sql" />
     <Build Include="Schemas\dbo\DownloadedApplications.table.sql" />
     <None Include="Scripts\DefaultUsersData.sql" />
+    <Build Include="Schemas\dbo\Survey.table.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
