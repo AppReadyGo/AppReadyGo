@@ -9,7 +9,7 @@ namespace AppReadyGo.API.Common.Mails
     public class APIActivationEmail : ActivationEmail
     {
        public APIActivationEmail(string email)
-            : base(email, "/Activate/?key=")
+            : base(email, "/Activate/")
         {
         }
 
