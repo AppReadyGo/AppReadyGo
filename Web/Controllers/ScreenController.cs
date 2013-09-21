@@ -109,7 +109,7 @@ namespace AppReadyGo.Web.Controllers
                 if (result.Validation.Any())
                 {
                     log.WriteError("Error to add screen to database: {0}", string.Join("; ", result.Validation.Select(v => string.Format("Code:{0}, Message: {1}", v.ErrorCode, v.Message)).ToArray()));
-                    return View("Error");
+                    return Redirect("/Error");
                 }
                 else
                 {

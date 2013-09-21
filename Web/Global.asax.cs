@@ -45,6 +45,7 @@ namespace AppReadyGo.Web
         {
             var context = HttpContext.Current;
             Exception ex = context.Server.GetLastError();
+            //context.Server.ClearError();
 
             log.WriteError(ex, "Global exception");
         }
