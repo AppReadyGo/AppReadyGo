@@ -8,11 +8,15 @@ using System.Web;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
 using System.Reflection;
+using System;
+using AppReadyGo.Core.Logger;
 
 namespace AppReadyGo.Web.Common.Mails
 {
     public abstract class Email
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
         public string BaseTemplatePath { get; private set; }
         public string EmailPagePath { get; private set; }
         public object Model { get; protected set; }
@@ -39,11 +43,19 @@ namespace AppReadyGo.Web.Common.Mails
 
         public void Send()
         {
-            InitRazor();
+            try
+            {
+                InitRazor();
 
-            string body = Razor.Resolve(this.EmailPagePath, this.Model).Run(new ExecuteContext());
+                string body = Razor.Resolve(this.EmailPagePath, this.Model).Run(new ExecuteContext());
 
-            Messenger.SendEmail(this.To, this.Subject, body, this.Cc, this.Bcc);
+                Messenger.SendEmail(this.To, this.Subject, body, this.Cc, this.Bcc);
+            }
+            catch (Exception exp)
+            {
+                log.WriteFatalError(exp, "Error in send email with parameters -  EmailPagePath:{0}, To:{1}, Subject:{2}", this.EmailPagePath, this.To, this.Subject);
+                throw exp;
+            }
         }
 
         public void InitRazor()
