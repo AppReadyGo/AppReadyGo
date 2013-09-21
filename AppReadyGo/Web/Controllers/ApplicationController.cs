@@ -123,7 +123,7 @@ namespace AppReadyGo.Controllers
                     else
                     {
                         log.WriteError("Error to add application to database", string.Join("; ", result.Validation.Select(v => string.Format("Code:{0}, Message: {1}", v.ErrorCode, v.Message)).ToArray()));
-                        return RedirectToAction("Error", "Home");
+                        return Redirect("/Error");
                     }
                 }
                 else
@@ -209,7 +209,7 @@ namespace AppReadyGo.Controllers
                 if (result.Validation.Any())
                 {
                     log.WriteError("Error to add application to database", string.Join("; ", result.Validation.Select(v => string.Format("Code:{0}, Message: {1}", v.ErrorCode, v.Message)).ToArray()));
-                    return RedirectToAction("Error", "Home");
+                    return Redirect("/Error");
                 }
                 else
                 {
@@ -266,7 +266,7 @@ namespace AppReadyGo.Controllers
             var app = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(id));
             if (app == null)
             {
-                return View("Error");
+                return Redirect("/Error");
             }
             else
             {
