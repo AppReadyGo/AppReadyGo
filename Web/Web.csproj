@@ -834,13 +834,13 @@
     <None Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Logs.cshtml" />
     <None Include="Views\Admin\Members.cshtml" />
-    <Content Include="Views\Admin\Membership.aspx" />
+    <None Include="Views\Admin\Membership.aspx_" />
     <None Include="Views\Admin\Staff.cshtml" />
     <None Include="Views\Admin\UserEdit.cshtml" />
-    <Content Include="Views\Analytics\Usage.aspx" />
+    <None Include="Views\Analytics\Usage.aspx_" />
     <Content Include="Views\Application\Publishes.cshtml" />
     <Content Include="Views\Application\Edit.cshtml" />
-    <Content Include="Views\Application\Fingerprint.aspx" />
+    <None Include="Views\Application\Fingerprint.aspx_" />
     <Content Include="Views\Screen\Forms\ScreenForm.cshtml" />
     <Content Include="Views\Application\New.cshtml" />
     <Content Include="Views\Screen\Edit.cshtml" />
@@ -849,8 +849,8 @@
     <Content Include="Views\Content\Authenticated404.cshtml" />
     <Content Include="Views\Content\AuthenticatedError.cshtml" />
     <Content Include="Views\Content\AuthenticatedPageContent.cshtml" />
-    <Content Include="Views\Home\ComingSoon.aspx" />
-    <Content Include="Views\Home\Mails\Basic.aspx" />
+    <None Include="Views\Home\ComingSoon.aspx_" />
+    <None Include="Views\Home\Mails\Basic.aspx_" />
     <Content Include="Views\Home\PlayGround.cshtml" />
     <Content Include="Views\Mails\Promotion.cshtml" />
     <Content Include="Views\Mails\System.cshtml" />
