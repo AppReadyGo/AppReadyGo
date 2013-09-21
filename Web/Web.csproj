@@ -526,6 +526,7 @@
     <Content Include="Images\icon_compare.png" />
     <Content Include="Images\PlayBack.jpg" />
     <Content Include="Images\TouchMap.jpg" />
+    <Content Include="Restricted\Icons\EmptyFile.txt" />
     <Content Include="Restricted\Packages\fingerprint-1.0.properties" />
     <Content Include="Restricted\Packages\fingerprint-1.8.62.properties" />
     <Content Include="Restricted\Packages\fingerprint-1.8.81.properties" />
@@ -537,6 +538,8 @@
     <None Include="Properties\PublishProfiles\Production.pubxml" />
     <None Include="Properties\PublishProfiles\QA.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Restricted\Screens\EmptyFile.txt" />
+    <Content Include="Restricted\UserPackages\EmptyFile.txt" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
@@ -913,9 +916,6 @@
   <ItemGroup>
     <Folder Include="Areas\m\Models\" />
     <Folder Include="Model\Pages\Secure\" />
-    <Folder Include="Restricted\Icons\" />
-    <Folder Include="Restricted\Screens\" />
-    <Folder Include="Restricted\UserPackages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

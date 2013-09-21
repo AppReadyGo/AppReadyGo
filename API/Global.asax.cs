@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AppReadyGo.API.Models.Market;
+using AppReadyGo.Core.Logger;
+using System.Reflection;
 
 namespace AppReadyGo.API
 {
@@ -16,6 +18,8 @@ namespace AppReadyGo.API
 
     public class WebApiApplication : System.Web.HttpApplication
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -26,6 +30,14 @@ namespace AppReadyGo.API
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ObjectContainer.Instance.GetType();
+        }
+
+        protected void Application_Error(object sender, System.EventArgs e)
+        {
+            var context = HttpContext.Current;
+            Exception ex = context.Server.GetLastError();
+
+            log.WriteError(ex, "Global exception");
         }
     }
 }
