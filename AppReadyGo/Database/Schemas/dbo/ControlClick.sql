@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [dbo].[ControlClick](
 	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Tag] [nvarchar](70) NOT NULL,
 	[Date] [datetime] NOT NULL,
 	[PageViewId] [bigint] NOT NULL
 PRIMARY KEY CLUSTERED 
