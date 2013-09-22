@@ -137,14 +137,17 @@
     <Build Include="Schemas\dbo\DownloadedApplications.table.sql" />
     <None Include="Scripts\DefaultUsersData.sql" />
     <Build Include="Schemas\dbo\Survey.table.sql" />
-    <Build Include="Schemas\dbo\ControlClick.sql" />
-    <Build Include="Schemas\dbo\SurveyQuestion.sql" />
-    <Build Include="Schemas\dbo\Question.sql" />
+    <Build Include="Schemas\dbo\ControlClick.table.sql" />
+    <Build Include="Schemas\dbo\SurveyQuestion.table.sql" />
+    <Build Include="Schemas\dbo\Question.table.sql" />
     <Build Include="Schemas\dbo\UserQuestionReply.sql" />
-    <Build Include="Schemas\dbo\ApplicationVersionQuestion.sql" />
-    <Build Include="Schemas\dbo\Tasks.sql" />
+    <Build Include="Schemas\dbo\ApplicationVersionQuestion.table.sql" />
+    <Build Include="Schemas\dbo\Tasks.table.sql" />
     <Build Include="Database Level Objects\Schemas\eco.sql" />
-    <Build Include="Schemas\dbo\Interests.sql" />
+    <Build Include="Schemas\dbo\Interests.table.sql" />
+    <Build Include="Schemas\dbo\ClickView.view.sql" />
+    <Build Include="Schemas\dbo\ScrollView.view.sql" />
+    <Build Include="Schemas\dbo\ViewPartView.view.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
