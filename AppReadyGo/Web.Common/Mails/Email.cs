@@ -64,6 +64,7 @@ namespace AppReadyGo.Web.Common.Mails
             templateConfig.Resolver = new DelegateTemplateResolver(name =>
             {
                 var absolutePath = GetAbsolutePath(name);
+                log.WriteInformation("Email template absolute path:{0}, file exists:{1}", absolutePath, File.Exists(absolutePath));
                 return File.ReadAllText(absolutePath);
             });
             Razor.SetTemplateService(new TemplateService(templateConfig));
