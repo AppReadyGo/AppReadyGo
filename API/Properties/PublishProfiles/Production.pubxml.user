@@ -13,19 +13,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2013 15:31:30</publishTime>
     </File>
     <File Include="bin/AppReadyGo.API.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/16/2013 12:21:11</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Common.dll">
-      <publishTime>06/17/2013 10:21:54</publishTime>
+      <publishTime>08/28/2013 14:53:39</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Core.dll">
-      <publishTime>06/17/2013 10:21:51</publishTime>
+      <publishTime>08/28/2013 14:53:36</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Domain.dll">
-      <publishTime>06/17/2013 10:21:52</publishTime>
+      <publishTime>08/28/2013 14:53:38</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Web.Common.dll">
-      <publishTime>06/17/2013 10:21:56</publishTime>
+      <publishTime>09/16/2013 11:48:05</publishTime>
     </File>
     <File Include="bin/Castle.Core.dll">
       <publishTime>05/19/2013 11:14:29</publishTime>
@@ -378,6 +378,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Home/Index.cshtml">
       <publishTime>04/17/2013 15:30:38</publishTime>
     </File>
+    <File Include="Views/Home/PageContent.cshtml">
+      <publishTime>07/07/2013 09:41:41</publishTime>
+    </File>
     <File Include="Views/Mails/System.cshtml">
       <publishTime>05/20/2013 08:46:29</publishTime>
     </File>
@@ -385,7 +388,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2013 15:30:38</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/17/2013 15:30:38</publishTime>
+      <publishTime>07/07/2013 09:41:41</publishTime>
     </File>
     <File Include="Views/Shared/_Mail.cshtml">
       <publishTime>05/19/2013 17:32:54</publishTime>
