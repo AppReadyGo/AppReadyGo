@@ -28,6 +28,7 @@ namespace AppReadyGo.Controllers
 
         public ActionResult Index(string srch = "", int scol = 1, int cp = 1)
         {
+            throw new Exception("Something");
             var data = ObjectContainer.Instance.RunQuery(new GetAllApplicationsQuery(srch, cp, 15));
 
             if (!data.Applications.Any())

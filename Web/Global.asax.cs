@@ -26,7 +26,7 @@ namespace AppReadyGo.Web
             WindsorContainer applicationWideWindsorContainer = new WindsorContainer();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
@@ -45,7 +45,7 @@ namespace AppReadyGo.Web
         {
             var context = HttpContext.Current;
             Exception ex = context.Server.GetLastError();
-            //context.Server.ClearError();
+            context.Server.ClearError();
 
             log.WriteError(ex, "Global exception");
         }

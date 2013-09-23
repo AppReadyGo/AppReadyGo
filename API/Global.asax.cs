@@ -25,7 +25,7 @@ namespace AppReadyGo.API
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
@@ -36,6 +36,7 @@ namespace AppReadyGo.API
         {
             var context = HttpContext.Current;
             Exception ex = context.Server.GetLastError();
+            context.Server.ClearError();
 
             log.WriteError(ex, "Global exception");
         }

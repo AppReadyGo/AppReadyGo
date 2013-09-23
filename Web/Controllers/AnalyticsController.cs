@@ -165,7 +165,7 @@ namespace AppReadyGo.Controllers
                 //{
                 //    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}/{1}/{2}/{3}/3\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, HttpUtility.UrlEncode(filter.Path));
                 //}
-                if (data.ScreenData.Id.HasValue)
+                if (data.ScreenData != null && data.ScreenData.Id.HasValue)
                 {
                     placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", data.ScreenData.Id.Value);
                 }
@@ -269,7 +269,7 @@ namespace AppReadyGo.Controllers
                 //{
                 //    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}/{1}/{2}/{3}/3\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, HttpUtility.UrlEncode(filter.Path));
                 //}
-                if (filterData.ScreenData.Id.HasValue)
+                if (filterData.ScreenData != null && filterData.ScreenData.Id.HasValue)
                 {
                     placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", filterData.ScreenData.Id.Value);
                 }
@@ -283,19 +283,35 @@ namespace AppReadyGo.Controllers
                 var firstScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.Path == x });
                 var secondScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.SecondPath == x });
 
+                string firstScreenPath = string.Empty;
+                string secondScreenPath = string.Empty;
+                int clicks = 0;
+                int firstClicksData = 0;
+                int secondClicksData = 0;
+                int scrolls = 0;
+                int firstScrollsData = 0;
+                int secondScrollsData = 0;
+                var visits = 0;
+                int firstVisitsData = 0;
+                int secondVisitsData = 0;
+                if (firstScreenPathes.Any())
+                {
+                    firstScreenPath = firstScreenPathes.Any(x => x.Selected) ? firstScreenPathes.First(x => x.Selected).Text : firstScreenPathes.First().Text;
+                    secondScreenPath = secondScreenPathes.Any(x => x.Selected) ? secondScreenPathes.First(x => x.Selected).Text : secondScreenPathes.First().Text;
+                }
 
-                var firstScreenPath = firstScreenPathes.Any(x => x.Selected) ? firstScreenPathes.First(x => x.Selected).Text : firstScreenPathes.First().Text;
-                var secondScreenPath = secondScreenPathes.Any(x => x.Selected) ? secondScreenPathes.First(x => x.Selected).Text : secondScreenPathes.First().Text;
-
-                var clicks = filterData.ScreenData.ClicksAmount + filterData.SecondFilteredClicks;
-                int firstClicksData = clicks > 0 ? filterData.ScreenData.ClicksAmount * 100 / clicks : 0;
-                int secondClicksData = 100 - firstClicksData;
-                var scrolls = filterData.ScreenData.ScrollsAmount + filterData.SecondFilteredScrolls;
-                int firstScrollsData = scrolls > 0 ? filterData.ScreenData.ScrollsAmount * 100 / scrolls : 0;
-                int secondScrollsData = 100 - firstScrollsData;
-                var visits = filterData.ScreenData.VisitsAmount + filterData.SecondFilteredVisits;
-                int firstVisitsData = visits > 0 ? filterData.ScreenData.VisitsAmount * 100 / visits : 0;
-                int secondVisitsData = 100 - firstScrollsData;
+                if (filterData.ScreenData != null)
+                {
+                    clicks = filterData.ScreenData.ClicksAmount + filterData.SecondFilteredClicks;
+                    firstClicksData = clicks > 0 ? filterData.ScreenData.ClicksAmount * 100 / clicks : 0;
+                    secondClicksData = 100 - firstClicksData;
+                    scrolls = filterData.ScreenData.ScrollsAmount + filterData.SecondFilteredScrolls;
+                    firstScrollsData = scrolls > 0 ? filterData.ScreenData.ScrollsAmount * 100 / scrolls : 0;
+                    secondScrollsData = 100 - firstScrollsData;
+                    visits = filterData.ScreenData.VisitsAmount + filterData.SecondFilteredVisits;
+                    firstVisitsData = visits > 0 ? filterData.ScreenData.VisitsAmount * 100 / visits : 0;
+                    secondVisitsData = 100 - firstScrollsData;
+                }
                 //Create chart data
                 var pieData = new
                 {
@@ -349,10 +365,10 @@ namespace AppReadyGo.Controllers
                     SecondScreenPathes = secondScreenPathes,
                     FirstPath = filter.Path,
                     SecondPath = filter.SecondPath,
-                    FirstHasFilteredClicks = filterData.ScreenData.ClicksAmount > 0,
+                    FirstHasFilteredClicks = filterData.ScreenData != null && filterData.ScreenData.ClicksAmount > 0,
                     SecondHasFilteredClicks = filterData.SecondFilteredClicks > 0,
                     SecondHasClicks = filterData.SecondHasClicks,
-                    FirstHasClicks = filterData.ScreenData.HasClicks
+                    FirstHasClicks = filterData.ScreenData != null && filterData.ScreenData.HasClicks
                 };
 
                 return View("~/Views/Analytics/ABCompare.cshtml", model);
@@ -388,7 +404,7 @@ namespace AppReadyGo.Controllers
                 //{
                 //    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}/{1}/{2}/{3}?returl={4}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, HttpUtility.UrlEncode(filter.Path), HttpUtility.UrlEncode("/Analytics/FingerPrint/?pid=2&fd=06-Aug-2012&td=05-Sep-2012&aid=5&ss=480X800&p=Some View"));
                 //}
-                if (data.ScreenData.Id.HasValue)
+                if (data.ScreenData != null && data.ScreenData.Id.HasValue)
                 {
                     placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", data.ScreenData.Id.Value);
                 }
