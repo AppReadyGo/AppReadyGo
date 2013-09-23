@@ -13,6 +13,7 @@ namespace AppReadyGo.Domain.Model
         private Iesi.Collections.Generic.ISet<Click> clicks;
         private Iesi.Collections.Generic.ISet<ViewPart> viewParts;
         private Iesi.Collections.Generic.ISet<Scroll> scrolls;
+        private Iesi.Collections.Generic.ISet<ControlClick> controlClicks;
 
         public virtual long Id { get; protected set; }
         /// <summary>
@@ -58,11 +59,14 @@ namespace AppReadyGo.Domain.Model
 
         public virtual IEnumerable<Scroll> Scrolls { get { return scrolls; } }
 
+        public virtual IEnumerable<ControlClick> ControlClicks { get { return controlClicks; } }
+
         public PageView()
         {
             this.clicks = new HashedSet<Click>();
             this.viewParts = new HashedSet<ViewPart>();
             this.scrolls = new HashedSet<Scroll>();
+            this.controlClicks = new HashedSet<ControlClick>();
         }
 
         public PageView(
@@ -107,6 +111,11 @@ namespace AppReadyGo.Domain.Model
         public virtual void AddScroll(Scroll scroll)
         {
             this.scrolls.Add(scroll);
+        }
+
+        public virtual void AddControlClick(ControlClick controlClick)
+        {
+            this.controlClicks.Add(controlClick);
         }
     }
 }
