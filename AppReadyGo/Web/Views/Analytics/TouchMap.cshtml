@@ -72,7 +72,7 @@
                     <div class="thumbnails">
                     @foreach (var screen in Model.Screens)
                     {
-                        <a href="@Model.Filter.GetUrlPart(screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.Filter.SelectedDateFrom, Model.Filter.SelectedDateTo) %>"><img src="/Thumbnails/<%=screen.Id %><%=screen.FileExtension %>"/></a>    
+                        <a href="@Model.Filter.GetUrlPart(screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.Filter.SelectedDateFrom, Model.Filter.SelectedDateTo)"><img src="/Thumbnails/@screen.Id@screen.FileExtension"/></a>    
                     }
                     </div>
                 }

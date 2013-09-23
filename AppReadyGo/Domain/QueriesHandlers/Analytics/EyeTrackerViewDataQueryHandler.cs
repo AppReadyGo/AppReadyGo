@@ -40,15 +40,22 @@ namespace AppReadyGo.Domain.Queries.Analytics
                                         })
                                         .ToArray();
 
-            data.UsageData = session.Query<Scroll>()
-                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
-                                                s.PageView.Path.ToLower() == data.SelectedPath.ToLower() &&
-                                                s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
-                                                s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&
-                                                s.PageView.Date >= query.From && s.PageView.Date <= query.To)
-                                    .GroupBy(c => c.PageView.Date)
-                                    .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
-                                    .ToList().ToDictionary(v => v.Key, v => v.Value);
+            if (!string.IsNullOrWhiteSpace(data.SelectedPath) && data.SelectedScreenSize.HasValue)
+            {
+                data.UsageData = session.Query<Scroll>()
+                                        .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
+                                                    s.PageView.Path.ToLower() == data.SelectedPath.ToLower() &&
+                                                    s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
+                                                    s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&
+                                                    s.PageView.Date >= query.From && s.PageView.Date <= query.To)
+                                        .GroupBy(c => c.PageView.Date)
+                                        .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
+                                        .ToList().ToDictionary(v => v.Key, v => v.Value);
+            }
+            else
+            {
+                data.UsageData = new Dictionary<DateTime, int>();
+            }
             return data;
         }
     }

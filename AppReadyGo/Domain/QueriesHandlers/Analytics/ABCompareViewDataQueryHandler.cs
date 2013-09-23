@@ -29,42 +29,46 @@ namespace AppReadyGo.Domain.Queries.Analytics
             var data = GetResult<ABCompareViewDataResult>(session, this.securityContext.CurrentUser.Id, query);
 
             data.SelectedSecondPath = string.IsNullOrEmpty(query.SecondPath) ? data.SelectedPath : query.SecondPath;
-            data.SecondFilteredClicks = session.Query<Click>()
-                                        .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
-                                                    s.PageView.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
-                                                    s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
-                                                    s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&
-                                                    s.PageView.Date >= query.From && s.PageView.Date <= query.To)
-                                                    .Select(s => s.Id)
-                                                    .ToArray()
-                                                    .Count();
+            if (!string.IsNullOrWhiteSpace(data.SelectedPath) && data.SelectedScreenSize.HasValue)
+            {
+                data.SecondFilteredClicks = session.Query<Click>()
+                                            .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
+                                                        s.PageView.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
+                                                        s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
+                                                        s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&
+                                                        s.PageView.Date >= query.From && s.PageView.Date <= query.To)
+                                                        .Select(s => s.Id)
+                                                        .ToArray()
+                                                        .Count();
 
-            data.SecondHasClicks = session.Query<Click>()
-                                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
-                                                                s.PageView.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
-                                                                s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
-                                                                s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height)
-                                                    .Any();
+                data.SecondHasClicks = session.Query<Click>()
+                                                        .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
+                                                                    s.PageView.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
+                                                                    s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
+                                                                    s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height)
+                                                        .Any();
 
-            data.SecondFilteredVisits = session.Query<PageView>()
-                                        .Where(p => p.Application.Id == data.SelectedApplicationId &&
-                                                    p.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
-                                                    p.ScreenWidth == data.SelectedScreenSize.Value.Width &&
-                                                    p.ScreenHeight == data.SelectedScreenSize.Value.Height &&
-                                                    p.Date >= query.From && p.Date <= query.To)
-                                                    .Select(s => s.Id)
-                                                    .ToArray()
-                                                    .Count();
+                data.SecondFilteredVisits = session.Query<PageView>()
+                                            .Where(p => p.Application.Id == data.SelectedApplicationId &&
+                                                        p.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
+                                                        p.ScreenWidth == data.SelectedScreenSize.Value.Width &&
+                                                        p.ScreenHeight == data.SelectedScreenSize.Value.Height &&
+                                                        p.Date >= query.From && p.Date <= query.To)
+                                                        .Select(s => s.Id)
+                                                        .ToArray()
+                                                        .Count();
 
-            data.SecondFilteredScrolls = session.Query<Scroll>()
-                                        .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
-                                                    s.PageView.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
-                                                    s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
-                                                    s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&
-                                                    s.PageView.Date >= query.From && s.PageView.Date <= query.To)
-                                                    .Select(s => s.Id)
-                                                    .ToArray()
-                                                    .Count();
+                data.SecondFilteredScrolls = session.Query<Scroll>()
+                                            .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
+                                                        s.PageView.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
+                                                        s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
+                                                        s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&
+                                                        s.PageView.Date >= query.From && s.PageView.Date <= query.To)
+                                                        .Select(s => s.Id)
+                                                        .ToArray()
+                                                        .Count();
+            }
+
             return data;
         }
     }
