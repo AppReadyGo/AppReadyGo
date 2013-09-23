@@ -76,6 +76,7 @@
     <Folder Include="Database Level Objects" />
     <Folder Include="Database Level Objects\Schemas" />
     <Folder Include="Schemas\eco" />
+    <Folder Include="Schemas\dbo\Views" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\cont\Items.table.sql" />
@@ -144,9 +145,6 @@
     <Build Include="Schemas\dbo\UserQuestionReply.sql" />
     <Build Include="Schemas\dbo\ApplicationVersionQuestion.table.sql" />
     <Build Include="Database Level Objects\Schemas\eco.sql" />
-    <Build Include="Schemas\dbo\ClickView.view.sql" />
-    <Build Include="Schemas\dbo\ScrollView.view.sql" />
-    <Build Include="Schemas\dbo\ViewPartView.view.sql" />
     <Build Include="Schemas\utls\CeateFakeScrollByPoint.proc.sql" />
     <Build Include="Schemas\utls\CreateFakeData.proc.sql" />
     <Build Include="Schemas\utls\CreateFakeDataLine.proc..sql" />
@@ -154,6 +152,13 @@
     <Build Include="Schemas\utls\CreateFakeScrolls.proc..sql" />
     <Build Include="Schemas\eco\Tasks.table.sql" />
     <Build Include="Schemas\eco\Interests.table.sql" />
+    <Build Include="Schemas\dbo\Views\ClickView.view.sql" />
+    <Build Include="Schemas\dbo\Views\ViewPartView.view.sql" />
+    <Build Include="Schemas\dbo\Views\ScrollView.view.sql" />
+    <Build Include="Schemas\dbo\ClientSurvey.table.sql" />
+    <Build Include="Schemas\eco\UserApplication.table..sql" />
+    <Build Include="Schemas\eco\UserApplicationsTask.table.sql" />
+    <Build Include="Schemas\eco\UserInterests.table.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
