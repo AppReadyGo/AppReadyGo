@@ -112,7 +112,14 @@ namespace AppReadyGo.API.Controllers
                             Date = t.Date,
                             Orientation = t.Orientation,
                             Press = t.Press
-                        })
+                        }),
+                        ControlClicks = s.ControlClickDetails.Select (cc => new AddPackageCommand.ControlClick
+                        {
+                            Date = cc.Date,
+                            Tag = cc.ControlTag
+                        }
+                        )
+
                     })));
 
                 if (res.Validation.Any())

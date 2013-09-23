@@ -132,6 +132,7 @@
     <Compile Include="Mapping\Content\PageMapping.cs" />
     <Compile Include="Mapping\Content\ThemeMapping.cs" />
     <Compile Include="Mapping\ApplicationTypeMapping.cs" />
+    <Compile Include="Mapping\ControlClickMaping.cs" />
     <Compile Include="Mapping\ScreensMapping.cs" />
     <Compile Include="Mapping\CountryMapping.cs" />
     <Compile Include="Mapping\LanguageMapping.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Model\BackOffice\SystemRole.cs" />
     <Compile Include="Model\BackOffice\SystemUser.cs" />
     <Compile Include="Model\Browser.cs" />
+    <Compile Include="Model\ControlClick.cs" />
     <Compile Include="Model\Click.cs" />
     <Compile Include="Model\Content\Item.cs" />
     <Compile Include="Model\Content\Key.cs" />

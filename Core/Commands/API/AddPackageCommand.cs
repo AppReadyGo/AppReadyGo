@@ -91,6 +91,10 @@ namespace AppReadyGo.Core.Commands.API
             /// Parts on the main view data 
             /// </summary>
             public IEnumerable<ViewPart> ScreenViewParts { get; set; }
+            /// <summary>
+            /// Control Clicks
+            /// </summary>
+            public IEnumerable<ControlClick> ControlClicks { get; set; }
         }
 
         public class Click
@@ -128,6 +132,13 @@ namespace AppReadyGo.Core.Commands.API
             public DateTime FinishDate { get; set; }
 
             public int Orientation { get; set; }
+        }
+        public class ControlClick
+        {
+            
+            public DateTime Date { get; set; }
+
+            public string Tag { get; set; }
         }
     }
 }

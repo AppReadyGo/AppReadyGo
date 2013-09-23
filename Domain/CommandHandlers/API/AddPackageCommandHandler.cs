@@ -45,6 +45,12 @@ namespace AppReadyGo.Domain.CommandHandlers.API
                 clicks.FirstOrDefault(c => c.Date == s.LastTouch.Date)
             ));
 
+            var controlClicks = firstSession.ControlClicks.Select(cc => new ControlClick (
+                pageView,
+                cc.Date,
+                cc.Tag
+            ));
+
             application.AddPageView(pageView);
 
             foreach (var click in clicks)
@@ -60,6 +66,11 @@ namespace AppReadyGo.Domain.CommandHandlers.API
             foreach (var scroll in scrolls)
             {
                 session.SaveOrUpdate(scroll);
+            }
+
+            foreach (var controlClick in controlClicks)
+            {
+                session.SaveOrUpdate(controlClick);
             }
 
             session.SaveOrUpdate(pageView);
