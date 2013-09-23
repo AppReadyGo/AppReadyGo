@@ -228,7 +228,7 @@ namespace AppReadyGo.Controllers
                     }
                 };
 
-                var model = new FingerPrintModel(filter, AnalyticsMasterModel.MenuItem.TouchMap, data, false)
+                var model = new FingerPrintModel(filter, AnalyticsMasterModel.MenuItem.TouchMap, data, true)
                 {
                     // Title = "Fingerprint",
                     Screens = data.Screens,
@@ -452,8 +452,18 @@ namespace AppReadyGo.Controllers
 
         public FileResult ClickHeatMapImage(FilterParametersModel filter)
         {
+            if (string.IsNullOrWhiteSpace(filter.Path))
+            {
+                throw new HttpException(400, "Parameter Path was not supplied");
+            }
+
+            if (!filter.ScreenSize.HasValue)
+            {
+                throw new HttpException(400, "Parameter ScreenSize was not supplied");
+            }
+
             var result = ObjectContainer.Instance.RunQuery(new ClickHeatMapDataQuery(filter.ApplicationId, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
-            
+
             byte[] imageData = null;
             Image image = null;
             if (result.Data.Any())
