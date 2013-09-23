@@ -13,12 +13,6 @@ namespace AppReadyGo.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //routes.MapRoute(
-            //    "Thumbnails",
-            //    "Thumbnails/{filename}",
-            //    new { controller = "Files", action = "Thumbnails" },
-            //    new[] { "AppReadyGo.Controllers" } // Namespaces
-            //);
 
             //routes.MapRoute(
             //    "AjaxData",
@@ -178,6 +172,13 @@ namespace AppReadyGo.Web
                 "HomeRoute",
                 "Home/{action}",
                 new { controller = "Home", action = "Index" },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
+                "Thumbnails",
+                "Thumbnails/{filename}",
+                new { controller = "Files", action = "Thumbnails" },
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
