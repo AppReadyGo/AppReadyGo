@@ -131,6 +131,21 @@ namespace AppReadyGo.Domain.Queries.Analytics
                                                                     s.PageView.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
                                                                     s.PageView.ScreenHeight == filterData.SelectedScreenSize.Value.Height)
                                                         .Any();
+
+                    filterData.ScreenData.ControlClicksAmount = session.Query<ControlClick>()
+                                                       .Where(s => s.PageView.Application.Id == filterData.SelectedApplicationId &&
+                                                                   s.PageView.Path.ToLower() == filterData.SelectedPath.ToLower() &&
+                                                                   s.PageView.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
+                                                                   s.PageView.ScreenHeight == filterData.SelectedScreenSize.Value.Height &&
+                                                                   s.PageView.Date >= query.From && s.PageView.Date <= query.To)
+                                                       .Count();
+
+                    filterData.ScreenData.HasControlClicks = session.Query<ControlClick>()
+                                                        .Where(s => s.PageView.Application.Id == filterData.SelectedApplicationId &&
+                                                                    s.PageView.Path.ToLower() == filterData.SelectedPath.ToLower() &&
+                                                                    s.PageView.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
+                                                                    s.PageView.ScreenHeight == filterData.SelectedScreenSize.Value.Height)
+                                                        .Any();
                 }
             }
 
