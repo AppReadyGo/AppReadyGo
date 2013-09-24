@@ -161,14 +161,15 @@ namespace AppReadyGo.Controllers
         public ActionResult Activate(string key)
         {
             var splitedKey = key.DecryptLow().Split(',');
-            if (DateTime.Now > DateTime.Parse(splitedKey[0]))
+            DateTime date = DateTime.Parse(splitedKey[0]);
+            if (DateTime.Now > date)
             {
-                throw new Exception("Activation link expired.");
+                throw new Exception(string.Format("Activation link expired: {0}", date));
             }
             var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(splitedKey[1]));
             if (result.Validation.Any())
             {
-                throw new Exception("User was not found.");
+                throw new Exception(string.Format("User was not found:{0}", splitedKey[1]));
             }
             ObjectContainer.Instance.Dispatch(new GrantSpecialAccessCommand(result.Result.Value, true));
             return Redirect("~/p/account-activated"); ;
