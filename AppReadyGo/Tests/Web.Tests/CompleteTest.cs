@@ -35,7 +35,7 @@ namespace AppReadyGo.Web.Tests
             {
                 LogOn(client, userName, password);
 
-                ApplicationNew(client);
+                int appId = ApplicationNew(client);
             }
             // Application Index
             // Screen New
@@ -121,25 +121,27 @@ namespace AppReadyGo.Web.Tests
 
         }
 
-        private void ApplicationNew(HttpClient client)
+        private int ApplicationNew(HttpClient client)
         {
-                var data = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+            var data = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
                     new KeyValuePair<string, string>("Name", "Test Application"),
                     new KeyValuePair<string, string>("Description", "Test application"),
                     new KeyValuePair<string, string>("Type", "1")
                 });
 
-                var responce = client.PostAsync("/Application/New", data).Result;
-                var res = responce.Content.ReadAsStringAsync().Result;
+            var responce = client.PostAsync("/Application/New", data).Result;
+            var res = responce.Content.ReadAsStringAsync().Result;
 
-                if (!responce.IsSuccessStatusCode)
-                {
-                    Assert.Fail(string.Format("Application New - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
-                }
-                else
-                {
-                    Assert.IsTrue(res.Contains("<h4>New Application</h4>"), string.Format("Application New - wrong responce: {0}", res));
-                }
-       }
+            if (!responce.IsSuccessStatusCode)
+            {
+                Assert.Fail(string.Format("Application New - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+            }
+            else
+            {
+                Assert.IsTrue(res.Contains("<h4>New Application</h4>"), string.Format("Application New - wrong responce: {0}", res));
+            }
+
+            return 1;
+        }
     }
 }
