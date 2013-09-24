@@ -10,6 +10,7 @@ using RazorEngine.Templating;
 using System.Reflection;
 using System;
 using AppReadyGo.Core.Logger;
+using System.Threading;
 
 namespace AppReadyGo.Web.Common.Mails
 {
@@ -25,10 +26,15 @@ namespace AppReadyGo.Web.Common.Mails
         public IEnumerable<string> Bcc { get; protected set; }
         public string Subject { get; protected set; }
 
+        private ReaderWriterLockSlim templatesLock = new ReaderWriterLockSlim();
+        private static List<string> Templates = new List<string>();
+
         protected Email(string baseTemplatePath, string emailPagePath)
         {
             this.BaseTemplatePath = baseTemplatePath;
             this.EmailPagePath = emailPagePath;
+
+            InitRazor();
         }
 
         protected Email(string baseTemplatePath, string emailPage, object model, string subject, IEnumerable<string> to, IEnumerable<string> cc = null, IEnumerable<string> bcc = null)
@@ -45,23 +51,45 @@ namespace AppReadyGo.Web.Common.Mails
         {
             log.WriteInformation("Send email:{0}, {1}, {2}, {3}, {4}", string.Join(";", this.To), this.Subject, this.Cc == null ? "" : string.Join(";", this.Cc), this.Bcc == null ? "" : string.Join(";", this.Bcc), this.EmailPagePath);
 
-            InitRazor();
 
             string body = Razor.Resolve(this.EmailPagePath, this.Model).Run(new ExecuteContext());
 
             Messenger.SendEmail(this.To, this.Subject, body, this.Cc, this.Bcc);
         }
 
-        public void InitRazor()
+        private void InitRazor()
         {
-            TemplateServiceConfiguration templateConfig = new TemplateServiceConfiguration();
-            templateConfig.Resolver = new DelegateTemplateResolver(name =>
+            var className = this.GetType().Name;
+            templatesLock.EnterUpgradeableReadLock();
+            try
             {
-                var absolutePath = GetAbsolutePath(name);
-                log.WriteInformation("Email template absolute path:{0}, file exists:{1}", absolutePath, File.Exists(absolutePath));
-                return File.ReadAllText(absolutePath);
-            });
-            Razor.SetTemplateService(new TemplateService(templateConfig));
+                if (!Templates.Contains(className))
+                {
+                    templatesLock.EnterWriteLock();
+                    try
+                    {
+
+                        TemplateServiceConfiguration templateConfig = new TemplateServiceConfiguration();
+                        templateConfig.Resolver = new DelegateTemplateResolver(name =>
+                        {
+                            var absolutePath = GetAbsolutePath(name);
+                            log.WriteInformation("Email template absolute path:{0}, file exists:{1}", absolutePath, File.Exists(absolutePath));
+                            return File.ReadAllText(absolutePath);
+                        });
+                        Razor.SetTemplateService(new TemplateService(templateConfig));
+
+                        Templates.Add(className);
+                    }
+                    finally
+                    {
+                        templatesLock.ExitWriteLock();
+                    }
+                }
+            }
+            finally
+            {
+                templatesLock.ExitUpgradeableReadLock();
+            }
         }
 
         private string GetAbsolutePath(string path)
