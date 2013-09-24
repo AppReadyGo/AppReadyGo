@@ -20,7 +20,6 @@ using System.Web.Security;
 namespace AppReadyGo.Controllers
 {
 
-    [HandleError]
     public class AccountController : Controller
     {
         public ActionResult LogOn()
