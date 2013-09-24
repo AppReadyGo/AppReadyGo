@@ -114,6 +114,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Core.csproj">
+      <Project>{6696bbd1-9b7a-44f9-ab0e-be264402e5cc}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Web\Web.csproj">
       <Project>{AD8B009A-AB15-4261-9739-E265948A9811}</Project>
       <Name>Web</Name>
