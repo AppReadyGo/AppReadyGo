@@ -13,6 +13,7 @@ namespace AppReadyGo.Core.Logger
     public class ApplicationLogging
     {
         public Type ParentType { get; private set; }
+        private static string GlobalCategory = ConfigurationManager.AppSettings["GlobalLogCategory"];
 
         public ApplicationLogging(Type parentType)
         {
@@ -30,6 +31,12 @@ namespace AppReadyGo.Core.Logger
                     if (!string.IsNullOrEmpty(currentString))
                         result.Add(currentString);
                 }
+            }
+
+            // Add global category
+            if (!string.IsNullOrWhiteSpace(GlobalCategory))
+            {
+                result.Add(GlobalCategory);
             }
 
             return result;
