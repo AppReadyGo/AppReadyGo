@@ -50,6 +50,17 @@ namespace AppReadyGo.Core.QueryResults.Analytics.QueryResults
             public bool HasClicks { get; set; }
 
             public int VisitsAmount { get; set; }
+
+            /// <summary>
+            /// Control Clicks on this screen in this time span
+            /// </summary>
+            public int ControlClicksAmount { get; set; }
+
+
+            /// <summary>
+            /// Any Control Clicks on this screen in this time span
+            /// </summary>
+            public bool HasControlClicks { get; set; }
         }
     }
 }

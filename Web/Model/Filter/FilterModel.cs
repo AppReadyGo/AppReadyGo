@@ -32,6 +32,8 @@ namespace AppReadyGo.Model.Filter
         public bool HasScrolls { get; protected set; }
         public int ScrollsAmount { get; protected set; }
         public bool HasClicks { get; protected set; }
+        public bool HasControlClicks { get; protected set; }
+        public int CobntrolClicksAmount { get; protected set; }
 
         //Top Panel
         public string Title { get; protected set; }
@@ -67,6 +69,8 @@ namespace AppReadyGo.Model.Filter
                 this.ScreenId = filterDataResult.ScreenData.Id;
                 this.HasClicks = filterDataResult.ScreenData.HasClicks;
                 this.ScrollsAmount = filterDataResult.ScreenData.ScrollsAmount;
+                this.HasControlClicks = filterDataResult.ScreenData.HasControlClicks;
+                this.CobntrolClicksAmount = filterDataResult.ScreenData.ControlClicksAmount;
             }
 
             this.NoData = !filterDataResult.Applications.SelectMany(a => a.ScreenSizes).Any();
