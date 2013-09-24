@@ -19,7 +19,6 @@ using AppReadyGo.Core.Queries.Content;
 
 namespace AppReadyGo.Controllers
 {
-    [HandleError]
     public class HomeController : Controller
     {
         public ActionResult Index()
