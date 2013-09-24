@@ -43,19 +43,13 @@ namespace AppReadyGo.Web.Common.Mails
 
         public void Send()
         {
-            try
-            {
-                InitRazor();
+            log.WriteInformation("Send email:{0}, {1}, {2}, {3}, {4}", string.Join(";", this.To), this.Subject, this.Cc == null ? "" : string.Join(";", this.Cc), this.Bcc == null ? "" : string.Join(";", this.Bcc), this.EmailPagePath);
 
-                string body = Razor.Resolve(this.EmailPagePath, this.Model).Run(new ExecuteContext());
+            InitRazor();
 
-                Messenger.SendEmail(this.To, this.Subject, body, this.Cc, this.Bcc);
-            }
-            catch (Exception exp)
-            {
-                log.WriteFatalError(exp, "Error in send email with parameters -  EmailPagePath:{0}, To:{1}, Subject:{2}", this.EmailPagePath, this.To, this.Subject);
-                throw exp;
-            }
+            string body = Razor.Resolve(this.EmailPagePath, this.Model).Run(new ExecuteContext());
+
+            Messenger.SendEmail(this.To, this.Subject, body, this.Cc, this.Bcc);
         }
 
         public void InitRazor()
