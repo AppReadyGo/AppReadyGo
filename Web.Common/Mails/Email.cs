@@ -66,7 +66,7 @@ namespace AppReadyGo.Web.Common.Mails
                 body = RenderViewToString(this.ControllerContext, this.EmailPagePath, new ViewDataDictionary(this.Model), new TempDataDictionary());
             } 
         
-            log.WriteInformation("Send email:{0}, {1}, {2}, {3}, {4}, {5}", string.Join(";", this.To), this.Subject, this.Cc == null ? "" : string.Join(";", this.Cc), this.Bcc == null ? "" : string.Join(";", this.Bcc), this.EmailPagePath, body);
+            log.WriteInformation("Send email:{0}, {1}, {2}, {3}, {4}, {5}", string.Join(";", this.To), this.Subject, this.Cc == null ? "" : string.Join(";", this.Cc), this.Bcc == null ? "" : string.Join(";", this.Bcc), this.EmailPagePath, body.Substring(0,200));
 
             Messenger.SendEmail(this.To, this.Subject, body, this.Cc, this.Bcc);
         }
