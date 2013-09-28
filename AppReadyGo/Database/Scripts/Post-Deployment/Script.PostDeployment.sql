@@ -846,6 +846,58 @@ VALUES  (1, 'Basic'),
 		(2, 'Plus'),
 		(3, 'Pro');
 GO
+
+
+SET IDENTITY_INSERT [dbo].[Continents] ON
+
+INSERT INTO [arg_qa].[dbo].[Continents]
+           ([ID]
+			,[Name]
+            ,[Code])
+     VALUES
+           (1,'North America','NA'),
+           (2,'Europe','EU'),
+           (3,'Asia','AS'),
+           (4,'South America','SA'),
+           (5,'Oceania','OC'),
+           (6,'Africa','AF')
+GO
+
+SET IDENTITY_INSERT [dbo].[Continents] OFF
+
+GO
+INSERT INTO [arg_dev_local].[dbo].[Countries]
+           ([GeoID],[Name],[Code],[ISOCode],[NativeName] ,[TimeZone],[Latitude] ,[Longitude],[ContinentID])
+     VALUES
+           (1 ,'United States' , 1 , 'US', 'United States' ,0, 0, 0, 1),
+           (2 ,'Canada' , 2 , 'CA', 'Canada' ,0, 0, 0, 1),
+           (3 ,'Mexico' , 3 , 'MX', 'Mexico' ,0, 0, 0, 1),
+           (4 ,'United Kingdom' , 4 , 'GB', 'United Kingdom' ,0, 0, 0, 2),
+           (5 ,'France' ,		  5 , 'FR', 'France' ,0, 0, 0, 2),
+           (6 ,'Russia' ,		  6 , 'RU', 'Russia' ,0, 0, 0, 2),
+           (7 ,'Ukraine' ,		  7 , 'UA', 'Ukraine' ,0, 0, 0, 2),
+           (8 ,'Germany' ,		  8 , 'DE', 'Germany' ,0, 0, 0, 2),
+           (9 ,'Netherlands' ,	  9 , 'NL', 'Netherlands' ,0, 0, 0, 2),
+           (10,'Belgium' ,	      10, 'BE', 'Belgium' ,0, 0, 0, 2),
+           (11,'Italy' ,		  11, 'IT', 'Italy' ,0, 0, 0, 2),
+           (12,'Israel'			, 12, 'IL', 'Israel' ,0, 0, 0, 2),
+           (13,'Spain'			, 13, 'ES', 'Spain' ,0, 0, 0, 2),
+           (14 ,'Poland' ,		  14, 'PL', 'Poland' ,0, 0, 0, 2),
+           (15 ,'Romania',		  15, 'RO', 'Romania' ,0, 0, 0, 2),
+           (16 ,'China' ,		  16, 'CN', 'China' ,0, 0, 0, 3),
+           (17 ,'Japan' ,		  17, 'JP', 'Japan' ,0, 0, 0, 3),
+           (18 ,'India' ,		  18, 'IN', 'India' ,0, 0, 0, 3),
+           (19 ,'South Korea',	  19, 'KR', 'South Korea' ,0, 0, 0, 3),
+           (20 ,'Brazil',		  20, 'BR', 'Brazil' ,0, 0, 0, 4),
+           (21 ,'Argentina',      21, 'AR', 'Argentina' ,0, 0, 0, 4),
+           (22 ,'Colombia',       22, 'CO', 'Colombia' ,0, 0, 0, 4),
+           (23 ,'Australia',      23, 'AU', 'Australia' ,0, 0, 0, 5),
+           (24 ,'New Zeland',     24, 'NZ', 'Australia' ,0, 0, 0, 5),
+           (25 ,'Nigeria',        25, 'NG', 'Nigeria' ,0, 0, 0, 6),
+           (26 ,'South Africa',   26, 'ZA', 'South Africa',0, 0, 0, 6),
+           (27 ,'Morocco',		  27, 'MA', 'Morocco',0, 0, 0, 6)
+GO
+
 SET IDENTITY_INSERT [dbo].[ApplicationTypes] ON
 
 INSERT INTO [dbo].[ApplicationTypes](ID, Name)
@@ -863,6 +915,7 @@ VALUES  (1, 'Books & References'),
 		(12, 'Productivity'),
 		(13, 'Social'),
 		(14, 'Shopping');
-
+GO
 SET IDENTITY_INSERT [dbo].[ApplicationTypes] OFF
+
 GO
