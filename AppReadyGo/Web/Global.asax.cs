@@ -10,6 +10,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web;
 using System;
+using AppReadyGo.Web.Common.Mails;
 
 namespace AppReadyGo.Web
 {
@@ -36,6 +37,8 @@ namespace AppReadyGo.Web
             ModelBinders.Binders[typeof(FilterParametersModel)] = new FilterParametersModelBinder();
 
             ObjectContainer.Instance.GetType();
+
+            Email.InitRazor();
             //ControllerBuilder.Current.SetControllerFactory(new WindsorFactory(applicationWideWindsorContainer));
             //// Initialize / install components in container
             //applicationWideWindsorContainer.Install(new WindsorInstaller());

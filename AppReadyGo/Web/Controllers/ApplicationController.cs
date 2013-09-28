@@ -111,7 +111,7 @@ namespace AppReadyGo.Controllers
 
             if (ModelState.IsValid)
             {
-                string iconExt = Request.Files.AllKeys.Contains("icon_file") ? Path.GetExtension(Request.Files[0].FileName) : null;
+                string iconExt = Request.Files.AllKeys.Contains("icon_file") ? Path.GetExtension(Request.Files["icon_file"].FileName) : null;
                 var result = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.Name, model.Description, model.Type, iconExt));
 
                 if (result.Validation.Any())
@@ -132,7 +132,7 @@ namespace AppReadyGo.Controllers
                     {
                         var path = Path.Combine(Server.MapPath("~/Restricted/Icons/"), result.Result + iconExt);
                         log.WriteInformation("Save file: {0}", path);
-                        Request.Files[0].SaveAs(path);
+                        Request.Files["icon_file"].SaveAs(path);
                     }
 
                     var keys = Request.Files.AllKeys.Where(x => x.Contains("screen_file_"));

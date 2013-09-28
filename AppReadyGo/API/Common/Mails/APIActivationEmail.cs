@@ -13,8 +13,8 @@ namespace AppReadyGo.API.Common.Mails
         {
         }
 
-       public APIActivationEmail(string email, string siteRootUrl, string templateRootPath)
-           : base(email, "/Activate/", siteRootUrl, templateRootPath)
+       public APIActivationEmail(string email, string siteRootUrl)
+           : base(email, "/Activate/", siteRootUrl)
         {
         }
     }

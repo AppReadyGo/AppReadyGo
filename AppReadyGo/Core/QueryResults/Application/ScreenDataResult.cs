@@ -10,7 +10,7 @@ namespace AppReadyGo.Core.QueryResults.Application
     {
         public int ApplicationId { get; set; }
 
-        public string ApplicationDescription { get; set; }
+        public string ApplicationName { get; set; }
 
         public IEnumerable<string> Pathes { get; set; }
 

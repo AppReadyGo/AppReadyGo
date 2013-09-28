@@ -10,6 +10,7 @@ using System.Web.Routing;
 using AppReadyGo.API.Models.Market;
 using AppReadyGo.Core.Logger;
 using System.Reflection;
+using AppReadyGo.Web.Common.Mails;
 
 namespace AppReadyGo.API
 {
@@ -25,11 +26,13 @@ namespace AppReadyGo.API
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
-            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ObjectContainer.Instance.GetType();
+
+            Email.InitRazor();
         }
 
         protected void Application_Error(object sender, System.EventArgs e)

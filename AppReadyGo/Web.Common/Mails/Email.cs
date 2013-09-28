@@ -11,14 +11,20 @@ using System.Reflection;
 using System;
 using AppReadyGo.Core.Logger;
 using System.Threading;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Mvc.Mailer;
+using System.Configuration;
 
 namespace AppReadyGo.Web.Common.Mails
 {
     public abstract class Email
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly string BodyGenerator = ConfigurationManager.AppSettings["EmailBodyGenerator"];
 
-        public string BaseTemplatePath { get; private set; }
+        public static string BaseTemplatePath { get; private set; }
+
         public string EmailPagePath { get; private set; }
         public object Model { get; protected set; }
         public IEnumerable<string> To { get; protected set; }
@@ -26,19 +32,15 @@ namespace AppReadyGo.Web.Common.Mails
         public IEnumerable<string> Bcc { get; protected set; }
         public string Subject { get; protected set; }
 
-        private ReaderWriterLockSlim templatesLock = new ReaderWriterLockSlim();
-        private static List<string> Templates = new List<string>();
+        public ControllerContext ControllerContext { get; protected set; }
 
-        protected Email(string baseTemplatePath, string emailPagePath)
+        protected Email(string emailPagePath)
         {
-            this.BaseTemplatePath = baseTemplatePath;
             this.EmailPagePath = emailPagePath;
-
-            InitRazor();
         }
 
-        protected Email(string baseTemplatePath, string emailPage, object model, string subject, IEnumerable<string> to, IEnumerable<string> cc = null, IEnumerable<string> bcc = null)
-            : this(baseTemplatePath, emailPage)
+        protected Email(string emailPage, object model, string subject, IEnumerable<string> to, IEnumerable<string> cc = null, IEnumerable<string> bcc = null)
+            : this(emailPage)
         {
             this.Model = model;
             this.Subject = subject;
@@ -49,58 +51,79 @@ namespace AppReadyGo.Web.Common.Mails
 
         public void Send()
         {
-            log.WriteInformation("Send email:{0}, {1}, {2}, {3}, {4}", string.Join(";", this.To), this.Subject, this.Cc == null ? "" : string.Join(";", this.Cc), this.Bcc == null ? "" : string.Join(";", this.Bcc), this.EmailPagePath);
 
-
-            string body = Razor.Resolve(this.EmailPagePath, this.Model).Run(new ExecuteContext());
+            string body = string.Empty;
+            if (BodyGenerator == "RazorEngine")
+            {
+                body = Razor.Resolve(this.EmailPagePath, this.Model).Run(new ExecuteContext());
+            }
+            else if (BodyGenerator == "MVCMailer")
+            {
+                body = GetMVCMailerBody();
+            }
+            else
+            {
+                body = RenderViewToString(this.ControllerContext, this.EmailPagePath, new ViewDataDictionary(this.Model), new TempDataDictionary());
+            } 
+        
+            log.WriteInformation("Send email:{0}, {1}, {2}, {3}, {4}, {5}", string.Join(";", this.To), this.Subject, this.Cc == null ? "" : string.Join(";", this.Cc), this.Bcc == null ? "" : string.Join(";", this.Bcc), this.EmailPagePath, body);
 
             Messenger.SendEmail(this.To, this.Subject, body, this.Cc, this.Bcc);
         }
 
-        private void InitRazor()
+        private string GetMVCMailerBody()
         {
-            var className = this.GetType().Name;
-            templatesLock.EnterUpgradeableReadLock();
-            try
+            var mailer = new MailerBase();
+            mailer.ViewData = new ViewDataDictionary(this.Model);
+            var message = mailer.Populate(x =>
             {
-                if (!Templates.Contains(className))
+                x.Subject = this.Subject;
+                x.ViewName = this.EmailPagePath;
+                foreach (var item in this.To)
                 {
-                    templatesLock.EnterWriteLock();
-                    try
-                    {
-
-                        TemplateServiceConfiguration templateConfig = new TemplateServiceConfiguration();
-                        templateConfig.Resolver = new DelegateTemplateResolver(name =>
-                        {
-                            var absolutePath = GetAbsolutePath(name);
-                            log.WriteInformation("Email template absolute path:{0}, file exists:{1}", absolutePath, File.Exists(absolutePath));
-                            return File.ReadAllText(absolutePath);
-                        });
-                        Razor.SetTemplateService(new TemplateService(templateConfig));
-
-                        Templates.Add(className);
-                    }
-                    finally
-                    {
-                        templatesLock.ExitWriteLock();
-                    }
+                    x.To.Add(item);
                 }
-            }
-            finally
-            {
-                templatesLock.ExitUpgradeableReadLock();
-            }
+            });
+            return message.Body;
         }
 
-        private string GetAbsolutePath(string path)
+        private string RenderViewToString(ControllerContext controllerContext, string viewPath, ViewDataDictionary viewData, TempDataDictionary tempData)
         {
-            if (string.IsNullOrEmpty(this.BaseTemplatePath))
+            ViewPage viewPage = new ViewPage();
+            StringWriter strWriter = new StringWriter();
+
+            //Right, create our view
+            viewPage.ViewContext = new ViewContext(controllerContext, new RazorView(controllerContext, viewPath, "~/Views/Shared/_Mail.cshtml", false, null), viewData, tempData, strWriter);
+
+            //Now render the view into the memorystream and flush the response
+            viewPage.ViewContext.View.Render(viewPage.ViewContext, viewPage.ViewContext.HttpContext.Response.Output);
+
+            return strWriter.ToString();
+        }
+
+        public static void InitRazor(string baseTemplatePath = null)
+        {
+            BaseTemplatePath = BaseTemplatePath;
+
+            TemplateServiceConfiguration templateConfig = new TemplateServiceConfiguration();
+            templateConfig.Resolver = new DelegateTemplateResolver(name =>
+            {
+                var absolutePath = GetAbsolutePath(name);
+                log.WriteInformation("Email template absolute path:{0}, file exists:{1}", absolutePath, File.Exists(absolutePath));
+                return File.ReadAllText(absolutePath);
+            });
+            Razor.SetTemplateService(new TemplateService(templateConfig));
+        }
+
+        private static string GetAbsolutePath(string path)
+        {
+            if (string.IsNullOrEmpty(BaseTemplatePath))
             {
                 return HttpContext.Current.Server.MapPath(path);
             }
             else
             {
-                return this.BaseTemplatePath + path.Remove(0, 2).Replace("/", "\\");
+                return BaseTemplatePath + path.Remove(0, 2).Replace("/", "\\");
             }
         }
     }

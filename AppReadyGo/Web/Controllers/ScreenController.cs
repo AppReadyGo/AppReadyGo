@@ -227,7 +227,7 @@ namespace AppReadyGo.Web.Controllers
 
         private ActionResult PrepareAction(ScreenModel model, ScreenDataResult data)
         {
-            ViewBag.ApplicationDescription = data.ApplicationDescription;
+            ViewBag.ApplicationDescription = data.ApplicationName;
 
             var pathes = data.Pathes.Select(p => new SelectListItem { Text = p, Value = p }).ToList();
             pathes.Insert(0, new SelectListItem { Text = "Select from exists", Value = "" });
