@@ -20,7 +20,7 @@ namespace AppReadyGo.Domain.QueriesHandlers.Application
                         .Select(a => new ScreenDataResult
                         {
                             ApplicationId = a.Id,
-                            ApplicationDescription = a.Description,
+                            ApplicationName = a.Name,
                         })
                         .SingleOrDefault(); ;
 

@@ -25,7 +25,7 @@ namespace AppReadyGo.Domain.Queries.Application
                             Height = s.Height,
                             FileExtention = s.FileExtension,
                             ApplicationId = s.Application.Id,
-                            ApplicationDescription = s.Application.Description,
+                            ApplicationName = s.Application.Name,
                         })
                         .SingleOrDefault();
 

@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Globalization;
 
 namespace AppReadyGo.Controllers
 {
@@ -161,7 +162,7 @@ namespace AppReadyGo.Controllers
         public ActionResult Activate(string key)
         {
             var splitedKey = key.DecryptLow().Split(',');
-            DateTime date = DateTime.Parse(splitedKey[0]);
+            DateTime date = DateTime.ParseExact(splitedKey[0], ActivationEmail.DateFormat, CultureInfo.CurrentCulture, DateTimeStyles.None);
             if (DateTime.Now > date)
             {
                 throw new Exception(string.Format("Activation link expired: {0}", date));

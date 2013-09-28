@@ -9,6 +9,7 @@ namespace AppReadyGo.API
     {
         public static void Register(HttpConfiguration config)
         {
+            config.Filters.Add(new ExceptionHandlingAttribute());
             config.Routes.MapHttpRoute(
                 name: "Market",
                 routeTemplate: "Market/{action}/{id}",

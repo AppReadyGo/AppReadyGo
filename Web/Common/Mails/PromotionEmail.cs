@@ -17,7 +17,7 @@ namespace AppReadyGo.Common.Mails
         }
 
         public PromotionEmail(string emailKey, UserDetailsResult userDetails, bool isEmailProcess = true)
-            : base("~/Views/Mails/", "Promotion.cshtml")
+            : base("~/Views/Mails/Promotion.cshtml")
         {
             this.To = new string[] { userDetails.Email };
             string contentPath = string.Format("mails/{0}", emailKey);

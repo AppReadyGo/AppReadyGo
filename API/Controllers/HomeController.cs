@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using AppReadyGo.Core;
 using AppReadyGo.Core.Queries.Content;
 using AppReadyGo.API.Models;
+using AppReadyGo.API.Common.Mails;
+using AppReadyGo.Web.Common.Mails;
 
 namespace AppReadyGo.API.Controllers
 {

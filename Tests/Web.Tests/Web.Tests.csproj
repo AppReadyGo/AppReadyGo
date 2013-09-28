@@ -118,14 +118,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+    <Content Include="Resources\Icon1.png" />
+    <Content Include="Resources\ScreenShot1.png" />
+    <Content Include="Resources\ScreenShot2.png" />
+    <Content Include="Resources\ScreenShot3.png" />
+    <Content Include="Resources\ScreenShot4.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\WhatsApp.apk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{6696bbd1-9b7a-44f9-ab0e-be264402e5cc}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Web.Common\Web.Common.csproj">
+      <Project>{656d43be-dac7-4ad7-b3a5-f1d34c8a2d1e}</Project>
+      <Name>Web.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Web\Web.csproj">
       <Project>{AD8B009A-AB15-4261-9739-E265948A9811}</Project>

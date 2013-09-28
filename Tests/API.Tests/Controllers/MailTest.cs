@@ -14,7 +14,8 @@ namespace AppReadyGo.API.Tests.Controllers
         {
             ObjectContainer.Instance.GetType();
             var path = AppDomain.CurrentDomain.BaseDirectory + @"\..\..\..\..\API\";
-            new APIActivationEmail("ypanshin@gmail.com", "http://api.qa.appreadygo.com", path).Send();
+            Email.InitRazor(path);
+            new APIActivationEmail("ypanshin@gmail.com", "http://api.qa.appreadygo.com").Send();
         }
     }
 }

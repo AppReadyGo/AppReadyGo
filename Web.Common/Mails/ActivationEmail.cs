@@ -8,14 +8,14 @@ namespace AppReadyGo.Web.Common.Mails
 {
     public abstract class ActivationEmail : SystemEmail
     {
+        public static readonly string DateFormat = "yyyy-MM-dd";
+
         public ActivationEmail(string email, string activationPageUrl)
-            : base()
         {
             Init(email, activationPageUrl, string.Format("{0}://{1}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority));
         }
 
-        public ActivationEmail(string email, string activationPageUrl, string siteRootUrl, string templateRootPath)
-            : base(templateRootPath)
+        public ActivationEmail(string email, string activationPageUrl, string siteRootUrl)
         {
             Init(email, activationPageUrl, siteRootUrl);
         }
@@ -25,7 +25,7 @@ namespace AppReadyGo.Web.Common.Mails
             this.To = new string[] { email };
             var mailContent = GetMailContent();
 
-            string activationKey = string.Format("{0},{1}", DateTime.Now.AddDays(EmailSettings.Settings.LinksExpire.Activation), email).EncryptLow();
+            string activationKey = string.Format("{0},{1}", DateTime.Now.AddDays(EmailSettings.Settings.LinksExpire.Activation).ToString(DateFormat), email).EncryptLow();
             string activationLnk = string.Format("{0}{1}?key={2}", siteRootUrl, activationPageUrl, HttpUtility.UrlEncode(activationKey));
             string body = mailContent.Body.Replace("{activation_link}", activationLnk);
 
