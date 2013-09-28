@@ -51,7 +51,6 @@ namespace AppReadyGo.Web.Common.Mails
 
         public void Send()
         {
-
             string body = string.Empty;
             if (BodyGenerator == "RazorEngine")
             {
