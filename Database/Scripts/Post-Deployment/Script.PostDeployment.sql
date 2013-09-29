@@ -918,4 +918,28 @@ VALUES  (1, 'Books & References'),
 GO
 SET IDENTITY_INSERT [dbo].[ApplicationTypes] OFF
 
+SET IDENTITY_INSERT [eco].[Interests] ON
+
+INSERT INTO [eco].[Interests]
+           ( [ID],[Name])
+    VALUES  (1, 'Books & References'),
+		(2,	'Games'),
+		(3,	'Business'),
+		(4,	'Comics'),
+		(5,	'Communication'),
+		(6,	'Education'),
+		(7,	'Entertaiment'),
+		(8,	'Finance'),
+		(9,	'Health & Fitness'),
+		(10,'Computers & Electronics'),
+		(11, 'Medical'),
+		(12, 'Animals'),
+		(13, 'Social'),
+		(14, 'Shopping'),
+		(15, 'Sports');
+		
+GO
+
+SET IDENTITY_INSERT [eco].[Interests] OFF
+
 GO
