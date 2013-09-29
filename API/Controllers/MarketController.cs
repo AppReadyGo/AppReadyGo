@@ -119,6 +119,34 @@ namespace AppReadyGo.API.Controllers
             }
         }
 
+        [HttpPost]
+        public ResultCode ForgotPassword(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return ResultCode.MissingData;
+            }
+
+            var userDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(email));
+            if (userDetails != null)
+            {
+                if (userDetails.Type != UserType.ApiMember)
+                {
+                    return ResultCode.WrongEmail;
+                }
+                else
+                {
+                    new APIForgotPasswordMail(email).Send();
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("error", "The user does not exits in the system.");
+            }
+
+            return ResultCode.Successful;
+        }
+
         /// <summary>
         /// Update user info
         /// </summary>

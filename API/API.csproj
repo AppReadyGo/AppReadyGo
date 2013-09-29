@@ -163,6 +163,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\Mails\APIActivationEmail.cs" />
+    <Compile Include="Common\Mails\APIForgotPasswordEmail.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarketController.cs" />
@@ -185,8 +186,10 @@
     <Compile Include="Models\Market\RegisterModel.cs" />
     <Compile Include="Models\Market\LoginModel.cs" />
     <Compile Include="Models\Market\RegisterResultModel.cs" />
+    <Compile Include="Models\Market\ResultCode.cs" />
     <Compile Include="Models\Market\SettingsModel.cs" />
     <Compile Include="Models\Market\TaskModel.cs" />
+    <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +209,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
@@ -218,6 +222,7 @@
     <Content Include="Views\Shared\_Mail.cshtml" />
     <Content Include="Views\Home\PageContent.cshtml" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
+    <Content Include="Views\Home\ResetPassword.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -214,7 +214,7 @@
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\Extentions.cs" />
     <Compile Include="Common\Mails\WebActivationEmail.cs" />
-    <Compile Include="Common\Mails\ForgotPasswordMail.cs" />
+    <Compile Include="Common\Mails\WebForgotPasswordMail.cs" />
     <Compile Include="Common\Mails\PromotionEmail.cs" />
     <Compile Include="Common\Mails\SpecialAccessEmail.cs" />
     <Compile Include="Common\MIMEAssistant.cs" />

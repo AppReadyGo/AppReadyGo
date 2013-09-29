@@ -195,7 +195,7 @@ namespace AppReadyGo.Controllers
                     }
                     else
                     {
-                        new ForgotPasswordMail(model.Email).Send();
+                        new WebForgotPasswordMail(model.Email).Send();
                         return Redirect("~/p/forgot-password-email-sent"); // Redirect to content page
                     }
                 }
@@ -211,7 +211,7 @@ namespace AppReadyGo.Controllers
         public ActionResult ResetPassword(string key)
         {
             var splitedKey = key.DecryptLow().Split(',');
-            if (DateTime.Now > DateTime.Parse(splitedKey[0]))
+            if (DateTime.Now > DateTime.ParseExact(splitedKey[0], ForgotPasswordMail.DateFormat, CultureInfo.CurrentCulture, DateTimeStyles.None))
             {
                 throw new Exception("Reset password link expired.");
             }
@@ -230,7 +230,7 @@ namespace AppReadyGo.Controllers
             {
                 var splitedKey = key.DecryptLow().Split(',');
                 var email = splitedKey[1];
-                if (DateTime.Now > DateTime.Parse(splitedKey[0]))
+                if (DateTime.Now > DateTime.ParseExact(splitedKey[0], ForgotPasswordMail.DateFormat, CultureInfo.CurrentCulture, DateTimeStyles.None))
                 {
                     throw new Exception("Reset password link expired.");
                 }

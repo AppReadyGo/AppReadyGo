@@ -23,7 +23,7 @@ namespace AppReadyGo.Web.Tests
         static readonly Uri _apiBaseAddress = new Uri("http://api.qa.appreadygo.com/");
 #elif DEBUG
         static readonly Uri _baseAddress = new Uri("http://localhost:63224/");
-        static readonly Uri _apiBaseAddress = new Uri("");
+        static readonly Uri _apiBaseAddress = new Uri("http://localhost:16989/");
 #else
         static readonly Uri _baseAddress = new Uri("http://appreadygo.com/");
         static readonly Uri _apiBaseAddress = new Uri("http://api.appreadygo.com/");
@@ -46,7 +46,11 @@ namespace AppReadyGo.Web.Tests
             var data = new UserModel { ContryId = 4, Gender = Gender.Women, AgeRange = AgeRange.Range35_44, Zip = "NW42RX", Email = apiUserName, FirstName = "xxx", Password = password };
             MarketByNetwork.Register(data);
 
+            APIByNetwork.Activate(apiUserName);
+
             MarketByNetwork.LogOn(apiUserName, password);
+
+            MarketByNetwork.ResetPassword(apiUserName);
 
             // After login section
             var cookieContainer = new CookieContainer();

@@ -6,7 +6,9 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using AppReadyGo.API.Models.Market;
+using AppReadyGo.Common.Mails;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using AppReadyGo.Core;
 
 namespace Common.Tests
 {
@@ -30,7 +32,7 @@ namespace Common.Tests
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 
-            var task = client.PostAsJsonAsync("register", data);
+            var task = client.PostAsJsonAsync("/market/register", data);
             var response = task.Result;
             if (!response.IsSuccessStatusCode)
             {
@@ -52,14 +54,9 @@ namespace Common.Tests
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var regdata = new UserModel { ContryId = 1, Email = email, FirstName = "xxx", Password = password };
+            var data = new LoginModel { Email = email, Password = password };
 
-            var task = client.PostAsJsonAsync("register", regdata);
-
-
-            var data = new LoginModel { Email = regdata.Email, Password = regdata.Password };
-
-            var response = client.PostAsJsonAsync("login", data).Result;
+            var response = client.PostAsJsonAsync("/market/login", data).Result;
             if (!response.IsSuccessStatusCode)
             {
                 var res = response.Content.ReadAsStringAsync();
@@ -73,6 +70,31 @@ namespace Common.Tests
                 Assert.AreEqual(res.Code, UserResultModel.Result.Successful);
 
                 return res.Id;
+            }
+        }
+
+        public static void ResetPassword(string email)
+        {
+            string key = string.Format("{0},{1}", DateTime.Now.AddDays(14).ToString(ForgotPasswordMail.DateFormat), email).EncryptLow(); ;
+            using (var client = new HttpClient() { BaseAddress = Global.ApiBaseAddress })
+            {
+                var data = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                    new KeyValuePair<string, string>("Key", email),
+                    new KeyValuePair<string, string>("NewPassword", "111111"),
+                    new KeyValuePair<string, string>("ConfirmPassword", "111111")
+                });
+
+                var responce = client.PostAsync("/ResetPassword", data).Result;
+                var res = responce.Content.ReadAsStringAsync().Result;
+
+                if (!responce.IsSuccessStatusCode)
+                {
+                    Assert.Fail(string.Format("Reset Password - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+                }
+                else
+                {
+                    Assert.IsTrue(res.Contains("Activation email was sent"), string.Format("Reset Password - wrong responce: {0}", res));
+                }
             }
         }
     }
