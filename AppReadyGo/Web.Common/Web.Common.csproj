@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mails\ActivationEmail.cs" />
+    <Compile Include="Mails\ForgotPasswordMail.cs" />
     <Compile Include="Mails\MailMasterModel.cs" />
     <Compile Include="Mails\SystemEmail.cs" />
     <Compile Include="Mails\Email.cs" />

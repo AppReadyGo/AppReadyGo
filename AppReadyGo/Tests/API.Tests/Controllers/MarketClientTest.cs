@@ -53,13 +53,23 @@ namespace AppReadyGo.API.Tests.Controllers
         [TestMethod]
         public void MarketLoginByNetwork()
         {
-            MarketByNetwork.LogOn("someuser", "somepass");
+            var data = new UserModel { ContryId = 1, Email = "ypanshin+testapi" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com", FirstName = "xxx", Password = "121" };
+            MarketByNetwork.Register(data);
+            MarketByNetwork.LogOn(data.Email, data.Password);
         }
 
         [TestMethod]
         public void MarketRegisterByNetwork()
         {
             MarketByNetwork.Register();
+        }
+
+        [TestMethod]
+        public void MarketResetPasswordByNetwork()
+        {
+            var data = new UserModel { ContryId = 1, Email = "ypanshin+testapi" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com", FirstName = "xxx", Password = "121" };
+            MarketByNetwork.Register(data);
+            MarketByNetwork.ResetPassword(data.Email);
         }
 
         [TestMethod]

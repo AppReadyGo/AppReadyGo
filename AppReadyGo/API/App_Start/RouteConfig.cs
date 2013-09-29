@@ -26,6 +26,12 @@ namespace AppReadyGo.API
             );
 
             routes.MapRoute(
+                name: "ResetPassword",
+                url: "ResetPassword/{key}",
+                defaults: new { controller = "Home", action = "ResetPassword" }
+            );
+
+            routes.MapRoute(
                 "Pages",
                 "p/{urlPart1}/{urlPart2}/{urlPart3}/",
                 new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional }
