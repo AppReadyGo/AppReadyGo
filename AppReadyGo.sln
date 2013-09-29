@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{25784E
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Tests", "Common.Tests\Common.Tests.csproj", "{17EB1A2D-913E-439B-8922-1CA2E2C4E4EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,12 @@ Global
 		{656D43BE-DAC7-4AD7-B3A5-F1D34C8A2D1E}.QA|Any CPU.Build.0 = Release|Any CPU
 		{656D43BE-DAC7-4AD7-B3A5-F1D34C8A2D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{656D43BE-DAC7-4AD7-B3A5-F1D34C8A2D1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17EB1A2D-913E-439B-8922-1CA2E2C4E4EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17EB1A2D-913E-439B-8922-1CA2E2C4E4EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17EB1A2D-913E-439B-8922-1CA2E2C4E4EF}.QA|Any CPU.ActiveCfg = Release|Any CPU
+		{17EB1A2D-913E-439B-8922-1CA2E2C4E4EF}.QA|Any CPU.Build.0 = Release|Any CPU
+		{17EB1A2D-913E-439B-8922-1CA2E2C4E4EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17EB1A2D-913E-439B-8922-1CA2E2C4E4EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,10 +133,11 @@ Global
 		{F1B9302A-E5AF-4195-995F-D8754F8962CF} = {0E5043EB-3097-48F0-B339-3E188965356F}
 		{654A465A-FD14-454E-B494-06A29A061075} = {0E5043EB-3097-48F0-B339-3E188965356F}
 		{EDBDD1F8-63C0-43A2-BB48-8A32688CE92A} = {0E5043EB-3097-48F0-B339-3E188965356F}
+		{17EB1A2D-913E-439B-8922-1CA2E2C4E4EF} = {0E5043EB-3097-48F0-B339-3E188965356F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.Database.6.0.1304.0\lib\NET45
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Logging.5.0.505.1\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Logging.Database.5.0.505.0\lib\NET35
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.Database.6.0.1304.0\lib\NET45
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True

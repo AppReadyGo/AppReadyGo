@@ -128,6 +128,10 @@
       <Project>{B73E5FF1-F3CD-4F2E-849A-57ED9926CCE0}</Project>
       <Name>API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common.Tests\Common.Tests.csproj">
+      <Project>{17eb1a2d-913e-439b-8922-1ca2e2c4e4ef}</Project>
+      <Name>Common.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.csproj">
       <Project>{8c379dd1-93a3-4b68-a3ae-e7c2ce5a8a0f}</Project>
       <Name>Common</Name>

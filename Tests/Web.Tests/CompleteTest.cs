@@ -9,6 +9,9 @@ using AppReadyGo.Common.Mails;
 using AppReadyGo.Web.Common.Mails;
 using System.Net.Http.Headers;
 using System.IO;
+using Common.Tests;
+using AppReadyGo.API.Models.Market;
+using AppReadyGo.Core.Entities;
 
 namespace AppReadyGo.Web.Tests
 {
@@ -17,20 +20,33 @@ namespace AppReadyGo.Web.Tests
     {
 #if QA
         static readonly Uri _baseAddress = new Uri("http://qa.appreadygo.com/");
+        static readonly Uri _apiBaseAddress = new Uri("http://api.qa.appreadygo.com/");
 #elif DEBUG
         static readonly Uri _baseAddress = new Uri("http://localhost:63224/");
+        static readonly Uri _apiBaseAddress = new Uri("");
 #else
         static readonly Uri _baseAddress = new Uri("http://appreadygo.com/");
+        static readonly Uri _apiBaseAddress = new Uri("http://api.appreadygo.com/");
 #endif
-        
+
         [TestMethod]
         public void UserFlowByNetworkMethod()
         {
-            string userName = "ypanshin+" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string userName = "ypanshin+web" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string apiUserName = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
             string password = "111111";
 
             Register(userName, password);
             Activate(userName);
+
+            // Forgot Password
+
+            // Reset Password
+
+            var data = new UserModel { ContryId = 4, Gender = Gender.Women, AgeRange = AgeRange.Range35_44, Zip = "NW42RX", Email = apiUserName, FirstName = "xxx", Password = password };
+            MarketByNetwork.Register(data);
+
+            MarketByNetwork.LogOn(apiUserName, password);
 
             // After login section
             var cookieContainer = new CookieContainer();
@@ -39,15 +55,19 @@ namespace AppReadyGo.Web.Tests
             {
                 LogOn(client, userName, password);
 
+                //Change password
+
                 int appId = ApplicationNew(client);
 
                 ApplicationEdit(client, appId);//(add screenshots)
 
+                int screenId = ScreenNew(client, appId);
+
+                ScreenEdit(client, appId, screenId);
+
+                ApplicationPublish(client, appId);
+
             }
-            // Screen New
-            // Screen Edit
-            // Screen New
-            // Application Publish
             // API Market download
             // API Analytics using
             // Analytics Dashboard
@@ -61,6 +81,110 @@ namespace AppReadyGo.Web.Tests
             // Screen Remove
             // Application Remove
             // Log Out
+        }
+
+        private void ApplicationPublish(HttpClient client, int appId)
+        {
+            var data = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                    new KeyValuePair<string, string>("ApplicationId", appId.ToString()),
+                    new KeyValuePair<string, string>("AgeRange", ((int)AgeRange.Range35_44).ToString()),
+                    new KeyValuePair<string, string>("Gender", ((int)Gender.Women).ToString()),
+                    new KeyValuePair<string, string>("Country", "4"),
+                    new KeyValuePair<string, string>("Zip", "NW42RX")
+                });
+            var responce = client.PostAsync("/Application/Publish/" + appId, data).Result;
+            var res = responce.Content.ReadAsStringAsync().Result;
+
+            if (!responce.IsSuccessStatusCode)
+            {
+                Assert.Fail(string.Format("Application Publish - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+            }
+            else
+            {
+                Assert.IsTrue(res.Contains("<a href=\"/Application/Edit/"), string.Format("Application Publish - wrong responce: {0}", res));
+            }            
+        }
+
+        private void ScreenEdit(HttpClient client, int appId, int screenId)
+        {
+            string screenPath = AppDomain.CurrentDomain.BaseDirectory + @"\..\..\Resources\ScreenShot2.png";
+            using (var data = new MultipartFormDataContent())
+            {
+                var values = new[]
+                {
+                    new KeyValuePair<string, string>("ApplicationId", appId.ToString()),
+                    new KeyValuePair<string, string>("Path", "FirstScreenEdited"),
+                    new KeyValuePair<string, string>("Width", "320"),
+                    new KeyValuePair<string, string>("Height", "480")
+                };
+
+                foreach (var keyValuePair in values)
+                {
+                    data.Add(new StringContent(keyValuePair.Value), String.Format("\"{0}\"", keyValuePair.Key));
+                }
+                using (var screenms = new MemoryStream(File.ReadAllBytes(screenPath)))
+                {
+                    var fileContent = CreateFileContent(screenms, "file", Path.GetFileName(screenPath), "image/png");
+                    data.Add(fileContent);
+
+                    string prefix = "/Application/" + appId + "/Screen/";
+
+                    var responce = client.PostAsync(prefix + "Edit/" + screenId, data).Result;
+                    var res = responce.Content.ReadAsStringAsync().Result;
+
+                    if (!responce.IsSuccessStatusCode)
+                    {
+                        Assert.Fail(string.Format("Screen Edit - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+                    }
+                    else
+                    {
+                        Assert.IsTrue(res.Contains("<a href=\"" + prefix + "Edit/"), string.Format("Screen Edit - wrong responce: {0}", res));
+                    }
+                }
+            }
+        }
+
+        private int ScreenNew(HttpClient client, int appId)
+        {
+            string screenPath = AppDomain.CurrentDomain.BaseDirectory + @"\..\..\Resources\ScreenShot1.png";
+            using (var data = new MultipartFormDataContent())
+            {
+                var values = new[]
+                {
+                    new KeyValuePair<string, string>("ApplicationId", appId.ToString()),
+                    new KeyValuePair<string, string>("Path", "FirstScreen"),
+                    new KeyValuePair<string, string>("Width", "320"),
+                    new KeyValuePair<string, string>("Height", "480")
+                };
+
+                foreach (var keyValuePair in values)
+                {
+                    data.Add(new StringContent(keyValuePair.Value), String.Format("\"{0}\"", keyValuePair.Key));
+                }
+                using (var screenms = new MemoryStream(File.ReadAllBytes(screenPath)))
+                {
+                    var fileContent = CreateFileContent(screenms, "file", Path.GetFileName(screenPath), "image/png");
+                    data.Add(fileContent);
+
+                    string prefix = "/Application/" + appId + "/Screen/";
+
+                    var responce = client.PostAsync(prefix + "New", data).Result;
+                    var res = responce.Content.ReadAsStringAsync().Result;
+
+                    if (!responce.IsSuccessStatusCode)
+                    {
+                        Assert.Fail(string.Format("Screen New - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+                    }
+                    else
+                    {
+                        Assert.IsTrue(res.Contains("<a href=\"" + prefix + "Edit/"), string.Format("Screen New - wrong responce: {0}", res));
+                    }
+
+                    int startIndx = res.IndexOf("<a href=\"" + prefix + "Edit/") + prefix.Length + 14;
+                    int endIndx = res.IndexOf("\"", startIndx);
+                    return int.Parse(res.Substring(startIndx, endIndx - startIndx));
+                }
+            }
         }
 
         private void Register(string username, string password)
@@ -151,13 +275,6 @@ namespace AppReadyGo.Web.Tests
 
                     fileContent = CreateFileContent(iconms, "icon_file", Path.GetFileName(iconPath), "image/png");
                     data.Add(fileContent);
-                    //var fileContent = new ByteArrayContent(File.ReadAllBytes(packagePath));
-                    //fileContent.Headers.Add("Content-Type", "application/vnd.android.package-archive");
-                    //data.Add(fileContent, "package_file", Path.GetFileName(packagePath));
-
-                    //fileContent = new ByteArrayContent(File.ReadAllBytes(iconPath));
-                    //fileContent.Headers.Add("Content-Type", "image/png");
-                    //data.Add(fileContent, "icon_file", Path.GetFileName(iconPath));
 
                     var responce = client.PostAsync("/Application/New", data).Result;
                     var res = responce.Content.ReadAsStringAsync().Result;

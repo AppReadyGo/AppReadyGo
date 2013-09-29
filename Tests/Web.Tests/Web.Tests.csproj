@@ -129,6 +129,14 @@
     <None Include="Resources\WhatsApp.apk" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\API\API.csproj">
+      <Project>{b73e5ff1-f3cd-4f2e-849a-57ed9926cce0}</Project>
+      <Name>API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common.Tests\Common.Tests.csproj">
+      <Project>{17eb1a2d-913e-439b-8922-1ca2e2c4e4ef}</Project>
+      <Name>Common.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{6696bbd1-9b7a-44f9-ab0e-be264402e5cc}</Project>
       <Name>Core</Name>
