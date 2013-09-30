@@ -59,7 +59,9 @@ namespace AppReadyGo.Domain
                 c.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
 
             });
-
+#if DEBUG
+            cfg.SetInterceptor(new SQLInterceptor());
+#endif
             cfg.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
 
             SchemaMetadataUpdater.QuoteTableAndColumns(cfg);

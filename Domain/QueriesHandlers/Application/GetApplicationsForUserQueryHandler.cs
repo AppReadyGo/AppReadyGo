@@ -8,6 +8,8 @@ using AppReadyGo.Core.Queries.Users;
 using AppReadyGo.Core.QueryResults.Users;
 using AppReadyGo.Core.Queries.Application;
 using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Domain.Model.Users;
+using AppReadyGo.Domain.Model;
 
 namespace AppReadyGo.Domain.Queries
 {
@@ -21,8 +23,41 @@ namespace AppReadyGo.Domain.Queries
                 PageSize = query.PageSize
             };
 
-            // TODO: Change application filtering by user details
-            var appsQuery = session.Query<AppReadyGo.Domain.Model.Application>();
+            var userDetails = session.Query<ApiMember>()
+                                .Where(m => m.Id == query.UserId)
+                                .Select(m => new {
+                                    m.Zip,
+                                    m.Gender,
+                                    CountryId = m.Country == null ? null : (int?)m.Country.GeoId,
+                                    m.AgeRange
+                                })
+                                .Single();
+
+            var publishQuery = session.Query<PublishDetails>();
+            if (userDetails.Gender.HasValue && userDetails.Gender.Value != Core.Entities.Gender.None)
+            {
+                publishQuery = publishQuery.Where(p => p.Gender == userDetails.Gender.Value || p.Gender == Core.Entities.Gender.None);
+            }
+
+            if (!string.IsNullOrEmpty(userDetails.Zip))
+            {
+                publishQuery = publishQuery.Where(p => p.Zip == userDetails.Zip || p.Zip == null);
+            }
+
+            if (userDetails.CountryId.HasValue)
+            {
+                publishQuery = publishQuery.Where(p => p.Country.GeoId == userDetails.CountryId || p.Country == null);
+            }
+
+            if (userDetails.AgeRange.HasValue && userDetails.AgeRange.Value != Core.Entities.AgeRange.None)
+            {
+                publishQuery = publishQuery.Where(p => p.AgeRange == userDetails.AgeRange || p.AgeRange == Core.Entities.AgeRange.None);
+            }
+            var appsIds = publishQuery.Select(p => p.Application.Id).Distinct().ToArray();
+
+            var appsQuery = session.Query<AppReadyGo.Domain.Model.Application>()
+                                    .Where(a => appsIds.Contains(a.Id));
+
             res.ItemsCount = appsQuery.Count();
 
             var skip = query.PageSize * (query.CurPage - 1);

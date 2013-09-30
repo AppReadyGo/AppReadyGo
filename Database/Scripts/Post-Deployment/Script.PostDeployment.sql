@@ -20,12 +20,7 @@ DELETE [cont].[Pages]
 GO
 DELETE [cont].[Themes]  
 GO
-DELETE [usr].[StaffRoles]
-GO
-DELETE [dbo].[ApplicationTypes]
-GO
-DELETE [usr].[Memberships]
-GO
+
 
 INSERT INTO [cont].[Themes] ([ID], [Name], [Url], [TYPE])
 VALUES (1, 'System Email', 'Mails\System.aspx', 1),
@@ -56,7 +51,8 @@ VALUES
 (16, 3, 'special-access-required'),
 (18, 3, 'm/activation-email-sent'),
 (19, 3, 'howitworks'),
-(20, 3, 'api/account-activated');
+(20, 3, 'api/account-activated'),
+(21, 3, 'api/password-changed');
 
 SET IDENTITY_INSERT [cont].[Pages] OFF
 GO              
@@ -612,6 +608,14 @@ FingerPrint.finish(this);
 	<p>Account was activated.</p>
 	<p>You can use your user name and password to log in.</p>
 </article>
+'),
+(21, 0, 'title', 'Your password was changed'),
+(21, 1, 'content', '
+<article class="center borders">
+	<h2>Your password was changed</h2>
+	<p>Password changed.</p>
+	<p>You can use your user name and password to log in.</p>
+</article>
 ');
 
 GO
@@ -850,7 +854,7 @@ GO
 
 SET IDENTITY_INSERT [dbo].[Continents] ON
 
-INSERT INTO [arg_qa].[dbo].[Continents]
+INSERT INTO [dbo].[Continents]
            ([ID]
 			,[Name]
             ,[Code])
@@ -866,7 +870,7 @@ GO
 SET IDENTITY_INSERT [dbo].[Continents] OFF
 
 GO
-INSERT INTO [arg_dev_local].[dbo].[Countries]
+INSERT INTO [dbo].[Countries]
            ([GeoID],[Name],[Code],[ISOCode],[NativeName] ,[TimeZone],[Latitude] ,[Longitude],[ContinentID])
      VALUES
            (1 ,'United States' , 1 , 'US', 'United States' ,0, 0, 0, 1),

@@ -228,6 +228,7 @@
     <Compile Include="QueriesHandlers\Users\GetUserRolesQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserSecuredDetailsByEmailQueryHandler.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="SQLInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

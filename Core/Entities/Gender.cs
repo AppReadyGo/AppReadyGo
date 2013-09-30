@@ -8,7 +8,7 @@ namespace AppReadyGo.Core.Entities
     public enum Gender : byte
     {
         None = 1,
-        Men,
-        Women
+        Men = 2,
+        Women = 3
     }
 }

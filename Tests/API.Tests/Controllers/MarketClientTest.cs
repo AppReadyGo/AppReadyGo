@@ -12,6 +12,8 @@ using AppReadyGo.API.Controllers;
 using AppReadyGo.Common;
 using AppReadyGo.API.Models.Market;
 using Common.Tests;
+using AppReadyGo.Common.Tests;
+using AppReadyGo.Core.Entities;
 
 namespace AppReadyGo.API.Tests.Controllers
 {
@@ -55,6 +57,7 @@ namespace AppReadyGo.API.Tests.Controllers
         {
             var data = new UserModel { ContryId = 1, Email = "ypanshin+testapi" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com", FirstName = "xxx", Password = "121" };
             MarketByNetwork.Register(data);
+            APIByNetwork.Activate(data.Email);
             MarketByNetwork.LogOn(data.Email, data.Password);
         }
 
@@ -62,14 +65,6 @@ namespace AppReadyGo.API.Tests.Controllers
         public void MarketRegisterByNetwork()
         {
             MarketByNetwork.Register();
-        }
-
-        [TestMethod]
-        public void MarketResetPasswordByNetwork()
-        {
-            var data = new UserModel { ContryId = 1, Email = "ypanshin+testapi" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com", FirstName = "xxx", Password = "121" };
-            MarketByNetwork.Register(data);
-            MarketByNetwork.ResetPassword(data.Email);
         }
 
         [TestMethod]
@@ -111,23 +106,91 @@ namespace AppReadyGo.API.Tests.Controllers
         [TestMethod]
         public void MarketGetAppsByNetwork()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = _baseAddress;
+            string userName = "ypanshin+web" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string apiUserName = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string password = "111111";
 
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-
-            var response = client.GetAsync("GetApps/?email=some&curPage=1&pageSize=10").Result;
-            if (!response.IsSuccessStatusCode)
+            // New web user
+            WebByNetwork.Register(userName, password);
+            WebByNetwork.Activate(userName);
+            var cookieContainer = new CookieContainer();
+            using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
+            using (var client = new HttpClient(handler) { BaseAddress = Global.BaseAddress })
             {
-                var res = response.Content.ReadAsStringAsync();
-                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
+                client.Timeout = new TimeSpan(0, 3, 0);
+                WebByNetwork.LogOn(client, userName, password);
+                // Add two applications
+                int appId_1 = WebByNetwork.ApplicationNew(client, "App 1", "Some description", 1, @"\..\..\..\Web.Tests\Resources\");
+                int appId_2 = WebByNetwork.ApplicationNew(client, "App 2", "Some description", 1, @"\..\..\..\Web.Tests\Resources\");
+
+                // New api user
+                var data = new UserModel { ContryId = 4, Gender = Gender.Women, AgeRange = AgeRange.Range12_17, Zip = "NW42RX", Email = apiUserName, FirstName = "xxx", Password = password };
+                MarketByNetwork.Register(data);
+                APIByNetwork.Activate(data.Email);
+                var apiUserId = MarketByNetwork.LogOn(data.Email, data.Password);
+
+                // Publish not relevant to api user app
+                WebByNetwork.ApplicationPublish(client, appId_1, AgeRange.Range45_54, Gender.Men, 4, "NW42RX");
+
+                // Get user apps (no apps)
+                var appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                Assert.AreEqual(0, appRes.ItemsCount);
+
+                // Publish relevant to api user app
+                WebByNetwork.ApplicationPublish(client, appId_2, AgeRange.Range12_17, Gender.Women, 4, "NW42RX");
+
+                // Get user apps (1 app)
+                appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                Assert.AreEqual(1, appRes.ItemsCount);
+
+                // Publish relevant to api user app
+                WebByNetwork.ApplicationPublish(client, appId_2, AgeRange.Range12_17, Gender.Women, 4, "NW42RX");
+
+                // Get user apps (1 app)
+                appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                Assert.AreEqual(1, appRes.ItemsCount);
+
+                // Publish relevant to api user app
+                WebByNetwork.ApplicationPublish(client, appId_1, AgeRange.None, Gender.None, 4, "NW42RX");
+
+                // Get user apps (1 app)
+                appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                Assert.AreEqual(2, appRes.ItemsCount);
             }
-            else
+
+        }
+
+        [TestMethod]
+        public void MarketGetAppByNetwork()
+        {
+            string userName = "ypanshin+web" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string apiUserName = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string password = "111111";
+
+            // New web user
+            WebByNetwork.Register(userName, password);
+            WebByNetwork.Activate(userName);
+            var cookieContainer = new CookieContainer();
+            using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
+            using (var client = new HttpClient(handler) { BaseAddress = Global.BaseAddress })
             {
-                var res = response.Content.ReadAsStringAsync();
-                //Assert.IsTrue(res.Result);
+                client.Timeout = new TimeSpan(0, 3, 0);
+                WebByNetwork.LogOn(client, userName, password);
+                // Add two applications
+                int appId = WebByNetwork.ApplicationNew(client, "App 1", "Some description", 1, @"\..\..\..\Web.Tests\Resources\");
+
+                // New api user
+                var data = new UserModel { ContryId = 4, Gender = Gender.Women, AgeRange = AgeRange.Range12_17, Zip = "NW42RX", Email = apiUserName, FirstName = "xxx", Password = password };
+                MarketByNetwork.Register(data);
+                APIByNetwork.Activate(data.Email);
+                var apiUserId = MarketByNetwork.LogOn(data.Email, data.Password);
+
+                WebByNetwork.ApplicationPublish(client, appId, AgeRange.Range12_17, Gender.Women, 4, "NW42RX");
+
+                var appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                Assert.IsTrue(appRes.Collection.Length > 0);
+
+                MarketByNetwork.GetApp(apiUserId.Value, appRes.Collection[0].Id);
             }
         }
     }
