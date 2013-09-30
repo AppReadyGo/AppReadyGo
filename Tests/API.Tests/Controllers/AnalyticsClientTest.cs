@@ -67,7 +67,7 @@ namespace AppReadyGo.API.Tests.Controllers
             using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
             using (var client = new HttpClient(handler) { BaseAddress = Global.BaseAddress })
             {
-                client.Timeout = new TimeSpan(0, 3, 0);
+                client.Timeout = new TimeSpan(0, 4, 0);
                 WebByNetwork.LogOn(client, userName, password);
                 // Add two applications
                 int appId = WebByNetwork.ApplicationNew(client, "App 1", "Some description", 1, @"\..\..\..\Web.Tests\Resources\");

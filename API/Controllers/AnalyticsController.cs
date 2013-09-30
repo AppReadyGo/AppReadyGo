@@ -61,6 +61,61 @@ namespace AppReadyGo.API.Controllers
                 // We have to create some queue to hold the ips and process the queue by other service.
                 // However, all the logic have to write to some queue and not to strate to database.
 
+                var systemInfo = new AppReadyGo.Core.Entities.SystemInfo
+                {
+                    ///data.SystemInfo
+                };
+
+                var sessions = data.SessionsInfo.Select(s => new AddPackageCommand.Session
+                {
+                    ClientHeight = s.ClientHeight,
+                    ClientWidth = s.ClientWidth,
+                    Path = s.PageUri,
+                    CloseDate = s.SessionCloseDate,
+                    StartDate = s.SessionStartDate,
+                    ScreenViewParts = s.ViewAreaDetails.Select(v => new AddPackageCommand.ViewPart
+                    {
+                        FinishDate = v.FinishDate,
+                        StartDate = v.StartDate,
+                        Orientation = v.Orientation,
+                        ScrollLeft = v.CoordX,
+                        ScrollTop = v.CoordY
+                    }).ToArray(),
+                    Scrolls = s.ScrollDetails.Select(scroll => new AddPackageCommand.Scroll
+                    {
+                        FirstTouch = new AddPackageCommand.Click
+                        {
+                            ClientX = scroll.StartTouchData.ClientX,
+                            ClientY = scroll.StartTouchData.ClientY,
+                            Date = scroll.StartTouchData.Date,
+                            Orientation = scroll.StartTouchData.Orientation,
+                            Press = scroll.StartTouchData.Press
+                        },
+                        LastTouch = new AddPackageCommand.Click
+                        {
+                            ClientX = scroll.CloseTouchData.ClientX,
+                            ClientY = scroll.CloseTouchData.ClientY,
+                            Date = scroll.CloseTouchData.Date,
+                            Orientation = scroll.CloseTouchData.Orientation,
+                            Press = scroll.CloseTouchData.Press
+                        }
+                    }).ToArray(),
+                    Clicks = s.TouchDetails.Select(t => new AddPackageCommand.Click
+                    {
+                        ClientX = t.ClientX,
+                        ClientY = t.ClientY,
+                        Date = t.Date,
+                        Orientation = t.Orientation,
+                        Press = t.Press
+                    }).ToArray(),
+                    ControlClicks = s.ControlClickDetails.Select (cc => new AddPackageCommand.ControlClick
+                    {
+                        Date = cc.Date,
+                        Tag = cc.ControlTag
+                    }).ToArray()
+                }).ToArray();
+
+
                 var res = ObjectContainer.Instance.Dispatch(new AddPackageCommand(
                     appId,
                     location,
@@ -68,57 +123,8 @@ namespace AppReadyGo.API.Controllers
                     null,
                     data.ScreenWidth,
                     data.ScreenHeight,
-                    new AppReadyGo.Core.Entities.SystemInfo
-                    {
-                    },
-                    data.SessionsInfo.Select(s => new AddPackageCommand.Session
-                    {
-                        ClientHeight = s.ClientHeight,
-                        ClientWidth = s.ClientWidth,
-                        Path = s.PageUri,
-                        CloseDate = s.SessionCloseDate,
-                        StartDate = s.SessionStartDate,
-                        ScreenViewParts = s.ViewAreaDetails.Select(v => new AddPackageCommand.ViewPart
-                        {
-                            FinishDate = v.FinishDate,
-                            StartDate = v.StartDate,
-                            Orientation = v.Orientation,
-                            ScrollLeft = v.CoordX,
-                            ScrollTop = v.CoordY
-                        }).ToArray(),
-                        Scrolls = s.ScrollDetails.Select(scroll => new AddPackageCommand.Scroll
-                        {
-                            FirstTouch = new AddPackageCommand.Click
-                            {
-                                ClientX = scroll.StartTouchData.ClientX,
-                                ClientY = scroll.StartTouchData.ClientY,
-                                Date = scroll.StartTouchData.Date,
-                                Orientation = scroll.StartTouchData.Orientation,
-                                Press = scroll.StartTouchData.Press
-                            },
-                            LastTouch = new AddPackageCommand.Click
-                            {
-                                ClientX = scroll.CloseTouchData.ClientX,
-                                ClientY = scroll.CloseTouchData.ClientY,
-                                Date = scroll.CloseTouchData.Date,
-                                Orientation = scroll.CloseTouchData.Orientation,
-                                Press = scroll.CloseTouchData.Press
-                            }
-                        }).ToArray(),
-                        Clicks = s.TouchDetails.Select(t => new AddPackageCommand.Click
-                        {
-                            ClientX = t.ClientX,
-                            ClientY = t.ClientY,
-                            Date = t.Date,
-                            Orientation = t.Orientation,
-                            Press = t.Press
-                        }).ToArray(),
-                        ControlClicks = s.ControlClickDetails.Select (cc => new AddPackageCommand.ControlClick
-                        {
-                            Date = cc.Date,
-                            Tag = cc.ControlTag
-                        }).ToArray()
-                    }).ToArray()
+                    systemInfo,
+                    sessions
                     ));
 
                 if (res.Validation.Any())
