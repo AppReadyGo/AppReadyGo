@@ -85,7 +85,7 @@ namespace AppReadyGo.API.Controllers
                             Orientation = v.Orientation,
                             ScrollLeft = v.CoordX,
                             ScrollTop = v.CoordY
-                        }),
+                        }).ToArray(),
                         Scrolls = s.ScrollDetails.Select(scroll => new AddPackageCommand.Scroll
                         {
                             FirstTouch = new AddPackageCommand.Click
@@ -104,7 +104,7 @@ namespace AppReadyGo.API.Controllers
                                 Orientation = scroll.CloseTouchData.Orientation,
                                 Press = scroll.CloseTouchData.Press
                             }
-                        }),
+                        }).ToArray(),
                         Clicks = s.TouchDetails.Select(t => new AddPackageCommand.Click
                         {
                             ClientX = t.ClientX,
@@ -112,15 +112,14 @@ namespace AppReadyGo.API.Controllers
                             Date = t.Date,
                             Orientation = t.Orientation,
                             Press = t.Press
-                        }),
+                        }).ToArray(),
                         ControlClicks = s.ControlClickDetails.Select (cc => new AddPackageCommand.ControlClick
                         {
                             Date = cc.Date,
                             Tag = cc.ControlTag
-                        }
-                        )
-
-                    })));
+                        }).ToArray()
+                    }).ToArray()
+                    ));
 
                 if (res.Validation.Any())
                 {

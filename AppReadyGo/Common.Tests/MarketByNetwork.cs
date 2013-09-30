@@ -9,6 +9,7 @@ using AppReadyGo.API.Models.Market;
 using AppReadyGo.Common.Mails;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AppReadyGo.Core;
+using Newtonsoft.Json;
 
 namespace Common.Tests
 {
@@ -73,29 +74,39 @@ namespace Common.Tests
             }
         }
 
-        public static void ResetPassword(string email)
+        public static PaggingModel<ApplicationModel> GetApps(int userId, int page = 1, int pagesize = 100000)
         {
-            string key = string.Format("{0},{1}", DateTime.Now.AddDays(14).ToString(ForgotPasswordMail.DateFormat), email).EncryptLow(); ;
-            using (var client = new HttpClient() { BaseAddress = Global.ApiBaseAddress })
+            HttpClient client = new HttpClient();
+            client.BaseAddress = Global.ApiBaseAddress;
+
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var response = client.GetAsync("/market/getapps/?userId=" + userId + "&curPage=" + page + "&pageSize=" + pagesize).Result;
+            if (!response.IsSuccessStatusCode)
             {
-                var data = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-                    new KeyValuePair<string, string>("Key", email),
-                    new KeyValuePair<string, string>("NewPassword", "111111"),
-                    new KeyValuePair<string, string>("ConfirmPassword", "111111")
-                });
+                var res = response.Content.ReadAsStringAsync();
+                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
 
-                var responce = client.PostAsync("/ResetPassword", data).Result;
-                var res = responce.Content.ReadAsStringAsync().Result;
-
-                if (!responce.IsSuccessStatusCode)
-                {
-                    Assert.Fail(string.Format("Reset Password - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
-                }
-                else
-                {
-                    Assert.IsTrue(res.Contains("Activation email was sent"), string.Format("Reset Password - wrong responce: {0}", res));
-                }
+                return null;
             }
+            else
+            {
+                var res = response.Content.ReadAsAsync<PaggingModel<ApplicationModel>>().Result;
+                return res;
+            }
+        }
+
+        public static void GetApp(int userId, int appId)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = Global.ApiBaseAddress;
+
+                var response = client.GetByteArrayAsync("/market/getapp/?userId=" + userId + "&appId=" + appId);
+                Assert.IsFalse(response.IsFaulted);
+                Assert.IsTrue(response.Result.Length > 0);
+            }
+
         }
     }
 }

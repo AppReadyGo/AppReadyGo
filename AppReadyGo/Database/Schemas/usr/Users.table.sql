@@ -16,7 +16,7 @@
 	[GenderID]		TINYINT			NULL,
 	[AgeRange]			SMALLINT		NULL,
 	[CountryID]		INT				NULL,
-	[Zip]			NVARCHAR(5)		NULL, 
+	[Zip]			NVARCHAR(10)		NULL, 
     [ThirdParty] BIT NOT NULL
 );
 GO

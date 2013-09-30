@@ -12,6 +12,7 @@ using System.IO;
 using Common.Tests;
 using AppReadyGo.API.Models.Market;
 using AppReadyGo.Core.Entities;
+using AppReadyGo.Common.Tests;
 
 namespace AppReadyGo.Web.Tests
 {
@@ -36,8 +37,8 @@ namespace AppReadyGo.Web.Tests
             string apiUserName = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
             string password = "111111";
 
-            Register(userName, password);
-            Activate(userName);
+            WebByNetwork.Register(userName, password);
+            WebByNetwork.Activate(userName);
 
             // Forgot Password
 
@@ -48,20 +49,20 @@ namespace AppReadyGo.Web.Tests
 
             APIByNetwork.Activate(apiUserName);
 
-            MarketByNetwork.LogOn(apiUserName, password);
+            int? apiUserId = MarketByNetwork.LogOn(apiUserName, password);
 
-            MarketByNetwork.ResetPassword(apiUserName);
+            APIByNetwork.ResetPassword(apiUserName, password);
 
             // After login section
             var cookieContainer = new CookieContainer();
             using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
             using (var client = new HttpClient(handler) { BaseAddress = _baseAddress })
             {
-                LogOn(client, userName, password);
+                WebByNetwork.LogOn(client, userName, password);
 
                 //Change password
 
-                int appId = ApplicationNew(client);
+                int appId = WebByNetwork.ApplicationNew(client);
 
                 ApplicationEdit(client, appId);//(add screenshots)
 
@@ -69,10 +70,16 @@ namespace AppReadyGo.Web.Tests
 
                 ScreenEdit(client, appId, screenId);
 
-                ApplicationPublish(client, appId);
+                WebByNetwork.ApplicationPublish(client, appId, AgeRange.Range25_34, Gender.Women, 4, "NW42RX");
 
+                var apps = MarketByNetwork.GetApps(apiUserId.Value);
+
+                Assert.IsTrue(apps.Collection.Length > 0);
+
+                MarketByNetwork.GetApp(apiUserId.Value, apps.Collection[0].Id);
+
+                AnalyticsByNetwork.SubmitPackageByNetwork(apps.Collection[0].Id, 320, 480);
             }
-            // API Market download
             // API Analytics using
             // Analytics Dashboard
             // Analytics Usage
@@ -87,27 +94,6 @@ namespace AppReadyGo.Web.Tests
             // Log Out
         }
 
-        private void ApplicationPublish(HttpClient client, int appId)
-        {
-            var data = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-                    new KeyValuePair<string, string>("ApplicationId", appId.ToString()),
-                    new KeyValuePair<string, string>("AgeRange", ((int)AgeRange.Range35_44).ToString()),
-                    new KeyValuePair<string, string>("Gender", ((int)Gender.Women).ToString()),
-                    new KeyValuePair<string, string>("Country", "4"),
-                    new KeyValuePair<string, string>("Zip", "NW42RX")
-                });
-            var responce = client.PostAsync("/Application/Publish/" + appId, data).Result;
-            var res = responce.Content.ReadAsStringAsync().Result;
-
-            if (!responce.IsSuccessStatusCode)
-            {
-                Assert.Fail(string.Format("Application Publish - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
-            }
-            else
-            {
-                Assert.IsTrue(res.Contains("<a href=\"/Application/Edit/"), string.Format("Application Publish - wrong responce: {0}", res));
-            }            
-        }
 
         private void ScreenEdit(HttpClient client, int appId, int screenId)
         {
@@ -128,7 +114,7 @@ namespace AppReadyGo.Web.Tests
                 }
                 using (var screenms = new MemoryStream(File.ReadAllBytes(screenPath)))
                 {
-                    var fileContent = CreateFileContent(screenms, "file", Path.GetFileName(screenPath), "image/png");
+                    var fileContent = WebByNetwork.CreateFileContent(screenms, "file", Path.GetFileName(screenPath), "image/png");
                     data.Add(fileContent);
 
                     string prefix = "/Application/" + appId + "/Screen/";
@@ -167,7 +153,7 @@ namespace AppReadyGo.Web.Tests
                 }
                 using (var screenms = new MemoryStream(File.ReadAllBytes(screenPath)))
                 {
-                    var fileContent = CreateFileContent(screenms, "file", Path.GetFileName(screenPath), "image/png");
+                    var fileContent = WebByNetwork.CreateFileContent(screenms, "file", Path.GetFileName(screenPath), "image/png");
                     data.Add(fileContent);
 
                     string prefix = "/Application/" + appId + "/Screen/";
@@ -191,125 +177,6 @@ namespace AppReadyGo.Web.Tests
             }
         }
 
-        private void Register(string username, string password)
-        {
-            using (var client = new HttpClient() { BaseAddress = _baseAddress })
-            {
-                var data = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-                    new KeyValuePair<string, string>("Email", username),
-                    new KeyValuePair<string, string>("Password", password),
-                    new KeyValuePair<string, string>("ConfirmPassword", password)
-                });
-
-                var responce = client.PostAsync("/Account/Register", data).Result;
-                var res = responce.Content.ReadAsStringAsync().Result;
-
-                if (!responce.IsSuccessStatusCode)
-                {
-                    Assert.Fail(string.Format("Register - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
-                }
-                else
-                {
-                    Assert.IsTrue(res.Contains("Activation email was sent"), string.Format("Register - wrong responce: {0}", res));
-                }
-            }
-        }
-
-        private void Activate(string username)
-        {
-            using (var client = new HttpClient() { BaseAddress = _baseAddress })
-            {
-                string key = string.Format("{0},{1}", DateTime.Now.AddDays(14).ToString(ActivationEmail.DateFormat), username).EncryptLow(); ;
-                var responce = client.GetAsync("Account/Activate/?key=" + HttpUtility.UrlEncode(key)).Result;
-                var res = responce.Content.ReadAsStringAsync().Result;
-
-                if (!responce.IsSuccessStatusCode)
-                {
-                    Assert.Fail(string.Format("Activate - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
-                }
-                else
-                {
-                    Assert.IsTrue(res.Contains("<h2>Your account was activated</h2>"), string.Format("Activate - wrong responce: {0}", res));
-                }
-            }
-        }
-
-        private void LogOn(HttpClient client, string username, string password)
-        {
-            var data = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-                    new KeyValuePair<string, string>("UserName", username),
-                    new KeyValuePair<string, string>("Password", password)
-                });
-            var responce = client.PostAsync("/Account/LogOn", data).Result;
-            var res = responce.Content.ReadAsStringAsync().Result;
-
-            if (!responce.IsSuccessStatusCode)
-            {
-                Assert.Fail(string.Format("LogOn - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
-            }
-            else
-            {
-                Assert.IsTrue(res.Contains("<h4>New Application</h4>"), string.Format("LogOn - wrong responce: {0}", res));
-            }
-
-        }
-
-        private int ApplicationNew(HttpClient client)
-        {
-            string packagePath = AppDomain.CurrentDomain.BaseDirectory + @"\..\..\Resources\WhatsApp.apk";
-            string iconPath = AppDomain.CurrentDomain.BaseDirectory + @"\..\..\Resources\Icon1.png";
-            using (var data = new MultipartFormDataContent())
-            {
-                var values = new[]
-                {
-                    new KeyValuePair<string, string>("Name", "WhatsApp Messenger"),
-                    new KeyValuePair<string, string>("Description", @"WhatsApp Messenger is a smartphone messenger available for Android and other smartphones. WhatsApp uses your 3G or WiFi (when available) to message with friends and family. Switch from SMS to WhatsApp to send and receive messages, pictures, audio notes, and video messages. First year FREE! ($0.99 USD/year after)."),
-                    new KeyValuePair<string, string>("Type", "1")
-                };
-
-                foreach (var keyValuePair in values)
-                {
-                    data.Add(new StringContent(keyValuePair.Value), String.Format("\"{0}\"", keyValuePair.Key));
-                }
-                using (var packagems = new MemoryStream(File.ReadAllBytes(packagePath)))
-                using (var iconms = new MemoryStream(File.ReadAllBytes(iconPath)))
-                {
-                    var fileContent = CreateFileContent(packagems, "package_file", Path.GetFileName(packagePath), "application/vnd.android.package-archive");
-                    data.Add(fileContent);
-
-                    fileContent = CreateFileContent(iconms, "icon_file", Path.GetFileName(iconPath), "image/png");
-                    data.Add(fileContent);
-
-                    var responce = client.PostAsync("/Application/New", data).Result;
-                    var res = responce.Content.ReadAsStringAsync().Result;
-
-                    if (!responce.IsSuccessStatusCode)
-                    {
-                        Assert.Fail(string.Format("Application New - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
-                    }
-                    else
-                    {
-                        Assert.IsTrue(res.Contains("<a href=\"/Application/Edit/"), string.Format("Application New - wrong responce: {0}", res));
-                    }
-
-                    int startIndx = res.IndexOf("<a href=\"/Application/Edit/") + 27;
-                    int endIndx = res.IndexOf("\"", startIndx);
-                    return int.Parse(res.Substring(startIndx, endIndx - startIndx));
-                }
-            }
-        }
-
-        private StreamContent CreateFileContent(Stream stream, string key, string fileName, string contentType)
-        {
-            var fileContent = new StreamContent(stream);
-            fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
-            {
-                Name = "\"" + key + "\"",
-                FileName = "\"" + fileName + "\""
-            }; // the extra quotes are key here
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-            return fileContent;
-        }
 
         private void ApplicationEdit(HttpClient client, int appId)
         {
@@ -328,16 +195,16 @@ namespace AppReadyGo.Web.Tests
                 {
                     data.Add(new StringContent(keyValuePair.Value), String.Format("\"{0}\"", keyValuePair.Key));
                 }
-                var fileContent = CreateFileContent(new MemoryStream(), "package_file", string.Empty, "application/vnd.android.package-archive");
+                var fileContent = WebByNetwork.CreateFileContent(new MemoryStream(), "package_file", string.Empty, "application/vnd.android.package-archive");
                 data.Add(fileContent);
-                fileContent = CreateFileContent(new MemoryStream(), "icon_file", string.Empty, "image/png");
+                fileContent = WebByNetwork.CreateFileContent(new MemoryStream(), "icon_file", string.Empty, "image/png");
                 data.Add(fileContent);
                 var fileStreams = new MemoryStream[4];
                 for (int i = 1; i <= 4; i++)
                 {
                     string filename = string.Format(screenShotPath, i);
                     fileStreams[i - 1] = new MemoryStream(File.ReadAllBytes(filename));
-                    fileContent = CreateFileContent(fileStreams[i - 1], "screen_file_" + i, Path.GetFileName(filename), "image/png");
+                    fileContent = WebByNetwork.CreateFileContent(fileStreams[i - 1], "screen_file_" + i, Path.GetFileName(filename), "image/png");
                     data.Add(fileContent);
                 }
 

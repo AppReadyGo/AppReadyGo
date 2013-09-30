@@ -10,6 +10,10 @@ using System.Net.Http.Headers;
 using AppReadyGo.API.Models.Analytics;
 using AppReadyGo.API.Controllers;
 using AppReadyGo.Common;
+using Common.Tests;
+using AppReadyGo.API.Models.Market;
+using AppReadyGo.Core.Entities;
+using AppReadyGo.Common.Tests;
 
 namespace AppReadyGo.API.Tests.Controllers
 {
@@ -43,7 +47,7 @@ namespace AppReadyGo.API.Tests.Controllers
         public void AnalyticsSubmitPackage()
         {
             ObjectContainer.Instance.GetType();
-            var data = CreatePackage();
+            var data = AnalyticsByNetwork.CreateRandomPackage(1, 320, 480);
             var controller = new AnalyticsController();
             var view = controller.SubmitPackage(data);
             Assert.IsTrue(view);
@@ -52,27 +56,34 @@ namespace AppReadyGo.API.Tests.Controllers
         [TestMethod]
         public void AnalyticsSubmitPackageByNetwork()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = _baseAddress;
+            string userName = "ypanshin+web" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string apiUserName = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string password = "111111";
 
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var data = CreatePackage();
-
-            string json = JsonConvert.SerializeObject(data);
-
-
-            var response = client.PostAsJsonAsync("submitpackage", data).Result;
-            if (!response.IsSuccessStatusCode)
+            // New web user
+            WebByNetwork.Register(userName, password);
+            WebByNetwork.Activate(userName);
+            var cookieContainer = new CookieContainer();
+            using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
+            using (var client = new HttpClient(handler) { BaseAddress = Global.BaseAddress })
             {
-                var res = response.Content.ReadAsStringAsync();
-                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
-            }
-            else
-            {
-                var res = response.Content.ReadAsAsync<bool>();
-                Assert.IsTrue(res.Result);
+                client.Timeout = new TimeSpan(0, 3, 0);
+                WebByNetwork.LogOn(client, userName, password);
+                // Add two applications
+                int appId = WebByNetwork.ApplicationNew(client, "App 1", "Some description", 1, @"\..\..\..\Web.Tests\Resources\");
+
+                // New api user
+                var data = new UserModel { ContryId = 4, Gender = Gender.Women, AgeRange = AgeRange.Range12_17, Zip = "NW42RX", Email = apiUserName, FirstName = "xxx", Password = password };
+                MarketByNetwork.Register(data);
+                APIByNetwork.Activate(data.Email);
+                var apiUserId = MarketByNetwork.LogOn(data.Email, data.Password);
+
+                WebByNetwork.ApplicationPublish(client, appId, AgeRange.Range12_17, Gender.Women, 4, "NW42RX");
+
+                var appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                Assert.IsTrue(appRes.Collection.Length > 0);
+
+                AnalyticsByNetwork.SubmitPackageByNetwork(appRes.Collection[0].Id, 320, 480);
             }
         }
 
@@ -110,78 +121,6 @@ namespace AppReadyGo.API.Tests.Controllers
                 return File.ReadAllText(path);
             }
             return string.Empty;
-        }
-
-        private static Package CreatePackage()
-        {
-            var data = new Package
-            {
-                ClientKey = "123-123-0001",
-                ScreenHeight = 100,
-                ScreenWidth = 200,
-                SystemInfo = new SystemInfo
-                {
-                },
-                SessionsInfo = new SessionInfo[]
-                {
-                    new SessionInfo
-                    {
-                        ClientHeight = 100,
-                        ClientWidth = 200,
-                        PageUri = "home",
-                        TouchDetails = new TouchDetails[]
-                        {
-                            new TouchDetails
-                            {
-                                ClientX = 50,
-                                ClientY = 40,
-                                Date = DateTime.UtcNow.AddMinutes(-1),
-                                Orientation = 1
-                            },
-                            new TouchDetails
-                            {
-                                ClientX = 40,
-                                ClientY = 30,
-                                Date = DateTime.UtcNow.AddSeconds(-30),
-                                Orientation = 1
-                            }
-                        },
-                        ScrollDetails = new ScrollDetails[]
-                        {
-                            new ScrollDetails
-                            {
-                                // TODO: Yura: Why do we need all the data? lets take the data from first and last touch in touch details array
-                                CloseTouchData = new TouchDetails
-                                {
-                                    ClientX = 40,
-                                    ClientY = 30,
-                                    Date = DateTime.UtcNow.AddSeconds(-30),
-                                    Orientation = 1
-                                },
-                                StartTouchData = new TouchDetails
-                                {
-                                    ClientX = 50,
-                                    ClientY = 40,
-                                    Date = DateTime.UtcNow.AddMinutes(-1),
-                                    Orientation = 1
-                                }
-                            }
-                        },
-                        ViewAreaDetails = new ViewAreaDetails[]
-                        {
-                            new ViewAreaDetails
-                            {
-                                    CoordX = 0,
-                                    CoordY = 20,
-                                    StartDate = DateTime.UtcNow.AddSeconds(-30),
-                                    FinishDate = DateTime.UtcNow.AddSeconds(-25)
-                            }
-                        }
-                    }
-                }
-            };
-            
-            return data;
         }
     }
 }

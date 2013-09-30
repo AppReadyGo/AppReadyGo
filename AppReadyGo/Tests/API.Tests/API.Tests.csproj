@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AnalyticsClientTest.cs" />
+    <Compile Include="Controllers\APIHomeControllerTest.cs" />
     <Compile Include="Controllers\MarketClientTest.cs" />
     <Compile Include="Controllers\MailTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
