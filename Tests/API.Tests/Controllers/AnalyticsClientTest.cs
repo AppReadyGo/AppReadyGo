@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net;
 using Newtonsoft.Json.Linq;
@@ -83,7 +84,7 @@ namespace AppReadyGo.API.Tests.Controllers
                 var appRes = MarketByNetwork.GetApps(apiUserId.Value);
                 Assert.IsTrue(appRes.Collection.Length > 0);
 
-                AnalyticsByNetwork.SubmitPackageByNetwork(appRes.Collection[0].Id, 320, 480);
+                AnalyticsByNetwork.SubmitPackageByNetwork(appRes.Collection.Select(a => a.Id).Max(), 320, 480);
             }
         }
 

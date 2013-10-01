@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -75,10 +76,11 @@ namespace AppReadyGo.Web.Tests
                 var apps = MarketByNetwork.GetApps(apiUserId.Value);
 
                 Assert.IsTrue(apps.Collection.Length > 0);
+                var lastAppId = apps.Collection.Select(a => a.Id).Max();
 
-                MarketByNetwork.GetApp(apiUserId.Value, apps.Collection[0].Id);
+                MarketByNetwork.GetApp(apiUserId.Value, lastAppId);
 
-                AnalyticsByNetwork.SubmitPackageByNetwork(apps.Collection[0].Id, 320, 480);
+                AnalyticsByNetwork.SubmitPackageByNetwork(lastAppId, 320, 480);
             }
             // API Analytics using
             // Analytics Dashboard
