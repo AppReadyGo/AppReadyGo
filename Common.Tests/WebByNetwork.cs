@@ -158,5 +158,56 @@ namespace Common.Tests
                 Assert.IsTrue(res.Contains("<a href=\"/Application/Edit/"), string.Format("Application Publish - wrong responce: {0}", res));
             }
         }
+
+        public static Tuple<int, string, int, int>[] ApplicationDashboard(HttpClient client)
+        {
+            var responce = client.GetAsync("/Application/").Result;
+            var res = responce.Content.ReadAsStringAsync().Result;
+
+            if (!responce.IsSuccessStatusCode)
+            {
+                Assert.Fail(string.Format("Application Index - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+            }
+            else
+            {
+                Assert.IsTrue(res.Contains("<a href=\"/Application/Edit/"), string.Format("Application Publish - wrong responce: {0}", res));
+            }
+
+            Tuple<int, string, int, int> item = null;
+            int indx = 0;
+            var list = new List<Tuple<int, string, int, int>>();
+            while ((indx = GetDashboardRow(res, out item, indx)) > 0)
+            {
+                list.Add(item);
+            }
+
+            return list.ToArray();
+        }
+
+        private static int GetDashboardRow(string responce, out Tuple<int, string, int, int> item, int startIndx = 0)
+        {
+            item = null;
+
+            int indx = responce.IndexOf("<tr class=\"portf alt\" appid=\"", startIndx);
+
+            if (indx < 0) return -1;
+
+            indx += 29;
+            int endIdx = responce.IndexOf("\"", indx);
+            int id = int.Parse(responce.Substring(indx, endIdx - indx));
+            indx = responce.IndexOf("<div class=\"status-", indx) + 19;
+            endIdx = responce.IndexOf("\"", indx);
+            string status = responce.Substring(indx, endIdx - indx);
+            indx = responce.IndexOf("Downloaded: ", indx) + 12;
+            endIdx = responce.IndexOf("&nbsp;", indx);
+            int downloaded = int.Parse(responce.Substring(indx, endIdx - indx).Trim());
+            indx = responce.IndexOf("Live visits: ", indx) + 13;
+            endIdx = responce.IndexOf("</td>", indx);
+            int visits = int.Parse(responce.Substring(indx, endIdx - indx).Trim());
+
+            item = new Tuple<int, string, int, int>(id, status, downloaded, visits);
+            
+            return endIdx;
+        }
     }
 }
