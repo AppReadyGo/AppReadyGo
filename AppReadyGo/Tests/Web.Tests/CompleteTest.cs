@@ -81,8 +81,13 @@ namespace AppReadyGo.Web.Tests
                 MarketByNetwork.GetApp(apiUserId.Value, lastAppId);
 
                 AnalyticsByNetwork.SubmitPackageByNetwork(lastAppId, 320, 480);
+
+                var items = WebByNetwork.ApplicationDashboard(client);
+
+                Assert.AreEqual("ok", items[0].Item2);
+                Assert.AreEqual(1, items[0].Item3);
+                Assert.AreEqual(5, items[0].Item4);
             }
-            // API Analytics using
             // Analytics Dashboard
             // Analytics Usage
             // Analytics TouchMap

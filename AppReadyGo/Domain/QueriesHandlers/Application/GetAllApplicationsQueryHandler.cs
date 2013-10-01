@@ -142,7 +142,7 @@ namespace AppReadyGo.Domain.Queries.Application
 
                 application.Visits = count != null ? count.VisitsCount : 0;
 
-                application.IsActive = count != null && count.LastRecivedDataDate < dt ? true : false;
+                application.IsActive = count != null && count.LastRecivedDataDate > dt ? true : false;
 
                 application.Published = appPublished.Contains(application.Id);
 

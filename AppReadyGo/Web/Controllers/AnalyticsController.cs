@@ -79,7 +79,6 @@ namespace AppReadyGo.Controllers
                                             }).ToArray()
                 };
 
-                // dashboardModel.Title = "Dashboard";
                 return View("~/Views/Analytics/Dashboard.cshtml", dashboardModel);
             }
             else
