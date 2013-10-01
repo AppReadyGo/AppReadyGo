@@ -73,6 +73,8 @@ namespace AppReadyGo.Domain.CommandHandlers.API
                 }
 
                 session.SaveOrUpdate(pageView);
+
+                session.Flush();
             }
 
             return cmd.Sessions.Count();

@@ -18,7 +18,7 @@ namespace Common.Tests
             using (var client = new HttpClient())
             {
                 client.BaseAddress = Global.ApiBaseAddress;
-                client.Timeout = new TimeSpan(0, 3, 0);
+                client.Timeout = new TimeSpan(0, 5, 0);
 
                 // Add an Accept header for JSON format.
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -48,7 +48,7 @@ namespace Common.Tests
 
             var data = new Package
             {
-                ClientKey = "123-" + appId.ToString("0000"),
+                ClientKey = "MA-" + appId.ToString("000000"),
                 ScreenHeight = height,
                 ScreenWidth = width,
                 SystemInfo = new SystemInfo
@@ -78,24 +78,12 @@ namespace Common.Tests
                 }
                 session.TouchDetails = touchDetails.ToArray();
                 var scrollDetails = new List<ScrollDetails>();
-                for (int y = 0; y < 10; y++)
+                for (int y = 0; y < 2; y++)
                 {
                     scrollDetails.Add(new ScrollDetails
                     {
-                        StartTouchData = new TouchDetails
-                        {
-                            ClientX = rnd.Next(0, width),
-                            ClientY = rnd.Next(0, height),
-                            Date = DateTime.UtcNow.AddSeconds((i * 10) + y),
-                            Orientation = 1
-                        },
-                        CloseTouchData = new TouchDetails
-                        {
-                            ClientX = rnd.Next(0, width),
-                            ClientY = rnd.Next(0, height),
-                            Date = DateTime.UtcNow.AddSeconds((i * 10) + y),
-                            Orientation = 1
-                        }
+                        StartTouchData = touchDetails[y],
+                        CloseTouchData = touchDetails[y+2]
                     });
                 }
                 session.ScrollDetails = scrollDetails.ToArray();

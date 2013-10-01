@@ -60,7 +60,7 @@ namespace AppReadyGo.Domain
 
             });
 #if DEBUG
-            cfg.SetInterceptor(new SQLInterceptor());
+            //cfg.SetInterceptor(new SQLInterceptor());
 #endif
             cfg.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
 
