@@ -45,7 +45,7 @@ namespace AppReadyGo.Web.Tests
 
             // Reset Password
 
-            var data = new UserModel { ContryId = 4, Gender = Gender.Women, AgeRange = AgeRange.Range35_44, Zip = "NW42RX", Email = apiUserName, FirstName = "xxx", Password = password };
+            var data = new UserModel { ContryId = 4, Gender = Gender.Women, AgeRange = AgeRange.Range25_34, Zip = "NW42RX", Email = apiUserName, FirstName = "xxx", Password = password };
             MarketByNetwork.Register(data);
 
             APIByNetwork.Activate(apiUserName);
@@ -59,6 +59,7 @@ namespace AppReadyGo.Web.Tests
             using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
             using (var client = new HttpClient(handler) { BaseAddress = _baseAddress })
             {
+                client.Timeout = new TimeSpan(0, 5, 0);
                 WebByNetwork.LogOn(client, userName, password);
 
                 //Change password
@@ -75,18 +76,25 @@ namespace AppReadyGo.Web.Tests
 
                 var apps = MarketByNetwork.GetApps(apiUserId.Value);
 
-                Assert.IsTrue(apps.Collection.Length > 0);
-                var lastAppId = apps.Collection.Select(a => a.Id).Max();
+                Assert.IsTrue(apps.Collection.Any(a => a.Id == appId), "Application was not published correctlly");
 
-                MarketByNetwork.GetApp(apiUserId.Value, lastAppId);
+                //MarketByNetwork.GetApp(apiUserId.Value, appId);
 
-                AnalyticsByNetwork.SubmitPackageByNetwork(lastAppId, 320, 480);
+                AnalyticsByNetwork.SubmitPackageByNetwork(appId, 320, 480);
 
                 var items = WebByNetwork.ApplicationDashboard(client);
 
                 Assert.AreEqual("ok", items[0].Item2);
                 Assert.AreEqual(1, items[0].Item3);
                 Assert.AreEqual(5, items[0].Item4);
+
+
+
+
+
+                WebByNetwork.ApplicationRemove(client, appId);
+
+                WebByNetwork.LogOff(client);
             }
             // Analytics Dashboard
             // Analytics Usage
@@ -96,9 +104,8 @@ namespace AppReadyGo.Web.Tests
             // Analytics ClickHeatMapImage
             // Analytics ViewHeatMapImage
             // Analytics ViewHeatMapImage
+            // Application Unpublish
             // Screen Remove
-            // Application Remove
-            // Log Out
         }
 
 

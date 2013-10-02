@@ -38,7 +38,7 @@ namespace Common.Tests
             if (!response.IsSuccessStatusCode)
             {
                 var res = response.Content.ReadAsStringAsync().Result;
-                Assert.Fail(string.Format("{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, res));
+                Assert.Fail(string.Format("API Register - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, res));
             }
             else
             {
@@ -61,7 +61,7 @@ namespace Common.Tests
             if (!response.IsSuccessStatusCode)
             {
                 var res = response.Content.ReadAsStringAsync();
-                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
+                Assert.Fail(string.Format("API Register - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, res));
 
                 return null;
             }
@@ -85,7 +85,7 @@ namespace Common.Tests
             if (!response.IsSuccessStatusCode)
             {
                 var res = response.Content.ReadAsStringAsync();
-                Assert.Fail(string.Format("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase));
+                Assert.Fail(string.Format("API Register - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, res));
 
                 return null;
             }
@@ -103,8 +103,8 @@ namespace Common.Tests
                 client.BaseAddress = Global.ApiBaseAddress;
 
                 var response = client.GetByteArrayAsync("/market/getapp/?userId=" + userId + "&appId=" + appId);
-                Assert.IsFalse(response.IsFaulted);
-                Assert.IsTrue(response.Result.Length > 0);
+                Assert.IsFalse(response.IsFaulted, "API GetApp - Fatal error: the response is faulted");
+                Assert.IsTrue(response.Result.Length > 0, "API GetApp - Fatal error: the result length is zero");
             }
 
         }

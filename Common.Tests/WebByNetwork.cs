@@ -31,11 +31,11 @@ namespace Common.Tests
 
                 if (!responce.IsSuccessStatusCode)
                 {
-                    Assert.Fail(string.Format("Register - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+                    Assert.Fail(string.Format("Web Register - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
                 }
                 else
                 {
-                    Assert.IsTrue(res.Contains("Activation email was sent"), string.Format("Register - wrong responce: {0}", res));
+                    Assert.IsTrue(res.Contains("Activation email was sent"), string.Format("Web Register - wrong responce: {0}", res));
                 }
             }
         }
@@ -50,11 +50,11 @@ namespace Common.Tests
 
                 if (!responce.IsSuccessStatusCode)
                 {
-                    Assert.Fail(string.Format("Activate - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+                    Assert.Fail(string.Format("Web Activate - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
                 }
                 else
                 {
-                    Assert.IsTrue(res.Contains("<h2>Your account was activated</h2>"), string.Format("Activate - wrong responce: {0}", res));
+                    Assert.IsTrue(res.Contains("<h2>Your account was activated</h2>"), string.Format("Web Activate - wrong responce: {0}", res));
                 }
             }
         }
@@ -70,11 +70,11 @@ namespace Common.Tests
 
             if (!responce.IsSuccessStatusCode)
             {
-                Assert.Fail(string.Format("LogOn - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+                Assert.Fail(string.Format("Web LogOn - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
             }
             else
             {
-                Assert.IsTrue(res.Contains("<h4>New Application</h4>"), string.Format("LogOn - wrong responce: {0}", res));
+                Assert.IsTrue(res.Contains("<h4>New Application</h4>"), string.Format("Web LogOn - wrong responce: {0}", res));
             }
         }
 
@@ -111,11 +111,11 @@ namespace Common.Tests
 
                     if (!responce.IsSuccessStatusCode)
                     {
-                        Assert.Fail(string.Format("Application New - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+                        Assert.Fail(string.Format("Web Application New - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
                     }
                     else
                     {
-                        Assert.IsTrue(res.Contains("<a href=\"/Application/Edit/"), string.Format("Application New - wrong responce: {0}", res));
+                        Assert.IsTrue(res.Contains("<a href=\"/Application/Edit/"), string.Format("Web Application New - wrong responce: {0}", res));
                     }
 
                     int startIndx = res.LastIndexOf("<a href=\"/Application/Edit/") + 27;
@@ -151,11 +151,11 @@ namespace Common.Tests
 
             if (!responce.IsSuccessStatusCode)
             {
-                Assert.Fail(string.Format("Application Publish - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+                Assert.Fail(string.Format("Web Application Publish - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
             }
             else
             {
-                Assert.IsTrue(res.Contains("<a href=\"/Application/Edit/"), string.Format("Application Publish - wrong responce: {0}", res));
+                Assert.IsTrue(res.Contains("<a href=\"/Application/Edit/"), string.Format("Web Application Publish - wrong responce: {0}", res));
             }
         }
 
@@ -166,11 +166,11 @@ namespace Common.Tests
 
             if (!responce.IsSuccessStatusCode)
             {
-                Assert.Fail(string.Format("Application Index - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+                Assert.Fail(string.Format("Web Application Index - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
             }
             else
             {
-                Assert.IsTrue(res.Contains("<a href=\"/Application/Edit/"), string.Format("Application Publish - wrong responce: {0}", res));
+                Assert.IsTrue(res.Contains("<a href=\"/Application/Edit/"), string.Format("Web Application Publish - wrong responce: {0}", res));
             }
 
             Tuple<int, string, int, int> item = null;
@@ -208,6 +208,36 @@ namespace Common.Tests
             item = new Tuple<int, string, int, int>(id, status, downloaded, visits);
             
             return endIdx;
+        }
+
+        public static void ApplicationRemove(HttpClient client, int appId_1)
+        {
+            var responce = client.GetAsync("/Application/Remove/" + appId_1).Result;
+            var res = responce.Content.ReadAsStringAsync().Result;
+
+            if (!responce.IsSuccessStatusCode)
+            {
+                Assert.Fail(string.Format("Web Application Remove - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+            }
+            else
+            {
+                Assert.IsTrue(res.Contains("<h4>New Application</h4>"), string.Format("Web Application Remove - wrong responce: {0}", res));
+            }
+        }
+
+        public static void LogOff(HttpClient client)
+        {
+            var responce = client.GetAsync("/Account/LogOff").Result;
+            var res = responce.Content.ReadAsStringAsync().Result;
+
+            if (!responce.IsSuccessStatusCode)
+            {
+                Assert.Fail(string.Format("Web Account LogOff - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
+            }
+            else
+            {
+                Assert.IsTrue(res.Contains("<title>AppReadyGo -   Home  </title>"), string.Format("Web Account LogOff - wrong responce: {0}", res));
+            }
         }
     }
 }

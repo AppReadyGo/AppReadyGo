@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="APITests.cs" />
     <Compile Include="ApplicationTests.cs" />
+    <Compile Include="SecurityContext.cs" />
     <Compile Include="UserTests.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
