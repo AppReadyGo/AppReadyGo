@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AppReadyGo.Core.Entities;
 
 namespace AppReadyGo.Core.Commands.Application
 {
-    public class RemoveApplicationCommand : ICommand<int>
+    public class RemoveApplicationCommand : ICommand<RemoveApplicationCommandResult>
     {
         public int Id { get; protected set; }
 
@@ -14,12 +15,27 @@ namespace AppReadyGo.Core.Commands.Application
 
         public IEnumerable<ValidationResult> Validate(IValidationContext validation)
         {
-            yield break;
+            if (!validation.IsApplicationExists(this.Id))
+            {
+                yield return new ValidationResult(ErrorCode.WrongParameter, string.Format("The application {0} does not exists", this.Id));
+            }
         }
 
         public IEnumerable<ValidationResult> ValidatePermissions(ISecurityContext security)
         {
             yield break;
         }
+
+    }
+
+    public class RemoveApplicationCommandResult
+    {
+        public int AppId { get; set; }
+
+        public IEnumerable<Tuple<int, string>> Screens { get; set; }
+
+        public IEnumerable<Tuple<int, string>> Screenshots { get; set; }
+
+        public string IconExt { get; set; }
     }
 }

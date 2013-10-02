@@ -4,6 +4,7 @@ using AppReadyGo.Domain.CommandHandlers;
 using AppReadyGo.Common;
 using NHibernate;
 using AppReadyGo.Domain.Model.Users;
+using AppReadyGo.Core;
 
 namespace Domain.Tests
 {
@@ -27,10 +28,11 @@ namespace Domain.Tests
         [TestMethod]
         public void IsEmailExistsForNewUser()
         {
-            int userId = UserTests.CreateMember(database).Id;
+            var member = UserTests.CreateMember(database);
+            var details = new CurrentUserDetails(member.Id, member.Type, member.Email, member.Email);
             using (ISession session = database.OpenSession())
             {
-                var validation = new ValidationContext(session);
+                var validation = new ValidationContext(session, new MockSecurityContext(details));
                 Assert.IsTrue(validation.IsEmailExists("test@test.com"));
                 Assert.IsFalse(validation.IsEmailExists("test1@test.com"));
             }
@@ -39,11 +41,12 @@ namespace Domain.Tests
         [TestMethod]
         public void IsEmailExistsForExistsUser()
         {
-            int userId = UserTests.CreateMember(database, "test1@test.com").Id;
-            userId = UserTests.CreateMember(database).Id;
+            var member = UserTests.CreateMember(database, "test1@test.com");
+            int userId = UserTests.CreateMember(database).Id;
+            var details = new CurrentUserDetails(member.Id, member.Type, member.Email, member.Email);
             using (ISession session = database.OpenSession())
             {
-                var validation = new ValidationContext(session);
+                var validation = new ValidationContext(session, new MockSecurityContext(details));
                 Assert.IsFalse(validation.IsEmailExists("test@test.com", userId));
                 Assert.IsTrue(validation.IsEmailExists("test1@test.com", userId));
             }

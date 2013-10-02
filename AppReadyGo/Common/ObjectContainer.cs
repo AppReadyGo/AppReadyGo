@@ -167,7 +167,7 @@ namespace AppReadyGo.Common
                 {
                     var list = new List<ValidationResult>();
                     list.AddRange(command.ValidatePermissions(container.Resolve<ISecurityContext>()));
-                    list.AddRange(command.Validate(new ValidationContext(session)));
+                    list.AddRange(command.Validate(new ValidationContext(session, container.Resolve<ISecurityContext>())));
                     commandResult.Validation = list;
                     if (!list.Any())
                     {

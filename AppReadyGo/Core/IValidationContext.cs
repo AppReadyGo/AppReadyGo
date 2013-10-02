@@ -14,5 +14,7 @@ namespace AppReadyGo.Core
         bool IsCorrectPassword(string password);
 
         bool IsApplicationExists(int appId);
+
+        bool IsCurrentUserApplicationExists(int appId);
     }
 }

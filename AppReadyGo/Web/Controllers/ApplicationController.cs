@@ -263,15 +263,44 @@ namespace AppReadyGo.Controllers
 
         public ActionResult Remove(int id)
         {
-            var app = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(id));
-            if (app == null)
+            var res = ObjectContainer.Instance.Dispatch(new RemoveApplicationCommand(id));
+            if (res.Validation.Any())
             {
+                log.WriteError("Error to remove application: {0} with user id: {1}", id, ObjectContainer.Instance.CurrentUserDetails.Id);
                 return Redirect("/Error");
             }
             else
             {
-                // TODO: remove all screens, screenshots and icon files
-                ObjectContainer.Instance.Dispatch(new RemoveApplicationCommand(id));
+                // remove all screens, screenshots, package and icon file
+                var path = Path.Combine(Server.MapPath("~/Restricted/UserPackages/"), res.Result.AppId.ToString());
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+
+                path = path = Path.Combine(Server.MapPath("~/Restricted/Icons/"), res.Result.AppId + res.Result.IconExt);
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+
+                foreach (var item in res.Result.Screens)
+                {
+                    path = path = Path.Combine(Server.MapPath("~/Restricted/Screens/"), item.Item1 + item.Item2);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                }
+
+                foreach (var item in res.Result.Screenshots)
+                {
+                    path = path = Path.Combine(Server.MapPath("~/Restricted/Screenshots/"), item.Item1 + item.Item2);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                }
             }
             return Redirect("/Application");
         }
