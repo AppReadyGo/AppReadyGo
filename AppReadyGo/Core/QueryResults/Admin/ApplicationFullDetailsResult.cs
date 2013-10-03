@@ -17,5 +17,7 @@ namespace AppReadyGo.Core.QueryResults.Users
         public int Screenshots { get; set; }
 
         public int Screens { get; set; }
+
+        public string UserEmail { get; set; }
     }
 }

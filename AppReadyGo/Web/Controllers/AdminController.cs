@@ -1,28 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using AppReadyGo.Common;
+using AppReadyGo.Common.Mails;
 using AppReadyGo.Core.Commands.Admin;
+using AppReadyGo.Core.Commands.Application;
+using AppReadyGo.Core.Commands.Content;
+using AppReadyGo.Core.Commands.Users;
 using AppReadyGo.Core.Logger;
 using AppReadyGo.Core.Queries.Admin;
-using AppReadyGo.Controllers.Master;
-using AppReadyGo.Core;
-using AppReadyGo.Model;
-using AppReadyGo.Model.Master;
-using AppReadyGo.Common;
-using System.Web.Security;
-using AppReadyGo.Core.Commands.Users;
-using AppReadyGo.Common.Mails;
-using AppReadyGo.Web.Model.Pages.Admin;
-using AppReadyGo.Web.Controllers;
 using AppReadyGo.Core.Queries.Content;
-using AppReadyGo.Web.Common;
-using AppReadyGo.Web.Common.Mails;
 using AppReadyGo.Core.QueryResults.Admin;
-using AppReadyGo.Core.Commands.Content;
-using AppReadyGo.Core.Commands.Application;
+using AppReadyGo.Model;
+using AppReadyGo.Web.Model.Pages.Admin;
 
 namespace AppReadyGo.Controllers
 {
@@ -231,7 +223,8 @@ namespace AppReadyGo.Controllers
                     IconExt = a.IconExt,
                     Published = a.Published,
                     PackageFileName = a.PackageFileName,
-                    Downloaded = a.Downloaded
+                    Downloaded = a.Downloaded,
+                    UserEmail = a.UserEmail
                 }).ToArray()
             };
             return View(model);
