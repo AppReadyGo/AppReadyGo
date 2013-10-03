@@ -29,7 +29,8 @@ namespace AppReadyGo.Web.Model.Pages.Admin
             Staff,
             Members,
             ApiMembers,
-            ContentManager
+            ContentManager,
+            Applications
         }
     }
 }

@@ -152,6 +152,7 @@
     <Compile Include="Messenger.cs" />
     <Compile Include="ObjectSerializator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\Admin\GetAllApplicationsQuery.cs" />
     <Compile Include="Queries\Content\GetItemQuery.cs" />
     <Compile Include="Queries\Content\GetAllItemsQuery.cs" />
     <Compile Include="Queries\Content\GetAllPageItemsQuery.cs" />
@@ -162,6 +163,8 @@
     <Compile Include="Queries\Admin\GetAllApiMembersQuery.cs" />
     <Compile Include="Queries\Admin\GetAllMembersQuery.cs" />
     <Compile Include="Queries\Admin\GetAllStaffQuery.cs" />
+    <Compile Include="QueryResults\Admin\AllApplicationsResult.cs" />
+    <Compile Include="QueryResults\Admin\ApplicationFullDetailsResult.cs" />
     <Compile Include="QueryResults\Admin\GetAllKeyItemsQueryResult.cs" />
     <Compile Include="QueryResults\Admin\ParentItemResult.cs" />
     <Compile Include="QueryResults\Admin\KeyDetailsResult.cs" />

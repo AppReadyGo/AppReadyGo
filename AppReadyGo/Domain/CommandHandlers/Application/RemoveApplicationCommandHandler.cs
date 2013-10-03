@@ -20,7 +20,19 @@ namespace AppReadyGo.Domain.CommandHandlers.Application
                 Screens = app.Screens.Select(s => new Tuple<int,string>(s.Id, s.FileExtension)).ToArray(),
                 Screenshots = app.Screenshots.Select(s => new Tuple<int, string>(s.Id, s.FileExtension)).ToArray()
             };
-
+            foreach (var p in app.Publishes)
+            {
+                session.Delete(p);
+            }
+            foreach (var s in app.Screenshots)
+            {
+                session.Delete(s);
+            }
+            //foreach (var s in app.Screens)
+            //{
+            //    session.Delete(s);
+            //}
+            session.Flush();
             session.Delete(app);
             return result;
         }

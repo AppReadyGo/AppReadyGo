@@ -288,6 +288,8 @@
     <Compile Include="Model\Pages\Admin\ContentPagesModel.cs" />
     <Compile Include="Model\Pages\Admin\ContentItemDetailsModel.cs" />
     <Compile Include="Model\Pages\Admin\ContentManagerModel.cs" />
+    <Compile Include="Model\Pages\Admin\ApplicationsPagingModel.cs" />
+    <Compile Include="Model\Pages\Admin\ApplicationDetailsModel.cs" />
     <Compile Include="Model\Pages\Admin\LogsModel.cs" />
     <Compile Include="Model\Pages\Admin\MemberDetailsModel.cs" />
     <Compile Include="Model\Pages\Admin\MembersPagingModel.cs" />
@@ -865,6 +867,7 @@
     <Content Include="Views\Admin\EditContentItem.cshtml" />
     <Content Include="Views\Admin\Forms\LogsFilter.cshtml" />
     <Content Include="Views\Admin\ApiMembers.cshtml" />
+    <Content Include="Views\Admin\Applications.cshtml" />
     <None Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Logs.cshtml" />
     <None Include="Views\Admin\Members.cshtml" />
