@@ -28,10 +28,6 @@ namespace AppReadyGo.Domain.CommandHandlers.Application
             {
                 session.Delete(s);
             }
-            //foreach (var s in app.Screens)
-            //{
-            //    session.Delete(s);
-            //}
             session.Flush();
             session.Delete(app);
             return result;
