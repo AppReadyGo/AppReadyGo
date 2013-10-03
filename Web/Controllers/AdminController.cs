@@ -22,6 +22,7 @@ using AppReadyGo.Web.Common;
 using AppReadyGo.Web.Common.Mails;
 using AppReadyGo.Core.QueryResults.Admin;
 using AppReadyGo.Core.Commands.Content;
+using AppReadyGo.Core.Commands.Application;
 
 namespace AppReadyGo.Controllers
 {
@@ -190,6 +191,56 @@ namespace AppReadyGo.Controllers
                 }).ToArray()
             };
             return View(model);
+        }
+
+        public ActionResult Applications(string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")
+        {
+            var orderBy = string.IsNullOrEmpty(orderby) ? GetAllApplicationsQuery.OrderByColumn.Name : (GetAllApplicationsQuery.OrderByColumn)Enum.Parse(typeof(GetAllApplicationsQuery.OrderByColumn), orderby, true);
+            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == GetAllApplicationsQuery.OrderByColumn.CreateDate) ? false : true) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
+            var data = ObjectContainer.Instance.RunQuery(new GetAllApplicationsQuery(srch, orderBy, asc, cp, 15));
+
+            var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
+            var model = new ApplicationsPagingModel
+            {
+                IsOnePage = data.TotalPages == 1,
+                Count = data.Count,
+                PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
+                NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
+                TotalPages = data.TotalPages,
+                CurPage = data.CurPage,
+                UrlPart = string.Concat(searchStrUrlPart, string.IsNullOrEmpty(orderby) ? string.Empty : string.Concat("&orderby=", orderby), string.IsNullOrEmpty(order) ? string.Empty : string.Concat("&order=", order)),
+                SearchStrUrlPart = searchStrUrlPart,
+                SearchStr = srch,
+                NameOrder = orderBy == GetAllApplicationsQuery.OrderByColumn.Name && asc ? "desc" : "asc",
+                TypeOrder = orderBy == GetAllApplicationsQuery.OrderByColumn.Type && asc ? "desc" : "asc",
+                CreateDateOrder = orderBy == GetAllApplicationsQuery.OrderByColumn.CreateDate && asc ? "desc" : "asc",
+                Applications = data.Applications.Select((a, i) => new ApplicationDetailsModel
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    UserId = a.UserId,
+                    Index = i,
+                    IsAlternative = i % 2 != 0,
+                    CreateDate = a.CreateDate.ToString("dd MMM yyyy"),
+                    Screenshots = a.Screenshots,
+                    Screens = a.Screens,
+                    Visits = a.Visits,
+                    Type = a.Type,
+                    IsActive = a.IsActive,
+                    Description = a.Description,
+                    IconExt = a.IconExt,
+                    Published = a.Published,
+                    PackageFileName = a.PackageFileName,
+                    Downloaded = a.Downloaded
+                }).ToArray()
+            };
+            return View(model);
+        }
+
+        public ActionResult DeleteApplication(int id)
+        {
+            var result = ObjectContainer.Instance.Dispatch(new RemoveApplicationCommand(id));
+            return RedirectToAction("Applications");
         }
 
         public ActionResult DeleteMember(int id)
