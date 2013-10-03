@@ -36,6 +36,10 @@
 			<th scope='col' class='manage-column column-activated'>Package</th>
 			<th scope='col' class='manage-column column-special-access'>Published</th>
 			<th scope='col' class='manage-column column-last-access'>Downloaded</th>	
+			<th scope='col' class='manage-column column-last-access'>Screens</th>	
+			<th scope='col' class='manage-column column-last-access'>Screenshots</th>	
+			<th scope='col' class='manage-column column-last-access'>Visits</th>	
+			<th scope='col' class='manage-column column-last-access'>Owner</th>	
 			<th scope='col' class='manage-column column-registred sortable'><a href="/Admin/Applications?cp=1&orderby=createdate&order=@(Model.CreateDateOrder + Model.SearchStrUrlPart)"><span>Create Date</span><span class="sorting-indicator"></span></a></th>	
 		</tr>
 		</thead>
@@ -46,6 +50,10 @@
 			<th scope='col' class='manage-column column-activated'>Package</th>
 			<th scope='col' class='manage-column column-special-access'>Published</th>
 			<th scope='col' class='manage-column column-last-access'>Downloaded</th>	
+			<th scope='col' class='manage-column column-last-access'>Screens</th>	
+			<th scope='col' class='manage-column column-last-access'>Screenshots</th>	
+			<th scope='col' class='manage-column column-last-access'>Visits</th>	
+			<th scope='col' class='manage-column column-last-access'>Owner</th>	
 			<th scope='col' class='manage-column column-registred sortable'><a href="/Admin/Applications?cp=1&orderby=createdate&order=@(Model.CreateDateOrder + Model.SearchStrUrlPart)"><span>Create Date</span><span class="sorting-indicator"></span></a></th>	
 		</tr>
 		</tfoot>
@@ -56,7 +64,7 @@
               {	
 		            <tr id='user-@app.Id' class="@(app.IsAlternative ? "" : "alternate")">
 			            <td class="email column-email">
-				            <strong>@app.Name</strong>
+				            <strong title="@app.Description">@app.Name</strong>
 				            <br />
 				            <div class="row-actions">
 					            <span class='delete'><a class='submitdelete' href='/Admin/DeleteApplication/@app.Id' onclick="javascript:return confirm('Are you realy want to remove @app.Name application? The operation is not recoverable!');">Delete</a></span>
@@ -66,6 +74,10 @@
 			            <td>@app.PackageFileName</td>
                         <td>@(app.Published ? "Yes" : "No")</td>
                         <td>@app.Downloaded</td>
+                        <td>@app.Screens</td>
+                        <td>@app.Screenshots</td>
+                        <td>@app.Visits</td>
+                        <td>@app.UserEmail</td>
 			            <td class="role column-registred">@app.CreateDate</td>
 		            </tr>
                 } 

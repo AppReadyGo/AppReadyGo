@@ -39,12 +39,7 @@ namespace AppReadyGo.Domain.Queries.Admin
                 Published = a.Publishes.Count() > 0,
                 Description = a.Description,
                 CreateDate = a.CreateDate,
-                Downloaded = 0,
-                HasScreens = false,
-                IsActive = false,
-                Visits = 0,
-                Screenshots = 0,
-                Screens = 0,
+                UserEmail = a.User.Email
             });
 
             if (query.OrderBy == GetAllApplicationsQuery.OrderByColumn.Name)
@@ -63,6 +58,46 @@ namespace AppReadyGo.Domain.Queries.Admin
             res.Applications = users.Skip(res.PageSize * (res.CurPage - 1))
                                     .Take(res.PageSize)
                                     .ToArray();
+
+            var appIds = res.Applications.Select(a => a.Id).ToArray();
+            var downloaded = session.Query<AppReadyGo.Domain.Model.Users.ApiMember>()
+                                        .SelectMany(m => m.Applications)
+                                        .Where(a => appIds.Contains(a.Id))
+                                        .Select(a => a.Id)
+                                        .GroupBy(x => x)
+                                        .Select(x => new { Id = x.Key, Count = x.Count() })
+                                        .ToDictionary(k => k.Id, v => v.Count);
+
+            var screens = session.Query<AppReadyGo.Domain.Model.Screen>()
+                                        .Where(s => appIds.Contains(s.Application.Id))
+                                        .Select(a => a.Application.Id)
+                                        .GroupBy(x => x)
+                                        .Select(x => new { Id = x.Key, Count = x.Count() })
+                                        .ToDictionary(k => k.Id, v => v.Count);
+
+            var screenshots = session.Query<AppReadyGo.Domain.Model.Screenshot>()
+                                        .Where(s => appIds.Contains(s.Application.Id))
+                                        .Select(a => a.Application.Id)
+                                        .GroupBy(x => x)
+                                        .Select(x => new { Id = x.Key, Count = x.Count() })
+                                        .ToDictionary(k => k.Id, v => v.Count);
+
+            var pageViews = session.Query<AppReadyGo.Domain.Model.PageView>()
+                                        .Where(s => appIds.Contains(s.Application.Id))
+                                        .Select(a => a.Application.Id)
+                                        .GroupBy(x => x)
+                                        .Select(x => new { Id = x.Key, Count = x.Count() })
+                                        .ToDictionary(k => k.Id, v => v.Count);
+
+            foreach (var app in res.Applications)
+            {
+                app.Downloaded = downloaded.ContainsKey(app.Id) ? downloaded[app.Id] : 0;
+                app.Screens = screens.ContainsKey(app.Id) ? screens[app.Id] : 0;
+                app.Screenshots = screenshots.ContainsKey(app.Id) ? screenshots[app.Id] : 0;
+                app.Visits = pageViews.ContainsKey(app.Id) ? pageViews[app.Id] : 0;
+                app.HasScreens = screens.ContainsKey(app.Id);
+                app.IsActive = pageViews.ContainsKey(app.Id);
+            }
 
             return res;
         }

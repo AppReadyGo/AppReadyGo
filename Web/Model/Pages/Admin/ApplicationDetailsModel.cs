@@ -38,5 +38,7 @@ namespace AppReadyGo.Web.Model.Pages.Admin
         public int Index { get; set; }
 
         public bool IsAlternative { get; set; }
+
+        public string UserEmail { get; set; }
     }
 }
