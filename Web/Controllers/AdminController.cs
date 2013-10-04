@@ -242,6 +242,12 @@ namespace AppReadyGo.Controllers
             return RedirectToAction("Members");
         }
 
+        public ActionResult DeleteAPIMember(int id)
+        {
+            var result = ObjectContainer.Instance.Dispatch(new RemoveUserCommand(id));
+            return RedirectToAction("APIMembers");
+        }
+
         public ActionResult Activate(string email)
         {
             var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(email));
