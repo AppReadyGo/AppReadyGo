@@ -868,12 +868,12 @@
     <Content Include="Views\Admin\Forms\LogsFilter.cshtml" />
     <Content Include="Views\Admin\ApiMembers.cshtml" />
     <Content Include="Views\Admin\Applications.cshtml" />
-    <None Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Logs.cshtml" />
-    <None Include="Views\Admin\Members.cshtml" />
+    <Content Include="Views\Admin\Members.cshtml" />
     <None Include="Views\Admin\Membership.aspx_" />
-    <None Include="Views\Admin\Staff.cshtml" />
-    <None Include="Views\Admin\UserEdit.cshtml" />
+    <Content Include="Views\Admin\Staff.cshtml" />
+    <Content Include="Views\Admin\UserEdit.cshtml" />
     <None Include="Views\Analytics\Usage.aspx_" />
     <Content Include="Views\Application\Publishes.cshtml" />
     <Content Include="Views\Application\Edit.cshtml" />
