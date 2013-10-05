@@ -196,8 +196,11 @@ namespace AppReadyGo.Controllers
                     visitsData.Add(new object[] { curDate.MilliTimeStamp(), data.VisitsData.ContainsKey(curDate) ? data.VisitsData[curDate] : 0 });
                     clicksData.Add(new object[] { curDate.MilliTimeStamp(), data.ClicksData.ContainsKey(curDate) ? data.ClicksData[curDate] : 0 });
                     scrollsData.Add(new object[] { curDate.MilliTimeStamp(),count });
+                    
+
                 }
 
+            
                 //Create chart data
                 var graphsInitData = new 
                 {
@@ -232,7 +235,9 @@ namespace AppReadyGo.Controllers
                     // Title = "Fingerprint",
                     Screens = data.Screens,
                     GraphsData = new JavaScriptSerializer().Serialize(graphsInitData),
-                    VisitsAmount = data.VisitsData.Sum(x => x.Value)
+                    VisitsAmount = data.VisitsData.Sum(x => x.Value),
+                    ControlClicks = data.ControlClicksData
+
                 };
 
                 return View("~/Views/Analytics/TouchMap.cshtml", model);

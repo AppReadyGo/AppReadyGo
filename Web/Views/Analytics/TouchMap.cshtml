@@ -21,7 +21,7 @@
 
     <script src="@Html.Content("~/Scripts/filter.js")" type="text/javascript"></script>
     <script type="text/javascript">
-        var graphsData = @Html.Raw(Model.GraphsData);
+        var graphsData = @Html.Raw(Model.GraphsData)
         $(document).ready(function () {
         var plot = $.plot($("#visits_graph"), graphsData.visits, {
             xaxis: { mode: "time", timeformat: '%d %b %y' },
@@ -120,10 +120,32 @@
                         <div class="title"><span>Clicks (@Model.Filter.ClicksAmount)</span></div>
                         <div id="clicks_graph" style="height:200px;width:575px;"></div>
                     </div>
-                    <div class="charts">
-                        <div class="title"><span>Control Clicks (@Model.Filter.CobntrolClicksAmount)</span></div>
-                     @*   <div id="visits_graph" style="height:200px;width:575px;"></div>*@
-                    </div>
+                    <div class="title"><span>Control Clicks (@Model.Filter.CobntrolClicksAmount)</span></div>
+                    <section id="content" class="content-overview">
+                            <table  class="content-overview">
+                                <thead>
+                                     <tr>
+                                       <th >Control Name  " </th>
+                                       <th >Number of Clicks</th>
+                                     </tr>
+                                </thead> 
+                                <tbody>   
+                                @foreach (var item in Model.ControlClicks)
+                                {
+                                    <tr >
+                                        <td >
+                                            @item.Key
+                                        </td>
+                                        <td >
+                                            @item.Value
+                                        </td>
+                               
+                                    </tr>
+                                }
+                               </tbody>
+                            </table>
+                       </section>
+               
                     @*<div class="charts">
                         <div class="title"><span>Scrolls (<%=Model.View.ScrollsAmount%>)</span></div>
                         <div id="scrolls_graph" style="height:200px;width:575px;"></div>

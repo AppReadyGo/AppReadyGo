@@ -22,6 +22,8 @@ namespace AppReadyGo.Model.Pages.Analytics
 
         public int VisitsAmount { get; set; }
 
+        public  Dictionary<String, int> ControlClicks  { get; set; }
+
         public FingerPrintModel(FilterParametersModel filter, MenuItem selectedItem, FilterDataResult filterDataResult, bool isSingleMode)
             : base(selectedItem)
         {
