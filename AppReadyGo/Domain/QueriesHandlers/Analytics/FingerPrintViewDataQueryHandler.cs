@@ -71,12 +71,23 @@ namespace AppReadyGo.Domain.Queries.Analytics
                                         .GroupBy(c => c.PageView.Date)
                                         .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
                                         .ToList().ToDictionary(v => v.Key, v => v.Value);
+//
+                data.ControlClicksData = session.Query<ControlClick>()
+                                        .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
+                                                    s.PageView.Path.ToLower() == data.SelectedPath.ToLower() &&
+                                                    s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
+                                                    s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&
+                                                    s.PageView.Date >= query.From && s.PageView.Date <= query.To)
+                                        .GroupBy(c => c.Tag)
+                                        .Select(g => new KeyValuePair<String, int>(g.Key, g.Count()))
+                                        .ToList().ToDictionary(v => v.Key, v => v.Value);
             }
             else
             {
                 data.VisitsData = new Dictionary<DateTime, int>();
                 data.ClicksData = new Dictionary<DateTime, int>();
                 data.ScrollsData = new Dictionary<DateTime, int>();
+                data.ControlClicksData = new Dictionary<String,int>();
             }
             return data;
         }

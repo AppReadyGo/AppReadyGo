@@ -70,7 +70,7 @@ namespace AppReadyGo.Model.Filter
                 this.HasClicks = filterDataResult.ScreenData.HasClicks;
                 this.ScrollsAmount = filterDataResult.ScreenData.ScrollsAmount;
                 this.HasControlClicks = filterDataResult.ScreenData.HasControlClicks;
-                this.CobntrolClicksAmount = filterDataResult.ScreenData.ControlClicksAmount;
+                this.CobntrolClicksAmount = filterDataResult.ScreenData.ControlClicksAmount;                         
             }
 
             this.NoData = !filterDataResult.Applications.SelectMany(a => a.ScreenSizes).Any();

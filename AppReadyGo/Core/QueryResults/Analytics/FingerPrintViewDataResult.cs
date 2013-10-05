@@ -14,5 +14,7 @@ namespace AppReadyGo.Core.QueryResults.Analytics.QueryResults
         public Dictionary<DateTime, int> ScrollsData { get; set; }
 
         public Dictionary<DateTime, int> ClicksData { get; set; }
+
+        public Dictionary<String, int> ControlClicksData { get; set; }
     }
 }
