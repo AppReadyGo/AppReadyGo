@@ -121,22 +121,23 @@
                         <div id="clicks_graph" style="height:200px;width:575px;"></div>
                     </div>
                     <div class="title"><span>Control Clicks (@Model.Filter.CobntrolClicksAmount)</span></div>
-                    <section id="content" class="content-overview">
-                            <table  class="content-overview">
+                    <section id="content" >
+                            <table border="1"  width="100%">
+	
                                 <thead>
                                      <tr>
-                                       <th >Control Name  " </th>
-                                       <th >Number of Clicks</th>
+                                       <th align="left" style="padding:2px">Control Name   </th>
+                                       <th align="left" style="padding:2px">Number of Clicks</th>
                                      </tr>
                                 </thead> 
                                 <tbody>   
                                 @foreach (var item in Model.ControlClicks)
                                 {
                                     <tr >
-                                        <td >
+                                        <td style="padding:5px">
                                             @item.Key
                                         </td>
-                                        <td >
+                                        <td style= "padding:5px">
                                             @item.Value
                                         </td>
                                
