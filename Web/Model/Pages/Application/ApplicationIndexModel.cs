@@ -1,35 +1,29 @@
 ﻿using System.Collections.Generic;
 using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Model.Master;
 
-namespace AppReadyGo.Model.Pages.Portfolio
+namespace AppReadyGo.Web.Model.Pages.Application
 {
-    public class ApplicationIndexModel : PagingModel
+    public class ApplicationIndexModel : AfterLoginMasterModel
     {
-        public IEnumerable<ApplicationItemModel> Applications { get; set; }
+        public object ApplicationsData { get; set; }
 
-        public string PortfolioDescription { get; set; }
+        public IEnumerable<PublishItem> Publishes { get; set; }
 
-        public int PortfolioId { get; set; }
-    }
+        public ApplicationIndexModel(AfterLoginMasterModel.MenuItem selectedItem)
+            : base(selectedItem)
+        {
+        }
 
-    public class ApplicationItemModel : ApplicationDataItemResult
-    {
-        public string Key { get; set; }
+        public class PublishItem
+        {
+            public int Id { get; set; }
 
-        public bool Alternate { get; set; }
+            public string Description { get; set; }
 
-        public string TargetGroup { get; set; }
+            public string ApplicaionName { get; set; }
 
-        public int Time { get; set; }
-
-        public int Clicks { get; set; }
-
-        public int Scrolls { get; set; }
-
-        public IEnumerable<object> AnalyticsVersions { get; set; }
-
-        public string Icon { get; set; }
-
-        public bool HasScreens { get; set; }
+            public bool Alternate { get; set; }
+        }
     }
 }

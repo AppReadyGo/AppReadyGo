@@ -199,6 +199,7 @@
     <Compile Include="QueriesHandlers\Analytics\FingerPrintViewDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\HeatMapDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\UsageViewDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetApplicationIndexDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetPublishesDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetApplicationEditDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetApplicationsForUserQueryHandler.cs" />

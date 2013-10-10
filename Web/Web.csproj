@@ -314,11 +314,11 @@
     <Compile Include="Model\Pages\Home\ContentModel.cs" />
     <Compile Include="Model\Pages\Home\Mails\BasicMailContentModel.cs" />
     <Compile Include="Model\Pages\Home\Mails\MailContentModel.cs" />
-    <Compile Include="Model\Pages\Portfolio\PortfolioIndexModel.cs" />
     <Compile Include="Model\Pages\Portfolio\PortfolioModel.cs" />
     <Compile Include="Model\Pages\ViewModel.cs" />
     <Compile Include="Model\PagingModel.cs" />
     <Compile Include="Model\ScreenDetailsModel.cs" />
+    <Compile Include="Model\Shared\TableModel.cs" />
     <Compile Include="Model\Shared\TesterWidgetModel.cs" />
     <Compile Include="Model\ViewModelWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -877,7 +877,6 @@
     <None Include="Views\Analytics\Usage.aspx_" />
     <Content Include="Views\Application\Publishes.cshtml" />
     <Content Include="Views\Application\Edit.cshtml" />
-    <None Include="Views\Application\Fingerprint.aspx_" />
     <Content Include="Views\Screen\Forms\ScreenForm.cshtml" />
     <Content Include="Views\Application\New.cshtml" />
     <Content Include="Views\Screen\Edit.cshtml" />
@@ -947,6 +946,8 @@
     <Content Include="Views\Shared\_BeforeLogin.cshtml" />
     <Content Include="Views\Shared\_Main.cshtml" />
     <Content Include="Views\Shared\TestersWidget.cshtml" />
+    <Content Include="Views\Shared\TableFooter.cshtml" />
+    <Content Include="Views\Shared\TableHeader.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

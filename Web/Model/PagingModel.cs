@@ -28,7 +28,7 @@ namespace AppReadyGo.Model
         string SearchStrUrlPart { get; set; }
     }
 
-    public class PagingModel
+    public class PagingModel : IPagingModel
     {
         public bool IsOnePage { get; set; }
 
