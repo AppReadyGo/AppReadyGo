@@ -2,7 +2,7 @@
 @using AppReadyGo.Model
 @using AppReadyGo.Model.Master
 @using AppReadyGo.Model.Pages.Portfolio
-@model PortfolioIndexModelTmp
+@model ApplicationIndexModel
 @{
     Layout = "~/Views/Shared/_AfterLogin.cshtml";
 }
@@ -20,18 +20,6 @@
         });
     </script>
 }
-<div class="crumb">
-    <div class="border-right">
-		<div class="border-left">
-			<div class="inner">
-                <ul>
-		           <li><h4>Applications</h4></li>
-		        </ul>
-			</div>
-		</div>
-    </div>
-</div>
-<div style="clear:both;"></div>
 <div class="content-wrapper" id="app_page">
 <div class="a-r top-panel">
 	<table class="tbl fixed" cellspacing="0">
@@ -76,138 +64,51 @@
     </table>
 </div>
 <div class="wrap">
-	<div class="t-nav">
-        <div class="a-l actions">
-            <a href="/Application/New/" class="link2"><span><span>+ Add Application</span></span></a>
-        </div>
-		<div class="a-l search-box">
-			<input type="search" id="search-input" name="s" value="@Model.SearchStr" />
-            <a class="link2" onclick="javascript: document.location.href = '/Application/?cp=1&srch=' + escape($('#search-input').val());"><span><span>Search</span></span></a>
-		</div>
-		<div class='t-nav-pages @(Model.IsOnePage ? "one-page" : "")'>
-			<span class="d-num">@Model.Count items</span>
-			<span class='pagination-links'>
-				<a class='first-page @(Model.IsOnePage ? "disabled" : "")' title='Go to the first page' href='/Application/?cp=1@Model.UrlPart'>&laquo;</a>
-				<a class='prev-page @(Model.PreviousPage.HasValue ? "" : "disabled")' title='Go to the previous page' href='/Application/?cp=@(Model.PreviousPage.HasValue ? Model.PreviousPage.Value : 1)@Model.UrlPart'>&lsaquo;</a>
-				<span class="paging-input">
-					<input class='cur-p' title='Current page' type='text' name='paged' value='@Model.CurPage' size='1' /> of <span class='total-pages'>@Model.TotalPages</span>
-				</span>
-				<a class='next-page @(Model.NextPage.HasValue ? "" : "disabled")' title='Go to the next page' href='/Application/?cp=@(Model.NextPage.HasValue ? Model.NextPage.Value : Model.TotalPages)@Model.UrlPart'>&rsaquo;</a>
-				<a class='last-page @(Model.IsOnePage ? "disabled" : "")' title='Go to the last page' href='/Application/?cp=@(Model.TotalPages)@Model.UrlPart'>&raquo;</a>
-			</span>
-		</div>
-	</div><!-- /table-head -->
+    <div class="a-l actions">
+        Tasks <a href="/Application/Publish/" class="link2"><span><span>+ Add Task</span></span></a>
+    </div>
 	<table class="tbl fixed" cellspacing="0">
 		<thead>
 		<tr>
-			<th scope='col' class='manage-column column-active'>Active</th>
-			<th scope='col' class='manage-column column-icon'></th>
-			<th scope='col' class='manage-column column-desc'></th>
-			<th scope='col' class='manage-column column-desc'>Key</th>
-			<th scope='col' class='manage-column column-visits'></th>
+			<th scope='col' class='manage-column'>Description</th>
+			<th scope='col' class='manage-column'>Application</th>
+			<th scope='col' class='manage-column'>Target</th>
+			<th scope='col' class='manage-column'>Installs</th>
+			<th scope='col' class='manage-column'>Started</th>
+			<th scope='col' class='manage-column'>Status</th>
 		</tr>
 		</thead>
 		<tfoot>
 		<tr>
-			<th scope='col' class='manage-column column-active'>Active</th>
-			<th scope='col' class='manage-column column-icon'></th>
-			<th scope='col' class='manage-column column-desc'></th>
-			<th scope='col' class='manage-column column-desc'>Key</th>
-			<th scope='col' class='manage-column column-visits'></th>
+			<th scope='col' class='manage-column'>Description</th>
+			<th scope='col' class='manage-column'>Application</th>
+			<th scope='col' class='manage-column'>Target</th>
+			<th scope='col' class='manage-column'>Installs</th>
+			<th scope='col' class='manage-column'>Started</th>
+			<th scope='col' class='manage-column'>Status</th>
 		</tr>
 		</tfoot>
-		<tbody id="the-list" class='list:user'>
-        @if (Model.Applications.Any())
+		<tbody>
+        @if (Model.Publishes.Any())
         {
-            foreach (var app in Model.Applications)
+            foreach (var task in Model.Publishes)
             {	
-		        <tr class="portf @(app.Alternate ? "" : "alt")" appId="@app.Id">
-			        <td>
-					    @if(app.Published)
-                        {
-				            <div class="@(app.IsActive ? "status-ok" : "status-alert")" title="@(app.IsActive ? "" : "The application has not been active for past 3 days.")"></div>
-                        }
-                        else
-                        {
-				            <a href="/Application/Publish/@app.Id"><div class="status-not-published" title="The application has not published."></div></a>
-                        }
-			        </td>
-                    <td class="app-link">
-                        <img src="@app.Icon" width="32" />
-                    </td>
-			        <td class="column-desc">
-                        <span class="app-link">@app.Name</span>
-				        <br />
-				        <div class="row-actions">
-					        <span class='edit'><a href="/Application/Edit/@app.Id">Edit</a> | </span>
-					        <span class='delete'><a href='/Application/Remove/@app.Id' onclick="javascript:return confirm('Are you realy want to remove @app.Description application? The operation is not recoverable!');">Delete</a> | </span>
-					        @if(app.Published)
-                            {
-                                <span class='upload'><a href="/Application/Publishes/@app.Id">Publishes</a> | </span>
-                            }
-                            else
-                            {
-                                <span class='upload'><a href="/Application/Publish/@app.Id">Publish</a> | </span>
-                            }
-                            @if(app.HasScreens)
-                            {
-					            <span class='screens'><a href="/Application/@app.Id/Screen">Screens</a></span>
-                            }
-                            else
-                            {
-					            <span class='screens'><a href="/Application/@app.Id/Screen/New">Add Screen</a></span>
-                            }
-				        </div>          
-                    </td>
-                    <td class="app-link">
-                        @app.Key
-                    </td>
-			        <td class="role column-visits app-link">Downloaded: @app.Downloaded &nbsp; Live visits: @app.Visits</td>
+		        <tr class="portf @(task.Alternate ? "" : "alt")">
+			        <td>@task.Description</td>
+                    <td>@task.ApplicaionName</td>
+			        <td>@task.Target</td>
+                    <td> @task.Installs</td>
+			        <td>@task.Published</td>
+			        <td>@task.Status</td>
 		        </tr>
-@*                if (app.AnalyticsVersions.Any())
-                {
-                    foreach (var version in app.AnalyticsVersions)
-                    {	
-		                <tr class="app portf-@(app.Id) @(version.Alternate ? "" : "app-alt")">
-                            <td><input type="checkbox" /></td>
-			                <td>
-				                <div class="@(!version.IsActive ? "status-alert" : "status-ok")" title="@(version.IsActive ? "" : "The version has not been active for past 3 days.")"></div>
-			                </td>
-			                <td colspan="3">
-                                <a href="/Analytics/Dashboard/?aid=@version.Id">
-                                <span> &nbsp; <strong>Published:</strong> @version.Published</span>
-                                <span> &nbsp; <strong>Target Group:</strong> @version.TargetGroup</span>
-                                <br />
-                                <span><strong>Downloads:</strong> @version.Downloads</span>
-                                <span> &nbsp; <strong>Visits:</strong> @version.Visits</span>
-                                <span> &nbsp; <strong>Time:</strong> @version.Time</span>
-                                <span> &nbsp; <strong>Clicks:</strong> @version.Clicks</span>
-                                <span> &nbsp; <strong>Scrolls:</strong> @version.Scrolls</span></a>
-                            </td>
-		                </tr>
-                    }
-                }
-*@            }
+            }
         }
         else
         {
-          <tr class="no-items"><td colspan="4" class="colspanchange">No matching applications were found.</td></tr>
+          <tr class="no-items"><td colspan="4" class="colspanchange">No tasks</td></tr>
         }
 		</tbody>
 	</table>
-	<div class="t-nav bottom">
-		<div class='t-nav-pages @(Model.IsOnePage ? "one-page" : "")'>
-			<span class="d-num">@Model.Count items</span>
-			<span class='pagination-links'>
-				<a class='first-page @(Model.IsOnePage ? "disabled" : "")' title='Go to the first page' href='/Application/?cp=1@Model.UrlPart'>&laquo;</a>
-				<a class='prev-page @(Model.PreviousPage.HasValue ? "" : "disabled")' title='Go to the previous page' href='/Application/?cp=@(Model.PreviousPage.HasValue ? Model.PreviousPage.Value : 1)@Model.UrlPart'>&lsaquo;</a>
-				<span class="paging-input">@Model.CurPage of <span class='total-pages'>@Model.TotalPages</span></span>
-				<a class='next-page @(Model.NextPage.HasValue ? "" : "disabled")' title='Go to the next page' href='/Application/?cp=@(Model.NextPage.HasValue ? Model.NextPage.Value : Model.TotalPages)@Model.UrlPart'>&rsaquo;</a>
-				<a class='last-page @(Model.IsOnePage ? "disabled" : "")' title='Go to the last page' href='/Application/?cp=@Model.TotalPages@Model.UrlPart'>&raquo;</a>
-			</span>
-		</div>
-		<br class="clear" />
-	</div>
 </div><!-- /wrap -->
 
 <br class="clear" />

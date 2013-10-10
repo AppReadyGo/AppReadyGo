@@ -17,6 +17,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using AppReadyGo.Web.Model.Shared;
 
 namespace AppReadyGo.Controllers
 {
@@ -26,61 +27,18 @@ namespace AppReadyGo.Controllers
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly string[] packageExtentions = new string[] { ".jar", ".apk" };
 
-        public ActionResult Index(string srch = "", int scol = 1, int cp = 1)
+        public ActionResult Index()
         {
-            var data = ObjectContainer.Instance.RunQuery(new GetAllApplicationsQuery(srch, cp, 15));
+            var data = ObjectContainer.Instance.RunQuery(new GetApplicationIndexDataQuery());
 
-            if (!data.Applications.Any())
+            var model = new ApplicationIndexModel(AfterLoginMasterModel.MenuItem.Analytics)
             {
-                return RedirectToAction("New");
-            }
-
-            ViewData["IsAdmin"] = User.IsInRole(StaffRole.Administrator.ToString());
-
-            var rnd = new Random();
-
-            var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
-            var model = new PortfolioIndexModelTmp(AfterLoginMasterModel.MenuItem.Analytics)
-            {
-                IsOnePage = data.TotalPages == 1,
-                Count = data.Count,
-                PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
-                NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
-                TotalPages = data.TotalPages,
-                CurPage = data.CurPage,
-                SearchStrUrlPart = searchStrUrlPart,
-                SearchStr = srch,
-                Applications = data.Applications.Select((a, i) => new ApplicationItemModel
+                Publishes = data.Publishes.Select((p, i) => new ApplicationIndexModel.PublishItem
                 {
-                    Id = a.Id,
-                    Name = a.Name,
-                    IsActive = a.IsActive,
-                    Alternate = i % 2 != 0,
-                    Visits = a.Visits,
-                    Key = a.Id.GetAppKey(),
-                    Scrolls = rnd.Next(1000),
-                    Clicks = rnd.Next(1000),
-                    Time = rnd.Next(100),
-                    TargetGroup = rnd.Next(100) > 50 ? "Men 18+" : "Women 18+",
-                    Description = a.Description,
-                    Icon = string.IsNullOrEmpty(a.IconExt) ?  "/content/images/no_icon.png" : string.Format("/Restricted/Icons/{0}{1}", a.Id, a.IconExt),
-                    Published = a.Published,
-                    Downloaded = a.Downloaded,
-                    HasScreens = a.HasScreens
-                }).ToArray(),
-                TopApplications = data.TopApplications.Select((a, i) => new TopApplicationsItemModel
-                {
-                    IsAlternative = i % 2 != 0,
-                    Id = a.Id,
-                    Description = a.Name
-                }).ToArray(),
-                TopScreens = data.TopScreens.Select((s, i) => new TopScreensItemModel
-                {
-                    IsAlternative = i % 2 != 0,
-                    ApplicationId = s.ApplicationId,
-                    ScreenSize = s.ScreenSize.ToFormatedString(),
-                    Path = s.Path
-                }).ToArray()
+                    Id = p.Id,
+                    Description = "Some Desc",
+                    Alternate = i % 2 == 0
+                })
             };
             return View("~/Views/Application/Index.cshtml", model);
         }
