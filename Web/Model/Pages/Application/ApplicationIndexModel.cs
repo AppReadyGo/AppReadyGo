@@ -23,6 +23,8 @@ namespace AppReadyGo.Web.Model.Pages.Application
 
             public string ApplicaionName { get; set; }
 
+            public string Target { get; set; }
+
             public bool Alternate { get; set; }
         }
     }
