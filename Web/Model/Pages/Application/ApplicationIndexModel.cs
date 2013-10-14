@@ -6,16 +6,16 @@ namespace AppReadyGo.Web.Model.Pages.Application
 {
     public class ApplicationIndexModel : AfterLoginMasterModel
     {
-        public object ApplicationsData { get; set; }
+        public IEnumerable<TaskItem> Tasks { get; set; }
 
-        public IEnumerable<PublishItem> Publishes { get; set; }
+        public IEnumerable<ApplicationItem> Applications { get; set; }
 
-        public ApplicationIndexModel(AfterLoginMasterModel.MenuItem selectedItem)
-            : base(selectedItem)
+        public ApplicationIndexModel()
+            : base(AfterLoginMasterModel.MenuItem.Analytics)
         {
         }
 
-        public class PublishItem
+        public class TaskItem
         {
             public int Id { get; set; }
 
@@ -25,7 +25,23 @@ namespace AppReadyGo.Web.Model.Pages.Application
 
             public string Target { get; set; }
 
-            public bool Alternate { get; set; }
+            public bool IsAlternative { get; set; }
+
+            public object Installs { get; set; }
+
+            public object Published { get; set; }
+
+            public object Status { get; set; }
+        }
+
+
+        public class ApplicationItem
+        {
+            public int Id { get; set; }
+
+            public string Name { get; set; }
+
+            public bool IsAlternative { get; set; }
         }
     }
 }

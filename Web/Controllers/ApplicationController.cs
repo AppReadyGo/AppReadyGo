@@ -31,13 +31,19 @@ namespace AppReadyGo.Controllers
         {
             var data = ObjectContainer.Instance.RunQuery(new GetApplicationIndexDataQuery());
 
-            var model = new ApplicationIndexModel(AfterLoginMasterModel.MenuItem.Analytics)
+            var model = new ApplicationIndexModel
             {
-                Publishes = data.Publishes.Select((p, i) => new ApplicationIndexModel.PublishItem
+                Tasks = data.Tasks.Select((p, i) => new ApplicationIndexModel.TaskItem
                 {
                     Id = p.Id,
                     Description = "Some Desc",
-                    Alternate = i % 2 == 0
+                    IsAlternative = i % 2 == 0
+                }),
+                Applications = data.Applications.Select((a, i) => new ApplicationIndexModel.ApplicationItem
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    IsAlternative = i % 2 == 0
                 })
             };
             return View("~/Views/Application/Index.cshtml", model);

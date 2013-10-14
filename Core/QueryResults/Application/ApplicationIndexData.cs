@@ -8,6 +8,8 @@ namespace AppReadyGo.Core.QueryResults.Application
 {
     public class ApplicationIndexData
     {
-        public PublishDetailsResult[] Publishes { get; set; }
+        public PublishDetailsResult[] Tasks { get; set; }
+
+        public ApplicationResult[] Applications { get; set; }
     }
 }

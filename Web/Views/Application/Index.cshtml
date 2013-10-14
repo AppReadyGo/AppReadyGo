@@ -1,27 +1,16 @@
 ﻿@using AppReadyGo.Helpers;
 @using AppReadyGo.Model
 @using AppReadyGo.Model.Master
-@using AppReadyGo.Model.Pages.Portfolio
-@model ApplicationIndexModel
+@model AppReadyGo.Web.Model.Pages.Application.ApplicationIndexModel
 @{
     Layout = "~/Views/Shared/_AfterLogin.cshtml";
 }
-@section title { Application }
-@section header 
-{
-    <script src="@Html.Content("~/Scripts/table.js")" type="text/javascript"></script>
-    <script>
-        $(document).ready(function () {
-            $('.app-link').click(function () {
-                var parent = $(this).parent();
-                var appId = parent.is('tr') ? parent.attr('appId') : parent.parent().attr('appid');
-                document.location.href = '/Analytics/Dashboard/?aid=' + appId;
-            });
-        });
-    </script>
-}
-<div class="content-wrapper" id="app_page">
+@section title { Dashboard }
+<div class="content-wrapper" id="dashboard_page">
 <div class="a-r top-panel">
+    <div class="a-l actions">
+        <h3>Tasks</h3> <a href="/Application/New/" class="link2"><span><span>+ Upload Application</span></span></a>
+    </div>
 	<table class="tbl fixed" cellspacing="0">
 		<thead>
 		<tr>
@@ -29,11 +18,11 @@
 		</tr>
 		</thead>
         <tbody>
-        @if (Model.TopApplications.Any())
+        @if (Model.Applications.Any())
         {
-            foreach (var item in Model.TopApplications)
+            foreach (var item in Model.Applications)
             {
-                <tr class="@(item.IsAlternative ? "" : "alternate")"><td><a href="/Analytics/Dashboard/?aid=@(item.Id)">@item.Description</a></td></tr>
+                <tr class="@(item.IsAlternative ? "" : "alternate")"><td><a href="/Analytics/Dashboard/?aid=@(item.Id)">@item.Name</a></td></tr>
             }
         }
         else
@@ -42,30 +31,10 @@
         }
         </tbody>
     </table>
-	<table class="tbl fixed" cellspacing="0">
-		<thead>
-		<tr>
-			<th scope='col' class='manage-column column-active'>Most Active Screens</th>
-		</tr>
-		</thead>
-        <tbody>
-        @if (Model.TopScreens.Any())
-        {
-            foreach (var item in Model.TopScreens)
-            { 
-                <tr class="@(item.IsAlternative ? "" : "alternate")"><td><a href="/Analytics/Dashboard/?aid=@(item.ApplicationId)&ss=@(item.ScreenSize)&p=@(item.Path)">@item.Path: @item.ScreenSize</a></td></tr>
-            }
-        }
-        else
-        {
-            <tr class="no-items"><td class="colspanchange">No screens.</td></tr>
-        }
-        </tbody>
-    </table>
 </div>
 <div class="wrap">
     <div class="a-l actions">
-        Tasks <a href="/Application/Publish/" class="link2"><span><span>+ Add Task</span></span></a>
+        <h3>Tasks</h3> <a href="/Application/Publish/" class="link2"><span><span>+ Add Task</span></span></a>
     </div>
 	<table class="tbl fixed" cellspacing="0">
 		<thead>
@@ -89,15 +58,15 @@
 		</tr>
 		</tfoot>
 		<tbody>
-        @if (Model.Publishes.Any())
+        @if (Model.Tasks.Any())
         {
-            foreach (var task in Model.Publishes)
+            foreach (var task in Model.Tasks)
             {	
-		        <tr class="portf @(task.Alternate ? "" : "alt")">
+		        <tr class="portf @(task.IsAlternative ? "" : "alt")">
 			        <td>@task.Description</td>
                     <td>@task.ApplicaionName</td>
 			        <td>@task.Target</td>
-                    <td> @task.Installs</td>
+                    <td>@task.Installs</td>
 			        <td>@task.Published</td>
 			        <td>@task.Status</td>
 		        </tr>
