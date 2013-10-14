@@ -25,7 +25,7 @@ namespace AppReadyGo.Domain.QueriesHandlers.Application
         public ApplicationIndexData Run(ISession session, GetApplicationIndexDataQuery query)
         {
             var result = new ApplicationIndexData { };
-            result.Publishes = session.Query<AppReadyGo.Domain.Model.Application>()
+            result.Tasks = session.Query<AppReadyGo.Domain.Model.Application>()
                                 .Where(a => a.User.Id == this.securityContext.CurrentUser.Id)
                                 .SelectMany(a => a.Publishes)
                                 .Select(p => new PublishDetailsResult
@@ -39,7 +39,14 @@ namespace AppReadyGo.Domain.QueriesHandlers.Application
                                 })
                                 .ToArray();
 
-
+            result.Applications = session.Query<AppReadyGo.Domain.Model.Application>()
+                                .Where(a => a.User.Id == this.securityContext.CurrentUser.Id)
+                                .Select(p => new ApplicationResult
+                                {
+                                    Id = p.Id,
+                                    Name = p.Name
+                                })
+                                .ToArray();
             return result;
         }
     }
