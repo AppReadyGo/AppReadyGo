@@ -271,13 +271,13 @@ namespace AppReadyGo.Controllers
 
         public ActionResult Publish(int id)
         {
-            var res = ObjectContainer.Instance.RunQuery(new PublishQuery(id));
+            var res = ObjectContainer.Instance.RunQuery(new TaskQuery(id));
             var countries = res.Countries.Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
             countries.Insert(0, new SelectListItem { Text = "All", Value = "" });
             var genders = new SelectListItem[] { new SelectListItem { Value = "", Text = "All" }, new SelectListItem { Value = "1", Text = "Men" }, new SelectListItem { Value = "2", Text = "Women" } };
             var ageRanges = GetList<AgeRange>().Select(x => new SelectListItem { Value = ((int)x).ToString(), Text = x.ToString() }).ToList();
             ageRanges.Insert(0, new SelectListItem { Text = "All", Value = "" });
-            var model = new PublishModel
+            var model = new TaskModel
             {
                 ApplicationId = id,
                 ApplicationName = res.ApplicationName,
@@ -289,7 +289,7 @@ namespace AppReadyGo.Controllers
         }
 
         [HttpPost]
-        public ActionResult Publish(PublishModel model)
+        public ActionResult Publish(TaskModel model)
         {
             if (!string.IsNullOrEmpty(model.Zip) && !model.Country.HasValue)
             {
@@ -303,7 +303,7 @@ namespace AppReadyGo.Controllers
             }
             else
             {
-                var res = ObjectContainer.Instance.RunQuery(new PublishQuery(model.ApplicationId));
+                var res = ObjectContainer.Instance.RunQuery(new TaskQuery(model.ApplicationId));
                 var countries = res.Countries.Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                 countries.Insert(0, new SelectListItem { Text = "All", Value = "" });
                 var genders = new SelectListItem[] { new SelectListItem { Value = "", Text = "All" }, new SelectListItem { Value = "1", Text = "Men" }, new SelectListItem { Value = "2", Text = "Women" } };

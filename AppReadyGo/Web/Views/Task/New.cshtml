@@ -1,0 +1,69 @@
+﻿@using AppReadyGo.Helpers;
+@using AppReadyGo.Model
+@using AppReadyGo.Model.Master
+@using AppReadyGo.Model.Pages.Application
+@model PublishModel
+@{
+    Layout = "~/Views/Shared/_AfterLogin.cshtml";
+}
+@section title { Portfolios }
+@section header 
+{
+    <link href="@Html.Content("~/Content/shared/bredcrumbs.css")" rel="stylesheet" type="text/css" />
+}
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+		           <li><a href="/Application"><h4>Applications</h4></a></li>
+		           <li><a href="/Application/Publishes/@Model.ApplicationId"><h4>@Model.ApplicationName - Publishes</h4></a></li>
+                   <li>Publish</li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<div class="content-wrapper">
+    <article class="center">
+        <div class="form-wrapper">
+            <header>
+                <h1>Publish to testers</h1>
+            </header>
+            <div class="sub-wrapper">
+            @using (Html.BeginForm()) 
+            {
+                @Html.HiddenFor(m => m.ApplicationId)
+                <p>
+                    @Html.LabelFor(m => m.AgeRange)<br> 
+                    @Html.DropDownListFor(m => m.AgeRange, Model.AgeRanges)
+                    @Html.ValidationMessageFor(m => m.AgeRange, null, new { @class = "error" })
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.Gender)<br> 
+                    @Html.DropDownListFor(m => m.Gender, Model.Genders)
+                    @Html.ValidationMessageFor(m => m.Gender, null, new { @class = "error" })
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.Country)<br> 
+                    @Html.DropDownListFor(m => m.Country, Model.Countries)
+                    @Html.ValidationMessageFor(m => m.Country, null, new { @class = "error" })
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.Zip)<br> 
+                    @Html.TextBoxFor(m => m.Zip)
+                    @Html.ValidationMessageFor(m => m.Zip, null, new { @class = "error" })
+                </p>
+                <p class="actions">
+                    @Html.ValidationSummary(true, null, new { @class = "error" })
+                    <input type="submit" value="Publish" class="button green medium"/>
+                    <a href="/Application/Publishes/@Model.ApplicationId">Cancel</a>
+                </p>
+            }
+            </div>
+        </div>
+    </article>
+</div>
+<div style="clear"></div>
+

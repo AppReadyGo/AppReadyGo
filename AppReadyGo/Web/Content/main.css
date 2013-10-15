@@ -240,3 +240,11 @@ footer nav > ul > li > ul > li{margin: 10px 0px 10px 0px;}
 #global #slideshow .content-wrapper p {margin:173px auto;}
 #global #slideshow .content-wrapper a{color:#FFF;text-decoration:none;}
 #global #slideshow .content-wrapper a:hover{text-decoration:underline;}
+
+
+.r-panel{float:right;}
+.l-panel{float:left;}
+#dashboard_page .r-panel{width:28%;}
+#dashboard_page .l-panel{width:70%;}
+#dashboard_page .r-panel .head h3,
+#dashboard_page .l-panel .head h3{float:left;line-height: 36px;margin-right: 20px;}

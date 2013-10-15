@@ -12,9 +12,9 @@ using AppReadyGo.Core.QueryResults;
 
 namespace AppReadyGo.Domain.Queries.Application
 {
-    public class PublishQueryHandler : IQueryHandler<PublishQuery, PublishResult>
+    public class PublishQueryHandler : IQueryHandler<TaskQuery, PublishResult>
     {
-        public PublishResult Run(ISession session, PublishQuery query)
+        public PublishResult Run(ISession session, TaskQuery query)
         {
             var res = new PublishResult();
 

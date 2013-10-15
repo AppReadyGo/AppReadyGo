@@ -8,7 +8,7 @@ using AppReadyGo.Core.Entities;
 
 namespace AppReadyGo.Model.Pages.Application
 {
-    public class PublishModel : AfterLoginMasterModel
+    public class TaskModel : AfterLoginMasterModel
     {
         public int ApplicationId { get; set; }
 
@@ -28,7 +28,7 @@ namespace AppReadyGo.Model.Pages.Application
 
         public string Zip { get; set; }
 
-        public PublishModel()
+        public TaskModel()
             : base(AfterLoginMasterModel.MenuItem.Analytics)
         {
         }
