@@ -193,5 +193,15 @@ namespace AppReadyGo.API.Tests.Controllers
                 MarketByNetwork.GetApp(apiUserId.Value, appRes.Collection[0].Id);
             }
         }
+
+        [TestMethod]
+        public void MarketGetApps()
+        {
+            var data = new UserModel { ContryId = 1, Email = "ypanshin+testapi" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com", FirstName = "xxx", Password = "121" };
+            var controller = new MarketController();
+            var model = controller.Register(data);
+            var apps = controller.GetApps(model.Id.Value, 1, 10);
+            Assert.IsTrue(apps.ItemsCount > 0);
+        }
     }
 }
