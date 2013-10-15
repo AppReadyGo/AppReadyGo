@@ -7,78 +7,77 @@
 }
 @section title { Dashboard }
 <div class="content-wrapper" id="dashboard_page">
-<div class="a-r top-panel">
-    <div class="a-l actions">
-        <h3>Tasks</h3> <a href="/Application/New/" class="link2"><span><span>+ Upload Application</span></span></a>
-    </div>
-	<table class="tbl fixed" cellspacing="0">
-		<thead>
-		<tr>
-			<th scope='col' class='manage-column column-active'>Most Active Applications</th>
-		</tr>
-		</thead>
-        <tbody>
-        @if (Model.Applications.Any())
-        {
-            foreach (var item in Model.Applications)
+    <div class="l-panel">
+        <div class="head">
+            <h3>Tasks</h3> <a href="/Task/New/" class="link2"><span><span>+ Add Task</span></span></a>
+        </div>
+	    <table class="tbl" cellspacing="0">
+		    <thead>
+		    <tr>
+			    <th>Description</th>
+			    <th>Application</th>
+			    <th>Target</th>
+			    <th>Installs</th>
+			    <th>Started</th>
+			    <th>Status</th>
+		    </tr>
+		    </thead>
+		    <tfoot>
+		    <tr>
+			    <th>Description</th>
+			    <th>Application</th>
+			    <th>Target</th>
+			    <th>Installs</th>
+			    <th>Started</th>
+			    <th>Status</th>
+		    </tr>
+		    </tfoot>
+		    <tbody>
+            @if (Model.Tasks.Any())
             {
-                <tr class="@(item.IsAlternative ? "" : "alternate")"><td><a href="/Analytics/Dashboard/?aid=@(item.Id)">@item.Name</a></td></tr>
+                foreach (var task in Model.Tasks)
+                {	
+		            <tr class="portf @(task.IsAlternative ? "" : "alt")">
+			            <td>@task.Description</td>
+                        <td>@task.ApplicaionName</td>
+			            <td>@task.Target</td>
+                        <td>@task.Installs</td>
+			            <td>@task.Published</td>
+			            <td>@task.Status</td>
+		            </tr>
+                }
             }
-        }
-        else
-        {
-            <tr class="no-items"><td class="colspanchange">No applications.</td></tr>
-        }
-        </tbody>
-    </table>
-</div>
-<div class="wrap">
-    <div class="a-l actions">
-        <h3>Tasks</h3> <a href="/Application/Publish/" class="link2"><span><span>+ Add Task</span></span></a>
+            else
+            {
+              <tr><td colspan="4">No tasks</td></tr>
+            }
+		    </tbody>
+	    </table>
+    </div><!-- /wrap -->
+    <div class="r-panel">
+        <div class="head">
+            <h3>Applications</h3> <a href="/Application/New/" class="link2"><span><span>+ Upload Application</span></span></a>
+        </div>
+	    <table class="tbl" cellspacing="0">
+		    <thead>
+		    <tr>
+			    <th>Most Active Applications</th>
+		    </tr>
+		    </thead>
+            <tbody>
+            @if (Model.Applications.Any())
+            {
+                foreach (var item in Model.Applications)
+                {
+                    <tr class="@(item.IsAlternative ? "" : "alternate")"><td><a href="/Analytics/Dashboard/?aid=@(item.Id)">@item.Name</a></td></tr>
+                }
+            }
+            else
+            {
+                <tr><td>No applications.</td></tr>
+            }
+            </tbody>
+        </table>
     </div>
-	<table class="tbl fixed" cellspacing="0">
-		<thead>
-		<tr>
-			<th scope='col' class='manage-column'>Description</th>
-			<th scope='col' class='manage-column'>Application</th>
-			<th scope='col' class='manage-column'>Target</th>
-			<th scope='col' class='manage-column'>Installs</th>
-			<th scope='col' class='manage-column'>Started</th>
-			<th scope='col' class='manage-column'>Status</th>
-		</tr>
-		</thead>
-		<tfoot>
-		<tr>
-			<th scope='col' class='manage-column'>Description</th>
-			<th scope='col' class='manage-column'>Application</th>
-			<th scope='col' class='manage-column'>Target</th>
-			<th scope='col' class='manage-column'>Installs</th>
-			<th scope='col' class='manage-column'>Started</th>
-			<th scope='col' class='manage-column'>Status</th>
-		</tr>
-		</tfoot>
-		<tbody>
-        @if (Model.Tasks.Any())
-        {
-            foreach (var task in Model.Tasks)
-            {	
-		        <tr class="portf @(task.IsAlternative ? "" : "alt")">
-			        <td>@task.Description</td>
-                    <td>@task.ApplicaionName</td>
-			        <td>@task.Target</td>
-                    <td>@task.Installs</td>
-			        <td>@task.Published</td>
-			        <td>@task.Status</td>
-		        </tr>
-            }
-        }
-        else
-        {
-          <tr class="no-items"><td colspan="4" class="colspanchange">No tasks</td></tr>
-        }
-		</tbody>
-	</table>
-</div><!-- /wrap -->
-
-<br class="clear" />
+    <br class="clear" />
 </div>
