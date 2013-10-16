@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppReadyGo.Core.QueryResults.Application
+namespace AppReadyGo.Core.QueryResults.Task
 {
-    public class PublishDetailsResult
+    public class TaskDetailsResult
     {
         public int Id { get; set; }
+
+        public int ApplicationId { get; set; }
 
         public AgeRange? AgeRange { get; set; }
 

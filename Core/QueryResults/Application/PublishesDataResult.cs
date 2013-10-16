@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppReadyGo.Core.QueryResults.Task;
 
 namespace AppReadyGo.Core.QueryResults.Application
 {
@@ -11,6 +12,6 @@ namespace AppReadyGo.Core.QueryResults.Application
     {
         public string ApplicationName { get; set; }
 
-        public IEnumerable<PublishDetailsResult> PublishesDetails { get; set; }
+        public IEnumerable<TaskDetailsResult> PublishesDetails { get; set; }
     }
 }

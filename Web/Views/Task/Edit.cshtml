@@ -1,8 +1,5 @@
 ﻿@using AppReadyGo.Helpers;
-@using AppReadyGo.Model
-@using AppReadyGo.Model.Master
-@using AppReadyGo.Model.Pages.Application
-@model PublishModel
+@model AppReadyGo.Model.Pages.Application.TaskModel
 @{
     Layout = "~/Views/Shared/_AfterLogin.cshtml";
 }
@@ -16,9 +13,8 @@
 		<div class="border-left">
 			<div class="inner">
                 <ul>
-		           <li><a href="/Application"><h4>Applications</h4></a></li>
-		           <li><a href="/Application/Publishes/@Model.ApplicationId"><h4>@Model.ApplicationName - Publishes</h4></a></li>
-                   <li>Publish</li>
+		           <li><a href="/Application"><h4>Dashboard</h4></a></li>
+                   <li>New task</li>
 		        </ul>
 			</div>
 		</div>
@@ -29,12 +25,27 @@
     <article class="center">
         <div class="form-wrapper">
             <header>
-                <h1>Publish to testers</h1>
+                <h1>Task Details</h1>
             </header>
             <div class="sub-wrapper">
             @using (Html.BeginForm()) 
             {
-                @Html.HiddenFor(m => m.ApplicationId)
+                @Html.HiddenFor(m => m.Id)
+                <p>
+                    @Html.LabelFor(m => m.DescriptionId)<br> 
+                    @Html.DropDownListFor(m => m.DescriptionId, Model.Descriptions)
+                    @Html.ValidationMessageFor(m => m.DescriptionId, null, new { @class = "error" })
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.ApplicationId)<br> 
+                    @Html.DropDownListFor(m => m.ApplicationId, Model.Applications) <a href="/Application/New">Upload a new</a>
+                    @Html.ValidationMessageFor(m => m.ApplicationId, null, new { @class = "error" })
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.Audence)<br> 
+                    @Html.DropDownListFor(m => m.Audence, Model.Audences) <a href="/Plan/Edit">Hire more</a>
+                    @Html.ValidationMessageFor(m => m.Audence, null, new { @class = "error" })
+                </p>
                 <p>
                     @Html.LabelFor(m => m.AgeRange)<br> 
                     @Html.DropDownListFor(m => m.AgeRange, Model.AgeRanges)
@@ -57,8 +68,9 @@
                 </p>
                 <p class="actions">
                     @Html.ValidationSummary(true, null, new { @class = "error" })
-                    <input type="submit" value="Publish" class="button green medium"/>
-                    <a href="/Application/Publishes/@Model.ApplicationId">Cancel</a>
+                    <input type="submit" value="Publish" class="green-btn"/>
+                    <input type="submit" value="Save" class="green-btn"/>
+                    <a href="/Application">Cancel</a>
                 </p>
             }
             </div>

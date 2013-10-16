@@ -933,7 +933,6 @@
     <Content Include="Views\Analytics\Filter.cshtml" />
     <Content Include="Views\Analytics\TouchMap.cshtml" />
     <Content Include="Views\Application\Index.cshtml" />
-    <Content Include="Views\Task\Edit.cshtml" />
     <Content Include="Views\Content\Public404.cshtml" />
     <Content Include="Views\Content\PublicError.cshtml" />
     <Content Include="Views\Content\PublicPageContent.cshtml" />
@@ -949,7 +948,7 @@
     <Content Include="Views\Shared\TestersWidget.cshtml" />
     <Content Include="Views\Shared\TableFooter.cshtml" />
     <Content Include="Views\Shared\TableHeader.cshtml" />
-    <Content Include="Views\Task\New.cshtml" />
+    <Content Include="Views\Task\Edit.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
