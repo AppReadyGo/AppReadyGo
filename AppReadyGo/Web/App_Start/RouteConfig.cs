@@ -35,13 +35,6 @@ namespace AppReadyGo.Web
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
-            //routes.MapRoute(
-            //    "Admin_elmah",
-            //    "Admin/Elmah/{query}",
-            //    new { action = "Elmah", controller = "Admin", query = UrlParameter.Optional },
-            //    new[] { "AppReadyGo.Controllers" } // Namespaces
-            //);
-
             routes.MapRoute(
                "Admin_edit",
                "Admin/{action}/{id}",
@@ -70,6 +63,12 @@ namespace AppReadyGo.Web
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
+            routes.MapRoute(
+                "Task",
+                "Task/{action}/{id}",
+                new { controller = "Task", action = "New", id = UrlParameter.Optional },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
 
             // Appication screens
             // Example: /Application/3/screen/edit/1/some.png

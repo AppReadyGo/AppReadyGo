@@ -225,6 +225,7 @@
     <Compile Include="QueriesHandlers\Content\GetThemeQuery.cs" />
     <Compile Include="QueriesHandlers\IQueryHandler.cs" />
     <Compile Include="QueriesHandlers\PortfoliosQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Task\GetTaskDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserDetailsByEmailQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserDetailsByIdQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserRolesQueryHandler.cs" />

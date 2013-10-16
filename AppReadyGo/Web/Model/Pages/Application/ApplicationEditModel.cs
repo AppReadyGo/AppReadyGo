@@ -3,6 +3,7 @@ using AppReadyGo.Core.Entities;
 using System.Collections.Generic;
 using System;
 using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Task;
 
 namespace AppReadyGo.Model.Pages.Application
 {
@@ -12,7 +13,7 @@ namespace AppReadyGo.Model.Pages.Application
 
         public IEnumerable<string> ScreensPathes { get; set; }
 
-        public IEnumerable<PublishDetailsResult> Publishes { get; set; }
+        public IEnumerable<TaskDetailsResult> Publishes { get; set; }
 
         public PackageModel Package { get; set; }
 

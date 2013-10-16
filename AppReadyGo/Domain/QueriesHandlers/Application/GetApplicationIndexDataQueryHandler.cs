@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AppReadyGo.Core;
 using AppReadyGo.Core.Queries.Application;
 using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Task;
 using AppReadyGo.Domain.Model;
 using AppReadyGo.Domain.Queries;
 using NHibernate;
@@ -28,7 +29,7 @@ namespace AppReadyGo.Domain.QueriesHandlers.Application
             result.Tasks = session.Query<AppReadyGo.Domain.Model.Application>()
                                 .Where(a => a.User.Id == this.securityContext.CurrentUser.Id)
                                 .SelectMany(a => a.Publishes)
-                                .Select(p => new PublishDetailsResult
+                                .Select(p => new TaskDetailsResult
                                 {
                                     Id = p.Id,
                                     AgeRange = p.AgeRange,

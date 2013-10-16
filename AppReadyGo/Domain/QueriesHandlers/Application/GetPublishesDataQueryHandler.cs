@@ -8,6 +8,7 @@ using NHibernate.Linq;
 using AppReadyGo.Core.Queries.Application;
 using AppReadyGo.Core.QueryResults.Application;
 using System.Collections.Generic;
+using AppReadyGo.Core.QueryResults.Task;
 
 namespace AppReadyGo.Domain.Queries.Application
 {
@@ -18,7 +19,7 @@ namespace AppReadyGo.Domain.Queries.Application
             var result = new PublishesDataResult();
             result.PublishesDetails = session.Query<Model.PublishDetails>()
                             .Where(p => p.Application.Id == query.ApplicationId)
-                            .Select(p => new PublishDetailsResult
+                            .Select(p => new TaskDetailsResult
                             {
                                 Id = p.Id,
                                 AgeRange = p.AgeRange,

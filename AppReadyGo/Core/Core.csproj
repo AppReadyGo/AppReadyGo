@@ -157,6 +157,7 @@
     <Compile Include="Queries\Content\GetItemQuery.cs" />
     <Compile Include="Queries\Content\GetAllItemsQuery.cs" />
     <Compile Include="Queries\Content\GetAllPageItemsQuery.cs" />
+    <Compile Include="Queries\Task\GetTaskDataQuery.cs" />
     <Compile Include="QueryResults\Admin\AllMembersResult.cs" />
     <Compile Include="QueryResults\Admin\AllStaffResult.cs" />
     <Compile Include="QueryResults\Admin\AllKeysResult.cs" />
@@ -236,7 +237,7 @@
     <Compile Include="QueryResults\Application\PagingResult.cs" />
     <Compile Include="QueryResults\Application\PublishesDataResult.cs" />
     <Compile Include="QueryResults\Application\ExtendedApplicationResult.cs" />
-    <Compile Include="QueryResults\Application\PublishDetailsResult.cs" />
+    <Compile Include="QueryResults\Task\TaskDetailsResult.cs" />
     <Compile Include="QueryResults\Application\PublishResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDataItemResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDataResult.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="QueryResults\Portfolio\PortfolioDataItemResult.cs" />
     <Compile Include="QueryResults\Portfolio\PortfolioResult.cs" />
     <Compile Include="QueryResults\Portfolio\PortfoliosDataResult.cs" />
+    <Compile Include="QueryResults\Task\TaskDataResult.cs" />
     <Compile Include="QueryResults\Users\UserDetailsResult.cs" />
     <Compile Include="QueryResults\Users\UserSecureDetailsResult.cs" />
     <Compile Include="SecurityContext.cs" />
