@@ -23,5 +23,7 @@ namespace AppReadyGo.API.Models.Market
             UserAlreadyRegistered
         }
 
+
+        public bool AlreadyExists { get; set; }
     }
 }

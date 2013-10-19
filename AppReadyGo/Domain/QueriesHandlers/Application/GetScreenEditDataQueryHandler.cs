@@ -6,7 +6,7 @@ using AppReadyGo.Domain.Model;
 using NHibernate;
 using NHibernate.Linq;
 using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 using System.Drawing;
 
 namespace AppReadyGo.Domain.Queries.Application

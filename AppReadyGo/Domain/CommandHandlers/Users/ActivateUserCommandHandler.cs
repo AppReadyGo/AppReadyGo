@@ -14,7 +14,7 @@ namespace AppReadyGo.Domain.CommandHandlers.Users
         public int? Execute(ISession session, ActivateUserCommand cmd)
         {
             var user = session.Query<User>()
-                            .Where(u => u.Email.ToLower() == cmd.Email.ToLower())
+                            .Where(u => u.Email.ToLower() == cmd.Email.ToLower() && cmd.UserTypes.Contains(u.Type))
                             .Select(u => u)
                             .SingleOrDefault();
             if (user != null)

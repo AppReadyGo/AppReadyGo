@@ -15,7 +15,7 @@ namespace AppReadyGo.Domain.Queries
         public UserSecuredDetailsResult Run(ISession session, GetUserSecuredDetailsByEmailQuery query)
         {
             var user = session.Query<User>()
-                    .Where(u => u.Email.ToLower() == query.Email.ToLower())
+                    .Where(u => u.Email.ToLower() == query.Email.ToLower() && query.UserTypes.Contains(u.Type))
                     .Select(u => new
                     {
                         Id = u.Id,

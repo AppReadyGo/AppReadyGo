@@ -5,8 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using AppReadyGo.Common;
 using AppReadyGo.Common.Mails;
+using AppReadyGo.Core;
 using AppReadyGo.Core.Commands.Admin;
-using AppReadyGo.Core.Commands.Application;
+using AppReadyGo.Core.Commands.Applications;
 using AppReadyGo.Core.Commands.Content;
 using AppReadyGo.Core.Commands.Users;
 using AppReadyGo.Core.Logger;
@@ -250,7 +251,7 @@ namespace AppReadyGo.Controllers
 
         public ActionResult Activate(string email)
         {
-            var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(email));
+            var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(email, UserType.Member, UserType.Staff));
             return RedirectToAction("Members");
         }
 

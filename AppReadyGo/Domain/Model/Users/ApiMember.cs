@@ -82,20 +82,27 @@ namespace AppReadyGo.Domain.Model.Users
             }
         }
 
-        public virtual void Update(string email, string password, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string Zip, ApplicationType[] appTypes)
+        public virtual void Update(string email, string password, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string zip, ApplicationType[] appTypes)
+        {
+            this.Password = Encryption.SaltedHash(password, this.PasswordSalt);
+            this.Update(email, firstName, lastName, gender, ageRange, country, zip, appTypes);
+        }
+
+        public virtual void Update(string email, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string zip, ApplicationType[] appTypes)
         {
             this.Email = email;
-            this.Password = Encryption.SaltedHash(password, this.PasswordSalt); ;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Gender = gender;
             this.AgeRange = ageRange;
             this.Country = country;
-            this.Zip = Zip;
+            this.Zip = zip;
             this.applicationTypes.Clear();
-            this.applicationTypes.AddAll(appTypes);
+            if (appTypes != null)
+            {
+                this.applicationTypes.AddAll(appTypes);
+            }
         }
-
         public virtual void UserApplicationWasUsed(Application application)
         {
             var app = this.applications.FirstOrDefault(a => a.Application == application);

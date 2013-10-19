@@ -6,11 +6,11 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using AppReadyGo.Common;
-using AppReadyGo.Core.Commands.Application;
+using AppReadyGo.Core.Commands.Applications;
 using AppReadyGo.Core.Logger;
 using AppReadyGo.Core.Queries.Analytics;
 using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 using AppReadyGo.Model;
 using AppReadyGo.Model.Pages.Application;
 

@@ -7,7 +7,7 @@ using NHibernate.Linq;
 using AppReadyGo.Core.Queries.Users;
 using AppReadyGo.Core.QueryResults.Users;
 using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 using AppReadyGo.Domain.Model.Users;
 using AppReadyGo.Domain.Model;
 using System;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 
 namespace AppReadyGo.Core.QueryResults.Portfolio
 {

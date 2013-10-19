@@ -133,28 +133,28 @@ namespace AppReadyGo.API.Tests.Controllers
                 WebByNetwork.ApplicationPublish(client, appId_1, AgeRange.Range45_54, Gender.Men, 4, "NW42RX");
 
                 // Get user apps (no apps)
-                var appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                var appRes = MarketByNetwork.GetApps(apiUserId.Id.Value);
                 Assert.AreEqual(0, appRes.ItemsCount);
 
                 // Publish relevant to api user app
                 WebByNetwork.ApplicationPublish(client, appId_2, AgeRange.Range12_17, Gender.Women, 4, "NW42RX");
 
                 // Get user apps (1 app)
-                appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                appRes = MarketByNetwork.GetApps(apiUserId.Id.Value);
                 Assert.AreEqual(1, appRes.ItemsCount);
 
                 // Publish relevant to api user app
                 WebByNetwork.ApplicationPublish(client, appId_2, AgeRange.Range12_17, Gender.Women, 4, "NW42RX");
 
                 // Get user apps (1 app)
-                appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                appRes = MarketByNetwork.GetApps(apiUserId.Id.Value);
                 Assert.AreEqual(1, appRes.ItemsCount);
 
                 // Publish relevant to api user app
                 WebByNetwork.ApplicationPublish(client, appId_1, AgeRange.None, Gender.None, 4, "NW42RX");
 
                 // Get user apps (1 app)
-                appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                appRes = MarketByNetwork.GetApps(apiUserId.Id.Value);
                 Assert.AreEqual(2, appRes.ItemsCount);
             }
 
@@ -187,10 +187,10 @@ namespace AppReadyGo.API.Tests.Controllers
 
                 WebByNetwork.ApplicationPublish(client, appId, AgeRange.Range12_17, Gender.Women, 4, "NW42RX");
 
-                var appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                var appRes = MarketByNetwork.GetApps(apiUserId.Id.Value);
                 Assert.IsTrue(appRes.Collection.Length > 0);
 
-                MarketByNetwork.GetApp(apiUserId.Value, appRes.Collection[0].Id);
+                MarketByNetwork.GetApp(apiUserId.Id.Value, appRes.Collection[0].Id);
             }
         }
 

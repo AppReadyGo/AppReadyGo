@@ -2,8 +2,8 @@
     [ID]             INT           IDENTITY (1, 1) NOT NULL,
     [UserTypeID]     TINYINT       NOT NULL,
     [Email]          NVARCHAR (50) NOT NULL,
-    [Password]       NVARCHAR (50) NOT NULL,
-    [PasswordSalt]   NVARCHAR (50) NOT NULL,
+    [Password]       NVARCHAR (50) NULL,
+    [PasswordSalt]   NVARCHAR (50) NULL,
     [CreateDate]     DATETIME      NOT NULL,
     [LastAccessDate] DATETIME      NULL,
 	[Activated]		BIT			   NOT NULL,
@@ -26,7 +26,7 @@ ADD CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([ID] ASC);
 GO;
 
 ALTER TABLE [usr].[Users]
-ADD CONSTRAINT UC_Email UNIQUE ([Email])
+ADD CONSTRAINT UC_Email UNIQUE ([Email], [UserTypeID])
 GO
 
 ALTER TABLE [usr].[Users]

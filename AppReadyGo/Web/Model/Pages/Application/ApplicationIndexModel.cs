@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 using AppReadyGo.Model.Master;
 
 namespace AppReadyGo.Web.Model.Pages.Application

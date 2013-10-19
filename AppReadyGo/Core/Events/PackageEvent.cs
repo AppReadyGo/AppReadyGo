@@ -5,7 +5,7 @@ using System.Web;
 using System.Runtime.Serialization;
 using AppReadyGo.Core.Interfaces;
 using AppReadyGo.Core;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 
 namespace AppReadyGo.Core.Model.Events
 {

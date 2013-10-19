@@ -6,9 +6,9 @@ using AppReadyGo.Domain.Model;
 using NHibernate;
 using NHibernate.Linq;
 using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 using System.Collections.Generic;
-using AppReadyGo.Core.QueryResults.Task;
+using AppReadyGo.Core.QueryResults.Tasks;
 
 namespace AppReadyGo.Domain.Queries.Application
 {
@@ -17,7 +17,7 @@ namespace AppReadyGo.Domain.Queries.Application
         public PublishesDataResult Run(ISession session, GetPublishesDataQuery query)
         {
             var result = new PublishesDataResult();
-            result.PublishesDetails = session.Query<Model.PublishDetails>()
+            result.PublishesDetails = session.Query<Model.Task>()
                             .Where(p => p.Application.Id == query.ApplicationId)
                             .Select(p => new TaskDetailsResult
                             {

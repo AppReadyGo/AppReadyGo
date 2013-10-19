@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using AppReadyGo.Core.QueryResults.Portfolio;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 
 namespace AppReadyGo.Core.QueryResults.Analytics.QueryResults
 {

@@ -36,7 +36,7 @@ namespace AppReadyGo.Domain.Queries.Admin
                 Name = a.Name,
                 IconExt = a.IconExt,
                 PackageFileName = a.PackageFileName,
-                Published = a.Publishes.Count() > 0,
+                Published = a.Tasks.Count() > 0,
                 Description = a.Description,
                 CreateDate = a.CreateDate,
                 UserEmail = a.User.Email

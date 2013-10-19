@@ -2,8 +2,8 @@
 using AppReadyGo.Core.Entities;
 using System.Collections.Generic;
 using System;
-using AppReadyGo.Core.QueryResults.Application;
-using AppReadyGo.Core.QueryResults.Task;
+using AppReadyGo.Core.QueryResults.Applications;
+using AppReadyGo.Core.QueryResults.Tasks;
 
 namespace AppReadyGo.Model.Pages.Application
 {

@@ -16,7 +16,7 @@ namespace AppReadyGo.Domain.Model
     public class Application
     {
         private Iesi.Collections.Generic.ISet<Screen> screens;
-        private Iesi.Collections.Generic.ISet<PublishDetails> publishes;
+        private Iesi.Collections.Generic.ISet<Task> tasks;
         private Iesi.Collections.Generic.ISet<Screenshot> screenshots;
         private Iesi.Collections.Generic.ISet<PageView> pageViews;
 
@@ -52,7 +52,7 @@ namespace AppReadyGo.Domain.Model
         /// </summary>
         public virtual IEnumerable<Screen> Screens { get { return screens; } }
 
-        public virtual IEnumerable<PublishDetails> Publishes { get { return publishes; } }
+        public virtual IEnumerable<Task> Tasks { get { return tasks; } }
 
         public virtual IEnumerable<Screenshot> Screenshots { get { return screenshots; } }
 
@@ -65,7 +65,7 @@ namespace AppReadyGo.Domain.Model
         public Application()
         {
             this.screens = new HashedSet<Screen>();
-            this.publishes = new HashedSet<PublishDetails>();
+            this.tasks = new HashedSet<Task>();
             this.screenshots = new HashedSet<Screenshot>();
             this.pageViews = new HashedSet<PageView>();
             this.CreateDate = DateTime.UtcNow;
@@ -102,9 +102,9 @@ namespace AppReadyGo.Domain.Model
             }
         }
 
-        public virtual void Publish(PublishDetails publishDetails)
+        public virtual void AddTask(Task publishDetails)
         {
-            publishes.Add(publishDetails);
+            tasks.Add(publishDetails);
         }
 
         public virtual void UpdateIcon(string iconExt)

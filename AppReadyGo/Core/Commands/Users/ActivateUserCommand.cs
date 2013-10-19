@@ -7,10 +7,13 @@ namespace AppReadyGo.Core.Commands.Users
 {
     public class ActivateUserCommand : ICommand<int?>
     {
+        public UserType[] UserTypes { get; set; }
+
         public string Email { get; set; }
 
-        public ActivateUserCommand(string email)
+        public ActivateUserCommand(string email, params UserType[] userTypes)
         {
+            this.UserTypes = userTypes;
             this.Email = email;
         }
 

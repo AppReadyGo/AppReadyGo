@@ -2,7 +2,7 @@
 using AppReadyGo.API.Models.Market;
 using AppReadyGo.Common;
 using AppReadyGo.Core;
-using AppReadyGo.Core.Commands.Application;
+using AppReadyGo.Core.Commands.Applications;
 using AppReadyGo.Core.Commands.Users;
 using AppReadyGo.Core.Logger;
 using AppReadyGo.Core.Queries.Application;
@@ -49,7 +49,7 @@ namespace AppReadyGo.API.Controllers
             }
 
             // var body = HttpContext.Current.Request.Body();
-            var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
+            var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email, UserType.ApiMember));
             if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
             {
                 // "The user name or password provided is incorrect."
@@ -75,14 +75,11 @@ namespace AppReadyGo.API.Controllers
 
             if (!result.Validation.Any())
             {
-                return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.Successful };
+                return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.Successful, Id = result.Result.Id, AlreadyExists = result.Result.AlreadyExists };
             }
             else
             {
-                if (result.Validation.Any(v => v.ErrorCode == ErrorCode.EmailExists))
-                    return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.UserAlreadyRegistered };
-                else
-                    return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.MissingData };
+                return new RegisterResultModel { Code = RegisterResultModel.RegisterResult.MissingData };
             }
         }
 
@@ -127,7 +124,7 @@ namespace AppReadyGo.API.Controllers
                 return ResultCode.MissingData;
             }
 
-            var userDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(email));
+            var userDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(email, UserType.ApiMember));
             if (userDetails != null)
             {
                 if (userDetails.Type != UserType.ApiMember)

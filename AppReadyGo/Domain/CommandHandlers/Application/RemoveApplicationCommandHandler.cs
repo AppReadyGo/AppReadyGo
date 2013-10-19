@@ -3,7 +3,7 @@ using System.Linq;
 using AppReadyGo.Core.Commands;
 using AppReadyGo.Domain.Model;
 using NHibernate;
-using AppReadyGo.Core.Commands.Application;
+using AppReadyGo.Core.Commands.Applications;
 
 namespace AppReadyGo.Domain.CommandHandlers.Application
 {
@@ -20,7 +20,7 @@ namespace AppReadyGo.Domain.CommandHandlers.Application
                 Screens = app.Screens.Select(s => new Tuple<int,string>(s.Id, s.FileExtension)).ToArray(),
                 Screenshots = app.Screenshots.Select(s => new Tuple<int, string>(s.Id, s.FileExtension)).ToArray()
             };
-            foreach (var p in app.Publishes)
+            foreach (var p in app.Tasks)
             {
                 session.Delete(p);
             }

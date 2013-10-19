@@ -1,11 +1,11 @@
 ﻿using AppReadyGo.Common;
 using AppReadyGo.Core;
-using AppReadyGo.Core.Commands.Application;
+using AppReadyGo.Core.Commands.Applications;
 using AppReadyGo.Core.Entities;
 using AppReadyGo.Core.Logger;
 using AppReadyGo.Core.Queries.Analytics;
 using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 using AppReadyGo.Model.Master;
 using AppReadyGo.Model.Pages.Application;
 using AppReadyGo.Model.Pages.Portfolio;
@@ -18,6 +18,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using AppReadyGo.Web.Model.Shared;
+using AppReadyGo.Core.Commands.Task;
 
 namespace AppReadyGo.Controllers
 {
@@ -298,7 +299,7 @@ namespace AppReadyGo.Controllers
 
             if (ModelState.IsValid)
             {
-                ObjectContainer.Instance.Dispatch(new PublishCommand(model.ApplicationId, model.AgeRange, model.Gender, model.Country, model.Zip));
+               // ObjectContainer.Instance.Dispatch(new AddTaskCommand(model.ApplicationId, model.AgeRange, model.Gender, model.Country, model.Zip));
                 return RedirectToAction("", "Application");
             }
             else
