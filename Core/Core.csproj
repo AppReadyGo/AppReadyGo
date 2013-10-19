@@ -103,7 +103,6 @@
     <Compile Include="Commands\Content\UpdateThemeCommand.cs" />
     <Compile Include="Commands\Extentions.cs" />
     <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\Tasks\Class1.cs" />
     <Compile Include="Commands\Users\AcceptTermsAndConditionsCommand.cs" />
     <Compile Include="Commands\Users\ActivateUserCommand.cs" />
     <Compile Include="Commands\Users\CreateThirdPartyAPIMemberCommand.cs" />
