@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 
 namespace AppReadyGo.Core.QueryResults.Portfolio
 {

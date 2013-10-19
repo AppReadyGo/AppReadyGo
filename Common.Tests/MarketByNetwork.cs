@@ -15,17 +15,16 @@ namespace Common.Tests
 {
     public static class MarketByNetwork
     {
-        public static void Register(string email = null, string password = null)
+        public static RegisterResultModel Register(string email = null, string password = null, bool validateResult = true)
         {
             email = email ?? "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
             password = password ?? "111111";
             var data = new UserModel { ContryId = 1, Email = email, FirstName = "xxx", Password = password };
-            Register(data);
+            return Register(data, validateResult);
         }
 
-        public static void Register(UserModel data)
+        public static RegisterResultModel Register(UserModel data, bool validateResult = true)
         {
-
             HttpClient client = new HttpClient();
             client.BaseAddress = Global.ApiBaseAddress;
 
@@ -37,17 +36,21 @@ namespace Common.Tests
             var response = task.Result;
             if (!response.IsSuccessStatusCode)
             {
-                var res = response.Content.ReadAsStringAsync().Result;
-                Assert.Fail(string.Format("API Register - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, res));
+                var resStr = response.Content.ReadAsStringAsync().Result;
+                Assert.Fail(string.Format("API Register - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, resStr));
+
+                return null;
             }
-            else
+
+            var res = response.Content.ReadAsAsync<RegisterResultModel>().Result;
+            if (validateResult)
             {
-                var res = response.Content.ReadAsAsync<RegisterResultModel>().Result;
                 Assert.IsTrue(res.Id.HasValue);
             }
+            return res;
         }
 
-        public static int? LogOn(string email, string password)
+        public static UserResultModel LogOn(string email, string password, bool validateResult = true)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = Global.ApiBaseAddress;
@@ -60,18 +63,19 @@ namespace Common.Tests
             var response = client.PostAsJsonAsync("/market/login", data).Result;
             if (!response.IsSuccessStatusCode)
             {
-                var res = response.Content.ReadAsStringAsync();
-                Assert.Fail(string.Format("API Register - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, res));
+                var resStr = response.Content.ReadAsStringAsync();
+                Assert.Fail(string.Format("API Register - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, resStr));
 
                 return null;
             }
-            else
-            {
-                var res = response.Content.ReadAsAsync<UserResultModel>().Result;
-                Assert.AreEqual(res.Code, UserResultModel.Result.Successful);
 
-                return res.Id;
+            var res = response.Content.ReadAsAsync<UserResultModel>().Result;
+            if (validateResult)
+            {
+                Assert.AreEqual(res.Code, UserResultModel.Result.Successful);
             }
+
+            return res; 
         }
 
         public static PaggingModel<ApplicationModel> GetApps(int userId, int page = 1, int pagesize = 100000)
@@ -107,6 +111,40 @@ namespace Common.Tests
                 Assert.IsTrue(response.Result.Length > 0, "API GetApp - Fatal error: the result length is zero");
             }
 
+        }
+
+        public static RegisterResultModel RegisterThirdParty(string email, bool validateResult = true)
+        {
+            email = email ?? "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            var data = new ThirdPartyUserModel { ContryId = 1, Email = email, FirstName = "xxx" };
+            return RegisterThirdParty(data, validateResult);
+        }
+
+        public static RegisterResultModel RegisterThirdParty(ThirdPartyUserModel data, bool validateResult = true)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = Global.ApiBaseAddress;
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+            var task = client.PostAsJsonAsync("/market/thirdpartyregister", data);
+            var response = task.Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var resStr = response.Content.ReadAsStringAsync().Result;
+                Assert.Fail(string.Format("API Register - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, resStr));
+
+                return null;
+            }
+
+            var res = response.Content.ReadAsAsync<RegisterResultModel>().Result;
+            if (validateResult)
+            {
+                Assert.IsTrue(res.Id.HasValue);
+            }
+            return res;
         }
     }
 }

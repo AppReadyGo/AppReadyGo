@@ -14,7 +14,7 @@ using AppReadyGo.Core.Entities;
 using AppReadyGo.Core.Queries.Users;
 using AppReadyGo.Core;
 using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.Commands.Application;
+using AppReadyGo.Core.Commands.Applications;
 using AppReadyGo.Core.Logger;
 using System.Reflection;
 using AppReadyGo.API.Models.Analytics;

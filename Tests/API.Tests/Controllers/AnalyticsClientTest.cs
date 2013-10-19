@@ -81,7 +81,7 @@ namespace AppReadyGo.API.Tests.Controllers
 
                 WebByNetwork.ApplicationPublish(client, appId, AgeRange.Range12_17, Gender.Women, 4, "NW42RX");
 
-                var appRes = MarketByNetwork.GetApps(apiUserId.Value);
+                var appRes = MarketByNetwork.GetApps(apiUserId.Id.Value);
                 Assert.IsTrue(appRes.Collection.Length > 0);
 
                 AnalyticsByNetwork.SubmitPackageByNetwork(appRes.Collection.Select(a => a.Id).Max(), 320, 480);

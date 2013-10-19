@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace AppReadyGo.Core.Commands.Users
 {
 
-    public abstract class CreateUserCommand : ICommand<int>
+    public abstract class CreateUserCommand
     {
         public string Email { get; protected set; }
 
@@ -40,24 +40,6 @@ namespace AppReadyGo.Core.Commands.Users
             if (!validation.IsCorrectEmail(this.Email))
             {
                 yield return new ValidationResult(ErrorCode.WrongEmail, "The email is wrong.");
-            }
-
-            if (validation.IsEmailExists(this.Email))
-            {
-                yield return new ValidationResult(ErrorCode.EmailExists, "The email exists in the system.");
-            }
-
-            if (!this.ThirdParty)
-            {
-                if (string.IsNullOrEmpty(this.Password))
-                {
-                    yield return new ValidationResult(ErrorCode.WrongPassword, "The command must have an Password parameter.");
-                }
-
-                if (!validation.IsCorrectPassword(this.Password))
-                {
-                    yield return new ValidationResult(ErrorCode.WrongPassword, "The password is wrong.");
-                }
             }
         }
     }

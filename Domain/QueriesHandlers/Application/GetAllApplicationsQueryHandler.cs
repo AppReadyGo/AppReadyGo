@@ -4,7 +4,7 @@ using System.Reflection;
 using AppReadyGo.Core;
 using AppReadyGo.Core.Logger;
 using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 using AppReadyGo.Domain.Model;
 using NHibernate;
 using NHibernate.Linq;

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Linq;
 using AppReadyGo.Core.QueryResults.Analytics.QueryResults;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 using AppReadyGo.Core.QueryResults.Portfolio;
 using AppReadyGo.Domain.Model;
 using NHibernate;

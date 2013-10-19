@@ -21,10 +21,14 @@ namespace AppReadyGo.Domain.CommandHandlers
             this.session = session;
             this.securityContext = securityContext;
         }
-        public bool IsEmailExists(string email, int? userId = null)
+        public bool IsEmailExists(string email, int? userId = null, params UserType[] userTypes)
         {
             var query = this.session.Query<User>()
                             .Where(u => u.Email.ToLower() == email.ToLower());
+            if (userTypes.Any())
+            {
+                query = query.Where(u => userTypes.Contains(u.Type));
+            }
             if (userId.HasValue)
             {
                 query = query.Where(u => userId.Value != u.Id);

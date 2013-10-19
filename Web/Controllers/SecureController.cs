@@ -31,7 +31,7 @@ namespace AppReadyGo.Controllers
         {
             if (ModelState.IsValid)
             {
-                var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(ObjectContainer.Instance.CurrentUserDetails.Email));
+                var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(ObjectContainer.Instance.CurrentUserDetails.Email, UserType.Member, UserType.Staff));
                 if (securedDetails.Password == Encryption.SaltedHash(model.OldPassword, securedDetails.PasswordSalt))
                 {
                     var result = ObjectContainer.Instance.Dispatch(new ResetPasswordCommand(securedDetails.Email, model.NewPassword));

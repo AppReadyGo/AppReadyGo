@@ -100,7 +100,7 @@
     <Build Include="Schemas\dbo\GeoKeys.table.sql" />
     <Build Include="Schemas\dbo\Languages.table.sql" />
     <Build Include="Schemas\dbo\OperationSystems.table.sql" />
-    <Build Include="Schemas\dbo\Publishes.table.sql" />
+    <Build Include="Schemas\dbo\Tasks.table.sql" />
     <Build Include="Schemas\dbo\PageViews.table.sql" />
     <Build Include="Schemas\dbo\Regions.table.sql" />
     <Build Include="Schemas\dbo\Screens.table.sql" />

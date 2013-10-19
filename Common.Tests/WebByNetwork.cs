@@ -11,12 +11,13 @@ using AppReadyGo.Core.Entities;
 using AppReadyGo.Web.Common.Mails;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AppReadyGo.Core;
+using System.Net;
 
 namespace Common.Tests
 {
     public static class WebByNetwork
     {
-        public static void Register(string username, string password)
+        public static string Register(string username, string password, bool validateResult = true)
         {
             using (var client = new HttpClient() { BaseAddress = Global.BaseAddress })
             {
@@ -33,10 +34,12 @@ namespace Common.Tests
                 {
                     Assert.Fail(string.Format("Web Register - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
                 }
-                else
+                else if(validateResult)
                 {
                     Assert.IsTrue(res.Contains("Activation email was sent"), string.Format("Web Register - wrong responce: {0}", res));
                 }
+
+                return res;
             }
         }
 
@@ -59,7 +62,17 @@ namespace Common.Tests
             }
         }
 
-        public static void LogOn(HttpClient client, string username, string password)
+        public static string LogOn(string username, string password, bool validateResult = true)
+        {
+            var cookieContainer = new CookieContainer();
+            using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
+            using (var client = new HttpClient(handler) { BaseAddress = Global.BaseAddress })
+            {
+                return LogOn(client, username, password, validateResult);
+            }
+        }
+
+        public static string LogOn(HttpClient client, string username, string password, bool validateResult = true)
         {
             var data = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
                     new KeyValuePair<string, string>("UserName", username),
@@ -72,10 +85,12 @@ namespace Common.Tests
             {
                 Assert.Fail(string.Format("Web LogOn - Fatal error:{0} ({1}) Body:{2}", (int)responce.StatusCode, responce.ReasonPhrase, res));
             }
-            else
+            else if(validateResult)
             {
-                Assert.IsTrue(res.Contains("<h4>New Application</h4>"), string.Format("Web LogOn - wrong responce: {0}", res));
+                Assert.IsTrue(res.Contains("<title>AppReadyGo -   Dashboard  </title>"), string.Format("Web LogOn - wrong responce: {0}", res));
             }
+
+            return res;
         }
 
         public static int ApplicationNew(HttpClient client, string name = null, string desc = null, int type = 1, string basePath = @"\..\..\Resources\")

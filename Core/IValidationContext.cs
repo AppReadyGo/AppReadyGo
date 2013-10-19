@@ -7,7 +7,7 @@ namespace AppReadyGo.Core
 {
     public interface IValidationContext
     {
-        bool IsEmailExists(string email, int? userID = null);
+        bool IsEmailExists(string email, int? userID = null, params UserType[] userTypes);
 
         bool IsCorrectEmail(string email);
 

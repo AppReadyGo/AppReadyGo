@@ -81,7 +81,7 @@
     <Compile Include="CommandHandlers\Application\CreateApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\RemoveApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\RemoveScreenCommandHandler.cs" />
-    <Compile Include="CommandHandlers\Application\PublishCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Task\AddTaskCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UpdateApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UpdateScreenCommandHandler.cs" />
     <Compile Include="CommandHandlers\Content\AcceptTermsAndConditionsCommandHandler.cs" />
@@ -130,7 +130,7 @@
     <Compile Include="Mapping\Logs\LogMapping.cs" />
     <Compile Include="Mapping\NameableMapping.cs" />
     <Compile Include="Mapping\OperationSystemMapping.cs" />
-    <Compile Include="Mapping\PublishDetailsMapping.cs" />
+    <Compile Include="Mapping\TaskMapping.cs" />
     <Compile Include="Mapping\PageViewMaping.cs" />
     <Compile Include="Mapping\ScreenshotsMapping.cs" />
     <Compile Include="Mapping\ScrollMapping.cs" />
@@ -172,7 +172,7 @@
     <Compile Include="Model\Logs\Log.cs" />
     <Compile Include="Model\Nameable.cs" />
     <Compile Include="Model\OperationSystem.cs" />
-    <Compile Include="Model\PublishDetails.cs" />
+    <Compile Include="Model\Task.cs" />
     <Compile Include="Model\PageView.cs" />
     <Compile Include="Model\Screen.cs" />
     <Compile Include="Model\Screenshot.cs" />

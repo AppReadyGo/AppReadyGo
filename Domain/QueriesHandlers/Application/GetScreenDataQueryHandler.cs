@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AppReadyGo.Domain.Queries;
 using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.QueryResults.Application;
+using AppReadyGo.Core.QueryResults.Applications;
 using NHibernate;
 using NHibernate.Linq;
 using System.Drawing;

@@ -33,7 +33,7 @@ namespace AppReadyGo.Controllers
         {
             if (ModelState.IsValid)
             {
-                var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.UserName));
+                var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.UserName, UserType.Member, UserType.Staff));
                 if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
                 {
                     ModelState.AddModelError("error", "The user name or password provided is incorrect.");
@@ -167,7 +167,7 @@ namespace AppReadyGo.Controllers
             {
                 throw new Exception(string.Format("Activation link expired: {0}", date));
             }
-            var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(splitedKey[1]));
+            var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(splitedKey[1] , UserType.Member, UserType.Staff));
             if (result.Validation.Any())
             {
                 throw new Exception(string.Format("User was not found:{0}", splitedKey[1]));
@@ -186,7 +186,7 @@ namespace AppReadyGo.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
+                var userDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email, UserType.Member, UserType.Staff));
                 if (userDetails != null)
                 {
                     if (userDetails.Type == UserType.ApiMember)
@@ -252,10 +252,10 @@ namespace AppReadyGo.Controllers
                 }
                 else
                 {
-                    var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(email));
+                    var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(email, UserType.Member, UserType.Staff));
                     if (!securedDetails.Activated)
                     {
-                        ObjectContainer.Instance.Dispatch(new ActivateUserCommand(email));
+                        ObjectContainer.Instance.Dispatch(new ActivateUserCommand(email, UserType.Member, UserType.Staff));
                     }
                     
                     // Temprorary access just for special users

@@ -9,13 +9,13 @@ using AppReadyGo.Domain.Model;
 
 namespace AppReadyGo.Domain.CommandHandlers.Users
 {
-    public class CreateMemberCommandHandler : ICommandHandler<CreateMemberCommand, int>
+    public class CreateMemberCommandHandler : ICommandHandler<CreateMemberCommand, object>
     {
-        public int Execute(ISession session, CreateMemberCommand cmd)
+        public object Execute(ISession session, CreateMemberCommand cmd)
         {
             var user = new Member(cmd.Email, cmd.Password);
             session.Save(user);
-            return user.Id;
+            return null;
         }
     }
 }

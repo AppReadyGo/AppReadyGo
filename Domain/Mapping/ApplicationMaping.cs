@@ -60,7 +60,7 @@ namespace AppReadyGo.Domain.Mapping
                 rel => rel.OneToMany());
 
             Set(
-              x => x.Publishes,
+              x => x.Tasks,
               map =>
               {
                   map.Key(k => k.Column("ApplicationID"));

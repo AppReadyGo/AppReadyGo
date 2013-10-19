@@ -192,7 +192,7 @@ public class CustomMembershipProvider : MembershipProvider
 
     public override bool ValidateUser(string username, string password)
     {
-        var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(username));
+        var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(username, UserType.Member, UserType.Staff));
         if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(password, securedDetails.PasswordSalt))
         {
             return false;

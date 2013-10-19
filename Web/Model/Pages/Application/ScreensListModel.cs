@@ -1,4 +1,4 @@
-﻿using AppReadyGo.Core.QueryResults.Application;
+﻿using AppReadyGo.Core.QueryResults.Applications;
 using AppReadyGo.Model.Master;
 using System.Collections.Generic;
 

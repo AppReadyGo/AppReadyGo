@@ -1,4 +1,4 @@
-﻿using AppReadyGo.Core.Commands.Application;
+﻿using AppReadyGo.Core.Commands.Applications;
 using AppReadyGo.Domain.Model.Users;
 using NHibernate;
 using NHibernate.Linq;

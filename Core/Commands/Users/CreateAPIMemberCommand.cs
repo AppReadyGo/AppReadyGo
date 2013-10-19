@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppReadyGo.Core.Commands.Users
 {
-    public class CreateAPIMemberCommand : CreateUserCommand
+    public class CreateAPIMemberCommand : CreateUserCommand, ICommand<int>
     {
         public string FirstName { get; protected set; }
 
@@ -33,6 +33,19 @@ namespace AppReadyGo.Core.Commands.Users
             this.CountryId = countryId;
             this.Zip = zip;
             this.ApplicationTypes = applicationTypes;
+        }
+
+        public IEnumerable<ValidationResult> Validate(IValidationContext validation)
+        {
+            foreach (var val in base.Validate(validation))
+            {
+                yield return val;
+            }
+
+            if (validation.IsEmailExists(this.Email, null, UserType.ApiMember))
+            {
+                yield return new ValidationResult(ErrorCode.EmailExists, "The email exists in the system.");
+            }
         }
     }
 }

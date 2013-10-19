@@ -50,7 +50,7 @@ namespace AppReadyGo.Web.Tests
 
             APIByNetwork.Activate(apiUserName);
 
-            int? apiUserId = MarketByNetwork.LogOn(apiUserName, password);
+            int? apiUserId = MarketByNetwork.LogOn(apiUserName, password).Id.Value;
 
             APIByNetwork.ResetPassword(apiUserName, password);
 
@@ -108,6 +108,62 @@ namespace AppReadyGo.Web.Tests
             // Screen Remove
         }
 
+        [TestMethod]
+        public void RegisterLogOnFunctionalityByNetwork()
+        {
+            string staff = "yura.panshin@appreadygo.com";
+            string member = "ypanshin+web" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string api = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string thirdParty = "ypanshin+third" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string passwordWeb = "111111";
+            string passwordApi = "222222";
+
+            var webRegRes = WebByNetwork.Register(staff, passwordWeb, false);
+            Assert.IsFalse(webRegRes.Contains("Activation email was sent"));
+
+            WebByNetwork.Register(member, passwordWeb);
+            WebByNetwork.Activate(member);
+
+            webRegRes = WebByNetwork.Register(member, passwordWeb, false);
+            Assert.IsFalse(webRegRes.Contains("Activation email was sent"));
+
+            WebByNetwork.Register(api, passwordWeb);
+            WebByNetwork.Activate(api);
+
+            var resApi = MarketByNetwork.Register(api, passwordApi);
+            APIByNetwork.Activate(api);
+
+            var resWrng = MarketByNetwork.Register(api, passwordApi, false);
+            Assert.AreEqual(RegisterResultModel.RegisterResult.UserAlreadyRegistered, resWrng.Code);
+
+            var resThirdParty = MarketByNetwork.RegisterThirdParty(api);
+            Assert.AreEqual(resApi.Id.Value, resThirdParty.Id.Value);
+
+            MarketByNetwork.RegisterThirdParty(thirdParty);
+
+            // Correct
+            var staffLogon = WebByNetwork.LogOn(staff, passwordWeb, false);
+            Assert.IsTrue(staffLogon.Contains("<title>AppReadyGo -     Logs    </title>"));
+
+            WebByNetwork.LogOn(member, passwordWeb);
+            WebByNetwork.LogOn(api, passwordWeb);
+
+            MarketByNetwork.LogOn(api, passwordApi);
+
+            //Wrong
+            var apiRes = MarketByNetwork.LogOn(staff, passwordWeb, false);
+            Assert.AreEqual(UserResultModel.Result.WrongUserNamePassword, apiRes.Code);
+
+            apiRes = MarketByNetwork.LogOn(member, passwordWeb, false);
+            Assert.AreEqual(UserResultModel.Result.WrongUserNamePassword, apiRes.Code);
+
+            apiRes = MarketByNetwork.LogOn(api, passwordWeb, false);
+            Assert.AreEqual(UserResultModel.Result.WrongUserNamePassword, apiRes.Code);
+
+            var webRs = WebByNetwork.LogOn(api, passwordApi, false);
+            Assert.IsTrue(webRegRes.Contains("The user name or password provided is incorrect."));
+
+        }
 
         private void ScreenEdit(HttpClient client, int appId, int screenId)
         {

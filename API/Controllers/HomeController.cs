@@ -29,7 +29,7 @@ namespace AppReadyGo.API.Controllers
             {
                 throw new Exception("Activation link expired.");
             }
-            var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(splitedKey[1]));
+            var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(splitedKey[1], UserType.ApiMember));
             if (result.Validation.Any())
             {
                 throw new Exception("User was not found.");
@@ -82,10 +82,10 @@ namespace AppReadyGo.API.Controllers
                 }
                 else
                 {
-                    var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(email));
+                    var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(email, UserType.ApiMember));
                     if (!securedDetails.Activated)
                     {
-                        ObjectContainer.Instance.Dispatch(new ActivateUserCommand(email));
+                        ObjectContainer.Instance.Dispatch(new ActivateUserCommand(email, UserType.ApiMember));
                     }
 
 

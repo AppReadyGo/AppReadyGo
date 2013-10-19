@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppReadyGo.Core.Commands.Users
 {
-    public class CreateThirdPartyAPIMemberCommand : CreateUserCommand
+    public class CreateThirdPartyAPIMemberCommand : CreateUserCommand, ICommand<CreateThirdPartyAPIMemberCommand.Result>
     {
         public string FirstName { get; protected set; }
 
@@ -33,6 +33,13 @@ namespace AppReadyGo.Core.Commands.Users
             this.CountryId = countryId;
             this.Zip = zip;
             this.ApplicationTypes = applicationTypes;
+        }
+
+        public class Result
+        {
+            public int Id { get; set; }
+
+            public bool AlreadyExists { get; set; }
         }
     }
 }
