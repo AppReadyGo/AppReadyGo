@@ -629,7 +629,8 @@ INSERT INTO [cont].[Mails] ([ID], [IsSystem], [ThemeID], [Url])
 VALUES (1, 1, 1, 'mails/webactivationemail'),
        (2, 1, 1, 'mails/forgotpasswordmail'),
        (4, 1, 1, 'mails/specialaccessemail'),
-	   (5, 1, 1, 'mails/apiactivationemail');
+	   (5, 1, 1, 'mails/apiactivationemail'),
+       (6, 1, 1, 'mails/apiforgotpasswordmail');
 
 SET IDENTITY_INSERT [cont].[Mails] OFF
 
@@ -650,7 +651,9 @@ This version of Fingerprint is not a final product. Rather, it is a tool that wi
 <p style="margin-bottom:16px">http://finger.mobillify.com</p>
 '),
 (5, 0, 'subject', 'Please activate your account'),
-(5, 1, 'body', 'Please activate your account by the link: {activation_link}');
+(5, 1, 'body', 'Please activate your account by the link: {activation_link}'),
+(6, 0, 'subject', 'Reset password'),
+(6, 1, 'body', 'Please use the link to reset password: {reset_password_link}');
 
 GO
 

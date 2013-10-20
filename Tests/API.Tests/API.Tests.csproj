@@ -116,6 +116,7 @@
     <Compile Include="Controllers\MarketClientTest.cs" />
     <Compile Include="Controllers\MailTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="APICompleteTests.cs" />
     <None Include="TestData\AnalyticsData_0.json" />
   </ItemGroup>
   <ItemGroup>

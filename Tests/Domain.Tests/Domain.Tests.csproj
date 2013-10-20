@@ -54,6 +54,7 @@
       <HintPath>..\..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -72,6 +73,8 @@
   <ItemGroup>
     <Compile Include="APITests.cs" />
     <Compile Include="ApplicationTests.cs" />
+    <Compile Include="IDatabase.cs" />
+    <Compile Include="RemoteDatabase.cs" />
     <Compile Include="SecurityContext.cs" />
     <Compile Include="UserTests.cs" />
     <Compile Include="Database.cs" />

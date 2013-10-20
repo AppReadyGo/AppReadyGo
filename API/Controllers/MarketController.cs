@@ -117,7 +117,7 @@ namespace AppReadyGo.API.Controllers
         }
 
         [HttpPost]
-        public ResultCode ForgotPassword(string email)
+        public ResultCode ForgotPassword([FromBody] string email)
         {
             if (string.IsNullOrWhiteSpace(email))
             {
@@ -157,13 +157,18 @@ namespace AppReadyGo.API.Controllers
         /// <param name="zip"></param>
         /// <param name="interest"></param>
         [HttpPost]
-        public void UpdateUser([FromBody] UserModel model)
+        public ResultCode UpdateUser([FromBody] UserModel model)
         {
 
             var result = ObjectContainer.Instance.Dispatch(new UpdateAPIMemberCommand(model.Id.Value, model.Email, model.Password, model.FirstName, model.LastName, model.Gender, model.AgeRange, model.ContryId, model.Zip, model.Interests));
 
             if (!result.Validation.Any())
             {
+                return ResultCode.MissingData;
+            }
+            else
+            {
+                return ResultCode.Successful;
             }
         }
 
