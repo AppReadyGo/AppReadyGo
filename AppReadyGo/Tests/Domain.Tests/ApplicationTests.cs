@@ -11,7 +11,7 @@ namespace Domain.Tests
     [TestClass]
     public class ApplicationTests
     {
-        private Database database;
+        private IDatabase database;
 
         [TestInitialize()]
         public void TestInitialize()
@@ -25,7 +25,7 @@ namespace Domain.Tests
             this.database.Clear();
         }
 
-        internal static Application CreateApplication(Database database, Member member, string name = "Some name")
+        internal static Application CreateApplication(IDatabase database, Member member, string name = "Some name")
         {
             var appType = new ApplicationType("Some type");
             var app = new Application(member, name, "Some description", appType, null);

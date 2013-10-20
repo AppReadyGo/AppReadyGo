@@ -6,18 +6,29 @@ using AppReadyGo.Common;
 using NHibernate;
 using AppReadyGo.Domain.Model.Users;
 using AppReadyGo.Domain.CommandHandlers.API;
+using AppReadyGo.Domain.Queries.Application;
+using AppReadyGo.Core.Queries.Application;
+using System.Configuration;
 
 namespace Domain.Tests
 {
     [TestClass]
     public class APITests
     {
-        private Database database;
+#if QA
+        public static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["QA"].ConnectionString;
+#elif DEBUG
+        public static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["DEV"].ConnectionString;
+#else
+        public static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["PROD"].ConnectionString;
+#endif
+        private static readonly bool UseRemoteDatabase = true;
+        private IDatabase database;
 
         [TestInitialize()]
         public void TestInitialize()
         {
-            this.database = new Database(@"QA", "arg_unittests");
+            this.database = UseRemoteDatabase ? (IDatabase)new RemoteDatabase(ConnectionString) : (IDatabase)new Database(@"QA", "arg_unittests");
         }
 
         [TestCleanup()]
@@ -82,7 +93,20 @@ namespace Domain.Tests
             }
         }
 
-        internal static void DownloadApplication(Database database, int memberId, int appId)
+        [TestMethod]
+        public void GetApplicationDetailsQuery()
+        {
+            var member = UserTests.CreateMember(this.database);
+            var apiMember = UserTests.CreateAPIMember(this.database);
+            var app = ApplicationTests.CreateApplication(this.database, member);
+            using (ISession session = database.OpenSession())
+            {
+                var details = new GetApplicationDetailsQueryHandler().Run(session, new GetApplicationDetailsQuery(app.Id));
+                Assert.AreEqual(app.Id, details.Id);
+            }
+        }
+
+        internal static void DownloadApplication(IDatabase database, int memberId, int appId)
         {
             using (ISession session = database.OpenSession())
             {

@@ -9,10 +9,10 @@
 	[Zip]			NVARCHAR(10)	NULL,
 	[Published]		BIT				NOT NULL
 );
-GO;
+GO
 
 ALTER TABLE [dbo].[Tasks]
 ADD CONSTRAINT [PK_Tasks] PRIMARY KEY CLUSTERED ([ID] ASC);
-GO;
+GO
 
 

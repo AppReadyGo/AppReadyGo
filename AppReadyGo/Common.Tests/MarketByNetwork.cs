@@ -10,11 +10,34 @@ using AppReadyGo.Common.Mails;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AppReadyGo.Core;
 using Newtonsoft.Json;
+using AppReadyGo.Core.Entities;
 
 namespace Common.Tests
 {
     public static class MarketByNetwork
     {
+        public static void GetSettings()
+        {
+            using (var client = new HttpClient() { BaseAddress = Global.ApiBaseAddress })
+            {            
+                // Add an Accept header for JSON format.
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                var response = client.GetAsync("/market/getsettings").Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var res = response.Content.ReadAsStringAsync();
+                    Assert.Fail(string.Format("API MarketGetSettings - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, res));
+                }
+                else
+                {
+                    var res = response.Content.ReadAsAsync<SettingsModel>().Result;
+                    Assert.IsFalse(string.IsNullOrEmpty(res.WebApplicationBaseURL));
+                }
+            }
+        }
+
         public static RegisterResultModel Register(string email = null, string password = null, bool validateResult = true)
         {
             email = email ?? "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
@@ -64,7 +87,7 @@ namespace Common.Tests
             if (!response.IsSuccessStatusCode)
             {
                 var resStr = response.Content.ReadAsStringAsync();
-                Assert.Fail(string.Format("API Register - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, resStr));
+                Assert.Fail(string.Format("API LogOn - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, resStr));
 
                 return null;
             }
@@ -89,7 +112,7 @@ namespace Common.Tests
             if (!response.IsSuccessStatusCode)
             {
                 var res = response.Content.ReadAsStringAsync();
-                Assert.Fail(string.Format("API Register - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, res));
+                Assert.Fail(string.Format("API GetApps - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, res));
 
                 return null;
             }
@@ -107,7 +130,7 @@ namespace Common.Tests
                 client.BaseAddress = Global.ApiBaseAddress;
 
                 var response = client.GetByteArrayAsync("/market/getapp/?userId=" + userId + "&appId=" + appId);
-                Assert.IsFalse(response.IsFaulted, "API GetApp - Fatal error: the response is faulted");
+                Assert.IsTrue(response.IsFaulted, "API GetApp - Fatal error: the response is faulted");
                 Assert.IsTrue(response.Result.Length > 0, "API GetApp - Fatal error: the result length is zero");
             }
 
@@ -134,7 +157,7 @@ namespace Common.Tests
             if (!response.IsSuccessStatusCode)
             {
                 var resStr = response.Content.ReadAsStringAsync().Result;
-                Assert.Fail(string.Format("API Register - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, resStr));
+                Assert.Fail(string.Format("API RegisterThirdParty - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, resStr));
 
                 return null;
             }
@@ -145,6 +168,98 @@ namespace Common.Tests
                 Assert.IsTrue(res.Id.HasValue);
             }
             return res;
+        }
+
+        public static ResultCode ForgotPassword(string apiUserName, bool validateResult = true)
+        {
+            using (var client = new HttpClient() { BaseAddress = Global.ApiBaseAddress })
+            {
+                // Add an Accept header for JSON format.
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var task = client.PostAsJsonAsync("/market/ForgotPassword", apiUserName);
+                var response = task.Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var resStr = response.Content.ReadAsStringAsync().Result;
+                    Assert.Fail(string.Format("API ForgotPassword - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, resStr));
+
+                    return ResultCode.MissingData;
+                }
+
+                var res = response.Content.ReadAsAsync<ResultCode>().Result;
+                if (validateResult)
+                {
+                    Assert.AreEqual(ResultCode.Successful, res);
+                }
+                return res;
+            }
+        }
+
+        public static ResultCode Update(int userId, string apiUserName, bool validateResult = true)
+        {
+            using (var client = new HttpClient() { BaseAddress = Global.ApiBaseAddress })
+            {
+                // Add an Accept header for JSON format.
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var model = new UserModel { Id = userId, Email = apiUserName, AgeRange = AgeRange.None };
+
+                var task = client.PostAsJsonAsync("/market/updateuser", model);
+                var response = task.Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var resStr = response.Content.ReadAsStringAsync().Result;
+                    Assert.Fail(string.Format("API Update - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, resStr));
+
+                    return ResultCode.MissingData;
+                }
+
+                var res = response.Content.ReadAsAsync<ResultCode>().Result;
+                if (validateResult)
+                {
+                    Assert.AreEqual(ResultCode.Successful, res);
+                }
+                return res;
+            }
+        }
+
+        public static void Used(int userId, int appId)
+        {
+            using (var client = new HttpClient() { BaseAddress = Global.ApiBaseAddress })
+            {
+                // Add an Accept header for JSON format.
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var model = new TaskModel { AppId = appId, UserId = userId };
+
+                var task = client.PostAsJsonAsync("/market/used", model);
+                var response = task.Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var resStr = response.Content.ReadAsStringAsync().Result;
+                    Assert.Fail(string.Format("API Used - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, resStr));
+                }
+            }
+        }
+
+        public static void UpdateReview(int userId, int appId)
+        {
+            using (var client = new HttpClient() { BaseAddress = Global.ApiBaseAddress })
+            {
+                // Add an Accept header for JSON format.
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var model = new ReviewModel { AppId = appId, UserId = userId, Review = "Some review" };
+
+                var task = client.PostAsJsonAsync("/market/updatereview", model);
+                var response = task.Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var resStr = response.Content.ReadAsStringAsync().Result;
+                    Assert.Fail(string.Format("API Update Review - Fatal error:{0} ({1}) Body:{2}", (int)response.StatusCode, response.ReasonPhrase, resStr));
+                }
+            }
         }
     }
 }

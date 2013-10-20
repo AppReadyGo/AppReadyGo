@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Tests
 {
-    internal class Database
+    internal class Database : IDatabase
     {
         public string ServerName { get; private set; }
         public string DatabaseName { get; private set; }
@@ -49,19 +49,19 @@ namespace Domain.Tests
                                + " SIZE = 1MB, "
                                + " FILEGROWTH = 10%);";
 
-            RunCmmand(conn, sqlCreateDBQuery);
+            RunCommand(conn, sqlCreateDBQuery);
 
             conn = new SqlConnection();
             conn.ConnectionString = this.ConnectionString;
 
-            RunCmmand(conn, "CREATE SCHEMA [api] AUTHORIZATION [dbo];");
-            RunCmmand(conn, "CREATE SCHEMA [cont] AUTHORIZATION [dbo];");
-            RunCmmand(conn, "CREATE SCHEMA [usr] AUTHORIZATION [dbo];");
-            RunCmmand(conn, "CREATE SCHEMA [utls] AUTHORIZATION [dbo];");
-            RunCmmand(conn, "CREATE SCHEMA [log] AUTHORIZATION [dbo];");
+            RunCommand(conn, "CREATE SCHEMA [api] AUTHORIZATION [dbo];");
+            RunCommand(conn, "CREATE SCHEMA [cont] AUTHORIZATION [dbo];");
+            RunCommand(conn, "CREATE SCHEMA [usr] AUTHORIZATION [dbo];");
+            RunCommand(conn, "CREATE SCHEMA [utls] AUTHORIZATION [dbo];");
+            RunCommand(conn, "CREATE SCHEMA [log] AUTHORIZATION [dbo];");
         }
 
-        private void RunCmmand(SqlConnection conn, string command)
+        private void RunCommand(SqlConnection conn, string command)
         {
             SqlCommand myCommand = new SqlCommand(command, conn);
             try
@@ -85,7 +85,7 @@ namespace Domain.Tests
                                     + " ALTER DATABASE " + this.DatabaseName + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE;"
                                     + "	DROP DATABASE " + this.DatabaseName + ";"
                                     + "END";
-            RunCmmand(conn, sqlCreateDBQuery);
+            RunCommand(conn, sqlCreateDBQuery);
         }
 
         public ISession OpenSession()
