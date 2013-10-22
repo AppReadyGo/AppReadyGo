@@ -16,7 +16,7 @@ namespace AppReadyGo.Domain.Mapping
 
             Id(x => x.Id, map => map.Generator(Generators.Identity));
             Property(x => x.DescriptionId, map => { map.NotNullable(true); });
-            Property(x => x.Published, map => { map.NotNullable(true); });
+            Property(x => x.PublishDate, map => { map.NotNullable(true); });
             Property(x => x.AgeRange, map => { });
             Property(x => x.Gender, map => { });
             Property(x => x.Zip, map => { map.Length(10); });

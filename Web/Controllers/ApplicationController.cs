@@ -19,6 +19,7 @@ using System.Web;
 using System.Web.Mvc;
 using AppReadyGo.Web.Model.Shared;
 using AppReadyGo.Core.Commands.Task;
+using AppReadyGo.Core.QueryResults.Tasks;
 
 namespace AppReadyGo.Controllers
 {
@@ -34,10 +35,15 @@ namespace AppReadyGo.Controllers
 
             var model = new ApplicationIndexModel
             {
-                Tasks = data.Tasks.Select((p, i) => new ApplicationIndexModel.TaskItem
+                Tasks = data.Tasks.Select((t, i) => new ApplicationIndexModel.TaskItem
                 {
-                    Id = p.Id,
-                    Description = "Some Desc",
+                    Id = t.Id,
+                    Description = t.Description,
+                    ApplicaionName = t.ApplicationName,
+                    Target = GeTarget(t),
+                    Installs = t.Installs + "/" + t.Audence,
+                    Published = t.PublishDate.HasValue ? t.PublishDate.Value.ToString() : "",
+                    Status = GetStatus(t),
                     IsAlternative = i % 2 == 0
                 }),
                 Applications = data.Applications.Select((a, i) => new ApplicationIndexModel.ApplicationItem
@@ -48,6 +54,41 @@ namespace AppReadyGo.Controllers
                 })
             };
             return View("~/Views/Application/Index.cshtml", model);
+        }
+
+        private string GetStatus(TaskDetailsResult task)
+        {
+            if (!task.PublishDate.HasValue)
+            {
+                return "Not Started";
+            }
+            else if (task.Installs == (int)task.Audence)
+            {
+                return "Complete";
+            }
+            else
+            {
+                return "In Progress";
+            }
+        }
+
+        private string GeTarget(TaskDetailsResult task)
+        {
+            List<string> target = new List<string>();
+            if (task.Gender.HasValue && task.Gender.Value != Gender.None)
+            {
+                target.Add(task.Gender.Value == Gender.Men ? "M" : "F");
+            }
+            if (task.AgeRange.HasValue)
+            {
+                target.Add(task.AgeRange.Value.ToString());
+            }
+            if (task.Country != null)
+            {
+                target.Add(task.Country.Item2);
+            }
+
+            return string.Join("-", target);
         }
 
         public ActionResult New()
