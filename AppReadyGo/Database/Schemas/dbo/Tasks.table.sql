@@ -7,7 +7,7 @@
 	[AgeRange]		SMALLINT		NULL,
 	[CountryID]		INT				NULL,
 	[Zip]			NVARCHAR(10)	NULL,
-	[Published]		BIT				NOT NULL
+	[PublishDate]	DATETIME		NULL
 );
 GO
 

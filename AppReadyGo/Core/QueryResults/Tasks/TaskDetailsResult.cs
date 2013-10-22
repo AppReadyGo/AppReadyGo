@@ -13,6 +13,10 @@ namespace AppReadyGo.Core.QueryResults.Tasks
 
         public int ApplicationId { get; set; }
 
+        public string ApplicationName { get; set; }
+
+        public string Description { get; set; }
+
         public AgeRange? AgeRange { get; set; }
 
         public Gender? Gender { get; set; }
@@ -23,5 +27,10 @@ namespace AppReadyGo.Core.QueryResults.Tasks
 
         public DateTime CreatedDate { get; set; }
 
+        public DateTime? PublishDate { get; set; }
+
+        public int Installs { get; set; }
+
+        public int Audence { get; set; }
     }
 }

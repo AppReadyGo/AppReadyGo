@@ -24,7 +24,7 @@ namespace AppReadyGo.Domain.Model
 
         public virtual DateTime CreatedDate { get; set; }
 
-        public virtual bool Published { get; set; }
+        public virtual DateTime? PublishDate { get; set; }
 
         public Task()
         {
@@ -44,7 +44,7 @@ namespace AppReadyGo.Domain.Model
 
         public virtual void Publish(bool publish = true)
         {
-            this.Published = publish;
+            this.PublishDate = publish ? (DateTime?)DateTime.UtcNow : null;
         }
     }
 }

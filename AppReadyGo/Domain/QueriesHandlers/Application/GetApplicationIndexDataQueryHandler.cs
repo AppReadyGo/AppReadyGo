@@ -36,9 +36,15 @@ namespace AppReadyGo.Domain.QueriesHandlers.Application
                                     Country = p.Country != null ? new System.Tuple<int,string>(p.Country.GeoId, p.Country.Name) : null,
                                     CreatedDate = p.CreatedDate,
                                     Gender = p.Gender,
-                                    Zip = p.Zip
+                                    Zip = p.Zip,
+                                    PublishDate = p.PublishDate,
+                                    Description = GetDesc(p.DescriptionId)
                                 })
                                 .ToArray();
+
+            //var installed = session.Query<AppReadyGo.Domain.Model.Users.ApiMember>()
+            //                            .SelectMany(u => u.Applications)
+            //                            .Where(a => a.
 
             result.Applications = session.Query<AppReadyGo.Domain.Model.Application>()
                                 .Where(a => a.User.Id == this.securityContext.CurrentUser.Id)
@@ -49,6 +55,17 @@ namespace AppReadyGo.Domain.QueriesHandlers.Application
                                 })
                                 .ToArray();
             return result;
+        }
+
+        private string GetDesc(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    return "";
+                default:
+                    return "";
+            }
         }
     }
 }
