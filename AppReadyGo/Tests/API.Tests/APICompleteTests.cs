@@ -11,6 +11,7 @@ namespace AppReadyGo.API.Tests
         [TestMethod]
         public void APICompleteTest()
         {
+            string userName = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
             string apiUserName = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
             string password = "111111";
 
