@@ -42,9 +42,11 @@ namespace AppReadyGo.Domain.QueriesHandlers.Application
                                 })
                                 .ToArray();
 
+            //var appIds = 
+
             //var installed = session.Query<AppReadyGo.Domain.Model.Users.ApiMember>()
             //                            .SelectMany(u => u.Applications)
-            //                            .Where(a => a.
+            //                            .Where(a => a.Application.Id
 
             result.Applications = session.Query<AppReadyGo.Domain.Model.Application>()
                                 .Where(a => a.User.Id == this.securityContext.CurrentUser.Id)
