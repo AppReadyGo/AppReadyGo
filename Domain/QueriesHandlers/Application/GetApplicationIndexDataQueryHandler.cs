@@ -38,7 +38,7 @@ namespace AppReadyGo.Domain.QueriesHandlers.Application
                                     Gender = p.Gender,
                                     Zip = p.Zip,
                                     PublishDate = p.PublishDate,
-                                    Description = GetDesc(p.DescriptionId)
+                                    Description = p.Description.Description
                                 })
                                 .ToArray();
 
@@ -57,17 +57,6 @@ namespace AppReadyGo.Domain.QueriesHandlers.Application
                                 })
                                 .ToArray();
             return result;
-        }
-
-        private string GetDesc(int id)
-        {
-            switch (id)
-            {
-                case 1:
-                    return "";
-                default:
-                    return "";
-            }
         }
     }
 }

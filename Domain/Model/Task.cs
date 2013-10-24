@@ -10,7 +10,7 @@ namespace AppReadyGo.Domain.Model
     {
         public virtual int Id { get; protected set; }
 
-        public virtual int DescriptionId { get; protected set; }
+        public virtual TaskDescription Description { get; protected set; }
 
         public virtual Application Application { get; protected set; }
 
@@ -30,10 +30,10 @@ namespace AppReadyGo.Domain.Model
         {
         }
 
-        public Task(int descriptionId, Application app, AgeRange? ageRange, Gender? gender, Country country, string zip)
+        public Task(TaskDescription description, Application app, AgeRange? ageRange, Gender? gender, Country country, string zip)
         {
             app.AddTask(this);
-            this.DescriptionId = descriptionId;
+            this.Description = description;
             this.Application = app;
             this.AgeRange = ageRange;
             this.Gender = gender;

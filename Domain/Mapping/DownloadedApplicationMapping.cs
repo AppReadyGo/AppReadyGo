@@ -6,20 +6,21 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Users
 {
-    internal class DownloadedApplicationMapping : ClassMapping<APIMemberApplication>
+    internal class DownloadedApplicationMapping : ClassMapping<APIMemberTask>
     {
         public DownloadedApplicationMapping()
         {
-            Table("APIMemberApplications");
+            Schema("eco");
+            Table("APIMemberTasks");
 
             Id(x => x.Id, map => map.Generator(Generators.Identity));
-            Property(x => x.Used, map => { });
-            Property(x => x.Review, map => map.Length(500));
+            Property(x => x.Rate, map => { });
+            Property(x => x.Review, map => map.Length(250));
 
-            ManyToOne(p => p.Application, map =>
+            ManyToOne(p => p.Task, map =>
             {
                 map.NotNullable(true);
-                map.Column("ApplicationID");
+                map.Column("TaskID");
             });
 
             ManyToOne(p => p.User, map =>
