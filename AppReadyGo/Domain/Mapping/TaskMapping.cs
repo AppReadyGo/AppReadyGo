@@ -12,10 +12,11 @@ namespace AppReadyGo.Domain.Mapping
     {
         public TaskMapping()
         {
+            Schema("eco");
             Table("Tasks");
 
             Id(x => x.Id, map => map.Generator(Generators.Identity));
-            Property(x => x.DescriptionId, map => { map.NotNullable(true); });
+            ManyToOne(p => p.Description, map => { map.Column("DescriptionID"); });
             Property(x => x.PublishDate, map => { map.NotNullable(true); });
             Property(x => x.AgeRange, map => { });
             Property(x => x.Gender, map => { });

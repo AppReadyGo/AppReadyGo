@@ -13,6 +13,7 @@ namespace AppReadyGo.API.Tests
         {
             string userName = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
             string apiUserName = "ypanshin+api" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
+            string api1UserName = "ypanshin+api1" + DateTime.Now.ToString("yyyyMMddHHmmss") + "@gmail.com";
             string password = "111111";
 
             MarketByNetwork.GetSettings();
@@ -36,6 +37,8 @@ namespace AppReadyGo.API.Tests
             MarketByNetwork.Used(res.Id.Value, appId);
 
             MarketByNetwork.UpdateReview(res.Id.Value, appId);
+
+            MarketByNetwork.RegisterThirdParty(api1UserName);
         }
     }
 }

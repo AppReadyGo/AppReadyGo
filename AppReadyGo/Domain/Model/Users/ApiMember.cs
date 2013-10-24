@@ -10,14 +10,14 @@ namespace AppReadyGo.Domain.Model.Users
 {
     public class ApiMember : User
     {
-        private Iesi.Collections.Generic.ISet<APIMemberApplication> applications = null;
+        private Iesi.Collections.Generic.ISet<Application> applications = null;
         private Iesi.Collections.Generic.ISet<ApplicationType> applicationTypes = null;
 
         public virtual Gender? Gender { get; protected set; }
         public virtual AgeRange? AgeRange { get; protected set; }
         public virtual Country Country { get; protected set; }
 
-        public virtual IEnumerable<APIMemberApplication> Applications
+        public virtual IEnumerable<Application> Applications
         {
             get { return this.applications; }
         }
@@ -34,14 +34,14 @@ namespace AppReadyGo.Domain.Model.Users
 
         public ApiMember()
         {
-            this.applications = new HashedSet<APIMemberApplication>();
+            this.applications = new HashedSet<Application>();
             this.applicationTypes = new HashedSet<ApplicationType>();
         }
 
         public ApiMember(string email, string password, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string Zip, ApplicationType[] appTypes)
             : base(email, password)
         {
-            this.applications = new HashedSet<APIMemberApplication>();
+            this.applications = new HashedSet<Application>();
             this.applicationTypes = new HashedSet<ApplicationType>();
 
             this.FirstName = firstName;
@@ -59,7 +59,7 @@ namespace AppReadyGo.Domain.Model.Users
         public ApiMember(string email, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string Zip, ApplicationType[] appTypes)
             : base(email)
         {
-            this.applications = new HashedSet<APIMemberApplication>();
+            this.applications = new HashedSet<Application>();
             this.applicationTypes = new HashedSet<ApplicationType>();
 
             this.FirstName = firstName;
@@ -76,9 +76,9 @@ namespace AppReadyGo.Domain.Model.Users
 
         public virtual void DownloadApplication(Application application)
         {
-            if (!this.applications.Any(a => a.Application == application))
+            if (!this.applications.Contains(application))
             {
-                this.applications.Add(new APIMemberApplication(application, this));
+                this.applications.Add(application);
             }
         }
 
@@ -101,23 +101,6 @@ namespace AppReadyGo.Domain.Model.Users
             if (appTypes != null)
             {
                 this.applicationTypes.AddAll(appTypes);
-            }
-        }
-        public virtual void UserApplicationWasUsed(Application application)
-        {
-            var app = this.applications.FirstOrDefault(a => a.Application == application);
-            if (app != null)
-            {
-                app.ApplicationWasUsed();
-            }
-        }
-
-        public virtual void UpdateApplicationReview(Application application, string review)
-        {
-            var app = this.applications.FirstOrDefault(a => a.Application == application);
-            if (app != null)
-            {
-                app.UpdateReview(review);
             }
         }
     }

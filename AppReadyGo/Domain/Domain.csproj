@@ -123,6 +123,7 @@
     <Compile Include="Mapping\Content\ThemeMapping.cs" />
     <Compile Include="Mapping\ApplicationTypeMapping.cs" />
     <Compile Include="Mapping\ControlClickMaping.cs" />
+    <Compile Include="Mapping\TaskDescriptionMapping.cs" />
     <Compile Include="Mapping\ScreensMapping.cs" />
     <Compile Include="Mapping\CountryMapping.cs" />
     <Compile Include="Mapping\LanguageMapping.cs" />
@@ -158,7 +159,7 @@
     <Compile Include="Model\Content\Mail.cs" />
     <Compile Include="Model\Content\Page.cs" />
     <Compile Include="Model\Content\Theme.cs" />
-    <Compile Include="Model\APIMemberApplication.cs" />
+    <Compile Include="Model\APIMemberTask.cs" />
     <Compile Include="Model\Country.cs" />
     <Compile Include="Model\Events\ClickEvent.cs" />
     <Compile Include="Model\Events\IEvent.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Model\Screenshot.cs" />
     <Compile Include="Model\Scroll.cs" />
     <Compile Include="Model\Size.cs" />
+    <Compile Include="Model\TaskDescription.cs" />
     <Compile Include="Model\Users\ApiMember.cs" />
     <Compile Include="Model\Users\Member.cs" />
     <Compile Include="Model\Users\Staff.cs" />

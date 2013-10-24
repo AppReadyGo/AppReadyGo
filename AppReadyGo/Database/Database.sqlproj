@@ -100,7 +100,6 @@
     <Build Include="Schemas\dbo\GeoKeys.table.sql" />
     <Build Include="Schemas\dbo\Languages.table.sql" />
     <Build Include="Schemas\dbo\OperationSystems.table.sql" />
-    <Build Include="Schemas\dbo\Tasks.table.sql" />
     <Build Include="Schemas\dbo\PageViews.table.sql" />
     <Build Include="Schemas\dbo\Regions.table.sql" />
     <Build Include="Schemas\dbo\Screens.table.sql" />
@@ -136,7 +135,6 @@
     <None Include="Scripts\RemovePortfolios.sql" />
     <Build Include="Schemas\dbo\ApplicationTypes.table.sql" />
     <Build Include="Schemas\dbo\Screenshots.table.sql" />
-    <Build Include="Schemas\dbo\DownloadedApplications.table.sql" />
     <None Include="Scripts\DefaultUsersData.sql" />
     <Build Include="Schemas\dbo\Survey.table.sql" />
     <Build Include="Schemas\dbo\ControlClick.table.sql" />
@@ -156,9 +154,10 @@
     <Build Include="Schemas\dbo\Views\ViewPartView.view.sql" />
     <Build Include="Schemas\dbo\Views\ScrollView.view.sql" />
     <Build Include="Schemas\dbo\ClientSurvey.table.sql" />
-    <Build Include="Schemas\eco\UserApplication.table..sql" />
-    <Build Include="Schemas\eco\UserApplicationsTask.table.sql" />
+    <Build Include="Schemas\eco\APIMemberTasks.table.sql" />
     <Build Include="Schemas\eco\UserInterests.table.sql" />
+    <Build Include="Schemas\eco\TaskDescriptions.table.sql" />
+    <Build Include="Schemas\eco\APIMemberApplications.table.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />

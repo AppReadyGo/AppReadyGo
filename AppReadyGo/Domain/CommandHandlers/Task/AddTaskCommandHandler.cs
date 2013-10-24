@@ -12,7 +12,8 @@ namespace AppReadyGo.Domain.CommandHandlers.Tasks
         {
             var application = session.Get<Model.Application>(cmd.ApplicationId);
             var country = cmd.CountryId.HasValue ? session.Get<Model.Country>(cmd.CountryId) : null;
-            var task = new Task(cmd.DescId, application, cmd.AgeRange, cmd.Gender, country, cmd.Zip);
+            var desc = session.Get<Model.TaskDescription>(cmd.DescId);
+            var task = new Task(desc, application, cmd.AgeRange, cmd.Gender, country, cmd.Zip);
             if (cmd.Publish)
             {
                 task.Publish();

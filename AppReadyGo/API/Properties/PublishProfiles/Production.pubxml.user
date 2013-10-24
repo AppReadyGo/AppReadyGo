@@ -13,25 +13,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/24/2013 14:04:55</publishTime>
     </File>
     <File Include="bin/AppReadyGo.API.dll">
-      <publishTime>10/02/2013 09:18:59</publishTime>
+      <publishTime>10/24/2013 10:42:06</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Common.dll">
-      <publishTime>10/02/2013 09:18:58</publishTime>
+      <publishTime>10/24/2013 10:42:05</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Core.dll">
-      <publishTime>10/02/2013 09:18:56</publishTime>
+      <publishTime>10/24/2013 09:24:21</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Domain.dll">
-      <publishTime>10/02/2013 09:18:57</publishTime>
+      <publishTime>10/24/2013 10:42:05</publishTime>
     </File>
     <File Include="bin/AppReadyGo.Web.Common.dll">
-      <publishTime>10/02/2013 09:18:58</publishTime>
+      <publishTime>10/24/2013 09:24:23</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>10/02/2013 09:19:16</publishTime>
+      <publishTime>10/24/2013 10:42:39</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>10/02/2013 09:19:16</publishTime>
+      <publishTime>10/24/2013 10:42:39</publishTime>
     </File>
     <File Include="bin/Castle.Core.dll">
       <publishTime>05/19/2013 11:14:29</publishTime>
@@ -382,7 +382,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/30/2013 10:10:04</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/02/2013 09:19:13</publishTime>
+      <publishTime>10/24/2013 10:42:37</publishTime>
     </File>
     <File Include="Scripts/jquery-1.7.1.js">
       <publishTime>04/17/2013 15:30:38</publishTime>
@@ -460,7 +460,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2013 15:30:38</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>09/30/2013 10:26:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Shared/_Mail.cshtml">
       <publishTime>05/19/2013 17:32:54</publishTime>
@@ -472,7 +472,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2013 15:30:38</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/02/2013 09:19:11</publishTime>
+      <publishTime>10/24/2013 09:24:54</publishTime>
     </File>
   </ItemGroup>
 </Project>
