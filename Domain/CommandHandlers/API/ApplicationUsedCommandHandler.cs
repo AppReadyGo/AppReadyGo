@@ -17,7 +17,7 @@ namespace AppReadyGo.Domain.CommandHandlers.API
         {
             var application = session.Get<Model.Application>(cmd.ApplicationId);
             var user = session.Get<ApiMember>(cmd.MemberId);
-            user.UserApplicationWasUsed(application);
+            // user.UserApplicationWasUsed(application);
             session.Update(user);
             return user.Id;
         }

@@ -68,6 +68,7 @@ namespace AppReadyGo.Domain.Model.Users
             this.AgeRange = ageRange;
             this.Country = country;
             this.Zip = Zip;
+            this.Activated = true;
             if (appTypes != null)
             {
                 this.applicationTypes.AddAll(appTypes);
@@ -98,6 +99,7 @@ namespace AppReadyGo.Domain.Model.Users
             this.Country = country;
             this.Zip = zip;
             this.applicationTypes.Clear();
+            this.Activated = true;
             if (appTypes != null)
             {
                 this.applicationTypes.AddAll(appTypes);
