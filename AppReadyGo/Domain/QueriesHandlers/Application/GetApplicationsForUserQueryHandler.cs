@@ -26,7 +26,7 @@ namespace AppReadyGo.Domain.Queries
                 PageSize = query.PageSize
             };
 
-            var appsQuery = session.Query<AppReadyGo.Domain.Model.Application>();
+            var appsQuery = session.Query<AppReadyGo.Domain.Model.Application>().Where(a => a.Tasks.Any(t => t.PublishDate != null));
 
             res.ItemsCount = appsQuery.Count();
 

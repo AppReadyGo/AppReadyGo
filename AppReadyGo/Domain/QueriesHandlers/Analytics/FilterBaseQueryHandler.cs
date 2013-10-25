@@ -151,13 +151,13 @@ namespace AppReadyGo.Domain.Queries.Analytics
 
             filterData.ApiMemberApplications = session.Query<ApiMember>()
                             .SelectMany(u => u.Applications)
-                            .Where(a => a.Used && a.Application.Id == filterData.SelectedApplicationId)
+                            //.Where(a => a.Used && a.Application.Id == filterData.SelectedApplicationId)
                             .Select(a => new ApiMemberApplicationResult{
                                 UserId = a.User.Id,
                                 Email = a.User.Email,
                                 FirstName = a.User.FirstName,
                                 LastName = a.User.LastName,
-                                Review = a.Review,
+                                //Review = a.Review,
                                 Type = a.User.Type
                             })
                             .ToArray();
