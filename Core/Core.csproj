@@ -77,11 +77,11 @@
     <Compile Include="ApplicationLogging.cs" />
     <Compile Include="Commands\Admin\ClearLogCommand.cs" />
     <Compile Include="Commands\API\AddPackageCommand.cs" />
-    <Compile Include="Commands\API\ApplicationUsedCommand.cs" />
-    <Compile Include="Commands\API\ApplicationUpdateReviewCommand.cs" />
+    <Compile Include="Commands\API\TaskCompleteCommand.cs" />
+    <Compile Include="Commands\API\ReviewApplicationCommand.cs" />
     <Compile Include="Commands\Applications\AddScreenCommand.cs" />
     <Compile Include="Commands\Applications\AddScreenshotCommand.cs" />
-    <Compile Include="Commands\API\ApplicationDownloadedCommand.cs" />
+    <Compile Include="Commands\API\StartTaskCommand.cs" />
     <Compile Include="Commands\Applications\UpdateApplicationIconCommand.cs" />
     <Compile Include="Commands\Applications\UnPublishCommand.cs" />
     <Compile Include="Commands\Applications\CreateApplicationCommand.cs" />

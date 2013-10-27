@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace AppReadyGo.Core.Commands.API
 {
-    public class ApplicationUpdateReviewCommand : ICommand<int>
+    public class ReviewApplicationCommand : ICommand<int>
     {
         public int MemberId { get; protected set; }
 
-        public int ApplicationId { get; protected set; }
+        public int TaskId { get; protected set; }
 
         public string Review { get; protected set; }
 
-        public ApplicationUpdateReviewCommand(int userId, int ApplicationId, string review)
+        public byte Rate { get; protected set; }
+
+        public ReviewApplicationCommand(int userId, int taskId, string review, byte rate)
         {
             this.MemberId = userId;
-            this.ApplicationId = ApplicationId;
-            this.Review = review;
+            this.TaskId = taskId;
+            this.Rate = rate;
         }
 
         public IEnumerable<ValidationResult> Validate(IValidationContext validation)

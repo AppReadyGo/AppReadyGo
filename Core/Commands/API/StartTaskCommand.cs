@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace AppReadyGo.Core.Commands.API
 {
-    public class ApplicationUsedCommand : ICommand<int>
+    public class StartTaskCommand : ICommand<int>
     {
         public int MemberId { get; protected set; }
 
-        public int ApplicationId { get; protected set; }
+        public int TaskId { get; protected set; }
 
-        public ApplicationUsedCommand(int userId, int ApplicationId)
+        public StartTaskCommand(int memberId, int taskId)
         {
-            this.MemberId = userId;
-            this.ApplicationId = ApplicationId;
+            this.MemberId = memberId;
+            this.TaskId = taskId;
         }
 
         public IEnumerable<ValidationResult> Validate(IValidationContext validation)

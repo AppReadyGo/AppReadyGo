@@ -8,16 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AppReadyGo.Core.Commands.API;
+using AppReadyGo.Domain.Model;
 
 namespace AppReadyGo.Domain.CommandHandlers.API
 {
-    public class ApplicationDownloadedCommandHandler : ICommandHandler<ApplicationDownloadedCommand, int>
+    public class StartTaskCommandHandler : ICommandHandler<StartTaskCommand, int>
     {
-        public int Execute(ISession session, ApplicationDownloadedCommand cmd)
+        public int Execute(ISession session, StartTaskCommand cmd)
         {
-            var application = session.Get<Model.Application>(cmd.ApplicationId);
+            var task = session.Get<Model.Task>(cmd.TaskId);
             var user = session.Get<ApiMember>(cmd.MemberId);
-            user.DownloadApplication(application);
+
+            var userTask = new ApiMemberTask(task, user);
+            user.StartTask(userTask);
             session.Update(user);
             return user.Id;
         }

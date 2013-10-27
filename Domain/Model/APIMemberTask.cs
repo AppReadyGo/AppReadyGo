@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AppReadyGo.Domain.Model
 {
-    public class APIMemberTask
+    public class ApiMemberTask
     {
         public virtual int Id { get; protected set; }
 
@@ -18,11 +18,13 @@ namespace AppReadyGo.Domain.Model
 
         public virtual byte Rate { get; protected set; }
 
-        public APIMemberTask()
+        public virtual bool Completed { get; protected set; }
+
+        public ApiMemberTask()
         {
         }
 
-        public APIMemberTask(Task task, ApiMember user)
+        public ApiMemberTask(Task task, ApiMember user)
         {
             this.Task = task;
             this.User = user;
@@ -36,6 +38,11 @@ namespace AppReadyGo.Domain.Model
         public virtual void UpdateReview(string review)
         {
             this.Review = review;
+        }
+
+        public virtual void Complete()
+        {
+            this.Completed = true;
         }
     }
 }

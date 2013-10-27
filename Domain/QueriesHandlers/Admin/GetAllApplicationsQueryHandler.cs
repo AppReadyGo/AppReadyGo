@@ -61,7 +61,7 @@ namespace AppReadyGo.Domain.Queries.Admin
 
             var appIds = res.Applications.Select(a => a.Id).ToArray();
             var downloaded = session.Query<AppReadyGo.Domain.Model.Users.ApiMember>()
-                                        .SelectMany(m => m.Applications)
+                                        .SelectMany(m => m.Tasks)
                                         .Where(a => appIds.Contains(a.Id))
                                         .Select(a => a.Id)
                                         .GroupBy(x => x)

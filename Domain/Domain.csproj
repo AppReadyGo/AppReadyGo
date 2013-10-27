@@ -70,7 +70,7 @@
   <ItemGroup>
     <Compile Include="CommandHandlers\Admin\ClearLogCommandHandler.cs" />
     <Compile Include="CommandHandlers\API\AddPackageCommandHandler.cs" />
-    <Compile Include="CommandHandlers\API\ApplicationUsedCommandHandler.cs" />
+    <Compile Include="CommandHandlers\API\TaskCompleteCommandHandler.cs" />
     <Compile Include="CommandHandlers\API\ApplicationUpdateReviewCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\AddScreenCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\AddScreenshotCommandHandler.cs" />
@@ -123,6 +123,7 @@
     <Compile Include="Mapping\Content\ThemeMapping.cs" />
     <Compile Include="Mapping\ApplicationTypeMapping.cs" />
     <Compile Include="Mapping\ControlClickMaping.cs" />
+    <Compile Include="Mapping\ApiMemberTaskMapping.cs" />
     <Compile Include="Mapping\TaskDescriptionMapping.cs" />
     <Compile Include="Mapping\ScreensMapping.cs" />
     <Compile Include="Mapping\CountryMapping.cs" />

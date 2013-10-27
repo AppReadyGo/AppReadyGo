@@ -9,12 +9,14 @@ namespace AppReadyGo.API.Models.Market
     {
         public int UserId { get; set; }
 
-        public int AppId { get; set; }
+        public int TaskId { get; set; }
     }
 
     public class ReviewModel : TaskModel
     {
         public string Review { get; set; }
+
+        public byte Rate { get; set; }
     }
 
     public class DownloadedModel : TaskModel

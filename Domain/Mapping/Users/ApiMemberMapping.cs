@@ -15,7 +15,7 @@ namespace AppReadyGo.Domain.Mapping.Users
             Property(x => x.Gender, map => { map.Column("GenderID"); });
 
             Set(
-              x => x.Applications,
+              x => x.Tasks,
               map =>
               {
                   map.Key(k => k.Column("UserID"));

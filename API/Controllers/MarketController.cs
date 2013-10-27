@@ -1,14 +1,4 @@
-﻿using AppReadyGo.API.Filters;
-using AppReadyGo.API.Models.Market;
-using AppReadyGo.Common;
-using AppReadyGo.Core;
-using AppReadyGo.Core.Commands.Applications;
-using AppReadyGo.Core.Commands.Users;
-using AppReadyGo.Core.Logger;
-using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.Queries.Users;
-using AppReadyGo.Web.Common.Mails;
-using System;
+﻿using System;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -19,7 +9,15 @@ using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using AppReadyGo.API.Common.Mails;
+using AppReadyGo.API.Filters;
+using AppReadyGo.API.Models.Market;
+using AppReadyGo.Common;
+using AppReadyGo.Core;
 using AppReadyGo.Core.Commands.API;
+using AppReadyGo.Core.Commands.Users;
+using AppReadyGo.Core.Logger;
+using AppReadyGo.Core.Queries.Application;
+using AppReadyGo.Core.Queries.Users;
 
 namespace AppReadyGo.API.Controllers
 {
@@ -301,7 +299,7 @@ namespace AppReadyGo.API.Controllers
                     FileName = appInfo.PackageFileName
                 };
 
-                ObjectContainer.Instance.Dispatch(new ApplicationDownloadedCommand(userId, appId));
+                ObjectContainer.Instance.Dispatch(new StartTaskCommand(userId, appId));
                 return response;
             }
             catch (IOException)
@@ -310,27 +308,20 @@ namespace AppReadyGo.API.Controllers
             }
         }
 
+
         /// <summary>
         /// TASK comple confirmation 
         /// </summary>
-        /// <param name="email"></param>
-        /// <param name="task"></param>
-        //[HttpPost]
-        //public void TaskConfirm([FromBody] TaskModel model)
-        //{ 
-            
-        //}
-
         [HttpPost]
-        public void Used([FromBody] TaskModel model)
+        public void TaskComplete([FromBody] TaskModel model)
         {
-            ObjectContainer.Instance.Dispatch(new ApplicationUsedCommand(model.UserId, model.AppId));
+            ObjectContainer.Instance.Dispatch(new TaskCompleteCommand(model.UserId, model.TaskId));
         }
 
         [HttpPost]
         public void UpdateReview([FromBody] ReviewModel model)
         {
-            ObjectContainer.Instance.Dispatch(new ApplicationUpdateReviewCommand(model.UserId, model.AppId, model.Review));
+            ObjectContainer.Instance.Dispatch(new ReviewApplicationCommand(model.UserId, model.TaskId, model.Review, model.Rate));
         }
     }
 
