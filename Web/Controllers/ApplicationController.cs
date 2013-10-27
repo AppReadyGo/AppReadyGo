@@ -18,7 +18,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using AppReadyGo.Web.Model.Shared;
-using AppReadyGo.Core.Commands.Task;
+using AppReadyGo.Core.Commands.Tasks;
 using AppReadyGo.Core.QueryResults.Tasks;
 
 namespace AppReadyGo.Controllers
@@ -39,12 +39,14 @@ namespace AppReadyGo.Controllers
                 {
                     Id = t.Id,
                     Description = t.Description,
+                    ApplicationId = t.ApplicationId,
                     ApplicaionName = t.ApplicationName,
                     Target = GeTarget(t),
                     Installs = t.Installs + "/" + t.Audence,
                     Published = t.PublishDate.HasValue ? t.PublishDate.Value.ToString() : "",
                     Status = GetStatus(t),
-                    IsAlternative = i % 2 == 0
+                    IsAlternative = i % 2 == 0,
+                    WasPublished = t.PublishDate.HasValue
                 }),
                 Applications = data.Applications.Select((a, i) => new ApplicationIndexModel.ApplicationItem
                 {
@@ -55,6 +57,7 @@ namespace AppReadyGo.Controllers
             };
             return View("~/Views/Application/Index.cshtml", model);
         }
+
 
         private string GetStatus(TaskDetailsResult task)
         {
@@ -79,9 +82,13 @@ namespace AppReadyGo.Controllers
             {
                 target.Add(task.Gender.Value == Gender.Men ? "M" : "F");
             }
-            if (task.AgeRange.HasValue)
+            if (task.AgeRange.HasValue && task.AgeRange.Value != AgeRange.None)
             {
-                target.Add(task.AgeRange.Value.ToString());
+                var type = typeof(AgeRange);
+                var memInfo = type.GetMember(task.AgeRange.Value.ToString());
+                var attributes = memInfo[0].GetCustomAttributes(typeof(AgeRangeDescriptionAttribute), false);
+                var description = ((AgeRangeDescriptionAttribute)attributes[0]).DisplayDescription;
+                target.Add(description);
             }
             if (task.Country != null)
             {
@@ -267,6 +274,17 @@ namespace AppReadyGo.Controllers
             }
         }
 
+        public ActionResult Details(int id)
+        {
+            var res = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(id));
+            var model = new ApplicationModel
+            {
+                Id = res.Id,
+                Name = res.Name
+            };
+            return View("~/Views/Application/Details.cshtml", model);
+        }
+
         public ActionResult Remove(int id)
         {
             var res = ObjectContainer.Instance.Dispatch(new RemoveApplicationCommand(id));
@@ -309,81 +327,6 @@ namespace AppReadyGo.Controllers
                 }
             }
             return Redirect("/Application");
-        }
-
-        public ActionResult Publish(int id)
-        {
-            var res = ObjectContainer.Instance.RunQuery(new TaskQuery(id));
-            var countries = res.Countries.Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-            countries.Insert(0, new SelectListItem { Text = "All", Value = "" });
-            var genders = new SelectListItem[] { new SelectListItem { Value = "", Text = "All" }, new SelectListItem { Value = "1", Text = "Men" }, new SelectListItem { Value = "2", Text = "Women" } };
-            var ageRanges = GetList<AgeRange>().Select(x => new SelectListItem { Value = ((int)x).ToString(), Text = x.ToString() }).ToList();
-            ageRanges.Insert(0, new SelectListItem { Text = "All", Value = "" });
-            var model = new TaskModel
-            {
-                ApplicationId = id,
-                ApplicationName = res.ApplicationName,
-                Countries = countries,
-                Genders = genders,
-                AgeRanges = ageRanges
-            };
-            return View("~/Views/Application/Publish.cshtml", model);
-        }
-
-        [HttpPost]
-        public ActionResult Publish(TaskModel model)
-        {
-            if (!string.IsNullOrEmpty(model.Zip) && !model.Country.HasValue)
-            {
-                ModelState.AddModelError("Country", "Please select a country when zip entered.");
-            }
-
-            if (ModelState.IsValid)
-            {
-               // ObjectContainer.Instance.Dispatch(new AddTaskCommand(model.ApplicationId, model.AgeRange, model.Gender, model.Country, model.Zip));
-                return RedirectToAction("", "Application");
-            }
-            else
-            {
-                var res = ObjectContainer.Instance.RunQuery(new TaskQuery(model.ApplicationId));
-                var countries = res.Countries.Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                countries.Insert(0, new SelectListItem { Text = "All", Value = "" });
-                var genders = new SelectListItem[] { new SelectListItem { Value = "", Text = "All" }, new SelectListItem { Value = "1", Text = "Men" }, new SelectListItem { Value = "2", Text = "Women" } };
-                var ageRanges = GetList<AgeRange>().Select(x => new SelectListItem { Value = ((int)x).ToString(), Text = x.ToString() }).ToList();
-                ageRanges.Insert(0, new SelectListItem { Text = "All", Value = "" });
-                model.ApplicationName = res.ApplicationName;
-                model.Countries = countries;
-                model.Genders = genders;
-                model.AgeRanges = ageRanges;
-                return View("~/Views/Application/Publish.cshtml", model);
-            }
-        }
-
-        public ActionResult Publishes(int id)
-        {
-            var res = ObjectContainer.Instance.RunQuery(new GetPublishesDataQuery(id));
-            var model = new PublishesModel
-            {
-                ApplicationId = id,
-                ApplicationName = res.ApplicationName,
-                Publishes = res.PublishesDetails.Select(x => new PublishDetailsModel
-                {
-
-                    Id = x.Id,
-                    CreatedDate = x.CreatedDate.ToString("dd-MMM-yyyy"),
-                    Country = x.Country == null ? string.Empty : x.Country.Item2,
-                    AgeRange = x.AgeRange.HasValue ? x.AgeRange.Value.GetName() : "All",
-                    Gender = x.Gender.HasValue ? x.Gender.Value.ToString() : "All",
-                    Zip = x.Zip
-                })
-            };
-            return View(model);
-        }
-
-        public ActionResult Unpublish(int id)
-        {
-            var appId = ObjectContainer.Instance.Dispatch(new UnPublishCommand(id));
-            return RedirectToAction("Publishes", new { id = appId.Result });
         }
 
         private IEnumerable<T> GetList<T>()

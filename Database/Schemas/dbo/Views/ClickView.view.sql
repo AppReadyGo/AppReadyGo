@@ -1,10 +1,10 @@
 ﻿CREATE view [dbo].[ClickView]
 as
 select 
-pv.ApplicationId,
-c.PageViewId,
+pv.ApplicationID,
+c.PageViewID,
 a.Description,
-pv.path,
+pv.Path,
 pv.ScreenWidth,
 pv.ScreenHeight,
 pv.ClientHeight,
@@ -13,7 +13,7 @@ c.X,
 c.Y,
 c.Date,
 c.Orientation
-from applications a
-join PageViews pv on pv.ApplicationId = a.id
-join clicks c on c.PageViewId = pv.id
+from Applications a
+join PageViews pv on pv.ApplicationID = a.ID
+join clicks c on c.PageViewId = pv.ID
 

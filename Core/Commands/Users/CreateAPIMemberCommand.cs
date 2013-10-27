@@ -35,7 +35,7 @@ namespace AppReadyGo.Core.Commands.Users
             this.ApplicationTypes = applicationTypes;
         }
 
-        public IEnumerable<ValidationResult> Validate(IValidationContext validation)
+        public override IEnumerable<ValidationResult> Validate(IValidationContext validation)
         {
             foreach (var val in base.Validate(validation))
             {

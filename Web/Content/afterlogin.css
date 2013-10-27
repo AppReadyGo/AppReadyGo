@@ -44,8 +44,9 @@ div.user-info form{float:right;margin-left:20px;}
 .crumb .border-left{background:url(images/crumb-left.png) no-repeat center left;padding-left:7px;}
 .crumb .inner ul{height:40px;}
 .crumb .inner ul li {overflow:hidden;float:left;line-height:50px;padding-right:18px;background:url(images/crumb-separator.png) no-repeat center right;height:53px;}
-.crumb .inner ul li h4{padding-left:10px;line-height:50px;margin:0px;}
-.crumb a {color:#464646;}
+.crumb .inner ul li h4{padding-left:10px;line-height:50px;margin:0px;font-weight:normal;color:#fff;}
+.crumb a {}
+.crumb a:hover {color:#fff;}
 .main-content{padding:6px 0px 1px 0px !important}
 
 .form-wrapper { width: 600px;}

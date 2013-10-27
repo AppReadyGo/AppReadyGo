@@ -30,7 +30,7 @@ namespace AppReadyGo.Model.Master
             return item == this.SelectedMenuItem ? "active" : string.Empty;
         }
 
-        public enum MenuItem
+        public new enum MenuItem
         {
             Portfolios,
             Dashboard,

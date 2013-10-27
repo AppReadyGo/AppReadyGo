@@ -1,0 +1,27 @@
+﻿@using AppReadyGo.Helpers;
+@model AppReadyGo.Model.Pages.Application.ApplicationModel
+@{
+    Layout = "~/Views/Shared/_AfterLogin.cshtml";
+}
+@section title { Application - @Model.Name }
+@section header { }
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+		           <li><a href="/Application"><h4>Dashboard</h4></a></li>
+		           <li><h4>@Model.Name</h4></li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<div class="content-wrapper">
+    <article class="center">
+    </article>
+</div>
+
+
+

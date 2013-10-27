@@ -17,7 +17,7 @@ BEGIN
 	
 	Declare points CURSOR READ_ONLY
 	FOR
-	select top 20 id
+	select top 20 ID
 	from Clicks s
 	where s.Date =  @currentDate
 	  and s.PageViewId = @pageViewId;

@@ -27,7 +27,7 @@ namespace AppReadyGo.Domain.Model.Users
             get { return this.applicationTypes; }
         }
 
-        public virtual UserType Type
+        public override UserType Type
         {
             get { return UserType.ApiMember; }
         }

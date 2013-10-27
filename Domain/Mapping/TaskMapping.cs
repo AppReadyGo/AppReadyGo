@@ -17,11 +17,12 @@ namespace AppReadyGo.Domain.Mapping
 
             Id(x => x.Id, map => map.Generator(Generators.Identity));
             ManyToOne(p => p.Description, map => { map.Column("DescriptionID"); });
-            Property(x => x.PublishDate, map => { map.NotNullable(true); });
+            Property(x => x.PublishDate, map => { });
             Property(x => x.AgeRange, map => { });
             Property(x => x.Gender, map => { });
             Property(x => x.Zip, map => { map.Length(10); });
             Property(x => x.CreatedDate, map => map.NotNullable(true));
+            Property(x => x.Audence, map => map.NotNullable(true));
             ManyToOne(p => p.Application, map =>
             {
                 map.Column("ApplicationID");

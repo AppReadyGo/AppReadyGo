@@ -14,14 +14,14 @@ CONSTRAINT [PK_UserQuestionReply] PRIMARY KEY CLUSTERED
 
 GO
 
-ALTER TABLE [dbo].[UserQuestionReply]  WITH CHECK ADD  CONSTRAINT [FK_UserQuestionReply_ApplicationVersionQuestion] FOREIGN KEY([ApplicationVersionQuestionId])
+ALTER TABLE [dbo].[UserQuestionReply]  ADD  CONSTRAINT [FK_UserQuestionReply_ApplicationVersionQuestion] FOREIGN KEY([ApplicationVersionQuestionId])
 REFERENCES [dbo].[ApplicationVersionQuestion] ([ApplicationVersionQuestionyId])
 GO
 
 ALTER TABLE [dbo].[UserQuestionReply] CHECK CONSTRAINT [FK_UserQuestionReply_ApplicationVersionQuestion]
 GO
 
-ALTER TABLE [dbo].[UserQuestionReply]  WITH CHECK ADD  CONSTRAINT [FK_UserQuestionReply_User] FOREIGN KEY([UserId])
+ALTER TABLE [dbo].[UserQuestionReply]  ADD  CONSTRAINT [FK_UserQuestionReply_User] FOREIGN KEY([UserId])
 REFERENCES [usr].[Users] ([ID])
 GO
 

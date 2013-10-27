@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AppReadyGo.Core.Entities;
+using AppReadyGo.Domain.Model.Users;
 
 namespace AppReadyGo.Domain.Model
 {
@@ -26,11 +27,13 @@ namespace AppReadyGo.Domain.Model
 
         public virtual DateTime? PublishDate { get; set; }
 
+        public virtual int Audence { get; set; }
+
         public Task()
         {
         }
 
-        public Task(TaskDescription description, Application app, AgeRange? ageRange, Gender? gender, Country country, string zip)
+        public Task(TaskDescription description, Application app, AgeRange? ageRange, Gender? gender, Country country, string zip, int audence)
         {
             app.AddTask(this);
             this.Description = description;
@@ -40,6 +43,7 @@ namespace AppReadyGo.Domain.Model
             this.Country = country;
             this.Zip = zip;
             this.CreatedDate = DateTime.Now;
+            this.Audence = audence;
         }
 
         public virtual void Publish(bool publish = true)

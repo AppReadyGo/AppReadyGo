@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AppReadyGo.Core.Entities;
 
-namespace AppReadyGo.Core.Commands.Task
+namespace AppReadyGo.Core.Commands.Tasks
 {
     public class AddTaskCommand : ICommand<int>
     {
@@ -12,17 +12,19 @@ namespace AppReadyGo.Core.Commands.Task
  
         public int ApplicationId { get; private set; }
 
-        public virtual AgeRange? AgeRange { get; protected set; }
+        public AgeRange? AgeRange { get; protected set; }
 
-        public virtual Gender? Gender { get; protected set; }
+        public Gender? Gender { get; protected set; }
 
-        public virtual int? CountryId { get; set; }
+        public int? CountryId { get; set; }
 
         public string Zip { get; set; }
- 
+
         public bool Publish { get; set; }
 
-        public AddTaskCommand(int descId, int applicationId, AgeRange? ageRange, Gender? gender, int? countryId, string zip, bool publish)
+        public int Audence { get; set; }
+
+        public AddTaskCommand(int descId, int applicationId, AgeRange? ageRange, Gender? gender, int? countryId, string zip, int audence, bool publish)
         {
             this.DescId = descId;
             this.ApplicationId = applicationId;
@@ -31,6 +33,7 @@ namespace AppReadyGo.Core.Commands.Task
             this.CountryId = countryId;
             this.Zip = zip;
             this.Publish = publish;
+            this.Audence = audence;
         }
 
         public IEnumerable<ValidationResult> Validate(IValidationContext validation)

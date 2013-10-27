@@ -32,5 +32,7 @@ namespace AppReadyGo.Core.QueryResults.Tasks
         public int Installs { get; set; }
 
         public int Audence { get; set; }
+
+        public int DescriptionId { get; set; }
     }
 }

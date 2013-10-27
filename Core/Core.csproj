@@ -83,7 +83,8 @@
     <Compile Include="Commands\Applications\AddScreenshotCommand.cs" />
     <Compile Include="Commands\API\StartTaskCommand.cs" />
     <Compile Include="Commands\Applications\UpdateApplicationIconCommand.cs" />
-    <Compile Include="Commands\Applications\UnPublishCommand.cs" />
+    <Compile Include="Commands\Tasks\PublishTaskCommand.cs" />
+    <Compile Include="Commands\Tasks\UnPublishTaskCommand.cs" />
     <Compile Include="Commands\Applications\CreateApplicationCommand.cs" />
     <Compile Include="Commands\Applications\RemoveApplicationCommand.cs" />
     <Compile Include="Commands\Applications\RemoveScreenCommand.cs" />
@@ -253,9 +254,6 @@
     <Compile Include="QueryResults\KeyValueResult.cs" />
     <Compile Include="QueryResults\PageingResult.cs" />
     <Compile Include="QueryResults\PortfolioDetailsResult.cs" />
-    <Compile Include="QueryResults\Portfolio\PortfolioDataItemResult.cs" />
-    <Compile Include="QueryResults\Portfolio\PortfolioResult.cs" />
-    <Compile Include="QueryResults\Portfolio\PortfoliosDataResult.cs" />
     <Compile Include="QueryResults\Tasks\TaskDataResult.cs" />
     <Compile Include="QueryResults\Users\UserDetailsResult.cs" />
     <Compile Include="QueryResults\Users\UserSecureDetailsResult.cs" />

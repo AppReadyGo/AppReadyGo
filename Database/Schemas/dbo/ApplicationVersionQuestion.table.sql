@@ -12,14 +12,14 @@ CONSTRAINT [PK_ApplicationVersionQuestion]  PRIMARY KEY CLUSTERED
 
 GO
 
-ALTER TABLE [dbo].[ApplicationVersionQuestion]  WITH CHECK ADD  CONSTRAINT [FK_ApplicationVersionQuestion_Application] FOREIGN KEY([ApplicationId])
-REFERENCES [dbo].[Applications] ([Id])
+ALTER TABLE [dbo].[ApplicationVersionQuestion] ADD  CONSTRAINT [FK_ApplicationVersionQuestion_Application] FOREIGN KEY([ApplicationId])
+REFERENCES [dbo].[Applications] ([ID])
 GO
 
 ALTER TABLE [dbo].[ApplicationVersionQuestion] CHECK CONSTRAINT [FK_ApplicationVersionQuestion_Application]
 GO
 
-ALTER TABLE [dbo].[ApplicationVersionQuestion]  WITH CHECK ADD  CONSTRAINT [FK_ApplicationVersionQuestion_SurveyQuestion] FOREIGN KEY([SurveyQuestionId])
+ALTER TABLE [dbo].[ApplicationVersionQuestion]  ADD  CONSTRAINT [FK_ApplicationVersionQuestion_SurveyQuestion] FOREIGN KEY([SurveyQuestionId])
 REFERENCES [dbo].[SurveyQuestion] ([SurveyQuestionId])
 GO
 

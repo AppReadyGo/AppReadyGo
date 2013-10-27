@@ -14,7 +14,7 @@
 			<div class="inner">
                 <ul>
 		           <li><a href="/Application"><h4>Dashboard</h4></a></li>
-                   <li>New task</li>
+                   <li><h4>New Task</h4></li>
 		        </ul>
 			</div>
 		</div>
@@ -68,8 +68,8 @@
                 </p>
                 <p class="actions">
                     @Html.ValidationSummary(true, null, new { @class = "error" })
-                    <input type="submit" value="Publish" class="green-btn"/>
-                    <input type="submit" value="Save" class="green-btn"/>
+                    <button name="Action" value="Publish" class="green-btn">Publish</button>
+                    <button name="Action" value="Save" class="green-btn">Save</button>
                     <a href="/Application">Cancel</a>
                 </p>
             }
@@ -77,5 +77,5 @@
         </div>
     </article>
 </div>
-<div style="clear"></div>
+<div style="clear:both"></div>
 

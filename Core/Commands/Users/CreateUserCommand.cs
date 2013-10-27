@@ -30,7 +30,7 @@ namespace AppReadyGo.Core.Commands.Users
             yield break;
         }
 
-        public IEnumerable<ValidationResult> Validate(IValidationContext validation)
+        public virtual IEnumerable<ValidationResult> Validate(IValidationContext validation)
         {
             if (string.IsNullOrEmpty(this.Email))
             {

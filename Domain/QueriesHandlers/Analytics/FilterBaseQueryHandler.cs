@@ -1,14 +1,13 @@
 ﻿using System.Drawing;
 using System.Linq;
+using AppReadyGo.Core.Queries.Analytics;
+using AppReadyGo.Core.QueryResults.Analytics;
 using AppReadyGo.Core.QueryResults.Analytics.QueryResults;
 using AppReadyGo.Core.QueryResults.Applications;
-using AppReadyGo.Core.QueryResults.Portfolio;
 using AppReadyGo.Domain.Model;
+using AppReadyGo.Domain.Model.Users;
 using NHibernate;
 using NHibernate.Linq;
-using AppReadyGo.Core.Queries.Analytics;
-using AppReadyGo.Domain.Model.Users;
-using AppReadyGo.Core.QueryResults.Analytics;
 
 namespace AppReadyGo.Domain.Queries.Analytics
 {

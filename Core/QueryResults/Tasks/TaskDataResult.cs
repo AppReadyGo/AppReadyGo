@@ -14,5 +14,7 @@ namespace AppReadyGo.Core.QueryResults.Tasks
         public IEnumerable<ApplicationResult> Applications { get; set; }
 
         public IDictionary<int, string> Countries { get; set; }
+
+        public IDictionary<int, string> Descriptions { get; set; }
     }
 }
