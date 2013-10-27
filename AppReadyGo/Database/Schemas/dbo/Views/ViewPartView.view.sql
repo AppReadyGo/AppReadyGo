@@ -2,10 +2,10 @@
 CREATE view [dbo].[ViewPartView]
 as
 select 
-pv.ApplicationId,
-v.PageViewId,
+pv.ApplicationID,
+v.PageViewID,
 a.Description,
-pv.path,
+pv.Path,
 pv.ScreenWidth,
 pv.ClientHeight,
 v.X,
@@ -13,6 +13,6 @@ v.Y,
 v.Orientation,
 v.StartDate,
 v.FinishDate
-from applications a
-join PageViews pv on pv.ApplicationId = a.id
-join ViewParts v on v.PageViewId = pv.id
+from Applications a
+join PageViews pv on pv.ApplicationID = a.ID
+join ViewParts v on v.PageViewId = pv.ID

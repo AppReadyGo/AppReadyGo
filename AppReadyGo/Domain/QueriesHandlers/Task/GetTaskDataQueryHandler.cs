@@ -37,12 +37,31 @@ namespace AppReadyGo.Domain.QueriesHandlers.Task
                 Countries = session.Query<Model.Country>()
                                 .Select(c => c)
                                 .ToDictionary(k => k.GeoId, v => v.Name),
+                Descriptions = session.Query<Model.TaskDescription>()
+                                .Select(d => d)
+                                .ToDictionary(k => k.Id, v => v.Description),
             };
 
             if (query.Id.HasValue)
             {
-                //result.Task =  session.Query<Model>()
-                //        .Where(a => a.User.Id == securityContext.CurrentUser.Id)
+                result.Task = session.Query<Model.Task>()
+                                    .Where(t => t.Application.User.Id == securityContext.CurrentUser.Id && t.Id == query.Id)
+                                    .Select(t => new TaskDetailsResult
+                                    {
+                                        Id = t.Id,
+                                        AgeRange = t.AgeRange,
+                                        Country = t.Country != null ? new System.Tuple<int,string>(t.Country.GeoId, t.Country.ISOCode) : null,
+                                        CreatedDate = t.CreatedDate,
+                                        Gender = t.Gender,
+                                        Zip = t.Zip,
+                                        PublishDate = t.PublishDate,
+                                        Description = t.Description.Description,
+                                        DescriptionId = t.Description.Id,
+                                        Audence = t.Audence,
+                                        ApplicationId = t.Application.Id,
+                                        ApplicationName = t.Application.Name
+                                    })
+                                    .Single();
             }
 
             return result;

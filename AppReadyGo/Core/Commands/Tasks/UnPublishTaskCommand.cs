@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using AppReadyGo.Core.Entities;
 
-namespace AppReadyGo.Core.Commands.Applications
+namespace AppReadyGo.Core.Commands.Tasks
 {
-    public class UnPublishCommand : ICommand<int>
+    public class UnPublishTaskCommand : ICommand<object>
     {
         public int Id { get; private set; }
 
-        public UnPublishCommand(int id)
+        public UnPublishTaskCommand(int id)
         {
             this.Id = id;
         }

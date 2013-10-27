@@ -40,9 +40,17 @@ namespace AppReadyGo.Model.Pages.Application
 
         public IEnumerable<SelectListItem> Audences { get; set; }
 
+        public FormAction Action { get; set; }
+
         public TaskModel()
             : base(AfterLoginMasterModel.MenuItem.Analytics)
         {
+        }
+
+        public enum FormAction
+        {
+            Save,
+            Publish
         }
     }
 }

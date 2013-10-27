@@ -886,6 +886,7 @@
     <Content Include="Views\Content\Authenticated404.cshtml" />
     <Content Include="Views\Content\AuthenticatedError.cshtml" />
     <Content Include="Views\Content\AuthenticatedPageContent.cshtml" />
+    <Content Include="Views\Application\Details.cshtml" />
     <None Include="Views\Home\ComingSoon.aspx_" />
     <None Include="Views\Home\Mails\Basic.aspx_" />
     <Content Include="Views\Home\PlayGround.cshtml" />

@@ -10,10 +10,6 @@ namespace AppReadyGo.Web.Model.Pages.Admin
     {
         public new IEnumerable<MemberDetailsModel> Users { get; set; }
 
-        public string EmailOrder { get; set; }
-
-        public string NameOrder { get; set; }
-
         public string CreateDateOrder { get; set; }
 
         public MembersPagingModel()

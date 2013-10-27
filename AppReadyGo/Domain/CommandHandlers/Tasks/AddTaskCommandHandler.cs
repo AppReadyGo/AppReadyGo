@@ -2,7 +2,8 @@
 using AppReadyGo.Domain.Model;
 using NHibernate;
 using AppReadyGo.Core.Commands.Applications;
-using AppReadyGo.Core.Commands.Task;
+using AppReadyGo.Core.Commands.Tasks;
+using AppReadyGo.Core;
 
 namespace AppReadyGo.Domain.CommandHandlers.Tasks
 {
@@ -13,7 +14,7 @@ namespace AppReadyGo.Domain.CommandHandlers.Tasks
             var application = session.Get<Model.Application>(cmd.ApplicationId);
             var country = cmd.CountryId.HasValue ? session.Get<Model.Country>(cmd.CountryId) : null;
             var desc = session.Get<Model.TaskDescription>(cmd.DescId);
-            var task = new Task(desc, application, cmd.AgeRange, cmd.Gender, country, cmd.Zip);
+            var task = new Task(desc, application, cmd.AgeRange, cmd.Gender, country, cmd.Zip, cmd.Audence);
             if (cmd.Publish)
             {
                 task.Publish();

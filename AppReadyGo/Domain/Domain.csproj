@@ -77,11 +77,12 @@
     <Compile Include="CommandHandlers\API\ApplicationDownloadedCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UpdatePackageCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UpdateApplicationIconCommandHandler.cs" />
-    <Compile Include="CommandHandlers\Application\UnPublishCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Tasks\PublishTaskCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Tasks\UnPublishTaskCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\CreateApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\RemoveApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\RemoveScreenCommandHandler.cs" />
-    <Compile Include="CommandHandlers\Task\AddTaskCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Tasks\AddTaskCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UpdateApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UpdateScreenCommandHandler.cs" />
     <Compile Include="CommandHandlers\Content\AcceptTermsAndConditionsCommandHandler.cs" />

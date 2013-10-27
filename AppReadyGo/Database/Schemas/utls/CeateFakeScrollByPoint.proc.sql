@@ -24,17 +24,17 @@ BEGIN
 	print  @pageViewId
 	
 		begin
-		   select @scrollPointId = c.Id
-			from clicks c
+		   select @scrollPointId = c.ID
+			from Clicks c
 			where not exists (select null
 								from scrolls  s
-							  where s.FirstTouchId = c.id) 
+							  where s.FirstTouchId = c.ID) 
 			 and not exists  (select null
 								from scrolls  s
-							  where s.LastTouchId = c.id) 
+							  where s.LastTouchId = c.ID) 
 			 and c.x between @vX - @offset and  @vX + @offset and c.y between @vY - @offset and @vY + @offset 
 			 and c.pageviewid = @pageViewId
- 			 and c.id != @pointId;
+ 			 and c.ID != @pointId;
  		end	
  		if @scrollPointId > 0
  		begin

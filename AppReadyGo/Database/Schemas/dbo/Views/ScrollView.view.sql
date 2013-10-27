@@ -1,15 +1,15 @@
-﻿CREATE view [dbo].[ScrollView]
-as
-select 
-pv.ApplicationId,
+﻿CREATE VIEW [dbo].[ScrollView]
+AS
+SELECT 
+pv.ApplicationID,
 s.PageViewId,
 a.Description,
-pv.path,
+pv.Path,
 pv.ScreenWidth,
 pv.ClientHeight,
-s.Id,
+s.ID,
 s.FirstTouchId,
 s.LastTouchId
-from applications a
-join PageViews pv on pv.ApplicationId = a.id
-join scrolls s on s.PageViewId = pv.id
+from Applications a
+join PageViews pv on pv.ApplicationID = a.ID
+join Scrolls s on s.PageViewId = pv.ID

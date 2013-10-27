@@ -38,8 +38,22 @@
                 foreach (var task in Model.Tasks)
                 {	
 		            <tr class="portf @(task.IsAlternative ? "" : "alt")">
-			            <td>@task.Description</td>
-                        <td>@task.ApplicaionName</td>
+			            <td>
+                            @task.Description
+                            <br />
+			                <div class="row-actions">
+                                <span><a href="/Task/Edit/@task.Id">Edit</a> | </span>
+                                @if (task.WasPublished)
+                                {
+				                    <span><a href="/Task/UnPublish/@task.Id">Unpublish</a></span>
+                                }
+                                else
+                                {
+				                    <span><a href="/Task/Publish/@task.Id">Publish</a></span>
+                                }
+			                </div>          
+			            </td>
+                        <td><a href="/Application/Details/@task.ApplicationId">@task.ApplicaionName</a></td>
 			            <td>@task.Target</td>
                         <td>@task.Installs</td>
 			            <td>@task.Published</td>

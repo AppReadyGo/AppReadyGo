@@ -924,7 +924,7 @@ VALUES  (1, 'Books & References'),
 		(14, 'Shopping');
 GO
 SET IDENTITY_INSERT [dbo].[ApplicationTypes] OFF
-
+GO
 SET IDENTITY_INSERT [eco].[Interests] ON
 
 INSERT INTO [eco].[Interests]
@@ -948,5 +948,18 @@ INSERT INTO [eco].[Interests]
 GO
 
 SET IDENTITY_INSERT [eco].[Interests] OFF
+
+GO
+SET IDENTITY_INSERT [eco].[TaskDescriptions] ON
+GO
+
+INSERT INTO [eco].[TaskDescriptions]
+           ( [ID],[Description])
+    VALUES  (1, 'Use application for 90 seconds'),
+		(2,	'Review application');
+		
+GO
+
+SET IDENTITY_INSERT [eco].[TaskDescriptions] OFF
 
 GO

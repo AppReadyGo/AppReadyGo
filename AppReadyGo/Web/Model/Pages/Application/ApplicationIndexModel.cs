@@ -21,6 +21,8 @@ namespace AppReadyGo.Web.Model.Pages.Application
 
             public string Description { get; set; }
 
+            public int ApplicationId { get; set; }
+
             public string ApplicaionName { get; set; }
 
             public string Target { get; set; }
@@ -32,6 +34,8 @@ namespace AppReadyGo.Web.Model.Pages.Application
             public object Published { get; set; }
 
             public object Status { get; set; }
+
+            public bool WasPublished { get; set; }
         }
 
 

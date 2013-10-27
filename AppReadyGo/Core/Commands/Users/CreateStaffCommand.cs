@@ -10,7 +10,7 @@ namespace AppReadyGo.Core.Commands.Users
         {
         }
 
-        public IEnumerable<ValidationResult> Validate(IValidationContext validation)
+        public override IEnumerable<ValidationResult> Validate(IValidationContext validation)
         {
             foreach (var val in base.Validate(validation))
             {
