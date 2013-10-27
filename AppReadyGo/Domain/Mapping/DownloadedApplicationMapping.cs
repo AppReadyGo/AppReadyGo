@@ -6,7 +6,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace AppReadyGo.Domain.Mapping.Users
 {
-    internal class DownloadedApplicationMapping : ClassMapping<APIMemberTask>
+    internal class DownloadedApplicationMapping : ClassMapping<ApiMemberTask>
     {
         public DownloadedApplicationMapping()
         {

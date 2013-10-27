@@ -47,11 +47,11 @@ namespace Domain.Tests
             {
                 using (ITransaction dbTrans = session.BeginTransaction())
                 {
-                    new ApplicationDownloadedCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationDownloadedCommand(apiMember.Id, app.Id));
+                    new StartTaskCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.StartTaskCommand(apiMember.Id, app.Id));
                     dbTrans.Commit();
                 }
                 apiMember = session.Get<ApiMember>(apiMember.Id);
-                Assert.AreEqual(1, apiMember.Applications.Count());
+                Assert.AreEqual(1, apiMember.Tasks.Count());
             }
         }
 
@@ -66,7 +66,7 @@ namespace Domain.Tests
             {
                 using (ITransaction dbTrans = session.BeginTransaction())
                 {
-                    new ApplicationUsedCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationUsedCommand(apiMember.Id, app.Id));
+                    new TaskCompleteCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.TaskCompleteCommand(apiMember.Id, app.Id));
                     dbTrans.Commit();
                 }
                 apiMember = session.Get<ApiMember>(apiMember.Id);
@@ -85,7 +85,7 @@ namespace Domain.Tests
             {
                 using (ITransaction dbTrans = session.BeginTransaction())
                 {
-                    new ApplicationUpdateReviewCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationUpdateReviewCommand(apiMember.Id, app.Id, "Some review"));
+                    new ApplicationUpdateReviewCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ReviewApplicationCommand(apiMember.Id, app.Id, "Some review", 1));
                     dbTrans.Commit();
                 }
                 apiMember = session.Get<ApiMember>(apiMember.Id);
@@ -112,7 +112,7 @@ namespace Domain.Tests
             {
                 using (ITransaction dbTrans = session.BeginTransaction())
                 {
-                    new ApplicationDownloadedCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.ApplicationDownloadedCommand(memberId, appId));
+                    new StartTaskCommandHandler().Execute(session, new AppReadyGo.Core.Commands.API.StartTaskCommand(memberId, appId));
                     dbTrans.Commit();
                 }
             }

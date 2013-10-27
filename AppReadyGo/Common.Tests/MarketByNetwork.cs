@@ -231,7 +231,7 @@ namespace Common.Tests
                 // Add an Accept header for JSON format.
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var model = new TaskModel { AppId = appId, UserId = userId };
+                var model = new TaskModel { TaskId = appId, UserId = userId };
 
                 var task = client.PostAsJsonAsync("/market/used", model);
                 var response = task.Result;
@@ -250,7 +250,7 @@ namespace Common.Tests
                 // Add an Accept header for JSON format.
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var model = new ReviewModel { AppId = appId, UserId = userId, Review = "Some review" };
+                var model = new ReviewModel { TaskId = appId, UserId = userId, Review = "Some review" };
 
                 var task = client.PostAsJsonAsync("/market/updatereview", model);
                 var response = task.Result;

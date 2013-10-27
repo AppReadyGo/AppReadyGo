@@ -10,16 +10,16 @@ namespace AppReadyGo.Domain.Model.Users
 {
     public class ApiMember : User
     {
-        private Iesi.Collections.Generic.ISet<Application> applications = null;
+        private Iesi.Collections.Generic.ISet<ApiMemberTask> tasks = null;
         private Iesi.Collections.Generic.ISet<ApplicationType> applicationTypes = null;
 
         public virtual Gender? Gender { get; protected set; }
         public virtual AgeRange? AgeRange { get; protected set; }
         public virtual Country Country { get; protected set; }
 
-        public virtual IEnumerable<Application> Applications
+        public virtual IEnumerable<ApiMemberTask> Tasks
         {
-            get { return this.applications; }
+            get { return this.tasks; }
         }
 
         public virtual IEnumerable<ApplicationType> ApplicationTypes
@@ -34,14 +34,14 @@ namespace AppReadyGo.Domain.Model.Users
 
         public ApiMember()
         {
-            this.applications = new HashedSet<Application>();
+            this.tasks = new HashedSet<ApiMemberTask>();
             this.applicationTypes = new HashedSet<ApplicationType>();
         }
 
         public ApiMember(string email, string password, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string Zip, ApplicationType[] appTypes)
             : base(email, password)
         {
-            this.applications = new HashedSet<Application>();
+            this.tasks = new HashedSet<ApiMemberTask>();
             this.applicationTypes = new HashedSet<ApplicationType>();
 
             this.FirstName = firstName;
@@ -59,7 +59,7 @@ namespace AppReadyGo.Domain.Model.Users
         public ApiMember(string email, string firstName, string lastName, Gender? gender, AgeRange? ageRange, Country country, string Zip, ApplicationType[] appTypes)
             : base(email)
         {
-            this.applications = new HashedSet<Application>();
+            this.tasks = new HashedSet<ApiMemberTask>();
             this.applicationTypes = new HashedSet<ApplicationType>();
 
             this.FirstName = firstName;
@@ -75,11 +75,11 @@ namespace AppReadyGo.Domain.Model.Users
             }
         }
 
-        public virtual void DownloadApplication(Application application)
+        public virtual void StartTask(ApiMemberTask task)
         {
-            if (!this.applications.Contains(application))
+            if (!this.tasks.Contains(task))
             {
-                this.applications.Add(application);
+                this.tasks.Add(task);
             }
         }
 

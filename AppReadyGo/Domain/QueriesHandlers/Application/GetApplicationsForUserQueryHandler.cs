@@ -25,8 +25,13 @@ namespace AppReadyGo.Domain.Queries
                 CurPage = query.CurPage,
                 PageSize = query.PageSize
             };
+            var userTasks = session.Query<AppReadyGo.Domain.Model.ApiMemberTask>()
+                                    .Where(t => t.User.Id == query.UserId)
+                                    .Select(t => t.Task.Id)
+                                    .ToArray();
 
-            var appsQuery = session.Query<AppReadyGo.Domain.Model.Application>().Where(a => a.Tasks.Any(t => t.PublishDate != null));
+            var appsQuery = session.Query<AppReadyGo.Domain.Model.Application>()
+                                    .Where(a => a.Tasks.Any(t => t.PublishDate != null && !userTasks.Contains(t.Id)));
 
             res.ItemsCount = appsQuery.Count();
 

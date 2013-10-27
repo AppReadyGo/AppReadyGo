@@ -150,7 +150,7 @@ namespace AppReadyGo.Domain.Queries.Analytics
             }
 
             filterData.ApiMemberApplications = session.Query<ApiMember>()
-                            .SelectMany(u => u.Applications)
+                            .SelectMany(u => u.Tasks)
                             //.Where(a => a.Used && a.Application.Id == filterData.SelectedApplicationId)
                             .Select(a => new ApiMemberApplicationResult{
                                 UserId = a.User.Id,
