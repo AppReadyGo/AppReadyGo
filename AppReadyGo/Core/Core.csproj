@@ -83,6 +83,7 @@
     <Compile Include="Commands\Applications\AddScreenshotCommand.cs" />
     <Compile Include="Commands\API\StartTaskCommand.cs" />
     <Compile Include="Commands\Applications\UpdateApplicationIconCommand.cs" />
+    <Compile Include="Commands\Tasks\EditTaskCommand.cs" />
     <Compile Include="Commands\Tasks\PublishTaskCommand.cs" />
     <Compile Include="Commands\Tasks\UnPublishTaskCommand.cs" />
     <Compile Include="Commands\Applications\CreateApplicationCommand.cs" />

@@ -84,11 +84,7 @@ namespace AppReadyGo.Controllers
             }
             if (task.AgeRange.HasValue && task.AgeRange.Value != AgeRange.None)
             {
-                var type = typeof(AgeRange);
-                var memInfo = type.GetMember(task.AgeRange.Value.ToString());
-                var attributes = memInfo[0].GetCustomAttributes(typeof(AgeRangeDescriptionAttribute), false);
-                var description = ((AgeRangeDescriptionAttribute)attributes[0]).DisplayDescription;
-                target.Add(description);
+                target.Add(task.AgeRange.Value.GetAgeRangeAttribute().DisplayDescription);
             }
             if (task.Country != null)
             {

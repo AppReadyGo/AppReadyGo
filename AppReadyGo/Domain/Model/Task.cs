@@ -33,11 +33,11 @@ namespace AppReadyGo.Domain.Model
         {
         }
 
-        public Task(TaskDescription description, Application app, AgeRange? ageRange, Gender? gender, Country country, string zip, int audence)
+        public Task(TaskDescription description, Application application, AgeRange? ageRange, Gender? gender, Country country, string zip, int audence)
         {
-            app.AddTask(this);
+            application.AddTask(this);
             this.Description = description;
-            this.Application = app;
+            this.Application = application;
             this.AgeRange = ageRange;
             this.Gender = gender;
             this.Country = country;
@@ -49,6 +49,23 @@ namespace AppReadyGo.Domain.Model
         public virtual void Publish(bool publish = true)
         {
             this.PublishDate = publish ? (DateTime?)DateTime.UtcNow : null;
+        }
+
+        public virtual void Update(TaskDescription description, Application application, AgeRange? ageRange, Gender? gender, Country country, string zip, int audence)
+        {
+            if (this.Application != application)
+            {
+                this.Application.RemoveTask(this);
+                application.AddTask(this);
+            }
+            this.Description = description;
+            this.Application = application;
+            this.AgeRange = ageRange;
+            this.Gender = gender;
+            this.Country = country;
+            this.Zip = zip;
+            this.CreatedDate = DateTime.Now;
+            this.Audence = audence;
         }
     }
 }
