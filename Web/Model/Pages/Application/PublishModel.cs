@@ -5,6 +5,7 @@ using System.Web;
 using AppReadyGo.Model.Master;
 using System.Web.Mvc;
 using AppReadyGo.Core.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace AppReadyGo.Model.Pages.Application
 {
@@ -16,6 +17,7 @@ namespace AppReadyGo.Model.Pages.Application
 
         public string ApplicationName { get; set; }
 
+        [Display(Name = "Age Range")]
         public AgeRange? AgeRange { get; set; }
 
         public Gender? Gender { get; set; }
@@ -50,7 +52,10 @@ namespace AppReadyGo.Model.Pages.Application
         public enum FormAction
         {
             Save,
-            Publish
+            Publish,
+            UnPublish
         }
+
+        public string PublishDate { get; set; }
     }
 }

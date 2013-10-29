@@ -102,9 +102,9 @@ namespace AppReadyGo.Domain.Model
             }
         }
 
-        public virtual void AddTask(Task publishDetails)
+        public virtual void AddTask(Task task)
         {
-            tasks.Add(publishDetails);
+            tasks.Add(task);
         }
 
         public virtual void UpdateIcon(string iconExt)
@@ -130,6 +130,11 @@ namespace AppReadyGo.Domain.Model
         public virtual void UpdatePackage(string fileName)
         {
             this.PackageFileName = fileName;
+        }
+
+        public virtual void RemoveTask(Task task)
+        {
+            tasks.Remove(task);
         }
     }
 }

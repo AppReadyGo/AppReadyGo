@@ -54,5 +54,13 @@ namespace AppReadyGo.Common
         {
             return Enum.GetValues(typeof(T)).Cast<T>();
         }
+
+        public static AgeRangeDescriptionAttribute GetAgeRangeAttribute(this AgeRange range)
+        {
+            var type = typeof(AgeRange);
+            var memInfo = type.GetMember(range.ToString());
+            var attributes = memInfo[0].GetCustomAttributes(typeof(AgeRangeDescriptionAttribute), false);
+            return ((AgeRangeDescriptionAttribute)attributes[0]);
+        }
     }
 }

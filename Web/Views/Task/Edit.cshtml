@@ -66,9 +66,20 @@
                     @Html.TextBoxFor(m => m.Zip)
                     @Html.ValidationMessageFor(m => m.Zip, null, new { @class = "error" })
                 </p>
+                if(!string.IsNullOrEmpty(Model.PublishDate))
+                {
+                    <p><label>Published on </label><span>@Model.PublishDate</span></p>
+                }
                 <p class="actions">
                     @Html.ValidationSummary(true, null, new { @class = "error" })
-                    <button name="Action" value="Publish" class="green-btn">Publish</button>
+                    @if(!string.IsNullOrEmpty(Model.PublishDate))
+                    {
+                        <button name="Action" value="UnPublish" class="green-btn">Unpublish</button>
+                    }
+                    else
+                    {
+                        <button name="Action" value="Publish" class="green-btn">Publish</button>
+                    }
                     <button name="Action" value="Save" class="green-btn">Save</button>
                     <a href="/Application">Cancel</a>
                 </p>

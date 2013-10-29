@@ -9,6 +9,7 @@ namespace AppReadyGo.Core.Entities
 {
     public enum AgeRange : short
     {
+        [AgeRangeDescription(DisplayDescription = "", DropDownDescription = "None")]
         None = 1,
         [AgeRangeDescription(DisplayDescription = "12/17", DropDownDescription = "12-17")]
         Range12_17 = 2,
