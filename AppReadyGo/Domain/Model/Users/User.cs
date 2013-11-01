@@ -24,7 +24,11 @@ namespace AppReadyGo.Domain.Model.Users
         public virtual Membership Membership { get; protected set; }
         public virtual string Zip { get; protected set; }
         public virtual bool ThirdParty { get; protected set; }
+        public virtual Gender? Gender { get; protected set; }
+        public virtual AgeRange? AgeRange { get; protected set; }
+        public virtual Country Country { get; protected set; }
 
+     
         public virtual UserType Type
         {
             get { return UserType.Member; }
@@ -87,5 +91,7 @@ namespace AppReadyGo.Domain.Model.Users
         {
             this.SpecialAccess = specialAccess;
         }
+
+   
     }
 }

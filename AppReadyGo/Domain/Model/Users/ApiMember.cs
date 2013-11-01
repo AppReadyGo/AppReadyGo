@@ -13,10 +13,6 @@ namespace AppReadyGo.Domain.Model.Users
         private Iesi.Collections.Generic.ISet<ApiMemberTask> tasks = null;
         private Iesi.Collections.Generic.ISet<ApplicationType> applicationTypes = null;
 
-        public virtual Gender? Gender { get; protected set; }
-        public virtual AgeRange? AgeRange { get; protected set; }
-        public virtual Country Country { get; protected set; }
-
         public virtual IEnumerable<ApiMemberTask> Tasks
         {
             get { return this.tasks; }
