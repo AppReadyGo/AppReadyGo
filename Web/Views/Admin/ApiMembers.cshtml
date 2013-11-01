@@ -36,7 +36,10 @@
 		<tr>
 			<th scope='col' id='username' class='manage-column column-username sortable'><a href="/Admin/Members?cp=1&orderby=email&order=@(Model.EmailOrder + Model.SearchStrUrlPart)"><span>E-mail</span><span class="sorting-indicator"></span></a></th>
 			<th scope='col' id='name' class='manage-column column-name sortable'><a href="/Admin/Members?cp=1&orderby=name&order=@(Model.NameOrder + Model.SearchStrUrlPart)"><span>Name</span><span class="sorting-indicator"></span></a></th>
-			<th scope='col' id='activated' class='manage-column column-activated'>Activated</th>
+			<th scope='col' class='manage-column column-age'>Age</th>
+            <th scope='col' class='manage-column column-sex'>Gender</th>
+            <th scope='col' class='manage-column column-location'>Location</th>
+            <th scope='col' id='activated' class='manage-column column-activated'>Activated</th>
 			<th scope='col' id='special_access' class='manage-column column-special-access'>Special Access</th>
 			<th scope='col' id='last_access_date' class='manage-column column-last-access'>Last Access Date</th>	
 			<th scope='col' class='manage-column column-registred sortable'><a href="/Admin/Members?cp=1&orderby=createdate&order=@(Model.CreateDateOrder + Model.SearchStrUrlPart)"><span>Registred Date</span><span class="sorting-indicator"></span></a></th>	
@@ -46,7 +49,10 @@
 		<tr>
 			<th scope='col' class='manage-column column-email sortable'><a href="/Admin/Members?cp=1&orderby=email&order=@(Model.EmailOrder + Model.SearchStrUrlPart)"><span>E-mail</span><span class="sorting-indicator"></span></a></th>
 			<th scope='col' class='manage-column column-name sortable'><a href="/Admin/Members?cp=1&orderby=name&order=@(Model.NameOrder + Model.SearchStrUrlPart)"><span>Name</span><span class="sorting-indicator"></span></a></th>
-			<th scope='col' class='manage-column column-activated'>Activated</th>
+			<th scope='col' class='manage-column column-age'>Age</th>
+            <th scope='col' class='manage-column column-sex'>Gender</th>
+            <th scope='col' class='manage-column column-location'>Location</th>
+            <th scope='col' class='manage-column column-activated'>Activated</th>
 			<th scope='col' class='manage-column column-special-access'>Special Access</th>
 			<th scope='col' class='manage-column column-last-access'>Last Access Date</th>	
 			<th scope='col' class='manage-column column-registred sortable'><a href="/Admin/Members?cp=1&orderby=createdate&order=@(Model.CreateDateOrder + Model.SearchStrUrlPart)"><span>Registred Date</span><span class="sorting-indicator"></span></a></th>	
@@ -67,6 +73,11 @@
 				            </div>
 			            </td>
 			            <td class="name column-name">@user.Name</td>
+
+                        <td class="name column-name">@user.AgeDescription</td>
+                        <td class="name column-name">@user.GenderDescription</td>
+                        <td class="name column-name">@user.CountryName</td>
+
 			            <td class="role column-activated">
                         <span>@(user.Activated ? "Yes" : "No")</span>
                         @if (!user.Activated)

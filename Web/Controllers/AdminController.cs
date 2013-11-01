@@ -143,7 +143,10 @@ namespace AppReadyGo.Controllers
                     Index = i,
                     IsAlternative = i % 2 != 0,
                     LastAccess = u.LastAccessDate.HasValue ? u.LastAccessDate.Value.ToString("dd MMM yyyy") : string.Empty,
-                    Registred = u.CreateDate.ToString("dd MMM yyyy")
+                    Registred = u.CreateDate.ToString("dd MMM yyyy"),
+                    AgeDescription = u.getAgeRangeDescription(),
+                    GenderDescription = u.getGenderDescription(),
+                    CountryName = u.CountryName
                 }).ToArray()
             };
             return View(model);
@@ -174,13 +177,16 @@ namespace AppReadyGo.Controllers
                 {
                     Id = u.Id,
                     Email = u.Email,
-                    Name = string.IsNullOrEmpty(u.FirstName + u.LastName) ? string.Empty : string.Concat(u.FirstName, " ", u.LastName),
+                    Name = string.IsNullOrEmpty(u.FirstName + u.LastName) ? string.Empty : string.Concat(u.FirstName, "xxxxxxx ", u.LastName),
                     Activated = u.Activated,
                     SpecialAccess = u.SpecialAccess,
                     Index = i,
                     IsAlternative = i % 2 != 0,
                     LastAccess = u.LastAccessDate.HasValue ? u.LastAccessDate.Value.ToString("dd MMM yyyy") : string.Empty,
-                    Registred = u.CreateDate.ToString("dd MMM yyyy")
+                    Registred = u.CreateDate.ToString("dd MMM yyyy"),
+                    AgeDescription = u.getAgeRangeDescription(),
+                    GenderDescription = u.getGenderDescription(),
+                    CountryName = u.CountryName
                 }).ToArray()
             };
             return View(model);

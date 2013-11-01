@@ -24,5 +24,11 @@ namespace AppReadyGo.Web.Model.Pages.Admin
         public string Registred { get; set; }
 
         public bool SpecialAccess { get; set; }
+
+        public String AgeDescription { get; set; }
+
+        public String GenderDescription { get; set; }
+
+        public String CountryName { get; set; }
     }
 }

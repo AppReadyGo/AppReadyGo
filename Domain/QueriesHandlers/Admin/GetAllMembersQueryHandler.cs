@@ -37,7 +37,10 @@ namespace AppReadyGo.Domain.Queries.Admin
                 Id = u.Id,
                 SpecialAccess = u.SpecialAccess,
                 CreateDate = u.CreateDate,
-                LastAccessDate = u.LastAccessDate
+                LastAccessDate = u.LastAccessDate,
+                Gender = u.Gender,
+                CountryName = u.Country.Name,
+                AgeRange = u.AgeRange
             });
 
             if (query.OrderBy == GetAllMembersQuery.OrderByColumn.Email)
