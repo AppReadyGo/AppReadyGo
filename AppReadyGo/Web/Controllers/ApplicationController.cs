@@ -58,7 +58,6 @@ namespace AppReadyGo.Controllers
             return View("~/Views/Application/Index.cshtml", model);
         }
 
-
         private string GetStatus(TaskDetailsResult task)
         {
             if (!task.PublishDate.HasValue)
@@ -97,7 +96,8 @@ namespace AppReadyGo.Controllers
         public ActionResult New()
         {
             var appTypes = ObjectContainer.Instance.RunQuery(new GetApplicationTypesQuery());
-            var types = appTypes.Select(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() }).OrderBy(x => x.Text);
+            var types = appTypes.OrderBy(x => x.Item2).Generate(x => new SelectListItem() { Text = x.Item2, Value = x.Item1.ToString() }, "Please select type");
+
             return View(new ApplicationModel { Types = types });
         }
 
