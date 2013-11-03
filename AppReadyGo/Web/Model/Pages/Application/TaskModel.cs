@@ -13,9 +13,8 @@ namespace AppReadyGo.Model.Pages.Application
     {
         public int? Id { get; set; }
 
+        [Display(Name = "Application")]
         public int ApplicationId { get; set; }
-
-        public string ApplicationName { get; set; }
 
         [Display(Name = "Age Range")]
         public AgeRange? AgeRange { get; set; }
@@ -26,9 +25,12 @@ namespace AppReadyGo.Model.Pages.Application
 
         public string Zip { get; set; }
 
+        [Display(Name = "Description")]
         public int DescriptionId { get; set; }
 
         public int Audence { get; set; }
+
+        public string ApplicationName { get; set; }
 
         public IEnumerable<SelectListItem> Countries { get; set; }
 
