@@ -23,7 +23,7 @@ ADD CONSTRAINT [FK_Tasks_Descriptions] FOREIGN KEY ([DescriptionID]) REFERENCES 
 GO
 
 ALTER TABLE [eco].[Tasks]
-ADD CONSTRAINT [FK_Tasks_Contries] FOREIGN KEY ([CountryID]) REFERENCES [eco].[TaskDescriptions] ([ID]);
+ADD CONSTRAINT [FK_Tasks_Contries] FOREIGN KEY ([CountryID]) REFERENCES [dbo].[Countries] ([GeoID]);
 GO
 
 

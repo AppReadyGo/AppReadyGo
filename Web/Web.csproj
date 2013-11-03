@@ -309,7 +309,7 @@
     <Compile Include="Model\Pages\Application\ApplicationViewModel.cs" />
     <Compile Include="Model\Pages\Application\PublishDetailsModel.cs" />
     <Compile Include="Model\Pages\Application\PublishesModel.cs" />
-    <Compile Include="Model\Pages\Application\PublishModel.cs" />
+    <Compile Include="Model\Pages\Application\TaskModel.cs" />
     <Compile Include="Model\Pages\Application\ScreenModel.cs" />
     <Compile Include="Model\Pages\Application\ScreensListModel.cs" />
     <Compile Include="Model\Pages\Home\ContentModel.cs" />
