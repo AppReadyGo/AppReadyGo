@@ -32,16 +32,16 @@ namespace AppReadyGo.CustomModelBinders
         protected T GetFilterModel<T>(ModelStateDictionary mState, NameValueCollection queryString)
             where T : FilterParametersModel, new()
         {
-            int applicationId = 0;
-            var value = queryString["aid"];
-            if (string.IsNullOrEmpty(value) || !int.TryParse(value, out applicationId))
+            int taskId = 0;
+            var value = mState["id"].Value.RawValue.ToString();
+            if (string.IsNullOrEmpty(value) || !int.TryParse(value, out taskId))
             {
-                mState.Add("ApplicationId(aid)", new ModelState { });
-                mState.AddModelError("ApplicationId(aid)", "Parameter ApplicationId is required.");
+                mState.Add("TaskId", new ModelState { });
+                mState.AddModelError("TaskId", "Parameter TaskId is required.");
                 return null;
             }
 
-            var result = new T() { ApplicationId = applicationId };
+            var result = new T() { TaskId = taskId };
 
             value = queryString["fd"];
             result.FromDate = string.IsNullOrEmpty(value) ? DateTime.UtcNow.AddDays(-30).StartDay() : DateTime.Parse(value).StartDay();

@@ -1,0 +1,58 @@
+﻿@using AppReadyGo.Helpers;
+@using AppReadyGo.Model.Pages.Home
+@using AppReadyGo.Model
+@using AppReadyGo.Model.Master
+@model AnalyticsMasterModel
+@{
+    Layout = "~/Views/Shared/_AfterLogin.cshtml";
+}
+@section title { @RenderSection("title") }
+@section header 
+{ 
+    <!-- jquery-ui -->
+    <script src="@Html.Content("~/ThridParty/jquery-ui-1.10.2/js/jquery-ui-1.10.2.custom.min.js")" type="text/javascript"></script>
+    <link href="@Html.Content("~/ThridParty/jquery-ui-1.10.2/css/trontastic/jquery-ui-1.10.2.custom.min.css")" rel="stylesheet" type="text/css" />
+    <!-- selectBoxIt -->
+    <script src="@Html.Content("~/ThridParty/selectBoxIt-3.4.0/jquery.selectBoxIt.min.js")" type="text/javascript"></script>
+    <link href="@Html.Content("~/ThridParty/selectBoxIt-3.4.0/jquery.selectBoxIt.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Html.Content("~/Content/tmp/analytics.master.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("header")
+}
+<aside>
+    <section>
+        <header>Application Details</header>
+        <article>
+            <p><label>Title:</label></p>
+            <p><label>Size:</label></p>
+            <p><label>Type:</label></p>
+            <p><label>Content:</label></p>
+        </article>
+    </section>
+    <section>
+        <header>Task Deatails</header>
+        <article>
+            <p></p>
+            <p><label>Audience:</label></p>
+            <p><label>Target:</label></p>
+            <p><label>Published:</label></p>
+            <p><label>Status:</label></p>
+        </article>
+    </section>
+    <section>
+        <header>Pathes</header>
+        <article>
+
+        </article>
+    </section>
+</aside>
+<section>
+    <header><span class="sel">Analytics</span>@*<span>Reviews</span><span>Tips</span>*@</header>
+    <article>@RenderBody()</article>
+</section>
+<section>
+    <header>Screens</header>
+    <article>
+
+    </article>
+</section>

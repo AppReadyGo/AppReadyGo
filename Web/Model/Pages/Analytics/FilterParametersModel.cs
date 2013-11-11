@@ -6,7 +6,7 @@ namespace AppReadyGo.Model.Pages.Analytics
 {
     public class FilterParametersModel
     {
-        public int ApplicationId { get; set; }
+        public int TaskId { get; set; }
 
         public DateTime FromDate { get; set;  }
 

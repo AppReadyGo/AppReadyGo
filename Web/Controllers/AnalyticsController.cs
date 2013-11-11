@@ -25,17 +25,24 @@ namespace AppReadyGo.Controllers
     public class AnalyticsController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
-        
-        public ActionResult Dashboard(FilterParametersModel filter)
+
+        public ActionResult Index(int id, FilterParametersModel filter)
+        {
+            if (ModelState.IsValid)
+            {
+            }
+            return View(dashboardModel);
+        }
+
+        public ActionResult Dashboard(int id, FilterParametersModel filter)
         {
             log.WriteInformation("Dashboard");
             if (ModelState.IsValid)
             {
-                //TODO: Pavel: change Yuri: What to change?
                 var dashboardViewData = ObjectContainer.Instance.RunQuery(
                             new DashboardViewDataQuery(filter.FromDate,
                                                 filter.ToDate,
-                                                filter.ApplicationId,
+                                                filter.TaskId,
                                                 filter.ScreenSize,
                                                 filter.Path,
                                                 filter.Language,
@@ -94,7 +101,7 @@ namespace AppReadyGo.Controllers
                 var query = new UsageViewDataQuery(
                 filter.FromDate,
                 filter.ToDate,
-                filter.ApplicationId,
+                filter.TaskId,
                 filter.ScreenSize,
                 filter.Path,
                 filter.Language,
@@ -147,7 +154,7 @@ namespace AppReadyGo.Controllers
                 var data = ObjectContainer.Instance.RunQuery(new FingerPrintViewDataQuery(
                                      filter.FromDate,
                                      filter.ToDate,
-                                     filter.ApplicationId,
+                                     filter.TaskId,
                                      filter.ScreenSize,
                                      filter.Path,
                                      null,
@@ -170,7 +177,7 @@ namespace AppReadyGo.Controllers
                 }
                 else
                 {
-                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId);
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.TaskId);
                 }
 
                 //Grouping data by day. To show on graph all days from start till end.
@@ -255,7 +262,7 @@ namespace AppReadyGo.Controllers
                 var filterData = ObjectContainer.Instance.RunQuery(new ABCompareViewDataQuery(
                                      filter.FromDate,
                                      filter.ToDate,
-                                     filter.ApplicationId,
+                                     filter.TaskId,
                                      filter.ScreenSize,
                                      filter.Path,
                                      filter.SecondPath,
@@ -279,10 +286,10 @@ namespace AppReadyGo.Controllers
                 }
                 else
                 {
-                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId);
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.TaskId);
                 }
 
-                var pathes = filterData.Applications.Single(x => x.Id == filter.ApplicationId).Pathes;
+                var pathes = filterData.Applications.Single(x => x.Id == filter.TaskId).Pathes;
 
                 var firstScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.Path == x });
                 var secondScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.SecondPath == x });
@@ -391,7 +398,7 @@ namespace AppReadyGo.Controllers
                 var data = ObjectContainer.Instance.RunQuery(new EyeTrackerViewDataQuery(
                                     filter.FromDate,
                                     filter.ToDate,
-                                    filter.ApplicationId,
+                                    filter.TaskId,
                                     filter.ScreenSize,
                                     filter.Path,
                                     null,
@@ -414,7 +421,7 @@ namespace AppReadyGo.Controllers
                 }
                 else
                 {
-                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId);
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.TaskId);
                 }
 
                 //Grouping data by day. To show on graph all days from start till end.
@@ -466,7 +473,7 @@ namespace AppReadyGo.Controllers
                 throw new HttpException(400, "Parameter ScreenSize was not supplied");
             }
 
-            var result = ObjectContainer.Instance.RunQuery(new ClickHeatMapDataQuery(filter.ApplicationId, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
+            var result = ObjectContainer.Instance.RunQuery(new ClickHeatMapDataQuery(filter.TaskId, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
 
             byte[] imageData = null;
             Image image = null;
@@ -515,7 +522,7 @@ namespace AppReadyGo.Controllers
 
         public FileResult ViewHeatMapImage(FilterParametersModel filter)
         {
-            var result = ObjectContainer.Instance.RunQuery(new HeatMapDataQuery(filter.ApplicationId, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
+            var result = ObjectContainer.Instance.RunQuery(new HeatMapDataQuery(filter.TaskId, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
             
             byte[] imageData = null;
             Image image = null;

@@ -75,7 +75,7 @@ namespace AppReadyGo.Model.Filter
 
             this.NoData = !filterDataResult.Applications.SelectMany(a => a.ScreenSizes).Any();
 
-            var curApplication = filterDataResult.Applications.Single(a => a.Id == filter.ApplicationId);
+            var curApplication = filterDataResult.Applications.Single(a => a.Id == filter.TaskId);
 
             this.Pathes = curApplication.Pathes;
 
