@@ -28,6 +28,7 @@ namespace AppReadyGo.Controllers
 
         public ActionResult Index(int id, FilterParametersModel filter)
         {
+            object dashboardModel = null;
             if (ModelState.IsValid)
             {
             }
