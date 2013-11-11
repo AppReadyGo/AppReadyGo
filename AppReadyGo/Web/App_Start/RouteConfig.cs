@@ -147,15 +147,8 @@ namespace AppReadyGo.Web
             //);
 
             routes.MapRoute(
-                "AnalyticsData",
-                "Analytics/{action}/{portfolioId}/{applicationId}/{fromDate}/{toDate}/{screenSize}/{path}/{language}/{os}/{location}",
-                new { controller = "Analytics", action = "Dashboard", applicationId = UrlParameter.Optional, fromDate = UrlParameter.Optional, toDate = UrlParameter.Optional, screenSize = UrlParameter.Optional, path = UrlParameter.Optional, language = UrlParameter.Optional, os = UrlParameter.Optional, location = UrlParameter.Optional },
-                new[] { "AppReadyGo.Controllers" } // Namespaces
-            );
-
-            routes.MapRoute(
                 "Analytics",
-                "Analytics/{action}/",
+                "Analytics/{action}/{id}",
                 new { controller = "Analytics", action = "Index" },
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );

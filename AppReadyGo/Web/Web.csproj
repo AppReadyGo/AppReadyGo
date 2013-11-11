@@ -298,10 +298,12 @@
     <Compile Include="Model\Pages\Admin\StaffPagingModel.cs" />
     <Compile Include="Model\Pages\Analytics\ABCompareModel.cs" />
     <Compile Include="Model\Pages\Analytics\ABFilterParametersModel.cs" />
+    <Compile Include="Model\Pages\Analytics\AnalyticsModel.cs" />
     <Compile Include="Model\Pages\Analytics\DashboardModel.cs" />
     <Compile Include="Model\Pages\Analytics\EyeTrackerModel.cs" />
     <Compile Include="Model\Pages\Analytics\FilterParametersModel.cs" />
     <Compile Include="Model\Pages\Analytics\FingerPrintModel.cs" />
+    <Compile Include="Model\Pages\Analytics\IndexModel.cs" />
     <Compile Include="Model\Pages\Analytics\UsageModel.cs" />
     <Compile Include="Model\Pages\Application\ApplicationEditModel.cs" />
     <Compile Include="Model\Pages\Application\ApplicationIndexModel.cs" />
@@ -876,6 +878,7 @@
     <None Include="Views\Admin\Membership.aspx_" />
     <Content Include="Views\Admin\Staff.cshtml" />
     <Content Include="Views\Admin\UserEdit.cshtml" />
+    <Content Include="Views\Analytics\Index.cshtml" />
     <None Include="Views\Analytics\Usage.aspx_" />
     <Content Include="Views\Application\Publishes.cshtml" />
     <Content Include="Views\Application\Edit.cshtml" />
@@ -888,6 +891,7 @@
     <Content Include="Views\Content\AuthenticatedError.cshtml" />
     <Content Include="Views\Content\AuthenticatedPageContent.cshtml" />
     <Content Include="Views\Application\Details.cshtml" />
+    <Content Include="Views\Analytics\_Analytics.cshtml" />
     <None Include="Views\Home\ComingSoon.aspx_" />
     <None Include="Views\Home\Mails\Basic.aspx_" />
     <Content Include="Views\Home\PlayGround.cshtml" />
