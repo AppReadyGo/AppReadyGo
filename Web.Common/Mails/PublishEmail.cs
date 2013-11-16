@@ -1,4 +1,6 @@
-﻿using AppReadyGo.Core;
+﻿using AppReadyGo.Common;
+using AppReadyGo.Core;
+using AppReadyGo.Core.Queries.Tasks;
 using AppReadyGo.Web.Common.Mails;
 using System;
 using System.Collections.Generic;
@@ -13,14 +15,14 @@ namespace Web.Common.Mails
     {
         private AppReadyGo.Core.QueryResults.Tasks.TaskDetailsResult task;
 
-        public PublishEmail(int applicationId, string siteRootUrl)
+        public PublishEmail(AppReadyGo.Core.QueryResults.Tasks.TaskDetailsResult task, string siteRootUrl)
         {
+            this.task = task;
             Init(siteRootUrl);
         }
 
         public PublishEmail(AppReadyGo.Core.QueryResults.Tasks.TaskDetailsResult task)
         {
-            // TODO: Complete member initialization
             this.task = task;
             Init(string.Format("{0}://{1}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority));
         }
