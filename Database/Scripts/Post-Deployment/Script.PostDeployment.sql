@@ -630,7 +630,9 @@ VALUES (1, 1, 1, 'mails/webactivationemail'),
        (2, 1, 1, 'mails/forgotpasswordmail'),
        (4, 1, 1, 'mails/specialaccessemail'),
 	   (5, 1, 1, 'mails/apiactivationemail'),
-       (6, 1, 1, 'mails/apiforgotpasswordmail');
+       (6, 1, 1, 'mails/apiforgotpasswordmail'),
+	   (7, 1, 1, 'mails/publishemail')
+	   ;
 
 SET IDENTITY_INSERT [cont].[Mails] OFF
 
@@ -653,7 +655,9 @@ This version of Fingerprint is not a final product. Rather, it is a tool that wi
 (5, 0, 'subject', 'Please activate your account'),
 (5, 1, 'body', 'Please activate your account by the link: {activation_link}'),
 (6, 0, 'subject', 'Reset password'),
-(6, 1, 'body', 'Please use the link to reset password: {reset_password_link}');
+(6, 1, 'body', 'Please use the link to reset password: {reset_password_link}'),
+(7, 0, 'subject', 'New Application Published'),
+(7, 1, 'body', 'New Application has just been pusblished: {application_name}');
 
 GO
 

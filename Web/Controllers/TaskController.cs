@@ -11,6 +11,7 @@ using AppReadyGo.Core.Queries.Application;
 using AppReadyGo.Core.Queries.Tasks;
 using AppReadyGo.Core.QueryResults.Tasks;
 using AppReadyGo.Model.Pages.Application;
+using Web.Common.Mails;
 
 namespace AppReadyGo.Web.Controllers
 {
@@ -106,7 +107,13 @@ namespace AppReadyGo.Web.Controllers
 
         public ActionResult Publish(int id)
         {
-            ObjectContainer.Instance.Dispatch(new PublishTaskCommand(id));
+            var result = ObjectContainer.Instance.Dispatch(new PublishTaskCommand(id));
+            if (!result.Validation.Any())
+            {
+                var data = ObjectContainer.Instance.RunQuery(new GetTaskDataQuery(id));
+                new PublishEmail(data.Task).Send();
+            }
+           
             return RedirectToAction("", "Application");
         }
 
