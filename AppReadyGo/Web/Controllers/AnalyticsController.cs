@@ -19,6 +19,7 @@ using AppReadyGo.Core.Queries.Analytics;
 using AppReadyGo.Core.QueryResults.Analytics;
 using AppReadyGo.Core;
 using AppReadyGo.Web.Model.Pages.Analytics;
+using AppReadyGo.Model.Pages.Application;
 
 namespace AppReadyGo.Controllers
 {
@@ -30,7 +31,21 @@ namespace AppReadyGo.Controllers
         public ActionResult Index(int id/*, FilterParametersModel filter*/)
         {
             var dashboardViewData = ObjectContainer.Instance.RunQuery(new TaskDashboardDataQuery(id));
-            IndexModel model = null;
+            IndexModel model = new IndexModel
+            {
+                TaskInfo = new TaskModel
+                {
+                    Id = id,
+                    ApplicationId = dashboardViewData.TaskInfo.ApplicationId,
+                    DescriptionId = dashboardViewData.TaskInfo.DescriptionId,
+                    AgeRange = dashboardViewData.TaskInfo.AgeRange,
+                    Gender = dashboardViewData.TaskInfo.Gender,
+                    Country = dashboardViewData.TaskInfo.Country.Item1,
+                    Zip = dashboardViewData.TaskInfo.Zip,
+                    Audence = dashboardViewData.TaskInfo.Audence,
+                    PublishDate = dashboardViewData.TaskInfo.PublishDate.HasValue ? dashboardViewData.TaskInfo.PublishDate.Value.ToShortDateString() : string.Empty,
+                }
+            };
             if (ModelState.IsValid)
             {
             }
