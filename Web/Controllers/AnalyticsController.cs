@@ -18,6 +18,7 @@ using AppReadyGo.Core.Logger;
 using AppReadyGo.Core.Queries.Analytics;
 using AppReadyGo.Core.QueryResults.Analytics;
 using AppReadyGo.Core;
+using AppReadyGo.Web.Model.Pages.Analytics;
 
 namespace AppReadyGo.Controllers
 {
@@ -26,13 +27,14 @@ namespace AppReadyGo.Controllers
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public ActionResult Index(int id, FilterParametersModel filter)
+        public ActionResult Index(int id/*, FilterParametersModel filter*/)
         {
-            object dashboardModel = null;
+            var dashboardViewData = ObjectContainer.Instance.RunQuery(new TaskDashboardDataQuery(id));
+            IndexModel model = null;
             if (ModelState.IsValid)
             {
             }
-            return View(dashboardModel);
+            return View(model);
         }
 
         public ActionResult Dashboard(int id, FilterParametersModel filter)
