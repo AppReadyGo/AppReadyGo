@@ -10,6 +10,8 @@ namespace AppReadyGo.Core.QueryResults.Analytics
 {
     public class TaskDashboardDataResult
     {
+        public TaskDetailsResult TaskInfo { get; set; }
+
         public int Downloads { get; set; }
 
         public int Devices { get; set; }
@@ -24,15 +26,12 @@ namespace AppReadyGo.Core.QueryResults.Analytics
 
         public int AvScrolls { get; set; }
 
-        public ApplicationResult ApplicationInfo { get; set; }
-
-        public TaskDetailsResult TaskInfo { get; set; }
-
         public IEnumerable<string> Pathes { get; set; }
 
-        public IDictionary<int, string> Screens { get; set; }
+        //public IDictionary<int, string> Screens { get; set; }
 
-        public string DateRange { get; set; }
+        // TODO: Date range from publish date till today
+        //public string DateRange { get; set; }
 
         public string ViewsGraphData { get; set; }
 

@@ -1,8 +1,7 @@
 ﻿@using AppReadyGo.Helpers;
 @using AppReadyGo.Model.Pages.Home
 @using AppReadyGo.Model
-@using AppReadyGo.Model.Master
-@model AnalyticsMasterModel
+@model AppReadyGo.Web.Model.Pages.Analytics.AnalyticsModel
 @{
     Layout = "~/Views/Shared/_AfterLogin.cshtml";
 }
@@ -23,9 +22,9 @@
     <section>
         <header>Application Details</header>
         <article>
-            <p><label>Title:</label></p>
+            <p><label>Title:</label>@Model.ApplicationInfo.Name</p>
             <p><label>Size:</label></p>
-            <p><label>Type:</label></p>
+            <p><label>Type:</label>@Model.ApplicationInfo.Type</p>
             <p><label>Content:</label></p>
         </article>
     </section>

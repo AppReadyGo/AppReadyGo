@@ -197,6 +197,7 @@
     <Compile Include="QueriesHandlers\Admin\LogQueryHadler.cs" />
     <Compile Include="QueriesHandlers\Analytics\ABCompareViewDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\ClickHeatMapDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Analytics\TaskDashboardDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\DashboardViewDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\EyeTrackerViewDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\FilterBaseQueryHandler.cs" />
