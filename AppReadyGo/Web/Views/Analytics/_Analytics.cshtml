@@ -22,26 +22,29 @@
     <section>
         <header>Application Details</header>
         <article>
-            <p><label>Title:</label>@Model.ApplicationInfo.Name</p>
-            <p><label>Size:</label></p>
-            <p><label>Type:</label>@Model.ApplicationInfo.Type</p>
-            <p><label>Content:</label></p>
+            <p><label>Title:</label>@Model.ApplicationName</p>
+            @*<p><label>Size:</label></p>*@
+            <p><label>Type:</label>@Model.ApplicationType</p>
+            <p><label>Content:</label>@Model.ApplicationContent</p>
         </article>
     </section>
     <section>
         <header>Task Details</header>
         <article>
-            <p></p>
-            <p><label>Audience:</label></p>
-            <p><label>Target:</label></p>
-            <p><label>Published:</label></p>
-            <p><label>Status:</label></p>
+            <p>@Model.TaskInfo.Description</p>
+            <p><label>Audience:</label>@Model.TaskInfo.Audence</p>
+            <p><label>Target:</label>>@Model.TaskInfo.Target</p>
+            <p><label>Published:</label>>@Model.TaskInfo.Published</p>
+            <p><label>Status:</label>@Model.TaskInfo.Status</p>
         </article>
     </section>
     <section>
         <header>Pathes</header>
         <article>
-
+            @foreach (var p in Model.Pathes)
+            {
+                <p><a href="@p">@p</a></p>
+            }
         </article>
     </section>
 </aside>
@@ -52,6 +55,9 @@
 <section>
     <header>Screens</header>
     <article>
-
+        @foreach(var screen in Model.ScreenList)
+        {
+            <img src="@screen.Value" />
+        }
     </article>
 </section>

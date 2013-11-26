@@ -24,6 +24,8 @@ namespace AppReadyGo.Model.Pages.Application
         [DisplayName("Type")]
         public int Type { get; set; }
 
+        public string Content { get; set; }
+
         public IEnumerable<SelectListItem> Types { get; set; }
 
         public ApplicationModel()

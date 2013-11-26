@@ -1,25 +1,18 @@
-﻿using AppReadyGo.Common;
-using AppReadyGo.Core;
-using AppReadyGo.Core.Commands.Applications;
-using AppReadyGo.Core.Entities;
-using AppReadyGo.Core.Logger;
-using AppReadyGo.Core.Queries.Analytics;
-using AppReadyGo.Core.Queries.Application;
-using AppReadyGo.Core.QueryResults.Applications;
-using AppReadyGo.Model.Master;
-using AppReadyGo.Model.Pages.Application;
-using AppReadyGo.Model.Pages.Portfolio;
-using AppReadyGo.Web.Model.Pages.Application;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
-using AppReadyGo.Web.Model.Shared;
-using AppReadyGo.Core.Commands.Tasks;
+using AppReadyGo.Common;
+using AppReadyGo.Core;
+using AppReadyGo.Core.Commands.Applications;
+using AppReadyGo.Core.Entities;
+using AppReadyGo.Core.Logger;
+using AppReadyGo.Core.Queries.Application;
 using AppReadyGo.Core.QueryResults.Tasks;
+using AppReadyGo.Model.Pages.Application;
+using AppReadyGo.Web.Model.Pages.Application;
 
 namespace AppReadyGo.Controllers
 {
@@ -41,10 +34,10 @@ namespace AppReadyGo.Controllers
                     Description = t.Description,
                     ApplicationId = t.ApplicationId,
                     ApplicaionName = t.ApplicationName,
-                    Target = GeTarget(t),
+                    Target = t.GetTarget(),
                     Installs = t.Installs + "/" + t.Audence,
                     Published = t.PublishDate.HasValue ? t.PublishDate.Value.ToString() : "",
-                    Status = GetStatus(t),
+                    Status = t.GetStatus(),
                     IsAlternative = i % 2 == 0,
                     WasPublished = t.PublishDate.HasValue
                 }),
@@ -56,41 +49,6 @@ namespace AppReadyGo.Controllers
                 })
             };
             return View("~/Views/Application/Index.cshtml", model);
-        }
-
-        private string GetStatus(TaskDetailsResult task)
-        {
-            if (!task.PublishDate.HasValue)
-            {
-                return "Not Started";
-            }
-            else if (task.Installs == (int)task.Audence)
-            {
-                return "Complete";
-            }
-            else
-            {
-                return "In Progress";
-            }
-        }
-
-        private string GeTarget(TaskDetailsResult task)
-        {
-            List<string> target = new List<string>();
-            if (task.Gender.HasValue && task.Gender.Value != Gender.None)
-            {
-                target.Add(task.Gender.Value == Gender.Men ? "M" : "F");
-            }
-            if (task.AgeRange.HasValue && task.AgeRange.Value != AgeRange.None)
-            {
-                target.Add(task.AgeRange.Value.GetAgeRangeAttribute().DisplayDescription);
-            }
-            if (task.Country != null)
-            {
-                target.Add(task.Country.Item2);
-            }
-
-            return string.Join("-", target);
         }
 
         public ActionResult New()

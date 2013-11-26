@@ -5,11 +5,47 @@ using System.Web;
 using System.Configuration;
 using AppReadyGo.Core.Entities;
 using System.Web.Mvc;
+using AppReadyGo.Core.QueryResults.Tasks;
 
 namespace AppReadyGo.Common
 {
     public static class Extentions
     {
+        public static string GetStatus(this TaskDetailsResult task)
+        {
+            if (!task.PublishDate.HasValue)
+            {
+                return "Not Started";
+            }
+            else if (task.Installs == (int)task.Audence)
+            {
+                return "Complete";
+            }
+            else
+            {
+                return "In Progress";
+            }
+        }
+
+        public static string GetTarget(this TaskDetailsResult task)
+        {
+            List<string> target = new List<string>();
+            if (task.Gender.HasValue && task.Gender.Value != Gender.None)
+            {
+                target.Add(task.Gender.Value == Gender.Men ? "M" : "F");
+            }
+            if (task.AgeRange.HasValue && task.AgeRange.Value != AgeRange.None)
+            {
+                target.Add(task.AgeRange.Value.GetAgeRangeAttribute().DisplayDescription);
+            }
+            if (task.Country != null)
+            {
+                target.Add(task.Country.Item2);
+            }
+
+            return string.Join("-", target);
+        }
+
         public static string GetContent(this ContentPredefinedKeys key)
         {
             switch (key)
