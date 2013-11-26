@@ -43,11 +43,23 @@ namespace AppReadyGo.Domain.Queries.Analytics
                                         Audence = t.Audence,
                                         ApplicationId = t.Application.Id,
                                         ApplicationName = t.Application.Name
-                                    }
+                                    },
+                                    ApplicationType = t.Application.Type.Name
                                 })
                                 .Single();
 
             res.Downloads = session.Query<ApiMemberTask>().Where(x => x.Task.Id == query.TaskId).Count();
+
+            res.Pathes = session.Query<PageView>()
+                            .Where(pv => pv.Application.Id == res.TaskInfo.ApplicationId)
+                            .Select(pv => pv.Path)
+                            .Distinct()
+                            .ToArray();
+
+            res.ScreenList = session.Query<Screen>()
+                            .Where(s => s.Application.Id == res.TaskInfo.ApplicationId)
+                            .Select(s => new { s.Id, s.Path })
+                            .ToDictionary(k => k.Id, v => v.Path);
 
             return res;
         }

@@ -26,7 +26,11 @@ namespace AppReadyGo.Core.QueryResults.Analytics
 
         public int AvScrolls { get; set; }
 
+        public string ApplicationType { get; set; }
+
         public IEnumerable<string> Pathes { get; set; }
+
+        public Dictionary<int, string> ScreenList { get; set; }
 
         //public IDictionary<int, string> Screens { get; set; }
 

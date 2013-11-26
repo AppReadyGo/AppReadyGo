@@ -9,17 +9,16 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using AppReadyGo.Common;
-using AppReadyGo.Model.Filter;
-using AppReadyGo.Model.Master;
-using AppReadyGo.Model.Pages.Analytics;
-using AppReadyGo.Model.Pages.Home;
-using AppReadyGo.Models;
+using AppReadyGo.Core;
 using AppReadyGo.Core.Logger;
 using AppReadyGo.Core.Queries.Analytics;
 using AppReadyGo.Core.QueryResults.Analytics;
-using AppReadyGo.Core;
-using AppReadyGo.Web.Model.Pages.Analytics;
+using AppReadyGo.Model.Master;
+using AppReadyGo.Model.Pages.Analytics;
 using AppReadyGo.Model.Pages.Application;
+using AppReadyGo.Models;
+using AppReadyGo.Web.Model.Pages.Analytics;
+using AppReadyGo.Web.Model.Pages.Application;
 
 namespace AppReadyGo.Controllers
 {
@@ -30,21 +29,22 @@ namespace AppReadyGo.Controllers
 
         public ActionResult Index(int id/*, FilterParametersModel filter*/)
         {
-            var dashboardViewData = ObjectContainer.Instance.RunQuery(new TaskDashboardDataQuery(id));
+            var data = ObjectContainer.Instance.RunQuery(new TaskDashboardDataQuery(id));
             IndexModel model = new IndexModel
             {
-                TaskInfo = new TaskModel
+                TaskInfo = new TaskDetailsModel
                 {
-                    Id = id,
-                    ApplicationId = dashboardViewData.TaskInfo.ApplicationId,
-                    DescriptionId = dashboardViewData.TaskInfo.DescriptionId,
-                    AgeRange = dashboardViewData.TaskInfo.AgeRange,
-                    Gender = dashboardViewData.TaskInfo.Gender,
-                    Country = dashboardViewData.TaskInfo.Country.Item1,
-                    Zip = dashboardViewData.TaskInfo.Zip,
-                    Audence = dashboardViewData.TaskInfo.Audence,
-                    PublishDate = dashboardViewData.TaskInfo.PublishDate.HasValue ? dashboardViewData.TaskInfo.PublishDate.Value.ToShortDateString() : string.Empty,
-                }
+                    Description = data.TaskInfo.Description,
+                    Target = data.TaskInfo.GetTarget(),
+                    Status = data.TaskInfo.GetStatus(),
+                    Audence = data.TaskInfo.Audence,
+                    Published = data.TaskInfo.PublishDate.HasValue ? data.TaskInfo.PublishDate.Value.ToString() : string.Empty,
+                },
+                ApplicationName = data.TaskInfo.ApplicationName,
+                ApplicationType = data.ApplicationType,
+                DateRange = data.TaskInfo.PublishDate.Value.ToString("dd-mm-yyyy") + " - " + DateTime.UtcNow.ToString("dd-mm-yyyy"),
+                Pathes = data.Pathes.OrderBy(p => p),
+                ScreenList = data.ScreenList
             };
             if (ModelState.IsValid)
             {
