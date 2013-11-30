@@ -58,8 +58,8 @@ namespace AppReadyGo.Domain.Queries.Analytics
 
             res.ScreenList = session.Query<Screen>()
                             .Where(s => s.Application.Id == res.TaskInfo.ApplicationId)
-                            .Select(s => new { s.Id, s.Path })
-                            .ToDictionary(k => k.Id, v => v.Path);
+                            .Select(s => new { s.Id, s.FileExtension })
+                            .ToDictionary(k => k.Id, v => v.FileExtension);
 
             return res;
         }

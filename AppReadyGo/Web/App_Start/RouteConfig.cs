@@ -147,6 +147,13 @@ namespace AppReadyGo.Web
             //);
 
             routes.MapRoute(
+                "AnalyticsIndex",
+                "Analytics/{id}",
+                new { controller = "Analytics", action = "Index" },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
                 "Analytics",
                 "Analytics/{action}/{id}",
                 new { controller = "Analytics", action = "Index" },

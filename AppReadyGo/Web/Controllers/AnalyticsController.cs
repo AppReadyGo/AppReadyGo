@@ -42,7 +42,7 @@ namespace AppReadyGo.Controllers
                 },
                 ApplicationName = data.TaskInfo.ApplicationName,
                 ApplicationType = data.ApplicationType,
-                DateRange = data.TaskInfo.PublishDate.Value.ToString("dd-mm-yyyy") + " - " + DateTime.UtcNow.ToString("dd-mm-yyyy"),
+                DateRange = data.TaskInfo.PublishDate.Value.ToString("dd MMM yyyy") + " - " + DateTime.UtcNow.ToString("dd MMM yyyy"),
                 Pathes = data.Pathes.OrderBy(p => p),
                 ScreenList = data.ScreenList
             };
