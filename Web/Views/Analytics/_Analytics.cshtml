@@ -8,17 +8,9 @@
 @section title { @RenderSection("title") }
 @section header 
 { 
-    <!-- jquery-ui -->
-    <script src="@Html.Content("~/ThridParty/jquery-ui-1.10.2/js/jquery-ui-1.10.2.custom.min.js")" type="text/javascript"></script>
-    <link href="@Html.Content("~/ThridParty/jquery-ui-1.10.2/css/trontastic/jquery-ui-1.10.2.custom.min.css")" rel="stylesheet" type="text/css" />
-    <!-- selectBoxIt -->
-    <script src="@Html.Content("~/ThridParty/selectBoxIt-3.4.0/jquery.selectBoxIt.min.js")" type="text/javascript"></script>
-    <link href="@Html.Content("~/ThridParty/selectBoxIt-3.4.0/jquery.selectBoxIt.css")" rel="stylesheet" type="text/css" />
-
-    <link href="@Html.Content("~/Content/tmp/analytics.master.css")" rel="stylesheet" type="text/css" />
     @RenderSection("header")
 }
-<aside>
+<aside class="widgets">
     <section>
         <header>Application Details</header>
         <article>
@@ -33,8 +25,8 @@
         <article>
             <p>@Model.TaskInfo.Description</p>
             <p><label>Audience:</label>@Model.TaskInfo.Audence</p>
-            <p><label>Target:</label>>@Model.TaskInfo.Target</p>
-            <p><label>Published:</label>>@Model.TaskInfo.Published</p>
+            <p><label>Target:</label>@Model.TaskInfo.Target</p>
+            <p><label>Published:</label>@Model.TaskInfo.Published</p>
             <p><label>Status:</label>@Model.TaskInfo.Status</p>
         </article>
     </section>
@@ -48,16 +40,18 @@
         </article>
     </section>
 </aside>
-<section>
-    <header><span class="sel">Analytics</span>@*<span>Reviews</span><span>Tips</span>*@</header>
-    <article>@RenderBody()</article>
-</section>
-<section>
-    <header>Screens</header>
-    <article>
-        @foreach(var screen in Model.ScreenList)
-        {
-            <img src="@screen.Value" />
-        }
-    </article>
-</section>
+<div class="content">
+    <section>
+        <header><span class="sel">Analytics</span>@*<span>Reviews</span><span>Tips</span>*@<label>@Model.DateRange</label></header>
+        <article>@RenderBody()</article>
+    </section>
+    <section>
+        <header><span>Screens</span></header>
+        <article class="screens">
+            @foreach(var screen in Model.ScreenList)
+            {
+                <img src="/Screens/@screen.Key@screen.Value" />
+            }
+        </article>
+    </section>
+</div>

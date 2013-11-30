@@ -201,3 +201,24 @@ textarea,input[type="text"],input[type="password"],input[type="file"],input[type
 .testers-widget img{height: 26px;margin-right: 2px;}
 
 
+
+/* new */
+aside.widgets {width: 250px;margin-left:10px;float:left;margin-right:20px;}
+aside.widgets header{background-color:#727D74;padding:7px 7px 8px;text-align:left;line-height:1.3em;font-size:14px;color: white;}
+aside.widgets article{ border:1px solid gray;color: #464646;background-color: #e7eef1;font-size: 12px;}
+aside.widgets article p{border-bottom:1px solid #fff;line-height: 24px;height: 24px;padding-left:10px;}
+aside.widgets article p label{float:left;width:70px;}
+
+div.content section{margin-left:280px}
+div.content section header span{background-color:#727D74;padding:7px 7px 8px;text-align:center;line-height:1.3em;font-size:14px;color: white;width:100px;display:inline-block;}
+div.content section header label{line-height:33px;font-size:15px;margin-left:30px;}
+div.content section article{padding:10px;border:1px solid grey;margin-bottom:20px;overflow:auto;}
+div.content section article.screens img{width:100px;margin: 5px;}
+div.content article p{float:left;width:200px;clear:left;margin-bottom:23px;}
+div.content article p label{float:left;width:168px;}
+div.content article .graph-wrapper{margin-left:240px;overflow:auto;}
+div.content article .graph-wrapper label{float:left;width:120px;padding-top:66px;}
+div.content article .graph-wrapper > div{}
+div.content article .graph-wrapper > div > div{margin-left:120px;width: 450px;height: 100px;position:relative;}
+
+
