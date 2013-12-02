@@ -212,7 +212,7 @@ aside.widgets article p label{float:left;width:70px;}
 div.content section{margin-left:280px}
 div.content section header span{background-color:#727D74;padding:7px 7px 8px;text-align:center;line-height:1.3em;font-size:14px;color: white;width:100px;display:inline-block;}
 div.content section header label{line-height:33px;font-size:15px;margin-left:30px;}
-div.content section article{padding:10px;border:1px solid grey;margin-bottom:20px;overflow:auto;}
+div.content section article{padding:10px;border:1px solid grey;margin-bottom:20px;overflow:auto;margin-right: 10px;}
 div.content section article.screens img{width:100px;margin: 5px;}
 div.content article p{float:left;width:200px;clear:left;margin-bottom:23px;}
 div.content article p label{float:left;width:168px;}

@@ -9,31 +9,100 @@
     <script src="@Html.Content("~/ThridParty/flot-0.8.0/jquery.flot.min.js")" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            var d1 = [[0, 3], [1, 3], [2, 5], [3, 7]];
-            $.plot($("#views_graph"), [
-                {
-                    data: d1,
+            var m1 = {
+                data: [[1, 14.72]],
+                bars: { lineWidth: 0, fillColor: "#AA4643", barWidth: 0.5 }
+            };
+
+            var m2 = {
+                data: [[2, 30.74]],
+                bars: { lineWidth: 0, fillColor: "#89A54E", barWidth: 0.5 }
+            };
+
+            var m3 = {
+                data: [[3, 18.57]],
+                bars: { lineWidth: 0, fillColor: "#4572A7", barWidth: 0.5 }
+            };
+
+            var m4 = {
+                data: [[4, 18.57]],
+                bars: { lineWidth: 0, fillColor: "#4572A7", barWidth: 0.5 }
+            };
+
+
+
+            $.plot($("#views_graph"), [m1, m2, m3, m4], {
+                xaxis: {
+                    min: 0,
+                    max: 5,
+                    ticks: [[1, 'Path 1'], [2, 'Path 2'], [3, 'Path 3'], [4, 'Path 4']],
+                    tickLength: 1
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 0
+                },
+                yaxis: {
+                    tickLength: 0,
+                    ticks: false
+                },
+                series: {
                     bars: {
-                        show: true
+                        show: true,
+                        align: "center"
+                        //fillColor : { colors : ["#32b9ff", "#2b78a0"] }
                     }
                 }
-            ]);
-            $.plot($("#clicks_graph"), [
-                {
-                    data: d1,
+            });
+            $.plot($("#clicks_graph"), [m1, m2, m3, m4], {
+                xaxis: {
+                    min: 0,
+                    max: 5,
+                    ticks: [[1, 'Path 1'], [2, 'Path 2'], [3, 'Path 3'], [4, 'Path 4']],
+                    tickLength: 1
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 0
+                },
+                yaxis: {
+                    tickLength: 0,
+                    ticks: false
+                },
+                series: {
                     bars: {
-                        show: true
+                        show: true,
+                        align: "center"
+                        //fillColor : { colors : ["#32b9ff", "#2b78a0"] }
                     }
                 }
-            ]);
-            $.plot($("#scrolls_graph"), [
-                {
-                    data: d1,
+            });
+            $.plot($("#scrolls_graph"), [m1, m2, m3, m4], {
+                xaxis: {
+                    min: 0,
+                    max: 5,
+                    ticks: [[1, 'Screen 1'], [2, 'Screen 2'], [3, 'Screen 3'], [4, 'Screen 4']],
+                    tickLength: 1
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 0
+                },
+                yaxis: {
+                    tickLength: 0,
+                    ticks: false
+                },
+                series: {
                     bars: {
-                        show: true
+                        show: true,
+                        align: "center"
+                        //fillColor : { colors : ["#32b9ff", "#2b78a0"] }
                     }
                 }
-            ]);
+            });
         });
     </script>
 }
