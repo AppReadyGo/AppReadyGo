@@ -21,10 +21,10 @@ namespace AppReadyGo.Web.Model.Pages.Analytics
 
         public int AvScrolls { get; set; }
 
-        public string ViewsGraphData { get; set; }
+        public KeyValuePair<string, int>[] ViewsGraphData { get; set; }
 
-        public string ClicksGraphData { get; set; }
+        public KeyValuePair<string, int>[] ClicksGraphData { get; set; }
 
-        public string ScrollsGraphData { get; set; }
+        public KeyValuePair<string, int>[] ScrollsGraphData { get; set; }
     }
 }

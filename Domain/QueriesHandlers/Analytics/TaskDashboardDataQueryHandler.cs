@@ -61,6 +61,26 @@ namespace AppReadyGo.Domain.Queries.Analytics
                             .Select(s => new { s.Id, s.FileExtension })
                             .ToDictionary(k => k.Id, v => v.FileExtension);
 
+            res.ClicksGraphData = session.Query<PageView>()
+                            .Where(pv => pv.Application.Id == res.TaskInfo.ApplicationId)
+                            .Select(pv => new { Path = pv.Path, Clicks = pv.Clicks.Count() })
+                            .ToArray()
+                            .GroupBy(x => x.Path)
+                            .ToDictionary(k => k.Key, v => v.Sum(x => x.Clicks));
+
+            res.ViewsGraphData = session.Query<PageView>()
+                            .Where(pv => pv.Application.Id == res.TaskInfo.ApplicationId)
+                            .Select(pv => pv.Path)
+                            .ToArray()
+                            .GroupBy(x => x)
+                            .ToDictionary(k => k.Key, v => v.Count());
+
+            res.ScrollsGraphData = session.Query<PageView>()
+                            .Where(pv => pv.Application.Id == res.TaskInfo.ApplicationId)
+                            .Select(pv => new { Path = pv.Path, Scrolls = pv.Scrolls.Count() })
+                            .ToArray()
+                            .GroupBy(x => x.Path)
+                            .ToDictionary(k => k.Key, v => v.Sum(x => x.Scrolls));
             return res;
         }
     }
