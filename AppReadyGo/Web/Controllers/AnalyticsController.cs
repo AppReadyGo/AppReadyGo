@@ -44,7 +44,10 @@ namespace AppReadyGo.Controllers
                 ApplicationType = data.ApplicationType,
                 DateRange = data.TaskInfo.PublishDate.Value.ToString("dd MMM yyyy") + " - " + DateTime.UtcNow.ToString("dd MMM yyyy"),
                 Pathes = data.Pathes.OrderBy(p => p),
-                ScreenList = data.ScreenList
+                ScreenList = data.ScreenList,
+                ClicksGraphData = data.ClicksGraphData.Count > 4 ? data.ClicksGraphData.OrderByDescending(x => x.Value).Take(4).ToArray() : data.ClicksGraphData.ToArray(),
+                ViewsGraphData = data.ViewsGraphData.Count > 4 ? data.ViewsGraphData.OrderByDescending(x => x.Value).Take(4).ToArray() : data.ViewsGraphData.ToArray(),
+                ScrollsGraphData = data.ScrollsGraphData.Count > 4 ? data.ScrollsGraphData.OrderByDescending(x => x.Value).Take(4).ToArray() : data.ScrollsGraphData.ToArray(),
             };
             if (ModelState.IsValid)
             {

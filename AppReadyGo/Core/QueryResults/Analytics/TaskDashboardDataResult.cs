@@ -37,10 +37,10 @@ namespace AppReadyGo.Core.QueryResults.Analytics
         // TODO: Date range from publish date till today
         //public string DateRange { get; set; }
 
-        public string ViewsGraphData { get; set; }
+        public IDictionary<string, int> ViewsGraphData { get; set; }
 
-        public string ClicksGraphData { get; set; }
+        public IDictionary<string, int> ClicksGraphData { get; set; }
 
-        public string ScrollsGraphData { get; set; }
+        public IDictionary<string, int> ScrollsGraphData { get; set; }
     }
 }

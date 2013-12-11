@@ -9,33 +9,13 @@
     <script src="@Html.Content("~/ThridParty/flot-0.8.0/jquery.flot.min.js")" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            var m1 = {
-                data: [[1, 14.72]],
-                bars: { lineWidth: 0, fillColor: "#AA4643", barWidth: 0.5 }
-            };
-
-            var m2 = {
-                data: [[2, 30.74]],
-                bars: { lineWidth: 0, fillColor: "#89A54E", barWidth: 0.5 }
-            };
-
-            var m3 = {
-                data: [[3, 18.57]],
-                bars: { lineWidth: 0, fillColor: "#4572A7", barWidth: 0.5 }
-            };
-
-            var m4 = {
-                data: [[4, 18.57]],
-                bars: { lineWidth: 0, fillColor: "#4572A7", barWidth: 0.5 }
-            };
-
-
-
-            $.plot($("#views_graph"), [m1, m2, m3, m4], {
+            var colors = ["#AA4643", "#89A54E", "#4572A7", "#4572A7"];
+            var data = [@(string.Join(",", Model.ViewsGraphData.Select((x, i) =>"{ data: [[" + (i+1) + ", " + Model.ViewsGraphData[i].Value + "]], bars: { lineWidth: 0, fillColor: colors[" + i + "], barWidth: 0.5 } }")))];
+            $.plot($("#views_graph"), data, {
                 xaxis: {
                     min: 0,
                     max: 5,
-                    ticks: [[1, 'Path 1'], [2, 'Path 2'], [3, 'Path 3'], [4, 'Path 4']],
+                    ticks: [[ @(Html.Raw(string.Join("], [", Model.ViewsGraphData.Select((x,i) => string.Format("{0}, '{1}'", i + 1, x.Key ))))) ]],
                     tickLength: 1
                 },
                 grid: {
@@ -55,11 +35,12 @@
                     }
                 }
             });
-            $.plot($("#clicks_graph"), [m1, m2, m3, m4], {
+            data = [@(string.Join(",", Model.ClicksGraphData.Select((x, i) =>"{ data: [[" + (i+1) + ", " + x.Value + "]], bars: { lineWidth: 0, fillColor: colors[" + i + "], barWidth: 0.5 } }")))];
+            $.plot($("#clicks_graph"), data, {
                 xaxis: {
                     min: 0,
                     max: 5,
-                    ticks: [[1, 'Path 1'], [2, 'Path 2'], [3, 'Path 3'], [4, 'Path 4']],
+                    ticks: [[ @(Html.Raw(string.Join("], [", Model.ClicksGraphData.Select((x,i) => string.Format("{0}, '{1}'", i + 1, x.Key )))))]],
                     tickLength: 1
                 },
                 grid: {
@@ -79,11 +60,12 @@
                     }
                 }
             });
-            $.plot($("#scrolls_graph"), [m1, m2, m3, m4], {
+            data = [@(string.Join(",", Model.ScrollsGraphData.Select((x, i) =>"{ data: [[" + (i+1) + ", " + x.Value + "]], bars: { lineWidth: 0, fillColor: colors[" + i + "], barWidth: 0.5 } }")))];
+            $.plot($("#scrolls_graph"), data, {
                 xaxis: {
                     min: 0,
                     max: 5,
-                    ticks: [[1, 'Screen 1'], [2, 'Screen 2'], [3, 'Screen 3'], [4, 'Screen 4']],
+                    ticks: [[ @(Html.Raw(string.Join("], [", Model.ScrollsGraphData.Select((x,i) => string.Format("{0}, '{1}'", i + 1, x.Key )))))]],
                     tickLength: 1
                 },
                 grid: {
@@ -103,16 +85,16 @@
                     }
                 }
             });
-        });
+      });
     </script>
 }
-<p><label>Downloads:</label><a>30</a></p>
-<p><label>Different Devices:</label><a>30</a></p>
-<p><label>Reported Screens:</label><a>30</a></p>
-<p><label>Using Sessions:</label><a>30</a></p>
-<p><label>Average Sessions Duration:</label><a>30</a></p>
-<p><label>Average Clicks per Sesson:</label><a>30</a></p>
-<p><label>Average Scrolls per Sesson:</label><a>30</a></p>
+<p><label>Downloads:</label> @Model.Downloads</p>
+<p><label>Different Devices:</label> @Model.Devices</p>
+<p><label>Reported Screens:</label> @Model.Screens</p>
+<p><label>Using Sessions:</label> @Model.Sessions</p>
+<p><label>Average Sessions Duration:</label> @Model.AvSessionDuration</p>
+<p><label>Average Clicks per Sesson:</label> @Model.AvClicks</p>
+<p><label>Average Scrolls per Sesson:</label> @Model.AvScrolls</p>
 <div class="graph-wrapper">
     <label>Views by Path</label>
     <div><div id="views_graph"></div></div>
