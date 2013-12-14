@@ -1,6 +1,7 @@
 ﻿@using AppReadyGo.Helpers;
 @using AppReadyGo.Model.Pages.Home
 @using AppReadyGo.Model
+@using AppReadyGo.Web.Model.Pages.Analytics
 @model AppReadyGo.Web.Model.Pages.Analytics.AnalyticsModel
 @{
     Layout = "~/Views/Shared/_AfterLogin.cshtml";
@@ -42,7 +43,22 @@
 </aside>
 <div class="content">
     <section>
-        <header><span class="sel">Analytics</span>@*<span>Reviews</span><span>Tips</span>*@<label>@Model.DateRange</label></header>
+        <header>
+            @if(Model.Tab == AnalyticsModel.Tabs.Task)
+            {
+                <span class="sel">Task</span>
+            }
+            else
+            {
+                <a href="/Analytics/@Model.TaskInfo.Id">Task</a>
+            }
+            @if(!string.IsNullOrEmpty(Model.CustomTab))
+            {
+                <span class="sel">Model.CustomTab</span>
+            }
+            @*<span>Reviews</span><span>Tips</span>*@
+            <label>@Model.DateRange</label>
+        </header>
         <article>@RenderBody()</article>
     </section>
     <section>

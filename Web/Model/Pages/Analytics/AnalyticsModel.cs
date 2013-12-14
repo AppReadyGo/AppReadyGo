@@ -26,9 +26,28 @@ namespace AppReadyGo.Web.Model.Pages.Analytics
 
         public string DateRange { get; set; }
 
-        public AnalyticsModel()
+        public Tabs Tab { get; set; }
+
+        public string CustomTab { get; set; }
+
+        public AnalyticsModel(Tabs tab)
             : base(MenuItem.Dashboard)
         {
+            this.Tab = tab;
+        }
+
+        public AnalyticsModel(string customTab)
+            : base(MenuItem.Dashboard)
+        {
+            this.CustomTab = customTab;
+        }
+
+        public enum Tabs
+        {
+            Task,
+            Analytics,
+            Reviews,
+            Tips
         }
     }
 }

@@ -7,6 +7,8 @@ namespace AppReadyGo.Web.Model.Pages.Application
 {
     public class TaskDetailsModel
     {
+        public int Id { get; set; }
+
         public int Audence { get; set; }
 
         public string Target { get; set; }

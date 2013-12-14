@@ -1,0 +1,43 @@
+﻿@using AppReadyGo.Helpers;
+@model AppReadyGo.Web.Model.Pages.Analytics.ScreenModel
+@{
+    Layout = "~/Views/Analytics/_Analytics.cshtml";
+}
+@section title { Task Analytics }
+@section header 
+{
+}
+<section>
+    <header>Overview</header>
+    <article>
+        <p><label>Views:</label> @Model.Views</p>
+        <p><label>Different Devices:</label> @Model.Devices</p>
+        <p><label>Average Duration:</label> @Model.AvgDuration</p>
+        <p><label>Average Clicks per View:</label> @Model.AvgClicks</p>
+        <p><label>Average Scrolls per View:</label> @Model.AvgScrolls</p>
+    </article>
+</section>
+<section>
+    <header>Buttons And Links</header>
+    <article>
+        @foreach(var lnk in Model.Links)
+        {
+            <p><label>@lnk.Title</label> @lnk.Clicks @lnk.Percents</p>
+        }
+    </article>
+</section>
+<section>
+    <header>
+        <span class="sel">TouchMap</span>
+        <span>EyeTrack</span>
+        <span>Original</span>
+    </header>
+    <article>
+        <img />
+        <img />
+        <img />
+    </article>
+</section>
+
+
+

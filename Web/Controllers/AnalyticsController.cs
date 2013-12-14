@@ -34,6 +34,7 @@ namespace AppReadyGo.Controllers
             {
                 TaskInfo = new TaskDetailsModel
                 {
+                    Id = id,
                     Description = data.TaskInfo.Description,
                     Target = data.TaskInfo.GetTarget(),
                     Status = data.TaskInfo.GetStatus(),
@@ -53,6 +54,13 @@ namespace AppReadyGo.Controllers
             {
             }
             return View(model);
+        }
+
+        public ActionResult Screen(int id)
+        {
+            var data = ObjectContainer.Instance.RunQuery(new AnalyticsScreenDataQuery(id));
+            var model = new AppReadyGo.Web.Model.Pages.Analytics.ScreenModel("");
+            return View("~/Views/Analytics/TouchMap.cshtml", model);
         }
 
         public ActionResult Dashboard(int id, FilterParametersModel filter)
