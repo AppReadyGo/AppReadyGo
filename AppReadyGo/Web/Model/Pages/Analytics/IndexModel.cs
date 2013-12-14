@@ -26,5 +26,10 @@ namespace AppReadyGo.Web.Model.Pages.Analytics
         public KeyValuePair<string, int>[] ClicksGraphData { get; set; }
 
         public KeyValuePair<string, int>[] ScrollsGraphData { get; set; }
+
+        public IndexModel()
+            : base(Tabs.Task)
+        {
+        }
     }
 }

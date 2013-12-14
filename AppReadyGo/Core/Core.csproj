@@ -155,6 +155,7 @@
     <Compile Include="ObjectSerializator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\Admin\GetAllApplicationsQuery.cs" />
+    <Compile Include="Queries\Analytics\AnalyticsScreenDataQuery.cs" />
     <Compile Include="Queries\Analytics\TaskDashboardDataQuery.cs" />
     <Compile Include="Queries\Applications\GetApplicationIndexDataQuery.cs" />
     <Compile Include="Queries\Content\GetItemQuery.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="QueryResults\Admin\StaffFullDetailsResult.cs" />
     <Compile Include="QueryResults\Admin\UserFullDetailsResult.cs" />
     <Compile Include="QueryResults\Analytics\ABCompareViewDataResult.cs" />
+    <Compile Include="QueryResults\Analytics\AnalyticsScreenDataResult.cs" />
     <Compile Include="QueryResults\Analytics\ApiMemberApplicationResult.cs" />
     <Compile Include="QueryResults\Analytics\ClickHeatMapDataResult.cs" />
     <Compile Include="QueryResults\Analytics\ClickHeatMapItemResult.cs" />
