@@ -26,6 +26,12 @@ namespace AppReadyGo.API.Models.Analytics
         [JsonProperty(PropertyName = "cid")]
         public string ClientKey { get; set; }
 
+        [JsonProperty(PropertyName = "task")]
+        public int TaskId { get; set; }
+
+        [JsonProperty(PropertyName = "usr")]
+        public string Username { get; set; }
+
         [JsonProperty(PropertyName = "sh")]
         public int ScreenHeight { get; set; }
 
