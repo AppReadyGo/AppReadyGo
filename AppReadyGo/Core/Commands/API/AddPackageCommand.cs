@@ -9,6 +9,8 @@ namespace AppReadyGo.Core.Commands.API
     public class AddPackageCommand : ICommand<long>
     {
         public int ApplicationId { get; protected set; }
+        public int TaskId { get; protected set; }
+        public string Username { get; protected set; }
         public Location Location { get; protected set; }
         public string OS { get; protected set; }
         public string Browser { get; protected set; }
@@ -18,6 +20,8 @@ namespace AppReadyGo.Core.Commands.API
         public IEnumerable<Session> Sessions { get; protected set; }
 
         public AddPackageCommand(int appId, 
+            int taskId,
+            string username,
             Location location,
             string os, 
             string browser, 
@@ -27,6 +31,8 @@ namespace AppReadyGo.Core.Commands.API
             IEnumerable<Session> sessions)
         {
             this.ApplicationId = appId;
+            this.TaskId = taskId;
+            this.Username = username;
             this.Location = location;
             this.OS = os;
             this.Browser = browser;
@@ -53,10 +59,20 @@ namespace AppReadyGo.Core.Commands.API
                 yield return new ValidationResult(ErrorCode.WrongParameter, "ScreenHeight must to be positive and greate than zero");
             }
 
+            if (this.TaskId <= 0)
+            {
+                yield return new ValidationResult(ErrorCode.WrongParameter, "TaskId must to be positive and greate than zero");
+            }
+
             if (!validation.IsApplicationExists(this.ApplicationId))
             {
                 yield return new ValidationResult(ErrorCode.WrongParameter, string.Format("The application {0} does not exists in system", this.ApplicationId));
             }
+
+           /* if (!validation.IsApplicationExists(this.TaskId))
+            {
+                yield return new ValidationResult(ErrorCode.WrongParameter, string.Format("The task {0} does not exists in system", this.TaskId));
+            }*/
         }
 
         public IEnumerable<ValidationResult> ValidatePermissions(ISecurityContext security)
@@ -71,6 +87,10 @@ namespace AppReadyGo.Core.Commands.API
             public int ClientWidth { get; set; }
 
             public int ClientHeight { get; set; }
+
+            public int TaskId { get; set; }
+
+            public string Username { get; set; }
             /// <summary>
             /// Start this session date
             /// </summary>
