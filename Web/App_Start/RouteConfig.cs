@@ -154,6 +154,13 @@ namespace AppReadyGo.Web
             );
 
             routes.MapRoute(
+                "AnalyticsTask",
+                "Analytics/{action}/{id}/{taskId}",
+                new { controller = "Analytics", action = "Screen" },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
                 "Analytics",
                 "Analytics/{action}/{id}",
                 new { controller = "Analytics", action = "Index" },

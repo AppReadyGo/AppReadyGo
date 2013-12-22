@@ -13,6 +13,7 @@ using AppReadyGo.Core;
 using AppReadyGo.Core.Logger;
 using AppReadyGo.Core.Queries.Analytics;
 using AppReadyGo.Core.QueryResults.Analytics;
+using AppReadyGo.Model.Filter;
 using AppReadyGo.Model.Master;
 using AppReadyGo.Model.Pages.Analytics;
 using AppReadyGo.Model.Pages.Application;
@@ -56,11 +57,37 @@ namespace AppReadyGo.Controllers
             return View(model);
         }
 
-        public ActionResult Screen(int id)
+        public ActionResult Screen(int id, int taskId)
         {
-            var data = ObjectContainer.Instance.RunQuery(new AnalyticsScreenDataQuery(id));
-            var model = new AppReadyGo.Web.Model.Pages.Analytics.ScreenModel("");
-            return View("~/Views/Analytics/TouchMap.cshtml", model);
+            var data = ObjectContainer.Instance.RunQuery(new AnalyticsScreenDataQuery(taskId, id));
+            var model = new AppReadyGo.Web.Model.Pages.Analytics.ScreenModel(data.Path)
+            {
+                TaskInfo = new TaskDetailsModel
+                {
+                    Id = taskId,
+                    Description = data.TaskInfo.Description,
+                    Target = data.TaskInfo.GetTarget(),
+                    Status = data.TaskInfo.GetStatus(),
+                    Audence = data.TaskInfo.Audence,
+                    Published = data.TaskInfo.PublishDate.HasValue ? data.TaskInfo.PublishDate.Value.ToString() : string.Empty,
+                },
+                DateRange = data.TaskInfo.PublishDate.Value.ToString("dd MMM yyyy") + " - " + DateTime.UtcNow.ToString("dd MMM yyyy"),
+                Pathes = data.Pathes.OrderBy(p => p),
+                ScreenList = data.ScreenList,
+                Links = new AppReadyGo.Web.Model.Pages.Analytics.ScreenModel.LinkModel[0],
+                UrlPart = FilterModel.GetUrlPart(taskId, data.TaskInfo.ApplicationId, data.ScreenSize.ToFormatedString(), data.Path, data.TaskInfo.PublishDate.Value, DateTime.UtcNow) 
+            };
+            return View(model);
+        //            public int TaskId { get; set; }
+
+        //public DateTime FromDate { get; set;  }
+
+        //public DateTime ToDate { get; set; }
+
+        //public Size? ScreenSize { get; set; }
+
+        //public string Path { get; set; }
+
         }
 
         public ActionResult Dashboard(int id, FilterParametersModel filter)

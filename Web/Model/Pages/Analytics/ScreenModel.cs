@@ -17,7 +17,9 @@ namespace AppReadyGo.Web.Model.Pages.Analytics
 
         public int AvgScrolls { get; set; }
 
-        public IEnumerable<object> Links { get; set; }
+        public IEnumerable<LinkModel> Links { get; set; }
+
+        public string UrlPart { get; set; }
 
         public ScreenModel(string path)
             : base(path)
