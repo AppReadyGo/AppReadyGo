@@ -8,10 +8,13 @@ namespace AppReadyGo.Core.Queries.Analytics
 {
     public class AnalyticsScreenDataQuery : IQuery<AnalyticsScreenDataResult>
     {
+        public int TaskId { get; private set; }
+
         public int ScreenId { get; private set; }
 
-        public AnalyticsScreenDataQuery(int screenId)
+        public AnalyticsScreenDataQuery(int taskId, int screenId)
         {
+            this.TaskId = taskId;
             this.ScreenId = screenId;
         }
     }

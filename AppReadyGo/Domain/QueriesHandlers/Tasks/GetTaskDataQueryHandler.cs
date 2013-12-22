@@ -11,7 +11,7 @@ using AppReadyGo.Domain.Queries;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace AppReadyGo.Domain.QueriesHandlers.Task
+namespace AppReadyGo.Domain.QueriesHandlers.Tasks
 {
     public class GetTaskDataQueryHandler : IQueryHandler<GetTaskDataQuery, TaskDataResult>
     {

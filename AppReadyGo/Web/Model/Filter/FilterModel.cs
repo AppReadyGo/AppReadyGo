@@ -124,9 +124,9 @@ namespace AppReadyGo.Model.Filter
             }
         }
 
-        public string GetUrlPart(int applicationId, string screenSize, string path, DateTime dateFrom, DateTime dateTo)
+        public static string GetUrlPart(int taskId, int applicationId, string screenSize, string path, DateTime dateFrom, DateTime dateTo)
         {
-            var parts = new List<string>() { string.Format("aid={0}", applicationId) };
+            var parts = new List<string>() { string.Format("tid={0}&aid={1}", taskId, applicationId) };
             if (!string.IsNullOrEmpty(screenSize)) parts.Add(string.Format("ss={0}", screenSize));
 
             if (!string.IsNullOrEmpty(path)) parts.Add(string.Format("p={0}", HttpUtility.UrlEncode(path)));

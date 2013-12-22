@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using AppReadyGo.Core;
 using AppReadyGo.Core.Queries.Analytics;
 using AppReadyGo.Core.QueryResults.Analytics;
+using AppReadyGo.Core.QueryResults.Tasks;
+using AppReadyGo.Domain.Model;
 using AppReadyGo.Domain.Queries;
 using AppReadyGo.Model;
 using NHibernate;
@@ -26,28 +28,43 @@ namespace AppReadyGo.Domain.QueriesHandlers.Analytics
 
         public AnalyticsScreenDataResult Run(ISession session, AnalyticsScreenDataQuery query)
         {
-            //var res = session.Query<ViewPage>()
-            //                    .Where(t => t.Id == query.ScreenId)
-            //                    .Select(t => new TaskDashboardDataResult
-            //                    {
-            //                        TaskInfo = new TaskDetailsResult
-            //                        {
-            //                            Id = t.Id,
-            //                            AgeRange = t.AgeRange,
-            //                            Country = t.Country != null ? new System.Tuple<int, string>(t.Country.GeoId, t.Country.ISOCode) : null,
-            //                            CreatedDate = t.CreatedDate,
-            //                            Gender = t.Gender,
-            //                            Zip = t.Zip,
-            //                            PublishDate = t.PublishDate,
-            //                            Description = t.Description.Description,
-            //                            Audence = t.Audence,
-            //                            ApplicationId = t.Application.Id,
-            //                            ApplicationName = t.Application.Name
-            //                        },
-            //                        ApplicationType = t.Application.Type.Name
-            //                    })
-            //                    .Single();
+            var screen = session.Query<Screen>()
+                            .Where(s => s.Id == query.ScreenId)
+                            .Select(s => s)
+                            .Single();
+            var res = session.Query<AppReadyGo.Domain.Model.Task>()
+                                .Where(t => t.Id == query.TaskId)
+                                .Select(t => new AnalyticsScreenDataResult
+                                {
+                                    TaskInfo = new TaskDetailsResult
+                                    {
+                                        Id = t.Id,
+                                        AgeRange = t.AgeRange,
+                                        Country = t.Country != null ? new System.Tuple<int, string>(t.Country.GeoId, t.Country.ISOCode) : null,
+                                        CreatedDate = t.CreatedDate,
+                                        Gender = t.Gender,
+                                        Zip = t.Zip,
+                                        PublishDate = t.PublishDate,
+                                        Description = t.Description.Description,
+                                        Audence = t.Audence,
+                                        ApplicationId = t.Application.Id,
+                                        ApplicationName = t.Application.Name
+                                    }
+                                })
+                                .Single();
 
+            res.Path = screen.Path;
+
+            res.Pathes = session.Query<PageView>()
+                            .Where(pv => pv.Application.Id == res.TaskInfo.ApplicationId)
+                            .Select(pv => pv.Path)
+                            .Distinct()
+                            .ToArray();
+
+            res.ScreenList = session.Query<Screen>()
+                            .Where(s => s.Application.Id == res.TaskInfo.ApplicationId)
+                            .Select(s => new { s.Id, s.FileExtension })
+                            .ToDictionary(k => k.Id, v => v.FileExtension);
             //res.Downloads = session.Query<ApiMemberTask>().Where(x => x.Task.Id == query.TaskId).Count();
 
             //res.Pathes = session.Query<PageView>()
@@ -56,10 +73,6 @@ namespace AppReadyGo.Domain.QueriesHandlers.Analytics
             //                .Distinct()
             //                .ToArray();
 
-            //res.ScreenList = session.Query<Screen>()
-            //                .Where(s => s.Application.Id == res.TaskInfo.ApplicationId)
-            //                .Select(s => new { s.Id, s.FileExtension })
-            //                .ToDictionary(k => k.Id, v => v.FileExtension);
 
             //res.ClicksGraphData = session.Query<PageView>()
             //                .Where(pv => pv.Application.Id == res.TaskInfo.ApplicationId)
@@ -81,7 +94,7 @@ namespace AppReadyGo.Domain.QueriesHandlers.Analytics
             //                .ToArray()
             //                .GroupBy(x => x.Path)
             //                .ToDictionary(k => k.Key, v => v.Sum(x => x.Scrolls));
-            return null;
+            return res;
         }
     }
 }
