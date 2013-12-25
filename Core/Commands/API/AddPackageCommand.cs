@@ -10,7 +10,7 @@ namespace AppReadyGo.Core.Commands.API
     {
         public int ApplicationId { get; protected set; }
         public int TaskId { get; protected set; }
-        public string Username { get; protected set; }
+        public int UserId { get; protected set; }
         public Location Location { get; protected set; }
         public string OS { get; protected set; }
         public string Browser { get; protected set; }
@@ -21,7 +21,7 @@ namespace AppReadyGo.Core.Commands.API
 
         public AddPackageCommand(int appId, 
             int taskId,
-            string username,
+            int userId,
             Location location,
             string os, 
             string browser, 
@@ -32,7 +32,7 @@ namespace AppReadyGo.Core.Commands.API
         {
             this.ApplicationId = appId;
             this.TaskId = taskId;
-            this.Username = username;
+            this.UserId = userId;
             this.Location = location;
             this.OS = os;
             this.Browser = browser;
@@ -90,7 +90,7 @@ namespace AppReadyGo.Core.Commands.API
 
             public int TaskId { get; set; }
 
-            public string Username { get; set; }
+            public int UserId { get; set; }
             /// <summary>
             /// Start this session date
             /// </summary>
