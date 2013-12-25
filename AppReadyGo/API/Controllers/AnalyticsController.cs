@@ -119,7 +119,7 @@ namespace AppReadyGo.API.Controllers
                 var res = ObjectContainer.Instance.Dispatch(new AddPackageCommand(
                     appId,
                     data.TaskId,
-                    data.Username,
+                    data.UserID,
                     location,
                     data.SystemInfo.RealVersionName,
                     null,

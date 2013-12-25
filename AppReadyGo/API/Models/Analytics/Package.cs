@@ -30,7 +30,7 @@ namespace AppReadyGo.API.Models.Analytics
         public int TaskId { get; set; }
 
         [JsonProperty(PropertyName = "usr")]
-        public string Username { get; set; }
+        public int UserID { get; set; }
 
         [JsonProperty(PropertyName = "sh")]
         public int ScreenHeight { get; set; }
