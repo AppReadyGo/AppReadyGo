@@ -20,7 +20,7 @@ namespace AppReadyGo.Domain.CommandHandlers.API
 
             foreach (var item in cmd.Sessions)
             {
-                var pageView = new PageView(application, DateTime.UtcNow, item.Path, null, null, null, null, operationSystem, null, cmd.ScreenWidth, cmd.ScreenHeight, item.ClientWidth, item.ClientHeight);
+                var pageView = new PageView(application, DateTime.UtcNow, item.Path, null, null, null, null, operationSystem, null, cmd.ScreenWidth, cmd.ScreenHeight, item.ClientWidth, item.ClientHeight, cmd.TaskId, cmd.UserId);
                 var clicks = item.Clicks.Select(c => new Click(
                     pageView,
                     c.Date,

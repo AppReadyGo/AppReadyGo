@@ -11,7 +11,9 @@
     [ScreenHeight]      INT            NOT NULL,
     [ClientWidth]       INT            NOT NULL,
     [ClientHeight]      INT            NOT NULL,
-    [ApplicationID]     INT            NOT NULL
+    [ApplicationID]     INT            NOT NULL, 
+    [TaskID] INT NULL, 
+    [UserID] INT NULL
 );
 GO
 

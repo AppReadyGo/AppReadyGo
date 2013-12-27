@@ -47,6 +47,9 @@ namespace AppReadyGo.Domain.Mapping
             Property(p => p.ScreenHeight, map => map.NotNullable(true));
             Property(p => p.ClientWidth, map => map.NotNullable(true));
             Property(p => p.ClientHeight, map => map.NotNullable(true));
+            Property(p => p.TaskId, map => map.NotNullable(false));
+            Property(p => p.UserId, map => map.NotNullable(false));
+
             ManyToOne(p => p.Application, map =>
             {
                 map.NotNullable(true);
