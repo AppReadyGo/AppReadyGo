@@ -51,6 +51,9 @@ namespace AppReadyGo.Domain.Model
 
         public virtual int ClientHeight { get; protected set; }
 
+        public virtual int TaskId { get; protected set; }
+        public virtual int UserId { get; protected set; }
+
         public virtual Application Application { get; protected set; }
 
         public virtual IEnumerable<Click> Clicks { get { return clicks; } }
@@ -82,7 +85,9 @@ namespace AppReadyGo.Domain.Model
             int screenWidth, 
             int screenHeight,
             int clientWidth,
-            int clientHeight)
+            int clientHeight,
+            int taskId,
+            int userId)
             : this()
         {
             this.Date = date;
@@ -96,6 +101,8 @@ namespace AppReadyGo.Domain.Model
             this.ScreenWidth = screenWidth;
             this.ScreenHeight = screenHeight;
             this.Application = application;
+            this.TaskId = taskId;
+            this.UserId = userId;
         }
 
         public virtual void AddClick(Click click)

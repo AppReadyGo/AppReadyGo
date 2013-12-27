@@ -64,6 +64,12 @@ namespace AppReadyGo.Core.Commands.API
                 yield return new ValidationResult(ErrorCode.WrongParameter, "TaskId must to be positive and greate than zero");
             }
 
+            if (this.UserId <= 0)
+            {
+                yield return new ValidationResult(ErrorCode.WrongParameter, "UserId must to be positive and greate than zero");
+            }
+
+
             if (!validation.IsApplicationExists(this.ApplicationId))
             {
                 yield return new ValidationResult(ErrorCode.WrongParameter, string.Format("The application {0} does not exists in system", this.ApplicationId));
@@ -88,9 +94,6 @@ namespace AppReadyGo.Core.Commands.API
 
             public int ClientHeight { get; set; }
 
-            public int TaskId { get; set; }
-
-            public int UserId { get; set; }
             /// <summary>
             /// Start this session date
             /// </summary>
