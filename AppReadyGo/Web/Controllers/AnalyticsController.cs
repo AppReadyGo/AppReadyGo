@@ -29,7 +29,7 @@ namespace AppReadyGo.Controllers
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public ActionResult Index(int id/*, FilterParametersModel filter*/)
+        public ActionResult Index(int id)
         {
             var data = ObjectContainer.Instance.RunQuery(new TaskDashboardDataQuery(id));
             IndexModel model = new IndexModel
@@ -43,6 +43,8 @@ namespace AppReadyGo.Controllers
                     Audence = data.TaskInfo.Audence,
                     Published = data.TaskInfo.PublishDate.HasValue ? data.TaskInfo.PublishDate.Value.ToString() : string.Empty,
                 },
+                Downloads = data.Downloads,
+                Devices = data.Devices,
                 ApplicationName = data.TaskInfo.ApplicationName,
                 ApplicationType = data.ApplicationType,
                 DateRange = data.TaskInfo.PublishDate.Value.ToString("dd MMM yyyy") + " - " + DateTime.UtcNow.ToString("dd MMM yyyy"),
@@ -52,9 +54,6 @@ namespace AppReadyGo.Controllers
                 ViewsGraphData = data.ViewsGraphData.Count > 4 ? data.ViewsGraphData.OrderByDescending(x => x.Value).Take(4).ToArray() : data.ViewsGraphData.ToArray(),
                 ScrollsGraphData = data.ScrollsGraphData.Count > 4 ? data.ScrollsGraphData.OrderByDescending(x => x.Value).Take(4).ToArray() : data.ScrollsGraphData.ToArray(),
             };
-            if (ModelState.IsValid)
-            {
-            }
             return View(model);
         }
 

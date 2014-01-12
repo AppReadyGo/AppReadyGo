@@ -89,6 +89,17 @@ namespace AppReadyGo.Domain.Queries.Analytics
                             .ToArray()
                             .GroupBy(x => x.Path)
                             .ToDictionary(k => k.Key, v => v.Sum(x => x.Scrolls));
+
+            res.Downloads = session.Query<ApiMemberTask>()
+                                .Where(a => a.Task.Id == res.TaskInfo.Id)
+                                .Select(a => a)
+                                .Count();
+
+            res.Devices = session.Query<PageView>()
+                                .Where(pv => pv.Application.Id == res.TaskInfo.ApplicationId)
+                                .Select(pv => pv.OperationSystem)
+                                .Distinct()
+                                .Count();
             return res;
         }
     }
