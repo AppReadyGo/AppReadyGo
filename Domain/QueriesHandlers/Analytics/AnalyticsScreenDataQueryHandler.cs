@@ -95,25 +95,25 @@ namespace AppReadyGo.Domain.QueriesHandlers.Analytics
                             .Select(p => p)
                             .Count();
 
-            res.AvgClicks = session.Query<Click>()
+            var clicks = session.Query<Click>()
                                 .Where(p => p.PageView.Application.Id == res.TaskInfo.ApplicationId &&
                                     p.PageView.Path.ToLower() == query.Path.ToLower() &&
                                     p.PageView.ScreenWidth == res.ScreenSize.Width &&
                                     p.PageView.ScreenHeight == res.ScreenSize.Height)
                                 .Select(c => c.PageView.Id)
-                                .ToArray()
-                                .GroupBy(x => x)
-                                .Average(x => x.Count());
+                                .ToArray();
 
-            res.AvgScrolls = session.Query<Scroll>()
+            res.AvgClicks = clicks.Any() ? clicks.GroupBy(x => x).Average(x => x.Count()) : 0;
+
+            var scrolls = session.Query<Scroll>()
                                 .Where(p => p.PageView.Application.Id == res.TaskInfo.ApplicationId &&
                                     p.PageView.Path.ToLower() == query.Path.ToLower() &&
                                     p.PageView.ScreenWidth == res.ScreenSize.Width &&
                                     p.PageView.ScreenHeight == res.ScreenSize.Height)
                                 .Select(c => c.PageView.Id)
-                                .ToArray()
-                                .GroupBy(x => x)
-                                .Average(x => x.Count());
+                                .ToArray();
+
+            res.AvgScrolls = scrolls.Any() ? scrolls.GroupBy(x => x).Average(x => x.Count()) : 0;
 
             res.Devices = session.Query<PageView>()
                             .Where(p => p.Application.Id == res.TaskInfo.ApplicationId &&
