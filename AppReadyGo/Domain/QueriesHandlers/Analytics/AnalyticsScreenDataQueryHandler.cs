@@ -28,10 +28,6 @@ namespace AppReadyGo.Domain.QueriesHandlers.Analytics
 
         public AnalyticsScreenDataResult Run(ISession session, AnalyticsScreenDataQuery query)
         {
-            var screen = session.Query<Screen>()
-                            .Where(s => s.Id == query.ScreenId)
-                            .Select(s => s)
-                            .Single();
             var res = session.Query<AppReadyGo.Domain.Model.Task>()
                                 .Where(t => t.Id == query.TaskId)
                                 .Select(t => new AnalyticsScreenDataResult
@@ -49,11 +45,41 @@ namespace AppReadyGo.Domain.QueriesHandlers.Analytics
                                         Audence = t.Audence,
                                         ApplicationId = t.Application.Id,
                                         ApplicationName = t.Application.Name
-                                    }
+                                    },
+                                    ApplicationType = t.Application.Type.Name
                                 })
                                 .Single();
 
-            res.Path = screen.Path;
+            res.Path = query.Path;
+
+            res.ScreenList = session.Query<Screen>()
+                            .Where(s => s.Application.Id == res.TaskInfo.ApplicationId && s.Path.ToLower() == query.Path.ToLower())
+                            .Select(s => new ScreenResult
+                            {
+                                Id = s.Id,
+                                ApplicationId = s.Application.Id,
+                                FileExtension = s.FileExtension,
+                                Height = s.Height,
+                                Path = s.Path,
+                                Width = s.Width
+                            })
+                            .ToArray();
+
+
+            if (query.ScreenId.HasValue)
+            {
+                var screen = res.ScreenList.Single(x => x.Id == query.ScreenId.Value);
+                res.ScreenSize = screen.Size;
+            }
+            else
+            {
+
+                res.ScreenSize = session.Query<PageView>()
+                                .Where(pv => pv.Application.Id == res.TaskInfo.ApplicationId)
+                                .Select(pv => new System.Drawing.Size(pv.ScreenWidth, pv.ScreenHeight))
+                                .First();
+            }
+
 
             res.Pathes = session.Query<PageView>()
                             .Where(pv => pv.Application.Id == res.TaskInfo.ApplicationId)
@@ -61,10 +87,43 @@ namespace AppReadyGo.Domain.QueriesHandlers.Analytics
                             .Distinct()
                             .ToArray();
 
-            res.ScreenList = session.Query<Screen>()
-                            .Where(s => s.Application.Id == res.TaskInfo.ApplicationId)
-                            .Select(s => new { s.Id, s.FileExtension })
-                            .ToDictionary(k => k.Id, v => v.FileExtension);
+            res.Views = session.Query<PageView>()
+                            .Where(p => p.Application.Id == res.TaskInfo.ApplicationId &&
+                                p.Path.ToLower() == query.Path.ToLower() &&
+                                p.ScreenWidth == res.ScreenSize.Width &&
+                                p.ScreenHeight == res.ScreenSize.Height)
+                            .Select(p => p)
+                            .Count();
+
+            res.AvgClicks = session.Query<Click>()
+                                .Where(p => p.PageView.Application.Id == res.TaskInfo.ApplicationId &&
+                                    p.PageView.Path.ToLower() == query.Path.ToLower() &&
+                                    p.PageView.ScreenWidth == res.ScreenSize.Width &&
+                                    p.PageView.ScreenHeight == res.ScreenSize.Height)
+                                .Select(c => c.PageView.Id)
+                                .ToArray()
+                                .GroupBy(x => x)
+                                .Average(x => x.Count());
+
+            res.AvgScrolls = session.Query<Scroll>()
+                                .Where(p => p.PageView.Application.Id == res.TaskInfo.ApplicationId &&
+                                    p.PageView.Path.ToLower() == query.Path.ToLower() &&
+                                    p.PageView.ScreenWidth == res.ScreenSize.Width &&
+                                    p.PageView.ScreenHeight == res.ScreenSize.Height)
+                                .Select(c => c.PageView.Id)
+                                .ToArray()
+                                .GroupBy(x => x)
+                                .Average(x => x.Count());
+
+            res.Devices = session.Query<PageView>()
+                            .Where(p => p.Application.Id == res.TaskInfo.ApplicationId &&
+                                p.Path.ToLower() == query.Path.ToLower() &&
+                                p.ScreenWidth == res.ScreenSize.Width &&
+                                p.ScreenHeight == res.ScreenSize.Height)
+                            .Select(p => p.OperationSystem)
+                            .Distinct()
+                            .Count();
+
             //res.Downloads = session.Query<ApiMemberTask>().Where(x => x.Task.Id == query.TaskId).Count();
 
             //res.Pathes = session.Query<PageView>()

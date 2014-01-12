@@ -25,36 +25,45 @@ namespace AppReadyGo.Domain.Queries
         public HeatMapDataResult Run(ISession session, HeatMapDataQuery query)
         {
             var result = new HeatMapDataResult();
+            string path = query.Path;
 
-            result.Screen = session.Query<Screen>()
-                    .Where(s => s.Application.Id == query.AplicationId &&
-                                s.Path.ToLower() == query.Path.ToLower() &&
-                                s.Width == query.ScreenSize.Width &&
-                                s.Height == query.ScreenSize.Height)
-                    .Select(s => new ScreenResult
-                    {
-                        Id = s.Id,
-                        Path = s.Path,
-                        ApplicationId = s.Application.Id,
-                        Height = s.Height,
-                        Width = s.Width,
-                        FileExtension = s.FileExtension
-                    })
-                    .FirstOrDefault();
+            int appId = session.Query<Task>()
+                            .Where(t => t.Id == query.TaskId)
+                            .Select(t => t.Application.Id)
+                            .Single();
+
+            if (query.ScreenId.HasValue)
+            {
+                result.Screen = session.Query<Screen>()
+                                    .Where(s => s.Id == query.ScreenId.Value)
+                                    .Select(s => new ScreenResult
+                                    {
+                                        Id = s.Id,
+                                        Path = s.Path,
+                                        ApplicationId = s.Application.Id,
+                                        Height = s.Height,
+                                        Width = s.Width,
+                                        FileExtension = s.FileExtension
+                                    })
+                                    .FirstOrDefault();
+
+                result.ScreenSize = result.Screen.Size;
+                path = result.Screen.Path;
+            }
+            else
+            {
+                result.ScreenSize = new System.Drawing.Size(query.Width.Value, query.Height.Value);
+            }
 
 
             ViewPart viewPart = null;
-            Model.Application application = null;
             ViewPartData viewPartData = null;
             result.Data = session.QueryOver<PageView>()
                 .JoinAlias(p => p.ViewParts, () => viewPart)
-                .JoinAlias(p => p.Application, () => application)
-                .Where(p => application.Id == query.AplicationId &&
-                            p.Path == query.Path &&
-                            p.ScreenWidth == query.ScreenSize.Width &&
-                            p.ScreenHeight == query.ScreenSize.Height &&
-                            p.Date >= query.FromDate &&
-                            p.Date <= query.ToDate)
+                .Where(p => p.Application.Id == appId &&
+                            p.Path == path &&
+                            p.ScreenWidth == result.ScreenSize.Width &&
+                            p.ScreenHeight == result.ScreenSize.Height)
                 .SelectList(list => list
                 .Select(p => p.ScreenWidth).WithAlias(() => viewPartData.ScreenWidth)
                 .Select(p => p.ScreenHeight).WithAlias(() => viewPartData.ScreenHeight)

@@ -211,8 +211,9 @@ aside.widgets article p label{float:left;width:70px;}
 
 div.content section{margin-left:280px}
 div.content section header span,
-div.content section header a{background-color:#727D74;padding:7px 7px 8px;text-align:center;line-height:1.3em;font-size:14px;color: white;width:100px;display:inline-block;}
-div.content section header span.sel{}
+div.content section header a{background-color:#727D74;padding:7px 18px 8px;text-align:center;line-height:1.3em;font-size:14px;color: white;display:inline-block;border-right:1px solid #F2F2F2;cursor:pointer;}
+div.content section header span.sel,
+div.content section header a.sel{background-color:#808a82;cursor:default;}
 div.content section header label{line-height:33px;font-size:15px;margin-left:30px;}
 div.content section article{padding:10px;border:1px solid grey;margin-bottom:20px;overflow:auto;margin-right: 10px;}
 div.content section article.screens img{width:100px;margin: 5px;}
@@ -222,5 +223,11 @@ div.content article .graph-wrapper{margin-left:240px;overflow:auto;}
 div.content article .graph-wrapper label{float:left;width:120px;padding-top:66px;}
 div.content article .graph-wrapper > div{}
 div.content article .graph-wrapper > div > div{margin-left:120px;width: 450px;height: 100px;position:relative;}
+
+div.content section section{margin-left:0px}
+div.content section.analytics{float:right;width:360px;margin-left:10px;}
+div.content section .images img{display:none;}
+div.content section .images img.sel{display:block;}
+
 
 

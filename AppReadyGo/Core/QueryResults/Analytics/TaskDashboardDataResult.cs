@@ -30,7 +30,7 @@ namespace AppReadyGo.Core.QueryResults.Analytics
 
         public IEnumerable<string> Pathes { get; set; }
 
-        public Dictionary<int, string> ScreenList { get; set; }
+        public IEnumerable<ScreenResult> ScreenList { get; set; }
 
         //public IDictionary<int, string> Screens { get; set; }
 

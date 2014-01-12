@@ -9,19 +9,19 @@ namespace AppReadyGo.Core.Queries.Analytics
 {
     public class ClickHeatMapDataQuery : IQuery<ClickHeatMapDataResult>
     {
-        public long AplicationId { get; private set; }
+        public int TaskId { get; set; }
         public string Path { get; private set; }
-        public Size ScreenSize { get; private set; }
-        public DateTime FromDate { get; private set; }
-        public DateTime ToDate { get; private set; }
+        public int? ScreenId { get; set; }
+        public int? Width { get; set; }
+        public int? Height { get; set; }
 
-        public ClickHeatMapDataQuery(long appId, string path, Size screenSize, DateTime fromDate, DateTime toDate)
+        public ClickHeatMapDataQuery(int taskId, string path, int? screenId = null, int? width = null, int? height = null)
         {
-            this.AplicationId = appId;
+            this.TaskId = taskId;
             this.Path = path;
-            this.ScreenSize = screenSize;
-            this.FromDate = fromDate.StartDay();
-            this.ToDate = toDate.EndDay();
+            this.ScreenId = screenId;
+            this.Width = width;
+            this.Height = height;
         }
     }
 }

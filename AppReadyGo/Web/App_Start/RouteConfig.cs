@@ -97,6 +97,47 @@ namespace AppReadyGo.Web
                 new[] { "AppReadyGo.Controllers" } // Namespaces
             );
 
+            routes.MapRoute(
+                "Screen analytics",
+                "Analytics/{taskId}/Screen/{path}/{screenId}",
+                new { controller = "Analytics", action = "Screen", screenId = UrlParameter.Optional },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
+                "Touch Map By Screen",
+                "Analytics/{taskId}/TouchMap/{screenId}",
+                new { controller = "Analytics", action = "ScreenTouchMap" },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
+                "Touch Map By Size",
+                "Analytics/{taskId}/TouchMap/{path}/{width}/{height}",
+                new { controller = "Analytics", action = "TouchMap" },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
+                "Eye Track By Screen",
+                "Analytics/{taskId}/EyeTrack/{screenId}",
+                new { controller = "Analytics", action = "ScreenEyeTrack" },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
+                "Eye Track By Size",
+                "Analytics/{taskId}/EyeTrack/{path}/{width}/{height}",
+                new { controller = "Analytics", action = "EyeTrack" },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
+                "Original",
+                "Analytics/Original/{screenId}",
+                new { controller = "Analytics", action = "Original" },
+                new[] { "AppReadyGo.Controllers" } // Namespaces
+            );
 
             //routes.MapRoute(
             //    "ApplicationScreen",

@@ -28,7 +28,9 @@ namespace AppReadyGo.Core.QueryResults.Analytics
 
         public IEnumerable<string> Pathes { get; set; }
 
-        public Dictionary<int, string> ScreenList { get; set; }
+        public IEnumerable<ScreenResult> ScreenList { get; set; }
+
+        public string ApplicationType { get; set; }
 
         public Size ScreenSize { get; set; }
 

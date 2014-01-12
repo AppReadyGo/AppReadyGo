@@ -11,15 +11,17 @@ namespace AppReadyGo.Web.Model.Pages.Analytics
 
         public int Devices { get; set; }
 
-        public int AvgDuration { get; set; }
+        public double AvgDuration { get; set; }
 
-        public int AvgClicks { get; set; }
+        public double AvgClicks { get; set; }
 
-        public int AvgScrolls { get; set; }
+        public double AvgScrolls { get; set; }
 
         public IEnumerable<LinkModel> Links { get; set; }
 
         public string UrlPart { get; set; }
+
+        public int? ScreenId { get; set; }
 
         public ScreenModel(string path)
             : base(path)
