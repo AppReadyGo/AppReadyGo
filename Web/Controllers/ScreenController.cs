@@ -24,14 +24,14 @@ namespace AppReadyGo.Web.Controllers
         {
             var screen = ObjectContainer.Instance.RunQuery(new GetScreenDetailsQuery(id));
 
-            var dir = Server.MapPath(string.Format("~/Restricted/Screens/{0}{1}", screen.Id, screen.FileExtention));
+            var dir = Server.MapPath(string.Format("~/Restricted/Screens/{0}{1}", screen.Id, screen.FileExtension));
             if (System.IO.File.Exists(dir))
             {
-                return new FileContentResult(System.IO.File.ReadAllBytes(dir), "image/" + screen.FileExtention.Replace(".", "")); ;
+                return new FileContentResult(System.IO.File.ReadAllBytes(dir), "image/" + screen.FileExtension.Replace(".", "")); ;
             }
             else
             {
-                throw new HttpException(404, "Not found");
+                throw new HttpException(404, "Image Not found");
             }
         }
 
@@ -212,7 +212,7 @@ namespace AppReadyGo.Web.Controllers
             else
             {
                 ObjectContainer.Instance.Dispatch(new RemoveScreenCommand(id));
-                var path = Path.Combine(Server.MapPath("~/Restricted/Screens/"), screen.Id + screen.FileExtention);
+                var path = Path.Combine(Server.MapPath("~/Restricted/Screens/"), screen.Id + screen.FileExtension);
                 System.IO.File.Delete(path);
             }
             return RedirectToAction("", new { appId = screen.ApplicationId });

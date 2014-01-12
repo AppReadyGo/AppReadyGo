@@ -6,7 +6,32 @@
 @section title { Task Analytics }
 @section header 
 {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var btns = $('.analytics header span');
+            var imgs = $('.analytics img');
+            btns.click(function () {
+                btns.removeClass('sel');
+                imgs.removeClass('sel');
+                $(this).addClass('sel');
+                $(imgs[$(this).index()]).addClass('sel');
+            });
+        });
+    </script>
 }
+<section class="analytics">
+    <header>
+        <span class="sel">TouchMap</span><span>EyeTrack</span>@if(Model.ScreenId.HasValue){<span>Original</span>}
+    </header>
+    <article class="images">
+        <img class="sel" id="touch_map" width="320" src="/Analytics/@Model.TaskInfo.Id/TouchMap/@Model.UrlPart" />
+        <img id="eye_track" width="320" src="/Analytics/@Model.TaskInfo.Id/EyeTrack/@Model.UrlPart" />
+        @if(Model.ScreenId.HasValue)
+        {
+            <img id="original" width="320" src="/Analytics/Original/@Model.ScreenId" />
+        }
+    </article>
+</section>
 <section>
     <header>Overview</header>
     <article>
@@ -26,18 +51,7 @@
         }
     </article>
 </section>
-<section>
-    <header>
-        <span class="sel">TouchMap</span>
-        <span>EyeTrack</span>
-        <span>Original</span>
-    </header>
-    <article>
-        <img id="touch_map" width="320" src="/Analytics/ClickHeatMapImage/@Model.UrlPart" />
-        <img id="eye_track" width="320" src="/Analytics/ViewHeatMapImage/@Model.UrlPart" />
-        <img id="original" width="320" src="/Analytics/ViewHeatMapImage/@Model.UrlPart" />
-    </article>
-</section>
+
 
 
 

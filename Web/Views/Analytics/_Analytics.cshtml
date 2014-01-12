@@ -36,7 +36,7 @@
         <article>
             @foreach (var p in Model.Pathes)
             {
-                <p><a href="@p">@p</a></p>
+                <p><a href="/Analytics/@Model.TaskInfo.Id/Screen/@Url.Encode(p.Key)/@(p.Value == 0 ? string.Empty : p.Value.ToString())">@p.Key</a></p>
             }
         </article>
     </section>
@@ -44,18 +44,7 @@
 <div class="content">
     <section>
         <header>
-            @if(Model.Tab == AnalyticsModel.Tabs.Task)
-            {
-                <span class="sel">Task</span>
-            }
-            else
-            {
-                <a href="/Analytics/@Model.TaskInfo.Id">Task</a>
-            }
-            @if(!string.IsNullOrEmpty(Model.CustomTab))
-            {
-                <span class="sel">@Model.CustomTab</span>
-            }
+            @if(Model.Tab == AnalyticsModel.Tabs.Task){<span class="sel">Task</span>}else{<a href="/Analytics/@Model.TaskInfo.Id">Task</a>}@if(!string.IsNullOrEmpty(Model.CustomTab)){<span class="sel">@Model.CustomTab</span>}
             @*<span>Reviews</span><span>Tips</span>*@
             <label>@Model.DateRange</label>
         </header>
@@ -66,7 +55,7 @@
         <article class="screens">
             @foreach(var screen in Model.ScreenList)
             {
-                <img src="/Screens/@screen.Key@screen.Value" />
+                <a href="/Analytics/@Model.TaskInfo.Id/Screen/@Url.Encode(screen.Path)/@screen.Id"><img src="/Application/@screen.ApplicationId/screen/image/@screen.Id" /></a>
             }
         </article>
     </section>

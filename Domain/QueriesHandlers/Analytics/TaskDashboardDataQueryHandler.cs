@@ -58,8 +58,16 @@ namespace AppReadyGo.Domain.Queries.Analytics
 
             res.ScreenList = session.Query<Screen>()
                             .Where(s => s.Application.Id == res.TaskInfo.ApplicationId)
-                            .Select(s => new { s.Id, s.FileExtension })
-                            .ToDictionary(k => k.Id, v => v.FileExtension);
+                            .Select(s => new ScreenResult
+                            { 
+                                Id = s.Id, 
+                                ApplicationId = s.Application.Id,
+                                FileExtension = s.FileExtension,
+                                Height = s.Height,
+                                Path = s.Path,
+                                Width = s.Width
+                            })
+                            .ToArray();
 
             res.ClicksGraphData = session.Query<PageView>()
                             .Where(pv => pv.Application.Id == res.TaskInfo.ApplicationId)

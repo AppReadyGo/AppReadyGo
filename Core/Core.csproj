@@ -248,7 +248,6 @@
     <Compile Include="QueryResults\Applications\ScreenDataItemResult.cs" />
     <Compile Include="QueryResults\Applications\ScreenDataResult.cs" />
     <Compile Include="QueryResults\Applications\ScreenDetailsDataResult.cs" />
-    <Compile Include="QueryResults\Applications\ScreenDetailsResult.cs" />
     <Compile Include="QueryResults\Applications\ScreensDataResult.cs" />
     <Compile Include="QueryResults\Content\ItemResult.cs" />
     <Compile Include="QueryResults\Content\KeyResult.cs" />

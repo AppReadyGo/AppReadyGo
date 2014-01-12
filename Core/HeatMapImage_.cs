@@ -258,7 +258,7 @@ namespace AppReadyGo.Models
             return bmpPic;
         }
 
-        public static Image CreateEmpityBackground(string title, int width, int height, Image bgImg = null)
+        public static Image CreateEmpityBackground(string title, int width, int height, Image bgImg = null, float opacity = 0.3F)
         {
             Image nImgPic = bgImg == null ? new Bitmap(width, height) : bgImg;
             using (Graphics g = Graphics.FromImage(nImgPic))
@@ -275,8 +275,8 @@ namespace AppReadyGo.Models
                 //int diagonal = (int)Math.Sqrt(width * width + hight * hight);
                 //RotateText(g, new Font(FontFamily.GenericSerif, 20, FontStyle.Bold), "NO IMAGE", -45, new SolidBrush(Color.Black), 100, 100);
             }
-            
-            var opacBmp = SetImgOpacity((Image)nImgPic, 0.3F);
+
+            var opacBmp = SetImgOpacity((Image)nImgPic, opacity);
 
             Bitmap bmpPic = new Bitmap(width, height);
             using (Graphics g = Graphics.FromImage(bmpPic))

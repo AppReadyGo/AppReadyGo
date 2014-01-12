@@ -23,29 +23,41 @@ namespace AppReadyGo.Domain.Queries
         public ClickHeatMapDataResult Run(ISession session, ClickHeatMapDataQuery query)
         {
             var result = new ClickHeatMapDataResult();
-            result.Screen = session.Query<Screen>()
-                                .Where(s => s.Application.Id == query.AplicationId &&
-                                            s.Path.ToLower() == query.Path.ToLower() &&
-                                            s.Width == query.ScreenSize.Width &&
-                                            s.Height == query.ScreenSize.Height)
-                                .Select(s => new ScreenResult 
-                                {
-                                    Id = s.Id,
-                                    Path = s.Path,
-                                    ApplicationId = s.Application.Id,
-                                    Height = s.Height,
-                                    Width = s.Width,
-                                    FileExtension = s.FileExtension
-                                })
-                                .FirstOrDefault();
+            string path = query.Path;
+
+            int appId = session.Query<Task>()
+                            .Where(t => t.Id == query.TaskId)
+                            .Select(t => t.Application.Id)
+                            .Single();
+
+            if (query.ScreenId.HasValue)
+            {
+                result.Screen = session.Query<Screen>()
+                                    .Where(s => s.Id == query.ScreenId.Value)
+                                    .Select(s => new ScreenResult
+                                    {
+                                        Id = s.Id,
+                                        Path = s.Path,
+                                        ApplicationId = s.Application.Id,
+                                        Height = s.Height,
+                                        Width = s.Width,
+                                        FileExtension = s.FileExtension
+                                    })
+                                    .FirstOrDefault();
+
+                result.ScreenSize = result.Screen.Size;
+                path = result.Screen.Path;
+            }
+            else
+            {
+                result.ScreenSize = new System.Drawing.Size(query.Width.Value, query.Height.Value);
+            }
 
             result.Data = session.Query<PageView>()
-                    .Where(p => p.Application.Id == query.AplicationId &&
-                                p.Path.ToLower() == query.Path.ToLower() &&
-                                p.ScreenWidth == query.ScreenSize.Width &&
-                                p.ScreenHeight == query.ScreenSize.Height &&
-                                p.Date >= query.FromDate &&
-                                p.Date <= query.ToDate)
+                    .Where(p => p.Application.Id == appId &&
+                                p.Path.ToLower() == path.ToLower() &&
+                                p.ScreenWidth == result.ScreenSize.Width &&
+                                p.ScreenHeight == result.ScreenSize.Height)
                     .SelectMany(p => p.Clicks)
                     .GroupBy(c => new { X = c.X, Y = c.Y })
                     .Select(c => new ClickHeatMapItemResult { ClientX = c.Key.X, ClientY = c.Key.Y, Count = c.Count() })

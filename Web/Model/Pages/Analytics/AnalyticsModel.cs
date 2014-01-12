@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using AppReadyGo.Core.QueryResults.Analytics;
 using AppReadyGo.Model.Master;
 using AppReadyGo.Model.Pages.Application;
 using AppReadyGo.Web.Model.Pages.Application;
@@ -20,9 +21,9 @@ namespace AppReadyGo.Web.Model.Pages.Analytics
 
         public string ApplicationContent { get; set; }
 
-        public IEnumerable<string> Pathes { get; set; }
+        public IDictionary<string, int> Pathes { get; set; }
 
-        public IDictionary<int, string> ScreenList { get; set; }
+        public IEnumerable<ScreenResult> ScreenList { get; set; }
 
         public string DateRange { get; set; }
 
@@ -47,7 +48,8 @@ namespace AppReadyGo.Web.Model.Pages.Analytics
             Task,
             Analytics,
             Reviews,
-            Tips
+            Tips,
+            CustomTab
         }
     }
 }
