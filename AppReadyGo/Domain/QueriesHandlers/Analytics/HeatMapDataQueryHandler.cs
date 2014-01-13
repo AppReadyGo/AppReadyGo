@@ -61,7 +61,7 @@ namespace AppReadyGo.Domain.Queries
             result.Data = session.QueryOver<PageView>()
                 .JoinAlias(p => p.ViewParts, () => viewPart)
                 .Where(p => p.Application.Id == appId &&
-                            p.Path == path &&
+                            p.Path == path &&   
                             p.ScreenWidth == result.ScreenSize.Width &&
                             p.ScreenHeight == result.ScreenSize.Height)
                 .SelectList(list => list
