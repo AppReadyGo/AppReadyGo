@@ -1,4 +1,5 @@
 ﻿@using AppReadyGo.Helpers;
+@using AppReadyGo.Core
 @using AppReadyGo.Model.Pages.Home
 @using AppReadyGo.Model
 @using AppReadyGo.Web.Model.Pages.Analytics
@@ -32,7 +33,7 @@
         </article>
     </section>
     <section>
-        <header>Pathes</header>
+        <header>Screens</header>
         <article>
             @foreach (var p in Model.Pathes)
             {
@@ -51,11 +52,15 @@
         <article>@RenderBody()</article>
     </section>
     <section>
-        <header><span>Screens</span></header>
+        <header><span>Views</span></header>
         <article class="screens">
             @foreach(var screen in Model.ScreenList)
             {
-                <a href="/Analytics/@Model.TaskInfo.Id/Screen/@Url.Encode(screen.Path)/@screen.Id"><img src="/Application/@screen.ApplicationId/screen/image/@screen.Id" /></a>
+                <a href="/Analytics/@Model.TaskInfo.Id/Screen/@Url.Encode(screen.Path)/@screen.Id">
+                    <img src="/Application/@screen.ApplicationId/screen/image/@screen.Id" />
+                    <span>@screen.Path</span>
+                    <span>@screen.Size.ToFormatedString()</span>
+                </a>
             }
         </article>
     </section>

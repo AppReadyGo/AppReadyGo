@@ -4,10 +4,7 @@
     Layout = "~/Views/Shared/_AfterLogin.cshtml";
 }
 @section title { Portfolios }
-@section header 
-{
-    <link href="@Html.Content("~/Content/shared/bredcrumbs.css")" rel="stylesheet" type="text/css" />
-}
+@section header {}
 <div class="crumb">
     <div class="border-right">
 		<div class="border-left">
@@ -43,7 +40,7 @@
                 </p>
                 <p>
                     @Html.LabelFor(m => m.Audence)<br> 
-                    @Html.DropDownListFor(m => m.Audence, Model.Audences) <a href="/Plan/Edit">Hire more</a>
+                    @Html.DropDownListFor(m => m.Audence, Model.Audences) @*<a href="/Plan/Edit">Hire more</a>*@
                     @Html.ValidationMessageFor(m => m.Audence, null, new { @class = "error" })
                 </p>
                 <p>

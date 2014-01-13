@@ -631,8 +631,7 @@ VALUES (1, 1, 1, 'mails/webactivationemail'),
        (4, 1, 1, 'mails/specialaccessemail'),
 	   (5, 1, 1, 'mails/apiactivationemail'),
        (6, 1, 1, 'mails/apiforgotpasswordmail'),
-	   (7, 1, 1, 'mails/publishemail')
-	   ;
+	   (7, 1, 1, 'mails/publishemail');
 
 SET IDENTITY_INSERT [cont].[Mails] OFF
 
