@@ -627,7 +627,7 @@ SET IDENTITY_INSERT [cont].[Mails] ON
 
 INSERT INTO [cont].[Mails] ([ID], [IsSystem], [ThemeID], [Url])
 VALUES (1, 1, 1, 'mails/webactivationemail'),
-       (2, 1, 1, 'mails/forgotpasswordmail'),
+       (2, 1, 1, 'mails/webforgotpasswordmail'),
        (4, 1, 1, 'mails/specialaccessemail'),
 	   (5, 1, 1, 'mails/apiactivationemail'),
        (6, 1, 1, 'mails/apiforgotpasswordmail'),
