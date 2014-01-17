@@ -10,8 +10,11 @@ namespace AppReadyGo.Core.Queries.Users
     {
         public string Email { get; private set; }
 
-        public GetUserDetailsByEmailQuery(string email)
+        public UserType[] Type { get; private set; }
+
+        public GetUserDetailsByEmailQuery(string email, params UserType[] type)
         {
+            this.Type = type;
             this.Email = email;
         }
     }

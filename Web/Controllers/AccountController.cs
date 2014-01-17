@@ -215,7 +215,7 @@ namespace AppReadyGo.Controllers
             {
                 throw new Exception("Reset password link expired.");
             }
-            var userDetails = ObjectContainer.Instance.RunQuery(new GetUserDetailsByEmailQuery(splitedKey[1]));
+            var userDetails = ObjectContainer.Instance.RunQuery(new GetUserDetailsByEmailQuery(splitedKey[1], UserType.Member, UserType.Staff));
             if (userDetails == null)
             {
                 throw new Exception("User not found.");
