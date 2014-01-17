@@ -12,7 +12,7 @@ namespace AppReadyGo.Common.Mails
     public class PromotionEmail : Email
     {
         public PromotionEmail(string emailKey, string email, bool isEmailProcess = true)
-            : this(emailKey, ObjectContainer.Instance.RunQuery(new GetUserDetailsByEmailQuery(email)), isEmailProcess)
+            : this(emailKey, ObjectContainer.Instance.RunQuery(new GetUserDetailsByEmailQuery(email, UserType.Member, UserType.ApiMember)), isEmailProcess)
         {
         }
 

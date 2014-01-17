@@ -15,7 +15,7 @@ namespace AppReadyGo.Domain.Queries
         public UserDetailsResult Run(ISession session, GetUserDetailsByEmailQuery query)
         {
             return session.Query<User>()
-                    .Where(u => u.Email.ToLower() == query.Email.ToLower())
+                    .Where(u => u.Email.ToLower() == query.Email.ToLower() && query.Type.Contains(u.Type))
                     .Select(u => new UserDetailsResult
                     {
                         Email = u.Email,
